@@ -27,7 +27,7 @@
     --line: rgba(201,154,46,.35);
   }
   *{box-sizing:border-box; margin:0; padding:0;}
-  html{scroll-behavior:smooth;}
+  html{scroll-behavior:smooth; overflow-x:hidden; width:100%;}
   body{
     background:var(--paper);
     color:var(--ink);
@@ -120,6 +120,9 @@
   }
   @media(max-width:520px){
     .login-btn{padding:8px 14px; font-size:.78rem;}
+    .brand img{width:34px; height:34px;}
+    .brand-text .school{font-size:.82rem; line-height:1.25;}
+    .brand-text .sub{display:none;}
   }
 
   /* ===== AUTH MODAL ===== */
@@ -222,12 +225,30 @@
   }
   .share-label{ font-size:.85rem; color:#7c8b91; margin-left:6px; }
   .share-icon-btn{
-    width:38px; height:38px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    width:46px; height:46px; border-radius:50%; display:flex; align-items:center; justify-content:center;
     background:var(--paper-2); color:var(--ink); transition:.2s; flex-shrink:0;
   }
   .share-icon-btn:hover{ transform:translateY(-3px); box-shadow:0 6px 14px rgba(0,0,0,.15); }
   .share-icon-btn.whatsapp{ background:#25D366; color:#fff; }
   .share-icon-btn.facebook{ background:#1877F2; color:#fff; }
+
+  .comment-composer{
+    display:flex; align-items:center; gap:8px; background:#f6f8f9; border-radius:26px;
+    padding:6px 6px 6px 16px; border:1px solid #e4d9bd;
+  }
+  .comment-composer input{
+    flex:1; border:none; background:transparent; outline:none; font-family:'IBM Plex Sans Arabic',sans-serif;
+    font-size:.9rem; padding:8px 4px; min-height:32px;
+  }
+  .comment-composer button{
+    width:44px; height:44px; border-radius:50%; background:var(--gold); color:var(--deep-2);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:.2s;
+  }
+  .comment-composer button:hover{ background:var(--gold-light); }
+
+  .breadcrumb{ font-size:.8rem; color:#8a959a; margin-bottom:14px; font-family:'Cairo',sans-serif; }
+  .breadcrumb a{ color:var(--royal); }
+  .breadcrumb span{ margin:0 4px; }
 
   .home-highlights{
     display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:14px;
@@ -692,7 +713,10 @@
 <!-- ================= ARTICLE DETAIL PAGE ================= -->
 <section id="article">
   <div class="container" style="max-width:760px;">
-    <a href="#news" class="btn" id="articleBackBtn" style="margin-bottom:22px; width:fit-content;">
+    <div class="breadcrumb" id="articleBreadcrumb">
+      <a href="#home">الرئيسية</a> <span>›</span> <a href="#news">الأخبار</a> <span>›</span> <span id="breadcrumbTitle"></span>
+    </div>
+    <a href="#news" class="btn" id="articleBackBtn" style="margin-bottom:22px; width:fit-content; min-height:44px;">
       <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
       العودة إلى الأخبار
     </a>
@@ -815,7 +839,8 @@
   }
 
   // Mobile nav toggle
-  document.getElementById('burgerBtn').addEventListener('click', ()=>{
+  document.getElementById('burgerBtn').addEventListener('click', (e)=>{
+    e.stopPropagation();
     document.getElementById('mainNav').classList.toggle('open');
   });
   document.querySelectorAll('#mainNav a').forEach(a=>{
@@ -824,6 +849,12 @@
       document.querySelectorAll('#mainNav a').forEach(x=>x.classList.remove('active'));
       a.classList.add('active');
     });
+  });
+  document.addEventListener('click', (e)=>{
+    const nav = document.getElementById('mainNav');
+    if(nav.classList.contains('open') && !nav.contains(e.target)){
+      nav.classList.remove('open');
+    }
   });
 
   // ---------- أهم المعلومات في الشاشة الرئيسية (بدل الروابط السريعة) ----------
@@ -1470,6 +1501,8 @@
       return;
     }
     const fullText = n.content || n.excerpt;
+    const bc = document.getElementById('breadcrumbTitle');
+    if(bc) bc.textContent = n.title;
     const gallery = (n.gallery || []).map(src=> `<img src="${src}" style="width:100%; border-radius:14px; margin-bottom:12px;">`).join('');
     const shareUrl = location.origin + location.pathname + '#article-' + n.id;
 
@@ -1498,9 +1531,11 @@
 
       <h3 style="font-size:1.05rem; margin-bottom:14px;">التعليقات</h3>
       <div id="articleComments" style="margin-bottom:16px;">جاري التحميل...</div>
-      <div style="display:flex; gap:8px;">
-        <input type="text" id="articleCommentInput" placeholder="اكتب تعليقك..." style="flex:1; border:1px solid #e4d9bd; border-radius:10px; padding:10px 13px; font-family:'IBM Plex Sans Arabic',sans-serif; font-size:.9rem; outline:none;">
-        <button class="btn gold" id="articleCommentSend">إرسال</button>
+      <div class="comment-composer">
+        <input type="text" id="articleCommentInput" placeholder="اكتب تعليقك...">
+        <button id="articleCommentSend" aria-label="إرسال">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4z"/></svg>
+        </button>
       </div>`;
 
     // مشاركة عبر واجهة النظام (إن كانت مدعومة) أو نسخ الرابط كبديل
