@@ -986,9 +986,9 @@
     ],
   };
   const DEFAULT_QUESTIONS = [
-    {id:"q1", subj:"رياضيات", body:"كيف يمكنني حل معادلة من الدرجة الأولى بمجهول واحد؟ لم أفهم الطريقة جيداً في الدرس.", author:"سارة .ك — 2 متوسط", replies:3, time:"منذ يومين"},
-    {id:"q2", subj:"لغة عربية", body:"ما الفرق بين الفعل اللازم والفعل المتعدي؟ وهل يمكن إعطائي أمثلة إضافية؟", author:"إياد .م — 3 متوسط", replies:5, time:"منذ 3 أيام"},
-    {id:"q3", subj:"فيزياء", body:"لم أستوعب جيداً كيفية حساب سرعة جسم متحرك بحركة مستقيمة منتظمة، هل من شرح مبسط؟", author:"نور الهدى .ب — 4 متوسط", replies:2, time:"منذ 5 أيام"},
+    {id:"q1", subj:"رياضيات", body:"كيف يمكنني حل معادلة من الدرجة الأولى بمجهول واحد؟ لم أفهم الطريقة جيداً في الدرس.", author:"سارة .ك — 2 متوسط", replies:[], time:"منذ يومين"},
+    {id:"q2", subj:"لغة عربية", body:"ما الفرق بين الفعل اللازم والفعل المتعدي؟ وهل يمكن إعطائي أمثلة إضافية؟", author:"إياد .م — 3 متوسط", replies:[], time:"منذ 3 أيام"},
+    {id:"q3", subj:"فيزياء", body:"لم أستوعب جيداً كيفية حساب سرعة جسم متحرك بحركة مستقيمة منتظمة، هل من شرح مبسط؟", author:"نور الهدى .ب — 4 متوسط", replies:[], time:"منذ 5 أيام"},
   ];
 
   // ---------- STORAGE HELPERS (Firestore-backed, real & persistent) ----------
@@ -1126,6 +1126,7 @@
   }
 
   const qaList = document.getElementById('qaList');
+  function asArray(x){ return Array.isArray(x) ? x : []; }
   function likeBtn(kind, qId, likedByArr, count, extra){
     const uid = auth && auth.currentUser ? auth.currentUser.uid : null;
     const liked = uid && (likedByArr || []).includes(uid);
@@ -1136,13 +1137,13 @@
 
   function renderQA(){
     qaList.innerHTML = siteQuestions.map(q=> {
-      const replies = q.replies && Array.isArray(q.replies) ? q.replies : [];
+      const replies = asArray(q.replies);
       const repliesHtml = replies.map((r, idx)=> `
         <div style="margin-top:8px; padding:10px 12px; background:var(--paper-2); border-radius:10px;">
           <div style="font-size:.78rem; color:var(--royal); font-weight:700; margin-bottom:4px;">${escapeHtml(r.author||'مستخدم')}</div>
           <div style="font-size:.88rem;">${escapeHtml(r.text)}</div>
           <div class="q-foot" style="margin-top:6px;">
-            ${likeBtn('reply', q.id, r.likes, (r.likes||[]).length, `data-reply-idx="${idx}"`)}
+            ${likeBtn('reply', q.id, asArray(r.likes), asArray(r.likes).length, `data-reply-idx="${idx}"`)}
           </div>
         </div>`).join('');
       return `
@@ -1154,14 +1155,14 @@
           <p class="q-body">${escapeHtml(q.body)}</p>
           ${q.attachment ? `<img src="${q.attachment}" style="max-width:220px; border-radius:10px; margin:8px 0;">` : ''}
           <div class="q-foot">
-            ${likeBtn('question', q.id, q.likes, (q.likes||[]).length)}
+            ${likeBtn('question', q.id, asArray(q.likes), asArray(q.likes).length)}
           </div>
           ${q.answer ? `
             <div style="margin-top:12px; padding:12px; background:var(--paper-2); border-radius:12px;">
               <div style="font-size:.78rem; color:var(--royal); font-weight:700; margin-bottom:4px;">إجابة الإدارة/الأستاذ — ${escapeHtml(q.answer.author||'')}</div>
               <div style="font-size:.9rem;">${escapeHtml(q.answer.text)}</div>
               <div class="q-foot" style="margin-top:8px;">
-                ${likeBtn('answer', q.id, q.answer.likes, (q.answer.likes||[]).length)}
+                ${likeBtn('answer', q.id, asArray(q.answer.likes), asArray(q.answer.likes).length)}
               </div>
             </div>` : ''}
           ${repliesHtml}
@@ -1187,18 +1188,18 @@
         const item = siteQuestions.find(x=> x.id === qId);
         if(!item) return;
         if(kind === 'question'){
-          item.likes = item.likes || [];
+          item.likes = asArray(item.likes);
           const i = item.likes.indexOf(uid);
           if(i === -1) item.likes.push(uid); else item.likes.splice(i,1);
         } else if(kind === 'answer' && item.answer){
-          item.answer.likes = item.answer.likes || [];
+          item.answer.likes = asArray(item.answer.likes);
           const i = item.answer.likes.indexOf(uid);
           if(i === -1) item.answer.likes.push(uid); else item.answer.likes.splice(i,1);
         } else if(kind === 'reply'){
           const idx = Number(btn.dataset.replyIdx);
-          const r = (item.replies || [])[idx];
+          const r = asArray(item.replies)[idx];
           if(r){
-            r.likes = r.likes || [];
+            r.likes = asArray(r.likes);
             const i = r.likes.indexOf(uid);
             if(i === -1) r.likes.push(uid); else r.likes.splice(i,1);
           }
@@ -1225,7 +1226,7 @@
         if(!item) return;
         const authorName = (currentUserProfile && (currentUserProfile.firstName + ' ' + currentUserProfile.lastName))
           || auth.currentUser.displayName || 'مستخدم مسجل';
-        item.replies = item.replies || [];
+        item.replies = asArray(item.replies);
         item.replies.push({ uid: auth.currentUser.uid, author: authorName, text, time: new Date().toLocaleDateString('ar-DZ'), likes: [] });
         renderQA();
         await saveJSON('site-questions', siteQuestions);
