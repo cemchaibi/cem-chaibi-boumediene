@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://cemchaibi.github.io/cem-chaibi-boumediene/sitemap.xml
