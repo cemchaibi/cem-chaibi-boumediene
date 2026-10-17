@@ -13,8 +13,8 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cemchaibi.github.io/cem-chaibi-boumediene/">
 <meta property="og:image" content="https://cemchaibi.github.io/cem-chaibi-boumediene/logo.png">
-<meta name="twitter:card" content="summary">
 <link rel="apple-touch-icon" href="logo.png">
+<meta name="theme-color" content="#0e3b4c">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="متوسطة شعيبي بومدين وهران — Cem Chaibi Boumediene Oran">
 <meta name="twitter:description" content="أخبار، مناسبات، مواعيد تقييم، فضاء أسئلة، وفضاء أولياء لمتوسطة شعيبي بومدين، وهران.">
@@ -28,8 +28,12 @@
   "address": { "@type": "PostalAddress", "addressLocality": "وهران", "addressRegion": "Oran", "addressCountry": "DZ" }
 }
 </script>
+<script>
+  try{ if(localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme','dark'); }catch(e){}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
     --ink:#123240;
@@ -614,6 +618,284 @@
     *{animation:none !important; transition:none !important;}
     .reveal, .reveal-stagger > *{opacity:1 !important; transform:none !important;}
   }
+  /* ===================================================================
+     MODERN LAYER — تحسينات الواجهة الحديثة والمؤثرات
+     =================================================================== */
+  :root{
+    --ease:cubic-bezier(.2,.7,.2,1);
+    --shadow-md:0 10px 30px rgba(14,59,76,.10);
+    --shadow-lg:0 24px 60px rgba(14,59,76,.18);
+  }
+  .sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+  [hidden]{ display:none !important; }
+  .nav-close-btn .lucide{ width:22px; height:22px; }
+  .auth-btn .lucide{ width:18px; height:18px; }
+  .text-link{ align-self:center; }
+  #emailModeChoice{ margin-bottom:4px; }
+  ::selection{ background:var(--gold); color:var(--deep-2); }
+  html{ scrollbar-color:var(--gold) transparent; }
+  ::-webkit-scrollbar{ width:10px; height:10px; }
+  ::-webkit-scrollbar-thumb{ background:linear-gradient(var(--gold), var(--royal)); border-radius:10px; border:2px solid var(--paper); }
+  ::-webkit-scrollbar-track{ background:transparent; }
+  :focus-visible{ outline:2px solid var(--gold); outline-offset:2px; }
+
+  /* حقول الإدخال قابلة للقراءة في الوضعين الفاتح والداكن */
+  input, textarea, select{ background:var(--card-bg); color:var(--ink); }
+  html[data-theme="dark"] input:not([type="color"]), html[data-theme="dark"] textarea, html[data-theme="dark"] select{ border-color:var(--card-border) !important; }
+  html[data-theme="dark"] .comment-composer input{ background:transparent; }
+  .news-card, .t-card, .q-card, .qa-compose, .exam-table-wrap{ border-color:var(--card-border); }
+  html[data-theme="dark"] tbody tr:nth-child(even){ background:rgba(255,255,255,.03); }
+  html[data-theme="dark"] tbody td{ border-top-color:var(--card-border); }
+  html[data-theme="dark"] .skeleton-shimmer, html[data-theme="dark"] .skeleton-line{ background:linear-gradient(90deg,#1c2e37 25%,#243a45 37%,#1c2e37 63%); background-size:400% 100%; }
+  html[data-theme="dark"] .section-head p, html[data-theme="dark"] .parents-copy p{ color:var(--muted); }
+  html[data-theme="dark"] .share-row{ border-color:var(--card-border); }
+  html[data-theme="dark"] .t-dot{ background:var(--card-bg); }
+  html[data-theme="dark"] .modal-close{ background:var(--paper-2); color:var(--ink); }
+
+  /* أيقونات Lucide */
+  [data-lucide]{ display:inline-block; width:1.15em; height:1.15em; }
+  .lucide{ width:1.15em; height:1.15em; flex-shrink:0; }
+
+  /* أزرار التفاعل الصغيرة (إعجاب، تعديل، حذف) */
+  .q-foot-item, .item-del-btn{ background:none; color:inherit; padding:4px 10px; border-radius:999px; transition:background .2s, color .2s, transform .2s; font-family:'Cairo',sans-serif; }
+  .q-foot-item:hover, .item-del-btn:hover{ background:rgba(47,110,168,.1); color:var(--royal); }
+  .like-btn:active{ transform:scale(.9); }
+  .like-btn.liked svg{ animation:likePop .45s var(--ease); }
+  @keyframes likePop{ 0%{transform:scale(1);} 40%{transform:scale(1.4) rotate(-10deg);} 100%{transform:scale(1);} }
+
+  .admin-error{ display:none; color:var(--red); font-size:.82rem; text-align:center; background:rgba(168,64,47,.08); padding:9px 12px; border-radius:10px; line-height:1.6; }
+  .admin-list-item{ display:flex; align-items:center; gap:12px; padding:12px 14px; border:1px solid var(--card-border); border-radius:14px; margin-bottom:8px; background:var(--card-bg); transition:.2s var(--ease); }
+  .admin-list-item:hover{ border-color:var(--gold); transform:translateX(-3px); }
+  .admin-list-info{ flex:1; min-width:0; }
+  .admin-list-info .t{ font-weight:700; font-size:.9rem; color:var(--ink); }
+  .admin-list-info .s{ font-size:.76rem; color:var(--muted); font-family:'Cairo',sans-serif; }
+  .empty-note{ text-align:center; color:var(--muted); padding:26px 0; font-size:.9rem; }
+  .text-link{ background:none; color:var(--royal); font-size:.8rem; font-family:'Cairo',sans-serif; text-decoration:underline; text-underline-offset:3px; padding:4px; }
+
+  /* شريط تقدّم القراءة */
+  .scroll-progress{
+    position:fixed; top:0; right:0; left:0; height:3px; transform-origin:right center; transform:scaleX(0);
+    background:linear-gradient(90deg, var(--royal-light), var(--gold), var(--gold-light)); z-index:1200; pointer-events:none;
+  }
+
+  /* شريط الإعلانات (يُدار من لوحة التحكم) */
+  .announce-bar{
+    position:relative; z-index:101; color:var(--deep-2); font-family:'Cairo',sans-serif; font-size:.85rem; font-weight:700;
+    padding:9px 52px; text-align:center; display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap;
+    background:linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold)); background-size:200% 100%; animation:shimmerBg 8s linear infinite;
+  }
+  .announce-bar[hidden]{ display:none; }
+  .announce-bar a{ text-decoration:underline; text-underline-offset:3px; }
+  .announce-close{
+    position:absolute; left:12px; top:50%; transform:translateY(-50%); width:28px; height:28px; border-radius:50%;
+    background:rgba(14,59,76,.14); color:var(--deep-2); display:flex; align-items:center; justify-content:center; transition:.2s;
+  }
+  .announce-close:hover{ background:rgba(14,59,76,.28); }
+  @keyframes shimmerBg{ to{ background-position:-200% 0; } }
+
+  /* الترويسة */
+  header{ transition:background .3s, box-shadow .3s; }
+  header.scrolled{ background:rgba(10,44,58,.86); box-shadow:0 10px 30px rgba(0,0,0,.25); }
+  .nav-wrap{ transition:padding .3s var(--ease); }
+  header.scrolled .nav-wrap{ padding-top:8px; padding-bottom:8px; }
+  .brand{ min-width:0; }
+  .brand img{ transition:transform .5s var(--ease); }
+  .brand:hover img{ transform:rotate(-8deg) scale(1.06); }
+  nav ul a .lucide{ display:none; }
+  #mainNav a::after{ right:16px; bottom:4px; height:2px; border-radius:2px; }
+  #mainNav a:hover::after{ width:calc(100% - 32px); }
+  #mainNav a.active::after{ width:0; }
+  nav a.active{ background:linear-gradient(135deg, var(--gold-light), var(--gold)); box-shadow:0 4px 14px rgba(201,154,46,.35); }
+  @media(max-width:1180px){ nav a{ padding:8px 11px; font-size:.84rem; } }
+  @media(max-width:1279px){ .head-actions > .social-row{ display:none; } }
+
+  .icon-btn{
+    width:40px; height:40px; border-radius:12px; display:inline-flex; align-items:center; justify-content:center; flex-shrink:0;
+    color:#fff; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.14); transition:.25s var(--ease);
+  }
+  .icon-btn:hover{ background:var(--gold); color:var(--deep-2); border-color:var(--gold); transform:translateY(-2px) rotate(-6deg); }
+  .icon-btn .lucide{ width:19px; height:19px; }
+  .theme-toggle .icon-sun{ display:none; }
+  html[data-theme="dark"] .theme-toggle .icon-sun{ display:inline-block; }
+  html[data-theme="dark"] .theme-toggle .icon-moon{ display:none; }
+  .burger.icon-btn{ display:none; }
+
+  .login-btn{
+    height:40px; padding:0 18px; border-radius:12px; color:var(--deep-2);
+    background:linear-gradient(135deg, var(--gold-light), var(--gold)); box-shadow:0 6px 18px rgba(201,154,46,.35);
+  }
+  .login-btn:hover{ background:linear-gradient(135deg, #f2d78a, var(--gold-light)); color:var(--deep-2); }
+  .user-chip{ transition:.25s var(--ease); font-family:'Cairo',sans-serif; }
+  .user-chip:hover{ background:rgba(255,255,255,.14); border-color:var(--gold); }
+  .user-chip .avatar{ overflow:hidden; }
+
+  .soc-ic{ transition:.25s var(--ease); }
+  .soc-ic:hover{ transform:translateY(-3px); }
+
+  @media(max-width:880px){
+    .nav-wrap{ padding:10px 14px; gap:10px; }
+    .brand{ flex:1; }
+    .brand-text{ min-width:0; }
+    .brand-text .school{ white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .head-actions{ gap:8px; }
+    .icon-btn.header-icon-btn{ display:none; }
+    .burger.icon-btn{ display:inline-flex; }
+    nav{ background:radial-gradient(circle at 85% 0%, rgba(201,154,46,.22), transparent 55%), rgba(8,30,40,.97); }
+    nav ul{ gap:10px; width:min(320px, 86vw); }
+    nav ul a{ display:flex; align-items:center; gap:12px; justify-content:flex-start; font-size:1.1rem; padding:13px 20px; border-radius:16px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.06); }
+    nav ul a .lucide{ display:inline-block; width:20px; height:20px; color:var(--gold-light); }
+    nav ul a.active .lucide{ color:var(--deep-2); }
+    #mainNav a::after{ display:none; }
+    nav ul li{ opacity:0; transform:translateY(14px); transition:opacity .4s var(--ease), transform .4s var(--ease); }
+    nav.open ul li{ opacity:1; transform:none; }
+    nav.open ul li:nth-child(2){ transition-delay:.04s; } nav.open ul li:nth-child(3){ transition-delay:.08s; }
+    nav.open ul li:nth-child(4){ transition-delay:.12s; } nav.open ul li:nth-child(5){ transition-delay:.16s; }
+    nav.open ul li:nth-child(6){ transition-delay:.2s; } nav.open ul li:nth-child(7){ transition-delay:.24s; }
+    nav.open ul li:nth-child(8){ transition-delay:.28s; }
+    .nav-action-item{ margin-top:4px !important; }
+    .nav-action-item button{ width:100% !important; border-radius:16px !important; }
+    .nav-action-item .lucide{ width:18px; height:18px; }
+  }
+  @media(max-width:520px){
+    .login-btn .btn-label{ display:none; }
+    .login-btn{ width:40px; padding:0; }
+    .user-chip .chip-label{ display:none; }
+    .user-chip{ padding:4px; }
+    .user-chip .avatar{ width:30px; height:30px; }
+    .brand-text .school{ font-size:.9rem; }
+    .announce-bar{ font-size:.78rem; padding:8px 44px; }
+  }
+
+  /* الأزرار: لمعان + تموّج عند النقر */
+  .btn{ position:relative; overflow:hidden; isolation:isolate; }
+  .btn::before{
+    content:''; position:absolute; inset:0; z-index:-1; pointer-events:none;
+    background:linear-gradient(115deg, transparent 30%, rgba(255,255,255,.35) 50%, transparent 70%);
+    transform:translateX(120%); transition:transform .75s var(--ease);
+  }
+  .btn:hover::before{ transform:translateX(-120%); }
+  .btn.gold::after{ display:none; }
+  .btn.ghost{ background:rgba(255,255,255,.08); color:#fff; border:1px solid rgba(255,255,255,.22); box-shadow:none; -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); }
+  .btn.ghost:hover{ background:rgba(255,255,255,.16); }
+  .btn.soft{ background:var(--paper-2); color:var(--ink); box-shadow:none; }
+  .btn.soft:hover{ background:var(--card-border); color:var(--ink); }
+  .btn:disabled{ opacity:.6; cursor:not-allowed; transform:none; }
+  .btn .lucide{ width:17px; height:17px; }
+  .ripple{ position:absolute; border-radius:50%; transform:scale(0); background:rgba(255,255,255,.45); animation:ripple .65s ease-out; pointer-events:none; }
+  @keyframes ripple{ to{ transform:scale(2.6); opacity:0; } }
+
+  /* الواجهة الرئيسية */
+  .hero{ padding:92px 0 76px; isolation:isolate; }
+  .hero-grid{
+    position:absolute; inset:0; z-index:-1; pointer-events:none;
+    background-image:linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+    background-size:44px 44px;
+    -webkit-mask-image:radial-gradient(ellipse at 50% 30%, #000 25%, transparent 72%); mask-image:radial-gradient(ellipse at 50% 30%, #000 25%, transparent 72%);
+  }
+  .hero-orb{ position:absolute; border-radius:50%; filter:blur(70px); opacity:.45; z-index:-1; pointer-events:none; animation:orbFloat 16s ease-in-out infinite; }
+  .hero-orb.o1{ width:340px; height:340px; background:var(--royal); top:-80px; left:8%; }
+  .hero-orb.o2{ width:280px; height:280px; background:var(--gold); bottom:-90px; right:10%; animation-delay:-5s; opacity:.3; }
+  .hero-orb.o3{ width:200px; height:200px; background:#3d9f8f; top:40%; right:40%; animation-delay:-10s; opacity:.22; }
+  @keyframes orbFloat{ 0%,100%{ transform:translate(0,0) scale(1); } 33%{ transform:translate(40px,-30px) scale(1.08); } 66%{ transform:translate(-30px,25px) scale(.95); } }
+  .hero-logo-wrap{ position:relative; width:150px; height:150px; margin:0 auto 22px; }
+  .hero-logo-wrap .hero-logo{ margin:0; position:relative; z-index:1; }
+  .hero-logo-wrap::before{
+    content:''; position:absolute; inset:-16px; border-radius:50%;
+    background:conic-gradient(from 0deg, transparent 0 55%, var(--gold-light), transparent 85%);
+    -webkit-mask:radial-gradient(circle, transparent 64%, #000 65%, #000 67%, transparent 68%); mask:radial-gradient(circle, transparent 64%, #000 65%, #000 67%, transparent 68%);
+    animation:spin 5s linear infinite;
+  }
+  .hero-logo-wrap::after{ content:''; position:absolute; inset:10px; border-radius:50%; background:radial-gradient(circle, rgba(230,196,103,.35), transparent 70%); filter:blur(18px); }
+  .eyebrow{ -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); }
+  .eyebrow .pulse-dot{ width:8px; height:8px; border-radius:50%; background:#5ee08f; box-shadow:0 0 0 0 rgba(94,224,143,.6); animation:pulseDot 2s infinite; }
+  @keyframes pulseDot{ 0%{ box-shadow:0 0 0 0 rgba(94,224,143,.6); } 70%{ box-shadow:0 0 0 10px rgba(94,224,143,0); } 100%{ box-shadow:0 0 0 0 rgba(94,224,143,0); } }
+  .hero h1 span{ background:linear-gradient(90deg, var(--gold-light), #fff1c2, var(--gold)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .hero-cta{ display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-bottom:34px; }
+  .hero-cta .btn{ padding:13px 26px; font-size:.92rem; }
+  .hero-stats{ display:flex; justify-content:center; gap:12px; flex-wrap:wrap; margin-bottom:34px; }
+  .hero-stat{ min-width:118px; padding:12px 20px; border-radius:16px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); }
+  .hero-stat b{ display:block; font-family:'Cairo',sans-serif; font-size:1.65rem; font-weight:800; color:var(--gold-light); line-height:1.3; }
+  .hero-stat span{ font-size:.78rem; color:rgba(255,255,255,.72); }
+  .highlight-card{ position:relative; overflow:hidden; -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); }
+  .highlight-card .hl-arrow{ position:absolute; left:16px; top:18px; color:var(--gold-light); opacity:.6; transition:.3s var(--ease); }
+  .highlight-card:hover .hl-arrow{ opacity:1; transform:translateX(-4px); }
+  .highlight-card:hover{ border-color:var(--gold-light); }
+
+  /* عناوين الأقسام */
+  .section-head h2::after{ content:''; display:block; width:56px; height:4px; border-radius:4px; margin:14px auto 0; background:linear-gradient(90deg, var(--gold), var(--royal)); }
+  .section-head .tag::before{ content:''; width:7px; height:7px; border-radius:50%; background:var(--gold); }
+
+  /* بطاقات الأخبار */
+  .news-card{ position:relative; display:flex; flex-direction:column; }
+  .news-card::before{
+    content:''; position:absolute; inset:0; border-radius:inherit; pointer-events:none; z-index:3; opacity:0; transition:opacity .3s;
+    background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%), rgba(201,154,46,.16), transparent 42%);
+  }
+  .news-card:hover::before{ opacity:1; }
+  .news-card:hover{ border-color:var(--gold); }
+  .news-thumb{ height:170px; overflow:hidden; }
+  .news-thumb img{ transition:transform .7s var(--ease); }
+  .news-card:hover .news-thumb img{ transform:scale(1.08); }
+  .news-body{ flex:1; display:flex; flex-direction:column; }
+  .news-foot{ display:flex; align-items:center; justify-content:space-between; gap:8px; margin-top:auto; padding-top:12px; flex-wrap:wrap; }
+  .news-cat{ margin-top:0; }
+  .read-more{ display:inline-flex; align-items:center; gap:6px; font-size:.8rem; color:var(--royal); font-weight:700; font-family:'Cairo',sans-serif; transition:gap .25s var(--ease); }
+  .news-card:hover .read-more{ gap:10px; }
+  .read-more .lucide{ width:15px; height:15px; }
+
+  /* الخط الزمني */
+  .t-dot{ transition:.3s var(--ease); }
+  .t-item:hover .t-dot{ background:var(--gold); color:var(--deep-2); transform:scale(1.12); box-shadow:0 0 0 6px rgba(201,154,46,.18); }
+  .t-card{ transition:transform .3s var(--ease), box-shadow .3s, border-color .3s; }
+  .t-item:hover .t-card{ border-color:var(--gold); }
+
+  /* التبويبات */
+  .tab-btn{ transition:.25s var(--ease); }
+  .tab-btn:hover{ border-color:var(--royal); transform:translateY(-2px); }
+  .tab-btn.active{ background:linear-gradient(135deg, var(--royal-light), var(--royal)); box-shadow:0 6px 16px rgba(47,110,168,.3); }
+  tbody tr{ transition:background .2s; }
+  tbody tr:hover{ background:rgba(201,154,46,.08) !important; }
+
+  /* فضاء الأسئلة */
+  .q-card{ transition:transform .3s var(--ease), box-shadow .3s, border-color .3s; }
+  .q-card:hover{ border-color:var(--gold); box-shadow:var(--shadow-md); }
+  .qa-compose{ transition:box-shadow .3s; }
+  .qa-compose:focus-within{ box-shadow:0 0 0 3px rgba(47,110,168,.15), var(--shadow-md); }
+  .comment-composer{ transition:border-color .2s, box-shadow .2s; }
+  .comment-composer:focus-within{ border-color:var(--royal); box-shadow:0 0 0 3px rgba(47,110,168,.12); }
+  .comment-composer button:hover{ transform:rotate(-12deg) scale(1.05); }
+
+  /* النوافذ المنبثقة */
+  .modal-overlay.open .modal-box{ animation:modalIn .38s var(--ease); }
+  @keyframes modalIn{ from{ opacity:0; transform:translateY(18px) scale(.97); } to{ opacity:1; transform:none; } }
+  .modal-close{ display:flex; align-items:center; justify-content:center; transition:.2s; z-index:2; }
+  .modal-close:hover{ background:var(--red); color:#fff; transform:rotate(90deg); }
+  .search-input-wrap{ position:relative; margin-bottom:16px; }
+  .search-input-wrap .lucide{ position:absolute; right:14px; top:50%; transform:translateY(-50%); color:var(--muted); }
+  .search-input-wrap input{ padding-right:42px !important; margin-bottom:0 !important; }
+  .kbd{ font-family:'Cairo',sans-serif; font-size:.7rem; border:1px solid var(--card-border); border-radius:6px; padding:1px 6px; color:var(--muted); }
+
+  /* زر العودة للأعلى */
+  .to-top{
+    position:fixed; bottom:22px; left:22px; width:48px; height:48px; border-radius:16px; z-index:900;
+    background:linear-gradient(135deg, var(--gold-light), var(--gold)); color:var(--deep-2);
+    display:flex; align-items:center; justify-content:center; box-shadow:0 12px 30px rgba(201,154,46,.4);
+    opacity:0; transform:translateY(20px) scale(.9); pointer-events:none; transition:.35s var(--ease);
+  }
+  .to-top.show{ opacity:1; transform:none; pointer-events:auto; }
+  .to-top:hover{ transform:translateY(-4px); }
+
+  /* التذييل */
+  footer{ position:relative; }
+  footer::before{ content:''; position:absolute; top:0; right:0; left:0; height:3px; background:linear-gradient(90deg, var(--royal), var(--gold), var(--royal)); }
+  footer ul li a{ display:inline-flex; align-items:center; gap:6px; transition:.2s; }
+  footer ul li a:hover{ transform:translateX(-4px); }
+  footer ul li a .lucide{ width:14px; height:14px; color:var(--gold); }
+
+  @media (prefers-reduced-motion: reduce){
+    .hero-orb, .hero-logo-wrap::before, .announce-bar{ animation:none !important; }
+  }
+
   /* ===== عرض قسم واحد في كل مرة بدل عرض كل الأقسام معاً ===== */
   #home, #news, #events, #exams, #qa, #parents, #parents-chat, #article{display:none;}
   #home.active-view, #news.active-view, #events.active-view, #exams.active-view, #qa.active-view, #parents.active-view, #article.active-view{display:block;}
@@ -622,58 +904,65 @@
 </style>
 </head>
 <body>
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+<div class="announce-bar" id="announceBar" role="status" hidden>
+  <i data-lucide="megaphone"></i>
+  <span id="announceText"></span>
+  <a id="announceLink" href="#" hidden>التفاصيل</a>
+  <button class="announce-close" id="announceClose" type="button" aria-label="إخفاء الإعلان"><i data-lucide="x"></i></button>
+</div>
 
-<header>
+<header id="siteHeader">
   <div class="nav-wrap">
     <a href="#home" class="brand" style="cursor:pointer; text-decoration:none;">
-      <img src="logo.png" alt="شعار متوسطة شعيبي بومدين">
+      <img src="logo.png" alt="شعار متوسطة شعيبي بومدين" width="46" height="46">
       <div class="brand-text">
         <div class="school">متوسطة شعيبي بومدين</div>
         <div class="sub">فضاء المتوسطة الرقمي</div>
       </div>
     </a>
     <nav id="mainNav">
-      <button class="nav-close-btn" id="navCloseBtn" aria-label="إغلاق القائمة">
-        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      <button class="nav-close-btn" id="navCloseBtn" type="button" aria-label="إغلاق القائمة">
+        <i data-lucide="x"></i>
       </button>
       <ul>
-        <li><a href="#home" class="active">الرئيسية</a></li>
-        <li><a href="#news">الأخبار</a></li>
-        <li><a href="#events">المناسبات</a></li>
-        <li><a href="#exams">الفروض والاختبارات</a></li>
-        <li><a href="#qa">فضاء الأسئلة</a></li>
-        <li><a href="#parents">فضاء الأولياء</a></li>
-        <li class="nav-action-item"><button id="navSearchBtn" type="button"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg> بحث في الموقع</button></li>
-        <li class="nav-action-item"><button id="navDarkModeBtn" type="button"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="navDarkModeIcon"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg> <span id="navDarkModeLabel">الوضع الداكن</span></button></li>
+        <li><a href="#home" class="active"><i data-lucide="house"></i>الرئيسية</a></li>
+        <li><a href="#news"><i data-lucide="newspaper"></i>الأخبار</a></li>
+        <li><a href="#events"><i data-lucide="calendar-heart"></i>المناسبات</a></li>
+        <li><a href="#exams"><i data-lucide="clipboard-check"></i>الفروض والاختبارات</a></li>
+        <li><a href="#qa"><i data-lucide="messages-square"></i>فضاء الأسئلة</a></li>
+        <li><a href="#parents"><i data-lucide="users"></i>فضاء الأولياء</a></li>
+        <li class="nav-action-item"><button id="navSearchBtn" type="button"><i data-lucide="search"></i> بحث في الموقع</button></li>
+        <li class="nav-action-item"><button id="navDarkModeBtn" type="button" class="theme-toggle"><i data-lucide="moon" class="icon-moon"></i><i data-lucide="sun" class="icon-sun"></i> <span id="navDarkModeLabel">الوضع الداكن</span></button></li>
       </ul>
     </nav>
     <div class="head-actions">
       <div class="social-row">
-        <a href="https://share.google/fVCazroCX34Up9VPe" target="_blank" rel="noopener" aria-label="فيسبوك" class="soc-ic">
+        <a href="https://share.google/fVCazroCX34Up9VPe" target="_blank" rel="noopener" aria-label="فيسبوك" class="soc-ic" data-social="facebook">
           <svg viewBox="0 0 24 24"><path d="M13.5 21v-7.7h2.6l.4-3h-3v-1.9c0-.87.24-1.46 1.5-1.46h1.6V4.3c-.28-.04-1.23-.12-2.34-.12-2.32 0-3.9 1.4-3.9 4V10.3H7.8v3h2.6V21h3.1z"/></svg>
         </a>
-        <a href="https://share.google/dIt6zbO9FOyQWr9KF" target="_blank" rel="noopener" aria-label="انستغرام" class="soc-ic">
+        <a href="https://share.google/dIt6zbO9FOyQWr9KF" target="_blank" rel="noopener" aria-label="انستغرام" class="soc-ic" data-social="instagram">
           <svg viewBox="0 0 24 24"><path d="M12 3.6c2.4 0 2.7 0 3.66.05 2.4.11 3.53 1.25 3.64 3.64.05.96.05 1.24.05 3.66s0 2.7-.05 3.66c-.11 2.38-1.23 3.53-3.64 3.64-.96.05-1.24.05-3.66.05s-2.7 0-3.66-.05c-2.4-.11-3.53-1.25-3.64-3.64C4.65 13.7 4.65 13.42 4.65 11s0-2.7.05-3.66C4.81 5 5.94 3.85 8.34 3.74 9.3 3.7 9.58 3.6 12 3.6zm0-1.6C9.55 2 9.25 2 8.29 2.05c-3.1.14-4.82 1.86-4.96 4.96C3.28 8.02 3.28 8.32 3.28 12s0 3.98.05 4.99c.14 3.1 1.86 4.82 4.96 4.96 1.01.05 1.31.05 4.29.05s3.98 0 4.99-.05c3.1-.14 4.82-1.86 4.96-4.96.05-1.01.05-1.31.05-4.99s0-3.98-.05-4.99c-.14-3.1-1.86-4.82-4.96-4.96C15.98 2 15.68 2 12 2zm0 5.3a4.7 4.7 0 1 0 0 9.4 4.7 4.7 0 0 0 0-9.4zm0 7.7a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm5.9-7.9a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0z"/></svg>
         </a>
-        <a href="https://share.google/ZutoycXpwLywmuaNu" target="_blank" rel="noopener" aria-label="يوتيوب" class="soc-ic">
+        <a href="https://share.google/ZutoycXpwLywmuaNu" target="_blank" rel="noopener" aria-label="يوتيوب" class="soc-ic" data-social="youtube">
           <svg viewBox="0 0 24 24"><path d="M21.6 7.6a2.7 2.7 0 0 0-1.9-1.9C18 5.2 12 5.2 12 5.2s-6 0-7.7.5A2.7 2.7 0 0 0 2.4 7.6 28 28 0 0 0 2 12a28 28 0 0 0 .4 4.4 2.7 2.7 0 0 0 1.9 1.9c1.7.5 7.7.5 7.7.5s6 0 7.7-.5a2.7 2.7 0 0 0 1.9-1.9A28 28 0 0 0 22 12a28 28 0 0 0-.4-4.4zM10 15V9l5.2 3-5.2 3z"/></svg>
         </a>
-        <a href="#" target="_blank" rel="noopener" aria-label="تيك توك" class="soc-ic">
+        <a href="#" target="_blank" rel="noopener" aria-label="تيك توك" class="soc-ic" data-social="tiktok" hidden>
           <svg viewBox="0 0 24 24"><path d="M16.6 2h-3.2v13.6a2.9 2.9 0 1 1-2.9-2.9c.3 0 .6 0 .9.1V9.5a6.1 6.1 0 1 0 5.2 6V8.4a7.7 7.7 0 0 0 4.4 1.4V6.6a4.4 4.4 0 0 1-4.4-4.4V2z"/></svg>
         </a>
         <a href="https://share.google/ZrWTth1lUYADKCIu3" target="_blank" rel="noopener" aria-label="الموقع الرسمي" class="soc-ic stroke-ic">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.4 3.8 5.6 3.8 9s-1.3 6.6-3.8 9c-2.5-2.4-3.8-5.6-3.8-9S9.5 5.4 12 3z"/></svg>
         </a>
       </div>
-      <button class="btn login-btn header-icon-btn" id="siteSearchBtn" style="background:transparent; box-shadow:none; color:var(--paper);" aria-label="بحث">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <button class="icon-btn header-icon-btn" id="siteSearchBtn" type="button" aria-label="بحث في الموقع" title="بحث (Ctrl+K)">
+        <i data-lucide="search"></i>
       </button>
-      <button class="btn login-btn header-icon-btn" id="darkModeBtn" style="background:transparent; box-shadow:none; color:var(--paper);" aria-label="تبديل الوضع الداكن">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="darkModeIcon"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
+      <button class="icon-btn header-icon-btn theme-toggle" id="darkModeBtn" type="button" aria-label="تبديل الوضع الداكن" title="الوضع الداكن">
+        <i data-lucide="moon" class="icon-moon"></i><i data-lucide="sun" class="icon-sun"></i>
       </button>
-      <button class="btn login-btn" id="openAuthBtn">تسجيل الدخول</button>
+      <button class="btn login-btn" id="openAuthBtn" type="button" aria-label="تسجيل الدخول"><i data-lucide="log-in"></i><span class="btn-label">تسجيل الدخول</span></button>
+      <button class="burger icon-btn" id="burgerBtn" type="button" aria-label="فتح القائمة" aria-controls="mainNav" aria-expanded="false"><i data-lucide="menu"></i></button>
     </div>
-    <button class="burger" id="burgerBtn" aria-label="القائمة"><span></span><span></span><span></span></button>
   </div>
 </header>
 
@@ -696,13 +985,20 @@
         متابعة عبر Facebook
       </button>
       <div class="or-sep"><span>أو</span></div>
-      <button class="auth-btn outline" id="authEmailToggle">المتابعة بالبريد الإلكتروني</button>
+      <button class="auth-btn outline" id="authEmailToggle" type="button"><i data-lucide="mail"></i> المتابعة بالبريد الإلكتروني</button>
 
-      <div class="email-form" id="emailForm">
-        <input type="email" placeholder="البريد الإلكتروني" id="emailInput">
-        <input type="password" placeholder="كلمة المرور" id="passInput">
-        <button class="btn" id="authEmailSubmit" style="width:100%; margin-top:10px;">متابعة</button>
-      </div>
+      <form class="email-form" id="emailForm" novalidate>
+        <div class="pill-choice" id="emailModeChoice" role="tablist" aria-label="نوع العملية">
+          <button type="button" class="pill-opt active" data-mode="login" role="tab" aria-selected="true">لدي حساب</button>
+          <button type="button" class="pill-opt" data-mode="register" role="tab" aria-selected="false">حساب جديد</button>
+        </div>
+        <label class="sr-only" for="emailInput">البريد الإلكتروني</label>
+        <input type="email" placeholder="البريد الإلكتروني" id="emailInput" autocomplete="email" required>
+        <label class="sr-only" for="passInput">كلمة المرور</label>
+        <input type="password" placeholder="كلمة المرور (6 خانات على الأقل)" id="passInput" autocomplete="current-password" minlength="6" required>
+        <button class="btn" id="authEmailSubmit" type="submit" style="width:100%; margin-top:6px;"><i data-lucide="log-in"></i> <span id="authEmailSubmitLabel">تسجيل الدخول</span></button>
+        <button class="text-link" id="forgotPassBtn" type="button">نسيت كلمة المرور؟</button>
+      </form>
     </div>
 
     <!-- STEP 1.5: loading -->
@@ -765,11 +1061,24 @@
 </div>
 
 <section class="hero" id="home">
+  <div class="hero-grid" aria-hidden="true"></div>
+  <span class="hero-orb o1" aria-hidden="true"></span>
+  <span class="hero-orb o2" aria-hidden="true"></span>
+  <span class="hero-orb o3" aria-hidden="true"></span>
   <div class="container">
-    <img class="hero-logo" src="logo.png" alt="شعار المتوسطة">
-    <div class="eyebrow">مرحباً بكم في فضائنا الرقمي الجديد</div>
+    <div class="hero-logo-wrap"><img class="hero-logo" src="logo.png" alt="شعار المتوسطة" width="150" height="150"></div>
+    <div class="eyebrow"><span class="pulse-dot" aria-hidden="true"></span><span id="heroEyebrow">مرحباً بكم في فضائنا الرقمي الجديد</span></div>
     <h1>متوسطة شعيبي بومدين <span id="heroTypewriter">— نحو تعلّم أقرب إليكم</span></h1>
-    <p>كل ما يخص المتوسطة في مكان واحد: الأخبار والمناسبات، مواعيد الفروض والاختبارات، فضاء لطرح الأسئلة ومناقشة التمارين، ومتابعة مستمرة لأولياء التلاميذ.</p>
+    <p id="heroText">كل ما يخص المتوسطة في مكان واحد: الأخبار والمناسبات، مواعيد الفروض والاختبارات، فضاء لطرح الأسئلة ومناقشة التمارين، ومتابعة مستمرة لأولياء التلاميذ.</p>
+    <div class="hero-cta">
+      <a href="#news" class="btn gold"><i data-lucide="newspaper"></i> تصفّح آخر الأخبار</a>
+      <a href="#qa" class="btn ghost"><i data-lucide="messages-square"></i> اطرح سؤالك</a>
+    </div>
+    <div class="hero-stats" aria-label="أرقام الموقع">
+      <div class="hero-stat"><b class="nums" data-count="news">0</b><span>خبر منشور</span></div>
+      <div class="hero-stat"><b class="nums" data-count="events">0</b><span>مناسبة</span></div>
+      <div class="hero-stat"><b class="nums" data-count="exams">4</b><span>مستويات دراسية</span></div>
+    </div>
     <div class="home-highlights" id="homeHighlights"></div>
   </div>
 </section>
@@ -834,8 +1143,8 @@
       <div class="qa-compose">
         <textarea id="qaInput" maxlength="1000" placeholder="اكتب سؤالك هنا... مثال: كيف أحل معادلة من الدرجة الأولى؟"></textarea>
         <div class="qa-row" style="margin-bottom:8px;">
-          <label class="btn" style="background:var(--paper-2); color:var(--ink); cursor:pointer;">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10" r="1.5"/><path d="M21 15l-5-5-9 9"/></svg>
+          <label class="btn soft" style="cursor:pointer;">
+            <i data-lucide="image-plus"></i>
             إرفاق صورة
             <input type="file" id="qaAttachInput" accept="image/*" style="display:none;">
           </label>
@@ -852,7 +1161,8 @@
             <option>علوم طبيعية</option>
             <option>تاريخ وجغرافيا</option>
           </select>
-          <button class="btn" id="qaSubmit">نشر السؤال</button>
+          <button class="btn" id="qaSubmit" type="button"><i data-lucide="send-horizontal"></i> نشر السؤال</button>
+          <span id="qaCounter" class="q-meta" style="margin-inline-start:auto;">0 / 1000</span>
         </div>
       </div>
       <div id="qaList"></div>
@@ -865,7 +1175,7 @@
   <div class="container">
     <div class="section-head reveal">
       <div class="tag">مخصص للأولياء فقط</div>
-      <h3>فضاء الأولياء</h3>
+      <h2>فضاء الأولياء</h2>
       <p>فضاء خاص لا يظهر محتواه إلا لحساب ولي التلميذ — دردشة عامة مع أولياء آخرين حول المتوسطة وأبنائهم.</p>
     </div>
     <div id="parentsGate"></div>
@@ -901,9 +1211,13 @@
 <!-- ================= SEARCH OVERLAY ================= -->
 <div class="modal-overlay" id="searchOverlay">
   <div class="modal-box" style="max-width:520px;">
-    <button class="modal-close" id="closeSearchBtn" aria-label="إغلاق"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
-    <h3 style="margin-bottom:16px;">البحث في الموقع</h3>
-    <input type="text" id="siteSearchInput" placeholder="اكتب كلمة للبحث في الأخبار، المناسبات، الفروض، الأسئلة..." style="width:100%; border:1px solid #e4d9bd; border-radius:11px; padding:12px 14px; font-family:'IBM Plex Sans Arabic',sans-serif; font-size:.9rem; outline:none; margin-bottom:16px;">
+    <button class="modal-close" id="closeSearchBtn" type="button" aria-label="إغلاق"><i data-lucide="x"></i></button>
+    <h3 style="margin-bottom:6px;">البحث في الموقع</h3>
+    <p class="modal-sub" style="text-align:right; margin-bottom:14px;">اختصار سريع: <span class="kbd">Ctrl</span> + <span class="kbd">K</span></p>
+    <div class="search-input-wrap">
+      <i data-lucide="search"></i>
+      <input type="search" id="siteSearchInput" aria-label="كلمة البحث" placeholder="ابحث في الأخبار، المناسبات، الفروض، الأسئلة..." style="width:100%; border:1px solid #e4d9bd; border-radius:12px; padding:12px 14px; font-family:'IBM Plex Sans Arabic',sans-serif; font-size:.9rem; outline:none;">
+    </div>
     <div id="siteSearchResults" style="max-height:340px; overflow-y:auto;"></div>
   </div>
 </div>
@@ -922,10 +1236,26 @@
     <h3 id="accountName" style="margin-bottom:4px;"></h3>
     <div id="accountType" style="font-size:.82rem; color:var(--royal); font-family:'Cairo',sans-serif; margin-bottom:6px;"></div>
     <div id="accountEmail" style="font-size:.8rem; color:var(--muted); margin-bottom:22px;"></div>
-    <button class="btn" id="accountLogoutBtn" style="width:100%; margin-bottom:10px; background:var(--paper-2); color:var(--ink);">تسجيل الخروج</button>
-    <button class="btn" id="accountDeleteBtn" style="width:100%; background:var(--red);">حذف الحساب نهائياً</button>
+    <a class="btn gold" id="accountAdminLink" href="admin.html" style="width:100%; margin-bottom:10px; display:none;"><i data-lucide="layout-dashboard"></i> لوحة التحكم</a>
+    <button class="btn soft" id="accountLogoutBtn" type="button" style="width:100%; margin-bottom:10px;"><i data-lucide="log-out"></i> تسجيل الخروج</button>
+    <button class="btn" id="accountDeleteBtn" type="button" style="width:100%; background:var(--red);"><i data-lucide="trash-2"></i> حذف الحساب نهائياً</button>
   </div>
 </div>
+
+<!-- ================= PROMPT MODAL (إدخال كلمة المرور للتأكيد) ================= -->
+<div class="modal-overlay" id="promptOverlay">
+  <form class="modal-box" id="promptForm" style="max-width:360px; text-align:center;">
+    <p id="promptMessage" style="font-size:.95rem; color:var(--ink); margin-bottom:14px; line-height:1.7;"></p>
+    <label class="sr-only" for="promptInput">القيمة المطلوبة</label>
+    <input id="promptInput" type="password" autocomplete="current-password" style="width:100%; border:1px solid #e4d9bd; border-radius:10px; padding:11px 14px; margin-bottom:16px; font-family:inherit;">
+    <div style="display:flex; gap:10px;">
+      <button class="btn soft" id="promptCancelBtn" type="button" style="flex:1;">إلغاء</button>
+      <button class="btn" id="promptOkBtn" type="submit" style="flex:1;">متابعة</button>
+    </div>
+  </form>
+</div>
+
+<button class="to-top" id="toTopBtn" type="button" aria-label="العودة إلى الأعلى"><i data-lucide="arrow-up"></i></button>
 
 <!-- ================= LIGHTBOX (معاين الصور) ================= -->
 <!-- ================= TOAST (تنبيهات الموقع) ================= -->
@@ -956,16 +1286,16 @@
         </div>
         <p>فضاء رقمي يجمع أخبار المتوسطة، مناسباتها، ومواعيد تقييم التلاميذ، إلى جانب منصة تفاعلية للأسئلة وفضاء خاص بالأولياء.</p>
         <div class="social-row" style="margin-top:16px;">
-          <a href="https://share.google/fVCazroCX34Up9VPe" target="_blank" rel="noopener" aria-label="فيسبوك" class="soc-ic">
+          <a href="https://share.google/fVCazroCX34Up9VPe" target="_blank" rel="noopener" aria-label="فيسبوك" class="soc-ic" data-social="facebook">
             <svg viewBox="0 0 24 24"><path d="M13.5 21v-7.7h2.6l.4-3h-3v-1.9c0-.87.24-1.46 1.5-1.46h1.6V4.3c-.28-.04-1.23-.12-2.34-.12-2.32 0-3.9 1.4-3.9 4V10.3H7.8v3h2.6V21h3.1z"/></svg>
           </a>
-          <a href="https://share.google/dIt6zbO9FOyQWr9KF" target="_blank" rel="noopener" aria-label="انستغرام" class="soc-ic">
+          <a href="https://share.google/dIt6zbO9FOyQWr9KF" target="_blank" rel="noopener" aria-label="انستغرام" class="soc-ic" data-social="instagram">
             <svg viewBox="0 0 24 24"><path d="M12 3.6c2.4 0 2.7 0 3.66.05 2.4.11 3.53 1.25 3.64 3.64.05.96.05 1.24.05 3.66s0 2.7-.05 3.66c-.11 2.38-1.23 3.53-3.64 3.64-.96.05-1.24.05-3.66.05s-2.7 0-3.66-.05c-2.4-.11-3.53-1.25-3.64-3.64C4.65 13.7 4.65 13.42 4.65 11s0-2.7.05-3.66C4.81 5 5.94 3.85 8.34 3.74 9.3 3.7 9.58 3.6 12 3.6zm0-1.6C9.55 2 9.25 2 8.29 2.05c-3.1.14-4.82 1.86-4.96 4.96C3.28 8.02 3.28 8.32 3.28 12s0 3.98.05 4.99c.14 3.1 1.86 4.82 4.96 4.96 1.01.05 1.31.05 4.29.05s3.98 0 4.99-.05c3.1-.14 4.82-1.86 4.96-4.96.05-1.01.05-1.31.05-4.99s0-3.98-.05-4.99c-.14-3.1-1.86-4.82-4.96-4.96C15.98 2 15.68 2 12 2zm0 5.3a4.7 4.7 0 1 0 0 9.4 4.7 4.7 0 0 0 0-9.4zm0 7.7a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm5.9-7.9a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0z"/></svg>
           </a>
-          <a href="https://share.google/ZutoycXpwLywmuaNu" target="_blank" rel="noopener" aria-label="يوتيوب" class="soc-ic">
+          <a href="https://share.google/ZutoycXpwLywmuaNu" target="_blank" rel="noopener" aria-label="يوتيوب" class="soc-ic" data-social="youtube">
             <svg viewBox="0 0 24 24"><path d="M21.6 7.6a2.7 2.7 0 0 0-1.9-1.9C18 5.2 12 5.2 12 5.2s-6 0-7.7.5A2.7 2.7 0 0 0 2.4 7.6 28 28 0 0 0 2 12a28 28 0 0 0 .4 4.4 2.7 2.7 0 0 0 1.9 1.9c1.7.5 7.7.5 7.7.5s6 0 7.7-.5a2.7 2.7 0 0 0 1.9-1.9A28 28 0 0 0 22 12a28 28 0 0 0-.4-4.4zM10 15V9l5.2 3-5.2 3z"/></svg>
           </a>
-          <a href="#" target="_blank" rel="noopener" aria-label="تيك توك" class="soc-ic">
+          <a href="#" target="_blank" rel="noopener" aria-label="تيك توك" class="soc-ic" data-social="tiktok" hidden>
             <svg viewBox="0 0 24 24"><path d="M16.6 2h-3.2v13.6a2.9 2.9 0 1 1-2.9-2.9c.3 0 .6 0 .9.1V9.5a6.1 6.1 0 1 0 5.2 6V8.4a7.7 7.7 0 0 0 4.4 1.4V6.6a4.4 4.4 0 0 1-4.4-4.4V2z"/></svg>
           </a>
         </div>
@@ -973,22 +1303,26 @@
       <div>
         <h4>روابط سريعة</h4>
         <ul>
-          <li><a href="#news">الأخبار</a></li>
-          <li><a href="#events">المناسبات</a></li>
-          <li><a href="#exams">الفروض والاختبارات</a></li>
-          <li><a href="#qa">فضاء الأسئلة</a></li>
-          <li><a href="#parents">فضاء الأولياء</a></li>
+          <li><a href="#news"><i data-lucide="chevron-left"></i>الأخبار</a></li>
+          <li><a href="#events"><i data-lucide="chevron-left"></i>المناسبات</a></li>
+          <li><a href="#exams"><i data-lucide="chevron-left"></i>الفروض والاختبارات</a></li>
+          <li><a href="#qa"><i data-lucide="chevron-left"></i>فضاء الأسئلة</a></li>
+          <li><a href="#parents"><i data-lucide="chevron-left"></i>فضاء الأولياء</a></li>
         </ul>
       </div>
       <div>
         <h4>تواصلوا معنا</h4>
         <div class="contact-row">
           <span class="icon-badge"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21.2s7.2-6.6 7.2-12.2a7.2 7.2 0 1 0-14.4 0c0 5.6 7.2 12.2 7.2 12.2z"/><circle cx="12" cy="9" r="2.6"/></svg></span>
-          <span>حي بومدين — الجزائر</span>
+          <span id="footAddress">حي بومدين — وهران، الجزائر</span>
         </div>
         <div class="contact-row">
           <span class="icon-badge"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5.2" width="18" height="13.6" rx="2"/><path d="M3.3 6.4 12 13l8.7-6.6"/></svg></span>
-          <a href="mailto:cemchaibi@gmail.com">cemchaibi@gmail.com</a>
+          <a href="mailto:cemchaibi@gmail.com" id="footEmail">cemchaibi@gmail.com</a>
+        </div>
+        <div class="contact-row" id="footPhoneRow" hidden>
+          <span class="icon-badge"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4.2 4.2h4l1.5 5-2.3 1.6a12.3 12.3 0 0 0 6.3 6.3l1.6-2.3 5 1.5v4a1 1 0 0 1-1.1 1.1A17.3 17.3 0 0 1 4.1 5.3a1 1 0 0 1 .1-1.1z"/></svg></span>
+          <a href="#" id="footPhone" dir="ltr"></a>
         </div>
         <div class="contact-row">
           <span class="icon-badge"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.4 3.8 5.6 3.8 9s-1.3 6.6-3.8 9c-2.5-2.4-3.8-5.6-3.8-9S9.5 5.4 12 3z"/></svg></span>
@@ -1004,6 +1338,8 @@
   </div>
 </footer>
 
+<script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.7/dist/purify.min.js"></script>
 <!-- Firebase (قاعدة بيانات حقيقية لحفظ الأخبار والمناسبات والأسئلة) -->
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
@@ -1063,58 +1399,81 @@
     return `<span class="icon-badge"><svg viewBox="0 0 24 24" width="${size}" height="${size}">${ICON_PATHS[name] || ''}</svg></span>`;
   }
 
+  function refreshIcons(){
+    if(window.lucide && lucide.createIcons) lucide.createIcons({ attrs:{ 'aria-hidden':'true' } });
+  }
+  function isComposingKey(e){ return e.isComposing || e.keyCode === 229; }
+
   // Mobile nav toggle
-  document.getElementById('burgerBtn').addEventListener('click', (e)=>{
+  const mainNavEl = document.getElementById('mainNav');
+  const burgerBtnEl = document.getElementById('burgerBtn');
+  function setNavOpen(open){
+    mainNavEl.classList.toggle('open', open);
+    burgerBtnEl.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+  burgerBtnEl.addEventListener('click', (e)=>{
     e.stopPropagation();
-    document.getElementById('mainNav').classList.toggle('open');
+    setNavOpen(!mainNavEl.classList.contains('open'));
   });
   document.querySelectorAll('#mainNav a').forEach(a=>{
-    a.addEventListener('click', ()=>{
-      document.getElementById('mainNav').classList.remove('open');
-      document.querySelectorAll('#mainNav a').forEach(x=>x.classList.remove('active'));
-      a.classList.add('active');
-    });
+    a.addEventListener('click', ()=> setNavOpen(false));
   });
-  document.getElementById('navCloseBtn').addEventListener('click', ()=>{
-    document.getElementById('mainNav').classList.remove('open');
-  });
-  document.addEventListener('click', (e)=>{
-    const nav = document.getElementById('mainNav');
-    if(nav.classList.contains('open') && !nav.contains(e.target)){
-      nav.classList.remove('open');
-    }
-  });
+  document.getElementById('navCloseBtn').addEventListener('click', ()=> setNavOpen(false));
+  mainNavEl.addEventListener('click', (e)=>{ if(e.target === mainNavEl) setNavOpen(false); });
 
   // ---------- أهم المعلومات في الشاشة الرئيسية (بدل الروابط السريعة) ----------
   function renderHomeHighlights(){
     const wrap = document.getElementById('homeHighlights');
     if(!wrap) return;
-    const latestNews = siteNews[0];
+    const latestNews = sortedNews()[0];
     const nextEvent = siteEvents[0];
+    const arrow = '<i data-lucide="arrow-left" class="hl-arrow"></i>';
     let cards = '';
     if(latestNews){
-      cards += `<a href="#article-${latestNews.id}" class="highlight-card">
-        <span class="hl-tag">آخر خبر</span>
-        <h4>${latestNews.title}</h4>
-        <span class="hl-date">${latestNews.date}</span>
+      cards += `<a href="#article-${encodeURIComponent(latestNews.id)}" class="highlight-card">${arrow}
+        <span class="hl-tag">${latestNews.pinned ? 'خبر مثبّت' : 'آخر خبر'}</span>
+        <h4>${escapeHtml(latestNews.title)}</h4>
+        <span class="hl-date">${escapeHtml(latestNews.date)}</span>
       </a>`;
     }
     if(nextEvent){
-      cards += `<a href="#events" class="highlight-card">
+      cards += `<a href="#events" class="highlight-card">${arrow}
         <span class="hl-tag">أقرب مناسبة</span>
-        <h4>${nextEvent.title}</h4>
-        <span class="hl-date">${nextEvent.date}</span>
+        <h4>${escapeHtml(nextEvent.title)}</h4>
+        <span class="hl-date">${escapeHtml(nextEvent.date)}</span>
       </a>`;
     }
-    cards += `<a href="#exams" class="highlight-card">
+    cards += `<a href="#exams" class="highlight-card">${arrow}
       <span class="hl-tag">الخدمات اليومية</span>
       <h4>مواعيد الفروض والاختبارات</h4>
     </a>`;
-    cards += `<a href="#qa" class="highlight-card">
+    cards += `<a href="#qa" class="highlight-card">${arrow}
       <span class="hl-tag">فضاء تفاعلي</span>
       <h4>اسأل وناقش</h4>
     </a>`;
     wrap.innerHTML = cards;
+    updateHeroStats();
+    refreshIcons();
+  }
+
+  function sortedNews(){
+    return siteNews.filter(n=> !n.hidden).sort((a,b)=> (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0));
+  }
+  function animateCount(el, to){
+    const from = Number(el.textContent) || 0;
+    if(from === to){ el.textContent = to; return; }
+    const start = performance.now(), dur = 900;
+    const step = (now)=>{
+      const p = Math.min(1, (now - start) / dur);
+      el.textContent = Math.round(from + (to - from) * (1 - Math.pow(1 - p, 3)));
+      if(p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+  function updateHeroStats(){
+    const counts = { news: sortedNews().length, events: siteEvents.length, exams: Object.keys(siteLevels).length || 4 };
+    document.querySelectorAll('[data-count]').forEach(el=> animateCount(el, counts[el.dataset.count] || 0));
   }
 
   // ---------- DEFAULT CONTENT (used to seed storage on first run) ----------
@@ -2223,7 +2582,7 @@
             await db.collection('newsComments').doc(id).collection('comments').doc(btn.dataset.delComment).delete();
           }catch(e){
             console.error(e);
-            showToast('تعذر حذف التعليق.', true);
+            showToast('ت��ذر حذف التعليق.', true);
           }
         });
       });
