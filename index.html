@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>متوسطة شعيبي بومدين وهران — Cem Chaibi Boumediene Oran — الموقع الرسمي</title>
 <link rel="icon" type="image/png" href="favicon.png">
 <meta name="description" content="الموقع الرسمي لمتوسطة شعيبي بومدين بولاية وهران (Cem Chaibi Boumediene Oran): أخبار المتوسطة، المناسبات، مواعيد الفروض والاختبارات، فضاء الأسئلة، وفضاء الأولياء.">
@@ -15,7 +15,7 @@
 <meta property="og:image" content="https://cemchaibi.github.io/cem-chaibi-boumediene/logo.png">
 <meta name="twitter:card" content="summary">
 <link rel="apple-touch-icon" href="logo.png">
-<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#0e3b4c">
 <meta name="twitter:title" content="متوسطة شعيبي بومدين وهران — Cem Chaibi Boumediene Oran">
 <meta name="twitter:description" content="أخبار، مناسبات، مواعيد تقييم، فضاء أسئلة، وفضاء أولياء لمتوسطة شعيبي بومدين، وهران.">
 <script type="application/ld+json">
@@ -619,9 +619,386 @@
   #home.active-view, #news.active-view, #events.active-view, #exams.active-view, #qa.active-view, #parents.active-view, #article.active-view{display:block;}
   #parents-chat.active-view{ display:flex; }
   #home.active-view{ animation:fadeInUp .5s ease; }
+
+  /* ===== تحسينات الواجهة ===== */
+  :focus-visible{ outline:3px solid var(--gold-light); outline-offset:2px; border-radius:6px; }
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important; }
+  }
+  #privacy{ display:none; padding:56px 0 80px; }
+  #privacy.active-view{ display:block; animation:fadeInUp .4s ease; }
+  .privacy-doc{ max-width:780px; margin:0 auto; background:var(--card-bg); border:1px solid var(--card-border); border-radius:18px; padding:32px 30px; line-height:2; }
+  .privacy-doc h2{ font-size:1.5rem; margin-bottom:6px; }
+  .privacy-doc h3{ font-size:1.08rem; margin:22px 0 6px; color:var(--royal); }
+  .privacy-doc ul{ list-style:disc; margin:6px 22px 6px 0; }
+  .privacy-doc .muted{ color:var(--muted); font-size:.85rem; }
+  .field-check{ display:flex; align-items:flex-start; gap:8px; font-size:.82rem; margin:6px 0 12px; line-height:1.7; cursor:pointer; }
+  .field-check input{ margin-top:5px; accent-color:var(--royal); }
+  .field-check a{ color:var(--royal); text-decoration:underline; }
+  .link-btn{ background:none; color:var(--royal); font-size:.8rem; text-decoration:underline; padding:4px; margin-top:4px; font-family:'Cairo',sans-serif; }
+  .btn-row-2{ display:flex; gap:8px; margin-top:10px; }
+  .btn-row-2 .btn{ flex:1; }
+  .pending-note{ background:rgba(201,154,46,.12); border:1px solid var(--line); border-radius:12px; padding:12px 14px; font-size:.86rem; margin-top:12px; }
+  #backTop{
+    position:fixed; bottom:22px; right:22px; z-index:900; width:44px; height:44px; border-radius:50%;
+    background:var(--gold); color:var(--deep-2); display:flex; align-items:center; justify-content:center;
+    box-shadow:0 8px 22px rgba(0,0,0,.25); opacity:0; visibility:hidden; transform:translateY(10px); transition:.3s;
+  }
+  #backTop.show{ opacity:1; visibility:visible; transform:none; }
+  .news-card img{ transition:transform .4s ease; }
+  .news-card:hover img{ transform:scale(1.04); }
+  .empty-note{ text-align:center; padding:26px 10px; color:var(--muted); grid-column:1/-1; }
+
+  /* =====================================================================
+     طبقة التصميم المطوَّرة — أيقونات، حركات، تناسق الهاتف
+     ===================================================================== */
+  ::selection{ background:var(--gold); color:var(--deep-2); }
+  /* إصلاح: overflow-x:hidden على body كان يُبطل تثبيت الهيدر (sticky) */
+  @supports (overflow:clip){ body{ overflow-x:clip !important; } }
+  section{ scroll-margin-top:0; }
+  *{ -webkit-tap-highlight-color:transparent; }
+  html{ scrollbar-width:thin; scrollbar-color:var(--gold) transparent; }
+  ::-webkit-scrollbar{ width:9px; height:9px; }
+  ::-webkit-scrollbar-thumb{ background:linear-gradient(var(--gold),var(--royal)); border-radius:9px; }
+  ::-webkit-scrollbar-track{ background:transparent; }
+
+  /* ----- الأيقونات ----- */
+  .ic{ width:1.15em; height:1.15em; flex-shrink:0; fill:none; stroke:currentColor; stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round; vertical-align:-.2em; }
+  .btn .ic, .tab-btn .ic{ transition:transform .3s cubic-bezier(.3,1.5,.5,1); }
+  .btn:hover .ic{ transform:translateX(-3px) scale(1.12); }
+
+  /* ----- شريط التقدم ----- */
+  #scrollBar{ position:fixed; top:0; right:0; height:3px; width:0; z-index:2000; background:linear-gradient(270deg,var(--gold-light),var(--gold),var(--royal-light)); box-shadow:0 0 10px rgba(230,196,103,.7); transition:width .08s linear; }
+
+  /* ----- الهيدر: إصلاح القائمة على الهاتف + تأثير زجاجي ----- */
+  header{ -webkit-backdrop-filter:none !important; backdrop-filter:none !important; transition:box-shadow .3s, background .3s; }
+  header::after{ content:''; position:absolute; inset:0; z-index:-1; -webkit-backdrop-filter:blur(22px) saturate(180%); backdrop-filter:blur(22px) saturate(180%); }
+  .nav-wrap{ transition:padding .3s; }
+  .brand img{ transition:width .3s, height .3s, transform .4s; }
+  .brand:hover img{ transform:rotate(-6deg) scale(1.08); }
+  header.scrolled{ background:rgba(10,38,50,.78); box-shadow:0 10px 34px rgba(0,0,0,.28); }
+  header.scrolled .nav-wrap{ padding-top:7px; padding-bottom:7px; }
+  header.scrolled .brand img{ width:38px; height:38px; }
+  .soc-ic{ transition:transform .25s cubic-bezier(.3,1.5,.5,1), background .2s, border-color .2s; }
+  .soc-ic:hover{ transform:translateY(-3px) rotate(-6deg) scale(1.08); }
+  .login-btn .ic{ font-size:1.05em; }
+  .user-chip .chip-name{ max-width:140px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  #siteSearchBtn, #darkModeBtn{ width:40px; height:40px; padding:0 !important; border-radius:50%; transition:background .2s, transform .3s; }
+  #siteSearchBtn:hover, #darkModeBtn:hover{ background:rgba(255,255,255,.12) !important; transform:rotate(12deg) scale(1.08); }
+
+  /* ----- الأزرار ----- */
+  .btn, .tab-btn, .pill-opt, .auth-btn, .share-icon-btn{ position:relative; overflow:hidden; }
+  .btn{ background:linear-gradient(135deg,var(--royal),var(--deep)); letter-spacing:.2px; }
+  .btn:hover{ background:linear-gradient(135deg,var(--royal-light),var(--royal)); }
+  .btn.gold{ background:linear-gradient(135deg,var(--gold-light),var(--gold)); }
+  .btn.gold:hover{ background:linear-gradient(135deg,#f1d47e,var(--gold-light)); }
+  .btn.gold::after{ display:none; }
+  .btn.gold::before, .btn:not(.login-btn):not(.gold)::before{
+    content:''; position:absolute; top:0; bottom:0; width:60%; right:-80%;
+    background:linear-gradient(105deg,transparent,rgba(255,255,255,.38),transparent); transform:skewX(-18deg); transition:right .6s ease; pointer-events:none;
+  }
+  .btn.gold:hover::before, .btn:not(.login-btn):not(.gold):hover::before{ right:130%; }
+  .btn.ghost{ background:rgba(255,255,255,.08); color:#fff; border:1px solid rgba(255,255,255,.35); box-shadow:none; -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); }
+  .btn.ghost:hover{ background:rgba(255,255,255,.18); }
+  .btn:disabled{ opacity:.6; cursor:not-allowed; transform:none; }
+  .ripple{ position:absolute; border-radius:50%; background:currentColor; opacity:.28; transform:scale(0); animation:ripple .65s ease-out forwards; pointer-events:none; }
+  @keyframes ripple{ to{ transform:scale(1); opacity:0; } }
+  .auth-btn{ transition:transform .2s, box-shadow .2s, background .2s; }
+  .auth-btn:hover{ transform:translateY(-2px); box-shadow:0 8px 20px rgba(0,0,0,.12); }
+  .auth-btn:active{ transform:scale(.97); }
+  .tab-btn{ transition:all .25s; }
+  .tab-btn:hover{ transform:translateY(-2px); box-shadow:0 6px 14px rgba(47,110,168,.15); }
+  .tab-btn.active{ background:linear-gradient(135deg,var(--royal),var(--deep)); box-shadow:0 8px 18px rgba(47,110,168,.3); transform:translateY(-1px); }
+  .pill-opt{ transition:all .2s; }
+  .pill-opt.active{ background:linear-gradient(135deg,var(--royal),var(--deep)); box-shadow:0 4px 12px rgba(47,110,168,.3); }
+  .like-btn svg{ transition:transform .25s cubic-bezier(.3,1.8,.5,1); }
+  .like-btn:active svg{ transform:scale(1.5) rotate(-12deg); }
+  .share-icon-btn{ transition:transform .25s cubic-bezier(.3,1.5,.5,1), box-shadow .2s; }
+  .share-icon-btn:hover{ transform:translateY(-4px) scale(1.08); }
+  .item-del-btn, .q-foot-item{ transition:color .2s, transform .2s; }
+  .q-foot-item:hover{ color:var(--royal); }
+  .comment-composer{ transition:box-shadow .25s, border-color .25s; }
+  .comment-composer:focus-within{ border-color:var(--royal); box-shadow:0 0 0 4px rgba(47,110,168,.14); }
+  input:focus, textarea:focus, select:focus{ box-shadow:0 0 0 4px rgba(47,110,168,.14); border-color:var(--royal) !important; }
+  .comment-composer button{ transition:transform .25s cubic-bezier(.3,1.5,.5,1), background .2s; }
+  .comment-composer button:hover{ transform:scale(1.1) rotate(-8deg); }
+
+  /* ----- الواجهة الأولى (Hero) ----- */
+  .hero{ isolation:isolate; }
+  .hero-bg{ position:absolute; inset:0; z-index:-1; overflow:hidden; pointer-events:none; }
+  .hero-bg::after{ content:''; position:absolute; inset:0; background-image:radial-gradient(rgba(230,196,103,.22) 1px, transparent 1.5px); background-size:26px 26px; -webkit-mask-image:radial-gradient(ellipse at 50% 30%,#000 10%,transparent 70%); mask-image:radial-gradient(ellipse at 50% 30%,#000 10%,transparent 70%); }
+  .hero-bg span{ position:absolute; border-radius:50%; filter:blur(60px); opacity:.55; animation:orb 14s ease-in-out infinite; }
+  .hero-bg span:nth-child(1){ width:340px; height:340px; background:#2f6ea8; top:-90px; right:6%; }
+  .hero-bg span:nth-child(2){ width:300px; height:300px; background:#c99a2e; bottom:-120px; left:8%; animation-delay:-5s; opacity:.4; }
+  .hero-bg span:nth-child(3){ width:240px; height:240px; background:#4f8fc7; top:38%; left:42%; animation-delay:-9s; opacity:.3; }
+  @keyframes orb{ 0%,100%{ transform:translate(0,0) scale(1); } 33%{ transform:translate(40px,-30px) scale(1.12); } 66%{ transform:translate(-30px,30px) scale(.92); } }
+  .logo-orb{ position:relative; width:172px; height:172px; margin:0 auto 20px; display:flex; align-items:center; justify-content:center; }
+  .logo-orb::before{ content:''; position:absolute; inset:0; border-radius:50%; background:conic-gradient(from 0deg,var(--gold-light),transparent 25%,var(--royal-light),transparent 60%,var(--gold-light)); -webkit-mask:radial-gradient(circle,transparent 62%,#000 64%); mask:radial-gradient(circle,transparent 62%,#000 64%); animation:spin 9s linear infinite; opacity:.9; }
+  .logo-orb::after{ content:''; position:absolute; inset:14px; border-radius:50%; background:radial-gradient(circle,rgba(255,255,255,.12),transparent 70%); }
+  .logo-orb .hero-logo{ width:128px; height:128px; margin:0; position:relative; z-index:1; object-fit:contain; }
+  .hero h1 span{ background:linear-gradient(90deg,var(--gold-light),#fff7da,var(--gold-light)); background-size:220% 100%; -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; animation:shine 5s linear infinite; }
+  @keyframes shine{ to{ background-position:-220% 0; } }
+  .hero .logo-orb, .hero .eyebrow, .hero h1, .hero > .container > p, .hero-cta, .home-highlights{ animation:heroIn .8s cubic-bezier(.2,.8,.3,1) both; }
+  .hero .eyebrow{ animation-delay:.1s; } .hero h1{ animation-delay:.2s; } .hero > .container > p{ animation-delay:.3s; } .hero-cta{ animation-delay:.4s; } .home-highlights{ animation-delay:.5s; }
+  @keyframes heroIn{ from{ opacity:0; transform:translateY(24px); } to{ opacity:1; transform:none; } }
+  .hero-cta{ display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin:-6px 0 34px; }
+  .hero-cta .btn{ padding:13px 28px; font-size:.95rem; border-radius:14px; }
+  .eyebrow{ -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); }
+
+  /* بطاقات أهم المعلومات */
+  .highlight-card{ display:grid; grid-template-columns:auto 1fr; column-gap:12px; row-gap:2px; align-items:center; position:relative; overflow:hidden; -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); }
+  .highlight-card .hl-ic{ grid-row:1 / span 3; width:44px; height:44px; border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:1.3rem; color:var(--deep-2); background:linear-gradient(135deg,var(--gold-light),var(--gold)); box-shadow:0 6px 16px rgba(201,154,46,.35); transition:transform .3s cubic-bezier(.3,1.5,.5,1); }
+  .highlight-card:hover .hl-ic{ transform:rotate(-8deg) scale(1.1); }
+  .highlight-card h4{ margin:2px 0; }
+
+  /* ----- توهج يتبع المؤشر على البطاقات ----- */
+  .news-card, .t-card, .q-card, .highlight-card{ position:relative; }
+  .news-card::after, .t-card::after, .q-card::after, .highlight-card::after{
+    content:''; position:absolute; inset:0; pointer-events:none; border-radius:inherit; opacity:0; transition:opacity .3s;
+    background:radial-gradient(280px circle at var(--mx,50%) var(--my,50%), rgba(201,154,46,.16), transparent 65%);
+  }
+  .news-card:hover::after, .t-card:hover::after, .q-card:hover::after, .highlight-card:hover::after{ opacity:1; }
+  .reveal-stagger.settled > *{ transition-delay:0s !important; transition:transform .25s ease, box-shadow .25s ease, opacity .3s ease !important; }
+
+  /* ----- عناوين الأقسام ----- */
+  .section-head .tag::before{ content:none; }
+  .section-head .tag{ font-size:.82rem; padding:6px 16px; background:linear-gradient(135deg,rgba(47,110,168,.12),rgba(201,154,46,.12)); border:1px solid var(--line); }
+  .section-head .tag .ic{ color:var(--gold); }
+  .section-head h2::after, .section-head h3::after{ content:''; display:block; width:64px; height:4px; border-radius:4px; margin:12px auto 0; background:linear-gradient(90deg,var(--gold),var(--royal)); transform-origin:center; animation:growLine .8s .2s cubic-bezier(.2,.8,.3,1) both; }
+  @keyframes growLine{ from{ transform:scaleX(0); } to{ transform:scaleX(1); } }
+
+  /* ----- الأخبار ----- */
+  .news-card{ border-radius:22px; }
+  .news-thumb{ height:150px; background:linear-gradient(135deg,var(--royal),var(--deep),var(--royal)); background-size:200% 200%; animation:gradShift 8s ease infinite; overflow:hidden; }
+  @keyframes gradShift{ 0%,100%{ background-position:0% 50%; } 50%{ background-position:100% 50%; } }
+  .news-thumb .icon-badge{ animation:floaty 4s ease-in-out infinite; backdrop-filter:blur(6px); }
+  @keyframes floaty{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-6px); } }
+  .news-foot{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:12px; }
+  .news-foot .news-cat{ margin-top:0; }
+  .read-more{ display:inline-flex; align-items:center; gap:6px; font-size:.78rem; font-weight:700; color:var(--royal); font-family:'Cairo',sans-serif; }
+  .read-more .ic{ transition:transform .3s; }
+  .news-card:hover .read-more .ic{ transform:translateX(-5px); }
+
+  /* ----- الخط الزمني ----- */
+  .timeline::before{ transform-origin:top; animation:drawLine 1.4s .2s ease both; }
+  @keyframes drawLine{ from{ transform:scaleY(0); } to{ transform:scaleY(1); } }
+  .t-dot{ background:linear-gradient(135deg,var(--gold-light),var(--gold)); border:3px solid var(--card-bg); color:var(--deep-2); box-shadow:0 4px 12px rgba(201,154,46,.4); }
+  .t-dot::after{ content:''; position:absolute; inset:-5px; border-radius:50%; border:2px solid var(--gold); opacity:0; animation:pulseRing 2.6s ease-out infinite; }
+  @keyframes pulseRing{ 0%{ transform:scale(.8); opacity:.7; } 100%{ transform:scale(1.5); opacity:0; } }
+  .t-card{ border-radius:20px; }
+  .t-card .t-date{ display:inline-block; background:rgba(168,64,47,.08); padding:2px 10px; border-radius:999px; }
+
+  /* ----- الجدول ----- */
+  thead th{ background:linear-gradient(135deg,var(--deep),var(--deep-2)); }
+  tbody tr{ transition:background .2s, transform .2s; }
+  tbody tr:hover{ background:rgba(47,110,168,.07) !important; }
+
+  /* ----- الأسئلة والأولياء ----- */
+  .q-card{ border-radius:20px; }
+  .qa-compose{ border-radius:22px; }
+  .parent-card{ box-shadow:0 18px 40px rgba(10,44,58,.25); }
+
+  /* ----- النوافذ المنبثقة ----- */
+  .modal-overlay.open .modal-box{ animation:popIn .35s cubic-bezier(.2,.9,.3,1.2); }
+  @keyframes popIn{ from{ opacity:0; transform:translateY(18px) scale(.94); } to{ opacity:1; transform:none; } }
+  @keyframes sheetUp{ from{ transform:translateY(100%); } to{ transform:none; } }
+  .modal-close{ transition:transform .25s, background .2s; display:flex; align-items:center; justify-content:center; }
+  .modal-close:hover{ transform:rotate(90deg); background:var(--gold-light); }
+  #toastContainer > div{ display:inline-flex; align-items:center; gap:8px; }
+
+  /* ----- شريط التنقل السفلي (الهاتف) ----- */
+  .bottom-nav{ display:none; }
+  .bnav-item{ position:relative; flex:1; display:flex; flex-direction:column; align-items:center; gap:3px; padding:9px 2px 8px; font-family:'Cairo',sans-serif; font-size:.64rem; font-weight:600; color:var(--muted); transition:color .25s; min-width:0; }
+  .bnav-item span{ white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:100%; }
+  .bnav-item .ic{ width:22px; height:22px; padding:0; transition:transform .35s cubic-bezier(.3,1.6,.5,1); }
+  .bnav-item::before{ content:''; position:absolute; top:0; left:50%; width:26px; height:3px; border-radius:0 0 4px 4px; background:var(--gold); transform:translateX(-50%) scaleX(0); transition:transform .3s; }
+  .bnav-item.active{ color:var(--royal); }
+  html[data-theme="dark"] .bnav-item.active{ color:var(--gold-light); }
+  .bnav-item.active::before{ transform:translateX(-50%) scaleX(1); }
+  .bnav-item.active .ic{ transform:translateY(-2px) scale(1.18); }
+
+  #backTop{ z-index:80; }
+  #backTop:hover{ transform:translateY(-3px) scale(1.08); }
+
+  /* ----- الوضع الداكن: إصلاح حقول وجداول كانت غير مقروءة ----- */
+  html[data-theme="dark"] input, html[data-theme="dark"] textarea, html[data-theme="dark"] select{ background:var(--paper-2); color:var(--ink); border-color:var(--card-border) !important; }
+  html[data-theme="dark"] ::placeholder{ color:var(--muted); }
+  html[data-theme="dark"] .news-card, html[data-theme="dark"] .t-card, html[data-theme="dark"] .q-card,
+  html[data-theme="dark"] .exam-table-wrap, html[data-theme="dark"] .qa-compose, html[data-theme="dark"] .privacy-doc{ border-color:var(--card-border); }
+  html[data-theme="dark"] tbody tr:nth-child(even){ background:rgba(255,255,255,.03); }
+  html[data-theme="dark"] tbody td{ border-top-color:var(--card-border); }
+  html[data-theme="dark"] .tab-btn, html[data-theme="dark"] .pill-opt{ background:var(--card-bg); color:var(--ink); border-color:var(--card-border); }
+  html[data-theme="dark"] .tab-btn.active, html[data-theme="dark"] .pill-opt.active{ color:#fff; }
+  html[data-theme="dark"] .section-head p, html[data-theme="dark"] .parents-copy p{ color:var(--muted); }
+  html[data-theme="dark"] .section-head h2{ color:var(--ink); }
+  html[data-theme="dark"] .t-card h3, html[data-theme="dark"] .news-body h3{ color:var(--ink); }
+  html[data-theme="dark"] .alt-bg{ background:var(--paper-2); }
+  html[data-theme="dark"] .modal-close{ background:var(--paper-2); color:var(--ink); }
+  html[data-theme="dark"] .auth-btn.google, html[data-theme="dark"] .auth-btn.outline{ background:var(--paper-2); color:var(--ink); border-color:var(--card-border); }
+  html[data-theme="dark"] .share-row{ border-color:var(--card-border); }
+  html[data-theme="dark"] .chat-page-header{ background:var(--card-bg); }
+  html[data-theme="dark"] .skeleton-shimmer, html[data-theme="dark"] .skeleton-line{ background:linear-gradient(90deg,#1c2e37 25%,#243a45 37%,#1c2e37 63%); background-size:400% 100%; }
+
+  /* =====================================================================
+     نسخة الهاتف والأجهزة اللوحية
+     ===================================================================== */
+  @media (max-width:880px){
+    body{ padding-bottom:calc(66px + env(safe-area-inset-bottom)); }
+    body.on-chat{ padding-bottom:0; }
+    .bottom-nav{
+      display:flex; position:fixed; z-index:90; bottom:0; left:0; right:0;
+      padding:0 6px env(safe-area-inset-bottom);
+      background:rgba(255,255,255,.82); -webkit-backdrop-filter:blur(20px) saturate(180%); backdrop-filter:blur(20px) saturate(180%);
+      border-top:1px solid rgba(201,154,46,.3); box-shadow:0 -8px 30px rgba(10,44,58,.12); border-radius:20px 20px 0 0;
+    }
+    html[data-theme="dark"] .bottom-nav{ background:rgba(15,26,31,.85); border-top-color:rgba(255,255,255,.08); }
+    body.on-chat .bottom-nav{ display:none; }
+    #backTop{ bottom:calc(80px + env(safe-area-inset-bottom)); right:14px; }
+    body.on-chat #backTop{ display:none; }
+    #toastContainer{ bottom:calc(84px + env(safe-area-inset-bottom)) !important; }
+    nav.open li{ animation:navIn .45s cubic-bezier(.2,.8,.3,1) both; }
+    nav.open li:nth-child(1){ animation-delay:.04s; } nav.open li:nth-child(2){ animation-delay:.08s; } nav.open li:nth-child(3){ animation-delay:.12s; }
+    nav.open li:nth-child(4){ animation-delay:.16s; } nav.open li:nth-child(5){ animation-delay:.2s; } nav.open li:nth-child(6){ animation-delay:.24s; }
+    nav.open li:nth-child(7){ animation-delay:.28s; } nav.open li:nth-child(8){ animation-delay:.32s; }
+    @keyframes navIn{ from{ opacity:0; transform:translateY(18px); } to{ opacity:1; transform:none; } }
+    nav ul a{ display:block; padding:6px 18px; }
+    nav ul a.active{ background:none; color:var(--gold-light); }
+    .burger{ width:42px; height:42px; align-items:center; justify-content:center; border-radius:12px; background:rgba(255,255,255,.08); }
+    .nav-wrap{ padding:10px 16px; gap:10px; }
+    .head-actions{ gap:8px; }
+  }
+
+  @media (max-width:640px){
+    section{ padding:46px 0; }
+    .container{ padding:0 16px; }
+    .section-head{ margin-bottom:26px; }
+    .section-head p{ font-size:.88rem; }
+    .hero{ padding:44px 0 36px; }
+    .logo-orb{ width:140px; height:140px; margin-bottom:14px; }
+    .logo-orb .hero-logo{ width:104px; height:104px; }
+    .hero p{ font-size:.95rem; margin-bottom:22px; }
+    .hero-cta{ margin-bottom:26px; }
+    .hero-cta .btn{ flex:1; min-width:140px; padding:12px 16px; }
+    .home-highlights{ grid-template-columns:1fr; gap:10px; }
+    .highlight-card{ padding:14px 16px; }
+    .news-grid{ grid-template-columns:1fr; gap:16px; }
+    .news-thumb{ height:120px; }
+
+    .timeline::before{ right:19px; }
+    .t-item{ padding-inline-end:52px; margin-bottom:22px; }
+    .t-dot{ right:3px; width:32px; height:32px; }
+    .t-card{ padding:14px 16px; }
+
+    .tabs{ flex-wrap:nowrap; overflow-x:auto; justify-content:flex-start; padding:4px 2px 10px; margin-inline:-16px; padding-inline:16px; scroll-snap-type:x proximity; -webkit-overflow-scrolling:touch; scrollbar-width:none; }
+    .tabs::-webkit-scrollbar{ display:none; }
+    .tab-btn{ flex-shrink:0; scroll-snap-align:center; padding:10px 18px; min-height:42px; }
+
+    .exam-table-wrap{ background:transparent; border:none; box-shadow:none; border-radius:0; overflow:visible; }
+    .exam-table-wrap table, .exam-table-wrap tbody, .exam-table-wrap tr, .exam-table-wrap td{ display:block; width:100%; }
+    .exam-table-wrap thead{ display:none; }
+    .exam-table-wrap tbody tr{
+      display:grid; grid-template-columns:1fr 1fr; gap:10px 14px; margin-bottom:12px; padding:14px 16px;
+      background:var(--card-bg) !important; border:1px solid var(--card-border); border-radius:16px; box-shadow:0 4px 14px rgba(20,60,75,.06);
+    }
+    .exam-table-wrap td{ border:0 !important; padding:0 !important; text-align:right !important; width:auto; font-size:.86rem; }
+    .exam-table-wrap td:first-child{ grid-column:1 / -1; font-size:.98rem; padding-bottom:8px !important; border-bottom:1px dashed var(--line) !important; }
+    .exam-table-wrap td:first-child .subject-cell{ justify-content:flex-start; }
+    .exam-table-wrap td[data-label]::before{ content:attr(data-label); display:block; font-size:.68rem; color:var(--muted); margin-bottom:2px; font-family:'Cairo',sans-serif; }
+    .exam-table-wrap td:first-child::before{ display:none !important; }
+    .exam-table-wrap td.empty-note{ grid-column:1 / -1; text-align:center !important; }
+
+    .qa-compose{ padding:16px; }
+    .qa-row{ flex-direction:row; }
+    .qa-row select{ flex:1; min-height:44px; }
+    .qa-row .btn{ flex:1; min-height:44px; }
+    .q-card{ padding:16px; }
+    .parent-card{ padding:22px 18px; }
+    .mock-row{ flex-direction:column; gap:2px; }
+
+    #article .container{ padding:0 16px; }
+    #article h1{ font-size:1.3rem !important; }
+    .share-row{ flex-wrap:wrap; }
+    .article-rich-content{ font-size:.95rem; }
+    .article-rich-content img{ border-radius:12px; }
+
+    #parents-chat{ min-height:100vh; min-height:100dvh; }
+    .chat-page-header{ position:sticky; top:0; z-index:5; padding:12px 14px; }
+    .chat-bubble{ max-width:84%; }
+    .chat-frame-composer{ padding:10px 12px calc(10px + env(safe-area-inset-bottom)); position:sticky; bottom:0; }
+
+    input, textarea, select{ font-size:16px !important; }
+    .btn, .auth-btn, .pill-opt{ min-height:44px; }
+    .user-chip .chip-name{ max-width:84px; }
+
+    .modal-overlay{ align-items:flex-end; padding:0; }
+    .modal-box{ max-width:100% !important; width:100%; border-radius:26px 26px 0 0; max-height:92vh; max-height:92dvh; padding:28px 20px calc(24px + env(safe-area-inset-bottom)); }
+    .modal-box::before{ border-radius:26px 26px 50% 50%/26px 26px 20% 20%; }
+    .modal-overlay.open .modal-box{ animation:sheetUp .38s cubic-bezier(.2,.9,.3,1); }
+    .modal-box::after{ content:''; position:absolute; top:8px; left:50%; width:40px; height:4px; border-radius:4px; background:rgba(120,130,135,.4); transform:translateX(-50%); }
+    .two-col{ gap:10px; }
+
+    .foot-grid{ gap:26px; text-align:right; }
+    footer{ padding:40px 0 20px; }
+  }
+
+  @media (max-width:380px){
+    .brand-text .school{ font-size:.74rem; }
+    .bnav-item{ font-size:.58rem; }
+    .hero-cta .btn{ min-width:100%; }
+  }
+
+  @media (hover:none){
+    .news-card:hover, .t-card:hover, .highlight-card:hover, .btn:hover{ transform:none; }
+  }
+
+  /* إصلاح تزاحم الهيدر على الهاتف */
+  @media (max-width:880px){
+    .btn.header-icon-btn, .header-icon-btn{ display:none !important; }
+    .brand{ min-width:0; flex:1 1 auto; }
+    .brand-text{ min-width:0; }
+    .brand-text .school{ white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:46vw; }
+    .head-actions{ flex-shrink:0; }
+    .btn.login-btn{ padding:8px 14px; font-size:.8rem; min-height:40px; }
+  }
+  @media (max-width:420px){
+    .btn.login-btn{ padding:8px 12px; font-size:.76rem; }
+    .brand-text .school{ font-size:.78rem; max-width:34vw; }
+    .brand img{ width:34px; height:34px; }
+  }
+
+  /* ===== لمسات سطح المكتب ===== */
+  header{ background:rgba(14,59,76,.9); }
+  header.scrolled{ background:rgba(10,38,50,.95); }
+  html[data-theme="dark"] header{ background:rgba(10,30,38,.9); }
+  .brand-text .school{ white-space:nowrap; }
+  nav ul{ flex-wrap:nowrap; }
+  nav a{ white-space:nowrap; padding:9px 13px; font-size:.88rem; }
+  @media (max-width:1180px) and (min-width:881px){
+    .social-row{ display:none; }
+    nav a{ padding:8px 10px; font-size:.84rem; }
+  }
+  @media (min-width:1000px){
+    .home-highlights{ max-width:1040px; grid-template-columns:repeat(4,1fr); }
+  }
+  @media (min-width:641px) and (max-width:999px){
+    .home-highlights{ max-width:640px; grid-template-columns:1fr 1fr; }
+  }
+  .home-highlights .highlight-card{ height:100%; }
+
+  @media (max-width:1380px) and (min-width:881px){ .social-row{ display:none; } }
+
+  @media (max-width:1120px) and (min-width:881px){
+    .brand-text{ display:none; }
+    nav a{ padding:8px 8px; font-size:.8rem; }
+    .nav-wrap{ gap:10px; padding-inline:16px; }
+  }
 </style>
+
 </head>
 <body>
+<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true"><defs><symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9v10.5a1.5 1.5 0 0 0 1.5 1.5H10v-6h4v6h3.5a1.5 1.5 0 0 0 1.5-1.5V9"/></symbol><symbol id="i-newspaper" viewBox="0 0 24 24"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H17v16H6a2 2 0 0 1-2-2z"/><path d="M17 8h2.5A1.5 1.5 0 0 1 21 9.5V18a2 2 0 0 1-2 2h-2"/><path d="M8 8.5h5M8 12h5M8 15.5h3"/></symbol><symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="16.5" rx="3"/><path d="M8 2.5v4M16 2.5v4M3 10h18"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 17.5h.01M12 17.5h.01"/></symbol><symbol id="i-clipboard" viewBox="0 0 24 24"><rect x="5" y="3.5" width="14" height="17.5" rx="2.5"/><path d="M9 3.5h6V6H9z"/><path d="m9 13.5 2 2 4-4.5"/></symbol><symbol id="i-message" viewBox="0 0 24 24"><path d="M20.5 11.5a8 8 0 0 1-11.8 7L3.5 20l1.5-4.6A8 8 0 1 1 20.5 11.5z"/><path d="M9 11.5h.01M12 11.5h.01M15 11.5h.01"/></symbol><symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.7a3.5 3.5 0 0 1 0 6.6M18.5 14.2a6.5 6.5 0 0 1 3 5.8"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></symbol><symbol id="i-send" viewBox="0 0 24 24"><path d="M21.5 2.5 10.5 13.5"/><path d="m21.5 2.5-7 19-4-8.5-8.5-4z"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="m8 12.5 3 3 5-6"/></symbol><symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.3 3.9 1.9 18a2 2 0 0 0 1.7 3h16.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9.5v4M12 17h.01"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 2.8 4.5 5.6v5.7c0 4.6 3 8.2 7.5 9.9 4.5-1.7 7.5-5.3 7.5-9.9V5.6z"/><path d="m8.8 12 2.4 2.4 4-4.4"/></symbol><symbol id="i-login" viewBox="0 0 24 24"><path d="M14 3h4a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3h-4"/><path d="M9 7.5 4 12l5 4.5M4 12h12"/></symbol><symbol id="i-sparkles" viewBox="0 0 24 24"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4M5 17v4M3 19h4"/></symbol><symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5.2c2.2-1 5.2-1 8 1 2.8-2 5.8-2 8-1v13.6c-2.2-1-5.2-1-8 1-2.8-2-5.8-2-8-1z"/><path d="M12 6.2v13.6"/></symbol></defs></svg>
+<div id="scrollBar" aria-hidden="true"></div>
+<noscript><div style="background:#a8402f;color:#fff;padding:12px;text-align:center;">يتطلب هذا الموقع تفعيل JavaScript ليعمل بشكل صحيح.</div></noscript>
 
 <header>
   <div class="nav-wrap">
@@ -658,9 +1035,6 @@
         <a href="https://share.google/ZutoycXpwLywmuaNu" target="_blank" rel="noopener" aria-label="يوتيوب" class="soc-ic">
           <svg viewBox="0 0 24 24"><path d="M21.6 7.6a2.7 2.7 0 0 0-1.9-1.9C18 5.2 12 5.2 12 5.2s-6 0-7.7.5A2.7 2.7 0 0 0 2.4 7.6 28 28 0 0 0 2 12a28 28 0 0 0 .4 4.4 2.7 2.7 0 0 0 1.9 1.9c1.7.5 7.7.5 7.7.5s6 0 7.7-.5a2.7 2.7 0 0 0 1.9-1.9A28 28 0 0 0 22 12a28 28 0 0 0-.4-4.4zM10 15V9l5.2 3-5.2 3z"/></svg>
         </a>
-        <a href="#" target="_blank" rel="noopener" aria-label="تيك توك" class="soc-ic">
-          <svg viewBox="0 0 24 24"><path d="M16.6 2h-3.2v13.6a2.9 2.9 0 1 1-2.9-2.9c.3 0 .6 0 .9.1V9.5a6.1 6.1 0 1 0 5.2 6V8.4a7.7 7.7 0 0 0 4.4 1.4V6.6a4.4 4.4 0 0 1-4.4-4.4V2z"/></svg>
-        </a>
         <a href="https://share.google/ZrWTth1lUYADKCIu3" target="_blank" rel="noopener" aria-label="الموقع الرسمي" class="soc-ic stroke-ic">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.4 3.8 5.6 3.8 9s-1.3 6.6-3.8 9c-2.5-2.4-3.8-5.6-3.8-9S9.5 5.4 12 3z"/></svg>
         </a>
@@ -671,7 +1045,7 @@
       <button class="btn login-btn header-icon-btn" id="darkModeBtn" style="background:transparent; box-shadow:none; color:var(--paper);" aria-label="تبديل الوضع الداكن">
         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="darkModeIcon"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
       </button>
-      <button class="btn login-btn" id="openAuthBtn">تسجيل الدخول</button>
+      <button class="btn login-btn" id="openAuthBtn"><svg class="ic" aria-hidden="true"><use href="#i-login"/></svg>تسجيل الدخول</button>
     </div>
     <button class="burger" id="burgerBtn" aria-label="القائمة"><span></span><span></span><span></span></button>
   </div>
@@ -701,7 +1075,11 @@
       <div class="email-form" id="emailForm">
         <input type="email" placeholder="البريد الإلكتروني" id="emailInput">
         <input type="password" placeholder="كلمة المرور" id="passInput">
-        <button class="btn" id="authEmailSubmit" style="width:100%; margin-top:10px;">متابعة</button>
+        <div class="btn-row-2">
+          <button class="btn" id="authEmailSubmit" type="button">دخول</button>
+          <button class="btn gold" id="authEmailSignup" type="button">إنشاء حساب جديد</button>
+        </div>
+        <button class="link-btn" id="authForgot" type="button">نسيت كلمة المرور؟</button>
       </div>
     </div>
 
@@ -751,6 +1129,7 @@
         <input type="tel" id="parentPhone" placeholder="0X XX XX XX XX">
       </div>
 
+      <label class="field-check"><input type="checkbox" id="consentChk"><span>أوافق على <a href="#privacy" target="_blank" rel="noopener">سياسة الخصوصية</a>، وأؤكد أن التسجيل يتم بعلم ولي الأمر إن كنت قاصراً.</span></label>
       <button class="btn gold" id="finishRegBtn" style="width:100%; margin-top:8px;">إتمام التسجيل</button>
     </div>
 
@@ -765,11 +1144,16 @@
 </div>
 
 <section class="hero" id="home">
+  <div class="hero-bg" aria-hidden="true"><span></span><span></span><span></span></div>
   <div class="container">
-    <img class="hero-logo" src="logo.png" alt="شعار المتوسطة">
+    <div class="logo-orb"><img class="hero-logo" src="logo.png" alt="شعار المتوسطة"></div>
     <div class="eyebrow">مرحباً بكم في فضائنا الرقمي الجديد</div>
     <h1>متوسطة شعيبي بومدين <span id="heroTypewriter">— نحو تعلّم أقرب إليكم</span></h1>
     <p>كل ما يخص المتوسطة في مكان واحد: الأخبار والمناسبات، مواعيد الفروض والاختبارات، فضاء لطرح الأسئلة ومناقشة التمارين، ومتابعة مستمرة لأولياء التلاميذ.</p>
+    <div class="hero-cta">
+      <a class="btn gold" href="#news"><svg class="ic" aria-hidden="true"><use href="#i-newspaper"/></svg>تصفّح آخر الأخبار</a>
+      <a class="btn ghost" href="#qa"><svg class="ic" aria-hidden="true"><use href="#i-message"/></svg>اطرح سؤالاً</a>
+    </div>
     <div class="home-highlights" id="homeHighlights"></div>
   </div>
 </section>
@@ -778,7 +1162,7 @@
 <section id="news">
   <div class="container">
     <div class="section-head reveal">
-      <a href="#news" class="tag" style="cursor:pointer;">مدوّنة المتوسطة</a>
+      <a href="#news" class="tag" style="cursor:pointer;"><svg class="ic" aria-hidden="true"><use href="#i-newspaper"/></svg>مدوّنة المتوسطة</a>
       <h2>آخر أخبار متوسطة شعيبي بومدين</h2>
       <p>تابعوا مستجدات الحياة المدرسية أولاً بأول، من الأنشطة البيداغوجية إلى الإعلانات الإدارية.</p>
     </div>
@@ -794,7 +1178,7 @@
 <section id="events" class="alt-bg">
   <div class="container">
     <div class="section-head reveal">
-      <div class="tag">تقويم المناسبات</div>
+      <div class="tag"><svg class="ic" aria-hidden="true"><use href="#i-calendar"/></svg>تقويم المناسبات</div>
       <h2>احتفالات ومناسبات السنة الدراسية</h2>
       <p>موعدكم مع كل الفعاليات والاحتفالات التي تُقام داخل المتوسطة على مدار الموسم.</p>
     </div>
@@ -806,7 +1190,7 @@
 <section id="exams">
   <div class="container">
     <div class="section-head reveal">
-      <div class="tag">التنظيم البيداغوجي</div>
+      <div class="tag"><svg class="ic" aria-hidden="true"><use href="#i-clipboard"/></svg>التنظيم البيداغوجي</div>
       <h2>مواعيد الفروض والاختبارات</h2>
       <p>اختر المستوى الدراسي لعرض جدول الفروض والاختبارات والواجبات المنزلية الخاصة به.</p>
     </div>
@@ -826,7 +1210,7 @@
 <section id="qa" class="alt-bg">
   <div class="container">
     <div class="section-head reveal">
-      <div class="tag">فضاء تفاعلي</div>
+      <div class="tag"><svg class="ic" aria-hidden="true"><use href="#i-message"/></svg>فضاء تفاعلي</div>
       <h2>اسأل، ناقش، وحلّ التمارين</h2>
       <p>منصة يطرح فيها التلاميذ أسئلتهم حول الدروس والتمارين، ويتناقشون فيما بينهم وبمساعدة الأساتذة.</p>
     </div>
@@ -852,7 +1236,7 @@
             <option>علوم طبيعية</option>
             <option>تاريخ وجغرافيا</option>
           </select>
-          <button class="btn" id="qaSubmit">نشر السؤال</button>
+          <button class="btn" id="qaSubmit"><svg class="ic" aria-hidden="true"><use href="#i-send"/></svg>نشر السؤال</button>
         </div>
       </div>
       <div id="qaList"></div>
@@ -864,7 +1248,7 @@
 <section id="parents">
   <div class="container">
     <div class="section-head reveal">
-      <div class="tag">مخصص للأولياء فقط</div>
+      <div class="tag"><svg class="ic" aria-hidden="true"><use href="#i-shield"/></svg>مخصص للأولياء فقط</div>
       <h3>فضاء الأولياء</h3>
       <p>فضاء خاص لا يظهر محتواه إلا لحساب ولي التلميذ — دردشة عامة مع أولياء آخرين حول المتوسطة وأبنائهم.</p>
     </div>
@@ -895,6 +1279,39 @@
       العودة إلى الأخبار
     </a>
     <div id="articleContent">جاري التحميل...</div>
+  </div>
+</section>
+
+<!-- ================= PRIVACY ================= -->
+<section id="privacy">
+  <div class="container">
+    <div class="privacy-doc">
+      <h2>سياسة الخصوصية</h2>
+      <p class="muted">آخر تحديث: أكتوبر 2026</p>
+      <h3>البيانات التي نجمعها</h3>
+      <ul>
+        <li>عند التسجيل: الاسم واللقب، البريد الإلكتروني، الجنس، الصفة (تلميذ أو ولي).</li>
+        <li>للأولياء: اسم التلميذ، ورقم الهاتف (اختياري).</li>
+        <li>اختيارياً: صورة الحساب، والصور المرفقة بالأسئلة أو رسائل الدردشة.</li>
+        <li>ما تنشره: الأسئلة والردود والتعليقات والإعجابات.</li>
+      </ul>
+      <h3>لماذا نستعملها</h3>
+      <p>لتمكينك من المشاركة في فضاء الأسئلة والتعليقات، وللتحقق من صفة أولياء التلاميذ قبل السماح لهم بدخول دردشة الأولياء.</p>
+      <h3>من يرى بياناتك</h3>
+      <ul>
+        <li>الأسئلة والردود والتعليقات (مع اسم صاحبها وصورته) تظهر لزوار الموقع.</li>
+        <li>ملفك الشخصي (البريد، الهاتف، اسم التلميذ) لا يراه إلا أنت وإدارة المتوسطة.</li>
+        <li>دردشة الأولياء لا يراها إلا الأولياء الموثَّقون والإدارة.</li>
+      </ul>
+      <h3>أين تُحفظ البيانات</h3>
+      <p>تُحفظ على خدمات Google Firebase. تسجيل الدخول يتم عبر Google أو Facebook أو البريد الإلكتروني. لا نبيع بياناتك ولا نشاركها مع أي جهة إعلانية.</p>
+      <h3>القاصرون</h3>
+      <p>إن كنت دون سن الرشد فيجب أن يتم تسجيلك بعلم ولي أمرك. يُنصح بعدم نشر معلومات شخصية حساسة (عنوان، هاتف) في الأسئلة والتعليقات.</p>
+      <h3>حقوقك</h3>
+      <p>يمكنك تعديل أو حذف منشوراتك، وحذف حسابك نهائياً من نافذة «حسابي». ولأي طلب آخر يخص بياناتك راسلنا على <a href="mailto:cemchaibi@gmail.com" style="color:var(--royal);text-decoration:underline;">cemchaibi@gmail.com</a>.</p>
+      <h3>التخزين المحلي</h3>
+      <p>نحفظ في متصفحك تفضيل الوضع الداكن فقط، ولا نستعمل ملفات تتبّع إعلانية.</p>
+    </div>
   </div>
 </section>
 
@@ -942,6 +1359,10 @@
   </div>
 </div>
 
+<div class="bottom-nav" id="bottomNav" role="navigation" aria-label="التنقل السريع"><a class="bnav-item" href="#home" data-sec="home"><svg class="ic" aria-hidden="true"><use href="#i-home"/></svg><span>الرئيسية</span></a><a class="bnav-item" href="#news" data-sec="news"><svg class="ic" aria-hidden="true"><use href="#i-newspaper"/></svg><span>الأخبار</span></a><a class="bnav-item" href="#events" data-sec="events"><svg class="ic" aria-hidden="true"><use href="#i-calendar"/></svg><span>المناسبات</span></a><a class="bnav-item" href="#exams" data-sec="exams"><svg class="ic" aria-hidden="true"><use href="#i-clipboard"/></svg><span>الفروض</span></a><a class="bnav-item" href="#qa" data-sec="qa"><svg class="ic" aria-hidden="true"><use href="#i-message"/></svg><span>الأسئلة</span></a><a class="bnav-item" href="#parents" data-sec="parents"><svg class="ic" aria-hidden="true"><use href="#i-users"/></svg><span>الأولياء</span></a></div>
+
+<button id="backTop" type="button" aria-label="العودة للأعلى"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+
 <div id="lightboxOverlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.9); z-index:3000; align-items:center; justify-content:center; cursor:zoom-out;">
   <img id="lightboxImg" style="max-width:92vw; max-height:92vh; object-fit:contain; border-radius:6px;">
 </div>
@@ -965,9 +1386,6 @@
           <a href="https://share.google/ZutoycXpwLywmuaNu" target="_blank" rel="noopener" aria-label="يوتيوب" class="soc-ic">
             <svg viewBox="0 0 24 24"><path d="M21.6 7.6a2.7 2.7 0 0 0-1.9-1.9C18 5.2 12 5.2 12 5.2s-6 0-7.7.5A2.7 2.7 0 0 0 2.4 7.6 28 28 0 0 0 2 12a28 28 0 0 0 .4 4.4 2.7 2.7 0 0 0 1.9 1.9c1.7.5 7.7.5 7.7.5s6 0 7.7-.5a2.7 2.7 0 0 0 1.9-1.9A28 28 0 0 0 22 12a28 28 0 0 0-.4-4.4zM10 15V9l5.2 3-5.2 3z"/></svg>
           </a>
-          <a href="#" target="_blank" rel="noopener" aria-label="تيك توك" class="soc-ic">
-            <svg viewBox="0 0 24 24"><path d="M16.6 2h-3.2v13.6a2.9 2.9 0 1 1-2.9-2.9c.3 0 .6 0 .9.1V9.5a6.1 6.1 0 1 0 5.2 6V8.4a7.7 7.7 0 0 0 4.4 1.4V6.6a4.4 4.4 0 0 1-4.4-4.4V2z"/></svg>
-          </a>
         </div>
       </div>
       <div>
@@ -978,6 +1396,7 @@
           <li><a href="#exams">الفروض والاختبارات</a></li>
           <li><a href="#qa">فضاء الأسئلة</a></li>
           <li><a href="#parents">فضاء الأولياء</a></li>
+          <li><a href="#privacy">سياسة الخصوصية</a></li>
         </ul>
       </div>
       <div>
@@ -1005,6 +1424,7 @@
 </footer>
 
 <!-- Firebase (قاعدة بيانات حقيقية لحفظ الأخبار والمناسبات والأسئلة) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.6/purify.min.js" crossorigin="anonymous"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
@@ -1058,6 +1478,7 @@
     check: '<path d="M5 12.5l4.5 4.5L19 7.5"/>',
     close: '<path d="M6 6l12 12M18 6L6 18"/>',
   };
+  function ic(n){ return `<svg class="ic" aria-hidden="true"><use href="#i-${n}"/></svg>`; }
   function icon(name, size){
     size = size || 20;
     return `<span class="icon-badge"><svg viewBox="0 0 24 24" width="${size}" height="${size}">${ICON_PATHS[name] || ''}</svg></span>`;
@@ -1090,81 +1511,39 @@
     const wrap = document.getElementById('homeHighlights');
     if(!wrap) return;
     const latestNews = siteNews[0];
-    const nextEvent = siteEvents[0];
+    const _today = new Date().toISOString().slice(0,10);
+    const _evs = sortedEvents();
+    const nextEvent = _evs.find(e=> e.iso && e.iso >= _today) || _evs[0];
     let cards = '';
     if(latestNews){
-      cards += `<a href="#article-${latestNews.id}" class="highlight-card">
-        <span class="hl-tag">آخر خبر</span>
-        <h4>${latestNews.title}</h4>
-        <span class="hl-date">${latestNews.date}</span>
+      cards += `<a href="#article-${escapeHtml(latestNews.id)}" class="highlight-card">
+        <span class="hl-ic">${ic('newspaper')}</span><span class="hl-tag">آخر خبر</span>
+        <h4>${escapeHtml(latestNews.title)}</h4>
+        <span class="hl-date">${escapeHtml(latestNews.date)}</span>
       </a>`;
     }
     if(nextEvent){
       cards += `<a href="#events" class="highlight-card">
-        <span class="hl-tag">أقرب مناسبة</span>
-        <h4>${nextEvent.title}</h4>
-        <span class="hl-date">${nextEvent.date}</span>
+        <span class="hl-ic">${ic('calendar')}</span><span class="hl-tag">أقرب مناسبة</span>
+        <h4>${escapeHtml(nextEvent.title)}</h4>
+        <span class="hl-date">${escapeHtml(nextEvent.date)}</span>
       </a>`;
     }
     cards += `<a href="#exams" class="highlight-card">
-      <span class="hl-tag">الخدمات اليومية</span>
+      <span class="hl-ic">${ic('clipboard')}</span><span class="hl-tag">الخدمات اليومية</span>
       <h4>مواعيد الفروض والاختبارات</h4>
     </a>`;
     cards += `<a href="#qa" class="highlight-card">
-      <span class="hl-tag">فضاء تفاعلي</span>
+      <span class="hl-ic">${ic('message')}</span><span class="hl-tag">فضاء تفاعلي</span>
       <h4>اسأل وناقش</h4>
     </a>`;
     wrap.innerHTML = cards;
   }
 
   // ---------- DEFAULT CONTENT (used to seed storage on first run) ----------
-  const DEFAULT_NEWS = [
-    {id:"n1", date:"24 أوت 2026", ic:"school", title:"انطلاق الدخول المدرسي 2026/2027", excerpt:"استقبال تلاميذ متوسطة شعيبي بومدين في أجواء تنظيمية جيدة مع توزيع الأقسام والجداول.", cat:"إعلان إداري", image:null},
-    {id:"n2", date:"18 أوت 2026", ic:"book", title:"قائمة الكتب واللوازم المدرسية للسنة الأولى", excerpt:"نشر القائمة الكاملة للكتب واللوازم الخاصة بتلاميذ السنة الأولى متوسط.", cat:"معلومة", image:null},
-    {id:"n3", date:"10 أوت 2026", ic:"trophy", title:"تكريم الناجحين في شهادة التعليم المتوسط", excerpt:"حفل تكريمي لتلاميذ المتوسطة الحاصلين على أحسن النتائج في الشهادة.", cat:"نشاط", image:null},
-    {id:"n4", date:"02 أوت 2026", ic:"flask", title:"ورشة تجريبية في مادة العلوم الفيزيائية", excerpt:"تنظيم ورشة تجارب مخبرية لفائدة تلاميذ السنة الرابعة متوسط.", cat:"نشاط بيداغوجي", image:null},
-    {id:"n5", date:"27 جويلية 2026", ic:"palette", title:"معرض الأعمال الفنية لتلاميذ المتوسطة", excerpt:"عرض لوحات ومنجزات تلاميذ نادي الرسم بمناسبة نهاية الموسم الدراسي.", cat:"نشاط ثقافي", image:null},
-    {id:"n6", date:"15 جويلية 2026", ic:"clipboard", title:"نتائج التقييم الفصلي الثالث", excerpt:"إعلان عن موعد وكيفية سحب كشوف النقاط الخاصة بالفصل الثالث.", cat:"نتائج", image:null},
-  ];
-  const DEFAULT_EVENTS = [
-    {id:"e1", date:"01 سبتمبر 2026", ic:"backpack", title:"الدخول المدرسي الرسمي", desc:"استقبال التلاميذ الجدد والقدامى وتوزيع الأقسام."},
-    {id:"e2", date:"05 أكتوبر 2026", ic:"globe", title:"اليوم العالمي للمعلم", desc:"احتفالية تكريمية لأساتذة المتوسطة."},
-    {id:"e3", date:"01 نوفمبر 2026", ic:"flag", title:"ذكرى اندلاع الثورة التحريرية", desc:"معرض ومسابقة ثقافية حول تاريخ الثورة الجزائرية."},
-    {id:"e4", date:"18 فيفري 2027", ic:"book", title:"أسبوع الكتاب والقراءة", desc:"فعاليات ومسابقات تشجيعية على القراءة داخل المكتبة المدرسية."},
-    {id:"e5", date:"21 مارس 2027", ic:"flower", title:"احتفالية الربيع", desc:"أنشطة بيئية وترفيهية بمناسبة عيد الربيع."},
-    {id:"e6", date:"05 جوان 2027", ic:"cap", title:"حفل نهاية السنة وتكريم المتفوقين", desc:"ختام الموسم الدراسي بحفل تكريمي للتلاميذ المتفوقين."},
-  ];
-  const DEFAULT_LEVELS = {
-    "الأولى متوسط":[
-      {subj:"رياضيات", type:"test", date:"14 سبتمبر 2026", time:"08:00 — 09:00"},
-      {subj:"لغة عربية", type:"hw", date:"16 سبتمبر 2026", time:"في المنزل"},
-      {subj:"لغة فرنسية", type:"test", date:"21 سبتمبر 2026", time:"09:00 — 10:00"},
-      {subj:"علوم طبيعية", type:"hw", date:"23 سبتمبر 2026", time:"في المنزل"},
-    ],
-    "الثانية متوسط":[
-      {subj:"رياضيات", type:"test", date:"15 سبتمبر 2026", time:"08:00 — 09:00"},
-      {subj:"لغة إنجليزية", type:"hw", date:"17 سبتمبر 2026", time:"في المنزل"},
-      {subj:"فيزياء", type:"test", date:"22 سبتمبر 2026", time:"10:00 — 11:00"},
-      {subj:"تاريخ وجغرافيا", type:"hw", date:"24 سبتمبر 2026", time:"في المنزل"},
-    ],
-    "الثالثة متوسط":[
-      {subj:"رياضيات", type:"test", date:"14 سبتمبر 2026", time:"09:00 — 10:00"},
-      {subj:"فيزياء", type:"test", date:"18 سبتمبر 2026", time:"08:00 — 09:00"},
-      {subj:"لغة عربية", type:"hw", date:"20 سبتمبر 2026", time:"في المنزل"},
-      {subj:"لغة فرنسية", type:"test", date:"25 سبتمبر 2026", time:"10:00 — 11:00"},
-    ],
-    "الرابعة متوسط":[
-      {subj:"رياضيات", type:"test", date:"16 سبتمبر 2026", time:"08:00 — 09:30"},
-      {subj:"فيزياء", type:"test", date:"19 سبتمبر 2026", time:"09:00 — 10:30"},
-      {subj:"لغة عربية", type:"test", date:"23 سبتمبر 2026", time:"08:00 — 09:30"},
-      {subj:"اجتماعيات", type:"hw", date:"26 سبتمبر 2026", time:"في المنزل"},
-    ],
-  };
-  const DEFAULT_QUESTIONS = [
-    {id:"q1", subj:"رياضيات", body:"كيف يمكنني حل معادلة من الدرجة الأولى بمجهول واحد؟ لم أفهم الطريقة جيداً في الدرس.", author:"سارة .ك — 2 متوسط", replies:[], time:"منذ يومين"},
-    {id:"q2", subj:"لغة عربية", body:"ما الفرق بين الفعل اللازم والفعل المتعدي؟ وهل يمكن إعطائي أمثلة إضافية؟", author:"إياد .م — 3 متوسط", replies:[], time:"منذ 3 أيام"},
-    {id:"q3", subj:"فيزياء", body:"لم أستوعب جيداً كيفية حساب سرعة جسم متحرك بحركة مستقيمة منتظمة، هل من شرح مبسط؟", author:"نور الهدى .ب — 4 متوسط", replies:[], time:"منذ 5 أيام"},
-  ];
+  const DEFAULT_NEWS = [];
+  const DEFAULT_EVENTS = [];
+  const DEFAULT_LEVELS = {};
 
   // ---------- STORAGE HELPERS (Firestore-backed, real & persistent) ----------
   function genId(){ return 'id' + Date.now() + Math.floor(Math.random()*1000); }
@@ -1185,7 +1564,8 @@
   function showToast(message, isError){
     const container = document.getElementById('toastContainer');
     const toast = document.createElement('div');
-    toast.textContent = message;
+    toast.innerHTML = ic(isError ? 'alert' : 'check') + '<span></span>';
+    toast.lastChild.textContent = message;
     toast.style.cssText = `
       background:${isError ? 'var(--red)' : 'var(--deep)'}; color:#fff; padding:12px 22px; border-radius:999px;
       font-size:.88rem; font-family:'Cairo',sans-serif; box-shadow:0 10px 30px rgba(0,0,0,.25);
@@ -1231,7 +1611,7 @@
           const w = Math.round(img.width * scale), h = Math.round(img.height * scale);
           const canvas = document.createElement('canvas');
           canvas.width = w; canvas.height = h;
-          canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+          const ctx = canvas.getContext('2d'); ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, w, h); ctx.drawImage(img, 0, 0, w, h);
           resolve(canvas.toDataURL('image/jpeg', quality));
         };
         img.onerror = reject;
@@ -1304,9 +1684,10 @@
     return 'cat-activity';
   }
   function renderNews(){
+    if(!siteNews.length){ newsGrid.innerHTML = '<p class="empty-note">لا توجد أخبار منشورة حالياً.</p>'; return; }
     newsGrid.innerHTML = siteNews.map(n=>{
       const thumb = n.image
-        ? `<img src="${safeImg(n.image)}" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">`
+        ? `<img loading="lazy" src="${safeImg(n.image)}" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">`
         : icon(n.ic || 'newspaper', 26);
       return `
       <div class="news-card" data-open-article="${escapeHtml(n.id)}" style="cursor:pointer;">
@@ -1315,7 +1696,7 @@
           <div class="date-badge">${escapeHtml(n.date)}</div>
           <h3>${escapeHtml(n.title)}</h3>
           <p>${escapeHtml(n.excerpt)}</p>
-          <span class="news-cat ${catClass(n.cat)}">${escapeHtml(n.cat)}</span>
+          <div class="news-foot"><span class="news-cat ${catClass(n.cat)}">${escapeHtml(n.cat)}</span><span class="read-more">اقرأ المزيد ${ic('arrow')}</span></div>
         </div>
       </div>`;
     }).join('');
@@ -1325,8 +1706,14 @@
   }
 
   const tl = document.getElementById('timelineList');
+  function sortedEvents(){
+    const arr = siteEvents.slice();
+    if(arr.length && arr.every(e=> e.iso)) arr.sort((a,b)=> a.iso < b.iso ? -1 : a.iso > b.iso ? 1 : 0);
+    return arr;
+  }
   function renderEvents(){
-    tl.innerHTML = siteEvents.map(e=> `
+    if(!siteEvents.length){ tl.innerHTML = '<p class="empty-note">لا توجد مناسبات مسجلة حالياً.</p>'; return; }
+    tl.innerHTML = sortedEvents().map(e=> `
       <div class="t-item">
         <div class="t-dot"><svg viewBox="0 0 24 24">${ICON_PATHS[e.ic] || ICON_PATHS.calendarStar}</svg></div>
         <div class="t-card">
@@ -1344,16 +1731,20 @@
   function renderExams(level){
     currentExamLevel = level;
     examBody.innerHTML = "";
+    if(!(siteLevels[level] || []).length){
+      examBody.innerHTML = '<tr><td colspan="4" class="empty-note">لا توجد فروض أو اختبارات مسجلة لهذا المستوى بعد.</td></tr>';
+      return;
+    }
     (siteLevels[level] || []).forEach(row=>{
       const color = subjColors[row.subj] || "#2f6ea8";
       const tagClass = row.type === "test" ? "test" : "hw";
       const tagLabel = row.type === "test" ? "اختبار" : "واجب منزلي";
       examBody.innerHTML += `
         <tr>
-          <td><div class="subject-cell"><span class="dot" style="background:${color}"></span>${escapeHtml(row.subj)}</div></td>
-          <td><span class="exam-tag ${tagClass}">${tagLabel}</span></td>
-          <td class="nums">${escapeHtml(row.date)}</td>
-          <td class="nums">${escapeHtml(row.time)}</td>
+          <td data-label="المادة"><div class="subject-cell"><span class="dot" style="background:${color}"></span>${escapeHtml(row.subj)}</div></td>
+          <td data-label="النوع"><span class="exam-tag ${tagClass}">${tagLabel}</span></td>
+          <td class="nums" data-label="التاريخ">${escapeHtml(row.date)}</td>
+          <td class="nums" data-label="التوقيت">${escapeHtml(row.time)}</td>
         </tr>`;
     });
   }
@@ -1385,6 +1776,7 @@
 
   // ---------- الأسئلة: كل سؤال في مستند مستقل questions/{id} والردود في مجموعة فرعية replies ----------
   let qaDocs = [], qaReplies = {};
+  let qaDirty = false;
   function tsToDate(t){ try{ return t && t.toDate ? t.toDate() : null; }catch(e){ return null; } }
   function fmtTs(t){ const d = tsToDate(t); return d ? d.toLocaleDateString('ar-DZ') : 'الآن'; }
   function tsMs(t){ const d = tsToDate(t); return d ? d.getTime() : Date.now(); }
@@ -1429,7 +1821,30 @@
   }
   function myPhoto(){ return safeImg(currentUserProfile && currentUserProfile.photoURL) ? currentUserProfile.photoURL : null; }
 
+  function captureQaInputs(){
+    const vals = {}; let focus = null;
+    qaList.querySelectorAll('.q-card').forEach(card=>{
+      const inp = card.querySelector('.qaReplyInput');
+      if(inp && inp.value) vals[card.dataset.qid] = inp.value;
+      if(inp && document.activeElement === inp) focus = { qid: card.dataset.qid, pos: inp.selectionStart };
+    });
+    return { vals, focus };
+  }
+  function restoreQaInputs(s){
+    qaList.querySelectorAll('.q-card').forEach(card=>{
+      const inp = card.querySelector('.qaReplyInput');
+      if(!inp) return;
+      if(s.vals[card.dataset.qid]) inp.value = s.vals[card.dataset.qid];
+      if(s.focus && s.focus.qid === card.dataset.qid){ inp.focus(); try{ inp.setSelectionRange(s.focus.pos, s.focus.pos); }catch(e){} }
+    });
+  }
+  function qaForceRender(){ qaDirty = false; const s = captureQaInputs(); renderQAInner(); restoreQaInputs(s); }
   function renderQA(){
+    if(qaList.querySelector('[data-qbody-edit]')){ qaDirty = true; return; }
+    qaForceRender();
+  }
+  function renderQAInner(){
+    if(!siteQuestions.length){ qaList.innerHTML = '<p class="empty-note">لا توجد أسئلة بعد — كن أول من يطرح سؤالاً.</p>'; return; }
     const myUid = auth && auth.currentUser ? auth.currentUser.uid : null;
     const iAmOwner = auth && isOwnerAccount(auth.currentUser);
     qaList.innerHTML = siteQuestions.map(q=> {
@@ -1506,9 +1921,9 @@
           if(!newText) return;
           try{ await db.collection('questions').doc(qId).update({ body: newText.slice(0,1000) }); }
           catch(e){ console.error(e); showToast('تعذر حفظ التعديل.', true); }
-          renderQA();
+          qaForceRender();
         });
-        card.querySelector('[data-cancel-q]').addEventListener('click', ()=> renderQA());
+        card.querySelector('[data-cancel-q]').addEventListener('click', ()=> qaForceRender());
       });
     });
     qaList.querySelectorAll('[data-del-q]').forEach(btn=>{
@@ -1591,7 +2006,7 @@
     qaAttachInput.addEventListener('change', async (e)=>{
       const file = e.target.files[0];
       if(!file) return;
-      pendingQaAttachment = await compressImage(file);
+      try{ pendingQaAttachment = await compressImage(file); }catch(err){ showToast('تعذر قراءة الصورة، اختر صورة صالحة.', true); e.target.value=''; return; }
       document.getElementById('qaAttachName').textContent = file.name;
       const prev = document.getElementById('qaAttachPreview');
       prev.src = pendingQaAttachment; prev.style.display = 'block';
@@ -1667,7 +2082,9 @@
     const map = {
       'auth/wrong-password':'كلمة المرور غير صحيحة.',
       'auth/user-not-found':'لا يوجد حساب بهذا البريد، حاول "المتابعة بالبريد الإلكتروني" لإنشاء حساب جديد.',
-      'auth/email-already-in-use':'هذا البريد مسجل مسبقاً، جرّب تسجيل الدخول بدل إنشاء حساب.',
+      'auth/user-disabled':'هذا الحساب موقوف، تواصل مع الإدارة.',
+      'auth/requires-recent-login':'لأسباب أمنية أعد تسجيل الدخول ثم حاول مجدداً.',
+      'auth/operation-not-allowed':'طريقة الدخول هذه غير مفعّلة بعد.',
       'auth/invalid-email':'صيغة البريد الإلكتروني غير صحيحة.',
       'auth/weak-password':'كلمة المرور ضعيفة (6 خانات على الأقل).',
       'auth/popup-closed-by-user':'تم إغلاق نافذة تسجيل الدخول قبل الإتمام.',
@@ -1742,25 +2159,22 @@
   document.getElementById('authEmailToggle').addEventListener('click', ()=>{
     emailForm.classList.toggle('open');
   });
-  document.getElementById('authEmailSubmit').addEventListener('click', async ()=>{
+  async function emailAuth(mode){
     const email = document.getElementById('emailInput').value.trim();
     const pass = document.getElementById('passInput').value;
     if(!email){ document.getElementById('emailInput').focus(); return; }
     if(!pass || pass.length < 6){ showAuthError('كلمة المرور يجب أن تكون 6 خانات على الأقل.'); return; }
     if(!auth){ showAuthError('تعذر الاتصال بخدمة تسجيل الدخول.'); return; }
-    document.getElementById('loadingTitle').textContent = 'جاري تسجيل الدخول...';
+    authErrorBox.style.display = 'none';
+    document.getElementById('loadingTitle').textContent = mode === 'signup' ? 'جاري إنشاء الحساب...' : 'جاري تسجيل الدخول...';
     showStep(stepLoading);
     try{
-      // نحاول تسجيل الدخول أولاً، وإن لم يكن الحساب موجوداً ننشئه تلقائياً
       let cred;
-      try{
+      if(mode === 'signup'){
+        cred = await auth.createUserWithEmailAndPassword(email, pass);
+        try{ await cred.user.sendEmailVerification(); }catch(e){}
+      } else {
         cred = await auth.signInWithEmailAndPassword(email, pass);
-      }catch(err){
-        if(err.code === 'auth/user-not-found'){
-          cred = await auth.createUserWithEmailAndPassword(email, pass);
-        } else {
-          throw err;
-        }
       }
       await afterAuthSuccess(cred.user);
     }catch(e){
@@ -1768,6 +2182,18 @@
       showStep(stepMethod);
       showAuthError(friendlyAuthError(e.code));
     }
+  }
+  document.getElementById('authEmailSubmit').addEventListener('click', ()=> emailAuth('login'));
+  document.getElementById('authEmailSignup').addEventListener('click', ()=> emailAuth('signup'));
+  document.getElementById('passInput').addEventListener('keydown', (e)=>{ if(e.key === 'Enter') emailAuth('login'); });
+  document.getElementById('authForgot').addEventListener('click', async ()=>{
+    const email = document.getElementById('emailInput').value.trim();
+    if(!email){ showAuthError('اكتب بريدك الإلكتروني أولاً ثم اضغط «نسيت كلمة المرور».'); document.getElementById('emailInput').focus(); return; }
+    try{
+      await auth.sendPasswordResetEmail(email);
+      authErrorBox.style.display = 'none';
+      showToast('أرسلنا رابط إعادة تعيين كلمة المرور إلى بريدك إن كان مسجلاً.');
+    }catch(e){ console.error(e); showAuthError(friendlyAuthError(e.code)); }
   });
 
   // gender pill
@@ -1798,6 +2224,7 @@
       document.getElementById('firstName').focus();
       return;
     }
+    if(!document.getElementById('consentChk').checked){ showToast('يرجى الموافقة على سياسة الخصوصية للمتابعة.', true); return; }
     const gender = document.querySelector('#stepProfile .form-group:nth-of-type(1) .pill-opt.active').dataset.val;
     const role = roleChoice.querySelector('.pill-opt.active').dataset.val;
     let studentName = '', parentPhone = '';
@@ -1805,6 +2232,7 @@
       studentName = document.getElementById('studentName').value.trim();
       if(!studentName){ document.getElementById('studentName').focus(); return; }
       parentPhone = document.getElementById('parentPhone').value.trim(); // اختياري
+      if(parentPhone && !/^(0|\+213)\d{8,9}$/.test(parentPhone.replace(/[\s.\-]/g,''))){ showToast('رقم الهاتف غير صحيح (مثال: 0550123456).', true); return; }
     }
 
     const profile = {
@@ -1813,6 +2241,7 @@
       firstName, lastName, gender, role,
       studentName: studentName || null,
       parentPhone: parentPhone || null,
+      consentAt: firebase.firestore.FieldValue.serverTimestamp(),
       provider: (user.providerData[0] && user.providerData[0].providerId) || 'password',
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
     };
@@ -1851,13 +2280,13 @@
       const chip = document.createElement('div');
       chip.className = 'user-chip';
       chip.style.cursor = 'pointer';
-      chip.innerHTML = `<span class="avatar">${avatarInner}</span>${label}${badge}`;
+      chip.innerHTML = `<span class="avatar">${avatarInner}</span><span class="chip-name">${label}</span>${badge}`;
       chip.title = 'حسابي';
       chip.addEventListener('click', openAccountPanel);
       btn.replaceWith(chip);
     } else {
       const chip = document.querySelector('.user-chip');
-      if(chip) chip.innerHTML = `<span class="avatar">${avatarInner}</span>${label}${badge}`;
+      if(chip) chip.innerHTML = `<span class="avatar">${avatarInner}</span><span class="chip-name">${label}</span>${badge}`;
     }
   }
 
@@ -1896,17 +2325,25 @@
     const user = auth.currentUser;
     if(!user) return;
     try{
+      // 1) إعادة المصادقة أولاً حتى لا يبقى الحساب بلا ملف شخصي إن فشل الحذف
+      const pid = user.providerData[0] && user.providerData[0].providerId;
+      if(pid === 'google.com') await user.reauthenticateWithPopup(new firebase.auth.GoogleAuthProvider());
+      else if(pid === 'facebook.com') await user.reauthenticateWithPopup(new firebase.auth.FacebookAuthProvider());
+      else if(pid === 'password'){
+        const pw = window.prompt('أدخل كلمة المرور لتأكيد الحذف:');
+        if(!pw) return;
+        await user.reauthenticateWithCredential(firebase.auth.EmailAuthProvider.credential(user.email, pw));
+      }
+      // 2) حذف الملف الشخصي ثم حساب الدخول
       await db.collection('users').doc(user.uid).delete();
       await user.delete();
       showToast('تم حذف حسابك بنجاح.');
-      location.reload();
+      setTimeout(()=> location.reload(), 600);
     }catch(e){
       console.error(e);
-      if(e.code === 'auth/requires-recent-login'){
-        showToast('لأسباب أمنية، يجب تسجيل الخروج والدخول من جديد ثم إعادة المحاولة مباشرة لحذف الحساب.', true);
-      } else {
-        showToast('تعذر حذف الحساب، حاول مجدداً.', true);
-      }
+      if(e.code === 'auth/wrong-password' || e.code === 'auth/invalid-credential') showToast('كلمة المرور غير صحيحة.', true);
+      else if(e.code === 'auth/popup-closed-by-user') showToast('أُلغي التأكيد، لم يُحذف الحساب.', true);
+      else showToast('تعذر حذف الحساب، حاول مجدداً.', true);
     }
   });
 
@@ -1919,7 +2356,7 @@
     const user = auth.currentUser;
     if(!user) return;
     try{
-      const compressed = await compressImage(file, 300, 0.8);
+      const compressed = await compressImage(file, 128, 0.75);
       await db.collection('users').doc(user.uid).update({ photoURL: compressed });
       currentUserProfile = currentUserProfile || {};
       currentUserProfile.photoURL = compressed;
@@ -1931,6 +2368,12 @@
     }
   });
 
+  function promptCompleteProfile(user){
+    document.getElementById('firstName').value = document.getElementById('firstName').value || (user.displayName||'').split(' ')[0] || '';
+    document.getElementById('lastName').value = document.getElementById('lastName').value || (user.displayName||'').split(' ').slice(1).join(' ') || '';
+    overlay.classList.add('open');
+    showStep(stepProfile);
+  }
   // مراقبة حالة الدخول تلقائياً عند تحميل الصفحة (تبقى الجلسة محفوظة)
   let parentsChatUnsub = null;
   if(auth){
@@ -1942,7 +2385,9 @@
         }catch(e){ currentUserProfile = null; }
         if(document.getElementById('openAuthBtn')) renderLoggedInUI(user, currentUserProfile);
       }
+      if(user && !currentUserProfile && !isOwnerAccount(user) && !(db === null)){ promptCompleteProfile(user); }
       renderParentsSpace(user, currentUserProfile);
+      renderQA();
       if(location.hash.replace('#','') === 'parents-chat') renderParentsChatPage(user, currentUserProfile);
     });
   } else {
@@ -1956,6 +2401,26 @@
     if(/^data:image\/(png|jpe?g|webp|gif);base64,[A-Za-z0-9+/=]+$/.test(src)) return src;
     if(/^https:\/\/[^\s"'<>`]+$/.test(src)) return escapeHtml(src);
     return '';
+  }
+  function sanitizeHtml(html){
+    let clean;
+    if(window.DOMPurify){
+      clean = DOMPurify.sanitize(String(html||''), { ADD_ATTR:['target'] });
+    } else {
+      const tpl = document.createElement('template');
+      tpl.innerHTML = String(html||'');
+      tpl.content.querySelectorAll('script,style,iframe,object,embed,link,meta,form').forEach(el=> el.remove());
+      tpl.content.querySelectorAll('*').forEach(el=>{
+        [...el.attributes].forEach(a=>{
+          if(/^on/i.test(a.name) || (/^(href|src)$/i.test(a.name) && /^\s*javascript:/i.test(a.value))) el.removeAttribute(a.name);
+        });
+      });
+      clean = tpl.innerHTML;
+    }
+    const t2 = document.createElement('template');
+    t2.innerHTML = clean;
+    t2.content.querySelectorAll('a[href]').forEach(a=>{ a.setAttribute('target','_blank'); a.setAttribute('rel','noopener noreferrer'); });
+    return t2.innerHTML;
   }
   function escapeHtml(s){
     return (s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -2032,7 +2497,7 @@
           <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.4 11.1 12.7 19.8a5 5 0 0 1-7.1-7.1l8.5-8.5a3.5 3.5 0 0 1 5 5l-8.5 8.5a2 2 0 0 1-2.8-2.8l7.8-7.8"/></svg>
           <input type="file" id="parentsChatImgInput" accept="image/*" style="display:none;">
         </label>
-        <input type="text" id="parentsChatInput" maxlength="1000" placeholder="Ask Anything....">
+        <input type="text" id="parentsChatInput" maxlength="1000" placeholder="اكتب رسالتك...">
         <button id="parentsChatSend" aria-label="إرسال">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4z"/></svg>
         </button>
@@ -2044,7 +2509,7 @@
     chatImgInput.addEventListener('change', async (e)=>{
       const file = e.target.files[0];
       if(!file) return;
-      pendingChatImage = await compressImage(file, 500, 0.7);
+      try{ pendingChatImage = await compressImage(file, 500, 0.7); }catch(err){ showToast('تعذر قراءة الصورة، اختر صورة صالحة.', true); return; }
       const prev = document.getElementById('parentsChatImgPreview');
       prev.src = pendingChatImage; prev.style.display = 'block';
     });
@@ -2109,7 +2574,7 @@
       return;
     }
     const isRichContent = !!n.content;
-    const fullTextHtml = isRichContent ? n.content : escapeHtml(n.excerpt).replace(/\n/g, '<br>');
+    const fullTextHtml = isRichContent ? sanitizeHtml(n.content) : escapeHtml(n.excerpt).replace(/\n/g, '<br>');
     const bc = document.getElementById('breadcrumbTitle');
     if(bc) bc.textContent = n.title;
     const gallery = (n.gallery || []).map(src=> `<img src="${safeImg(src)}" style="width:100%; border-radius:14px; margin-bottom:12px;">`).join('');
@@ -2239,8 +2704,8 @@
             const doc = await commentRef.get();
             const likes = (doc.data().likes) || [];
             const u = auth.currentUser.uid;
-            const updated = likes.includes(u) ? likes.filter(x=> x!==u) : [...likes, u];
-            await commentRef.update({ likes: updated });
+            const FV = firebase.firestore.FieldValue;
+            await commentRef.update({ likes: likes.includes(u) ? FV.arrayRemove(u) : FV.arrayUnion(u) });
           }catch(e){ console.error(e); }
         });
       });
@@ -2358,12 +2823,13 @@
   // ---------- ظهور تدريجي للعناصر عند فتح أي صفحة (موثوق في كل المتصفحات) ----------
   function playRevealAnimation(container){
     const targets = (container || document).querySelectorAll('.reveal, .reveal-stagger');
-    targets.forEach(t=> t.classList.remove('show'));
+    targets.forEach(t=> t.classList.remove('show','settled'));
     // إعادة تشغيل الانتقال (reflow) قبل إضافة الفئة من جديد
     void document.body.offsetWidth;
     requestAnimationFrame(()=>{
       targets.forEach((t, i)=> setTimeout(()=> t.classList.add('show'), i * 60));
     });
+    setTimeout(()=> targets.forEach(t=> t.classList.add('settled')), 1500);
   }
 
   // ---------- تحريك الكتابة (Typewriter) للعبارة الترويجية ----------
@@ -2388,7 +2854,7 @@
   }
 
   // ================= عرض قسم واحد فقط في كل مرة (كصفحات منفصلة) =================
-  const MAIN_SECTIONS = ['home','news','events','exams','qa','parents','parents-chat'];
+  const MAIN_SECTIONS = ['home','news','events','exams','qa','parents','parents-chat','privacy'];
   function showMainSection(){
     const rawHash = (location.hash || '#home').replace('#','');
     const isArticle = rawHash.startsWith('article-');
@@ -2411,6 +2877,9 @@
     }
     playRevealAnimation(document.getElementById(target));
     if(target === 'home') playTypewriter();
+    const navKey = target === 'article' ? 'news' : (target === 'parents-chat' ? 'parents' : target);
+    document.querySelectorAll('.bnav-item').forEach(a=> a.classList.toggle('active', a.dataset.sec === navKey));
+    document.body.classList.toggle('on-chat', target === 'parents-chat');
     window.scrollTo(0, 0);
   }
   window.addEventListener('hashchange', showMainSection);
@@ -2419,13 +2888,73 @@
   const lightboxOverlay = document.getElementById('lightboxOverlay');
   const lightboxImg = document.getElementById('lightboxImg');
   document.addEventListener('click', (e)=>{
-    const img = e.target.closest('#articleContent img, #home img');
+    const img = e.target.closest('#articleContent img');
     if(img){
       lightboxImg.src = img.src;
       lightboxOverlay.style.display = 'flex';
     }
   });
   lightboxOverlay.addEventListener('click', ()=>{ lightboxOverlay.style.display = 'none'; });
+  // ---------- زر العودة للأعلى + حالة الاتصال + مفتاح Esc ----------
+  const backTop = document.getElementById('backTop');
+  window.addEventListener('scroll', ()=> backTop.classList.toggle('show', window.scrollY > 600), { passive:true });
+  backTop.addEventListener('click', ()=> window.scrollTo({ top:0, behavior:'smooth' }));
+  window.addEventListener('offline', ()=> showToast('انقطع الاتصال بالإنترنت.', true));
+  window.addEventListener('online', ()=> showToast('عاد الاتصال بالإنترنت.'));
+  document.addEventListener('keydown', (e)=>{
+    if(e.key !== 'Escape') return;
+    document.querySelectorAll('.modal-overlay.open').forEach(o=> o.classList.remove('open'));
+    lightboxOverlay.style.display = 'none';
+    document.getElementById('mainNav').classList.remove('open');
+  });
+  // ---------- تأثيرات الحركة: شريط التقدم، الهيدر، التموج، الميل ثلاثي الأبعاد ----------
+  (function(){
+    const header = document.querySelector('header');
+    const bar = document.getElementById('scrollBar');
+    let ticking = false;
+    function onScroll(){
+      const y = window.scrollY;
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = (h > 0 ? Math.min(100, y / h * 100) : 0) + '%';
+      header.classList.toggle('scrolled', y > 30);
+      ticking = false;
+    }
+    window.addEventListener('scroll', ()=>{ if(!ticking){ ticking = true; requestAnimationFrame(onScroll); } }, { passive:true });
+    onScroll();
+
+    document.addEventListener('pointerdown', (e)=>{
+      const host = e.target.closest && e.target.closest('.btn, .tab-btn, .pill-opt, .auth-btn, .share-icon-btn');
+      if(!host || host.disabled) return;
+      const r = host.getBoundingClientRect();
+      const size = Math.max(r.width, r.height) * 2;
+      const s = document.createElement('span');
+      s.className = 'ripple';
+      s.style.cssText = `width:${size}px;height:${size}px;left:${e.clientX - r.left - size/2}px;top:${e.clientY - r.top - size/2}px;`;
+      host.appendChild(s);
+      setTimeout(()=> s.remove(), 700);
+    });
+
+    const cardSel = '.news-card, .t-card, .q-card, .highlight-card';
+    if(window.matchMedia('(hover:hover) and (pointer:fine)').matches){
+      document.addEventListener('pointermove', (e)=>{
+        const c = e.target.closest && e.target.closest(cardSel);
+        if(!c) return;
+        const r = c.getBoundingClientRect();
+        const x = e.clientX - r.left, y = e.clientY - r.top;
+        c.style.setProperty('--mx', x + 'px'); c.style.setProperty('--my', y + 'px');
+        if(c.matches('.news-card, .highlight-card')){
+          c.style.transform = `perspective(900px) rotateX(${((y / r.height) - .5) * -6}deg) rotateY(${((x / r.width) - .5) * 6}deg) translateY(-5px)`;
+        }
+      });
+      document.addEventListener('pointerout', (e)=>{
+        const c = e.target.closest && e.target.closest('.news-card, .highlight-card');
+        if(c && !c.contains(e.relatedTarget)) c.style.transform = '';
+      });
+    }
+  })();
+  if('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  const _top = ()=>{ if(window.scrollY < 250) window.scrollTo(0, 0); };
+  window.addEventListener('load', ()=>{ _top(); setTimeout(_top, 250); });
   showMainSection();
 
 </script>
