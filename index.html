@@ -32,8 +32,13 @@
   "address": { "@type": "PostalAddress", "addressLocality": "وهران", "addressRegion": "Oran", "addressCountry": "DZ" }
 }
 </script>
+<script>(function(){try{var c=navigator.connection||{},m=navigator.deviceMemory,h=navigator.hardwareConcurrency;if(c.saveData||/(^|-)2g$/.test(c.effectiveType||'')||(m&&m<=2)||(h&&h<=2)||(window.matchMedia&&matchMedia('(prefers-reduced-data: reduce)').matches))document.documentElement.classList.add('lite');}catch(e){}})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://firestore.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;700&family=Cairo:wght@400;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;700&family=Cairo:wght@400;600;700;800&display=swap"></noscript>
 <style>
   :root{
     --ink:#123240;
@@ -88,7 +93,7 @@
     overflow-x:hidden;
   }
   h1,h2,h3,h4,.display{
-    font-family:'Almarai', sans-serif;
+    font-family:'Cairo', sans-serif;
     font-weight:800;
     letter-spacing:.2px;
   }
@@ -130,7 +135,7 @@
   .brand{display:flex; align-items:center; gap:12px;}
   .brand img{width:46px; height:46px; object-fit:contain;}
   .brand-text{color:var(--paper);}
-  .brand-text .school{font-family:'Almarai',sans-serif; font-size:1.05rem; color:#fff;}
+  .brand-text .school{font-family:'Cairo',sans-serif; font-size:1.05rem; color:#fff;}
   .brand-text .sub{font-size:.72rem; color:var(--gold-light); font-family:'Cairo',sans-serif;}
 
   nav ul{display:flex; gap:2px; flex-wrap:wrap; background:rgba(255,255,255,.04); padding:5px; border-radius:999px; border:1px solid rgba(255,255,255,.06);}
@@ -337,7 +342,7 @@
 
   .chat-frame{ border-radius:20px; overflow:hidden; box-shadow:0 8px 24px rgba(20,60,75,.1); margin-bottom:8px; }
   .chat-frame-header{
-    background:var(--deep); color:#fff; padding:14px 18px; font-family:'Almarai',sans-serif; font-weight:700;
+    background:var(--deep); color:#fff; padding:14px 18px; font-family:'Cairo',sans-serif; font-weight:700;
     font-size:.92rem; display:flex; align-items:center; gap:8px;
   }
   .chat-frame-body{ background:#7f9c8f; padding:16px; }
@@ -563,7 +568,7 @@
     border-radius:20px; padding:30px; color:#fff; position:relative; overflow:hidden;
   }
   .parent-card::before{content:"★"; position:absolute; font-size:8rem; opacity:.05; top:-30px; left:-20px;}
-  .parent-card h4{font-family:'Almarai',sans-serif; font-size:1.1rem; margin-bottom:16px; color:var(--gold-light);}
+  .parent-card h4{font-family:'Cairo',sans-serif; font-size:1.1rem; margin-bottom:16px; color:var(--gold-light);}
   .mock-row{display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid rgba(255,255,255,.1); font-size:.85rem;}
   .mock-row span:last-child{color:var(--gold-light); font-family:'Cairo',sans-serif;}
   .parent-card .btn{width:100%; margin-top:18px; text-align:center;}
@@ -574,7 +579,7 @@
   @media(max-width:700px){.foot-grid{grid-template-columns:1fr;}}
   .foot-brand{display:flex; gap:12px; align-items:center; margin-bottom:12px;}
   .foot-brand img{width:38px;}
-  .foot-brand span{font-family:'Almarai',sans-serif; color:#fff; font-size:1rem;}
+  .foot-brand span{font-family:'Cairo',sans-serif; color:#fff; font-size:1rem;}
   footer p{font-size:.85rem; color:#9fb2b9;}
   footer h4{font-size:.9rem; color:var(--gold-light); margin-bottom:14px; font-family:'Cairo',sans-serif;}
   footer ul li{margin-bottom:9px; font-size:.85rem;}
@@ -1283,12 +1288,68 @@
   .t-dot svg{ fill:none; stroke:currentColor; stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round; width:17px; height:17px; }
   html[data-theme="dark"] .seg button:not(.active){ background:transparent; color:var(--muted); }
   html[data-theme="dark"] .seg{ background:var(--card-bg); }
+
+  /* =====================================================================
+     الإصدار 4: وضع خفيف + تحسينات الأداء + اللافتة + الوثائق + الإشراف
+     ===================================================================== */
+  .news-card, .media-card, .q-card{ content-visibility:auto; contain-intrinsic-size:auto 340px; }
+  /* وضع خفيف تلقائي للأجهزة الضعيفة أو وضع توفير البيانات */
+  html.lite *, html.lite *::before, html.lite *::after{ -webkit-backdrop-filter:none !important; backdrop-filter:none !important; }
+  html.lite header{ background:rgba(14,59,76,.97) !important; }
+  html.lite .hero-bg span{ animation:none; filter:none; opacity:.25; }
+  html.lite .orbit, html.lite .orb-item .face, html.lite .logo-orb::before, html.lite .news-thumb, html.lite .t-dot::after{ animation:none !important; }
+  html.lite .scene3d .orbit{ display:none; }
+  html.lite .hero h1 span{ animation:none; }
+  html.lite .news-card::after, html.lite .t-card::after, html.lite .q-card::after, html.lite .highlight-card::after{ display:none; }
+  html.lite section.active-view{ animation:none !important; }
+  html.lite .msg{ animation:none; }
+
+  /* لافتة إعلان عاجل */
+  .site-banner{ position:relative; z-index:120; display:flex; align-items:center; justify-content:center; gap:12px; padding:9px 44px 9px 16px; background:linear-gradient(90deg,var(--gold),#e6c467,var(--gold)); color:var(--deep-2); font-weight:700; font-size:.88rem; text-align:center; line-height:1.6; }
+  .site-banner[hidden]{ display:none; }
+  .site-banner a{ color:inherit; text-decoration:underline; font-weight:800; white-space:nowrap; }
+  .site-banner button{ position:absolute; top:50%; right:10px; transform:translateY(-50%); width:28px; height:28px; border-radius:50%; background:rgba(0,0,0,.12); color:inherit; display:flex; align-items:center; justify-content:center; }
+
+  /* الوثائق وقائمة المطعم */
+  .docs-list{ display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:12px; }
+  .doc-item{ display:flex; align-items:center; gap:12px; padding:12px 14px; border-radius:16px; background:var(--card-bg); border:1px solid var(--card-border); text-decoration:none; color:var(--ink); transition:transform .2s, box-shadow .2s; }
+  .doc-item:hover{ transform:translateY(-3px); box-shadow:0 12px 26px rgba(20,60,75,.14); }
+  .doc-item .di{ width:42px; height:42px; border-radius:13px; display:flex; align-items:center; justify-content:center; font-size:1.25rem; background:linear-gradient(135deg,var(--royal),var(--deep)); color:#fff; flex-shrink:0; }
+  .doc-item .dt{ font-weight:700; font-size:.9rem; line-height:1.5; }
+  .doc-item .dd{ font-size:.74rem; color:var(--muted); }
+  .doc-item .dg{ margin-inline-start:auto; color:var(--royal); font-size:1.1rem; }
+  .menu-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; }
+  .menu-day{ padding:12px; border-radius:14px; background:rgba(201,154,46,.1); border:1px solid var(--line); text-align:center; }
+  .menu-day b{ display:block; color:var(--royal); font-family:'Cairo',sans-serif; margin-bottom:4px; }
+  .menu-day span{ font-size:.84rem; line-height:1.8; }
+  .pin-badge{ display:inline-flex; align-items:center; gap:4px; margin-inline-start:8px; padding:1px 9px; border-radius:999px; background:var(--gold); color:var(--deep-2); font-size:.68rem; font-weight:800; }
+  .ev-ics{ margin-top:8px; display:inline-flex; align-items:center; gap:5px; font-size:.72rem; font-weight:700; color:var(--royal); background:rgba(47,110,168,.1); padding:3px 10px; border-radius:999px; }
+  .ev-ics:hover{ background:rgba(47,110,168,.2); }
+  .foot-tools{ display:flex; justify-content:center; gap:8px; align-items:center; margin-bottom:10px; font-size:.8rem; opacity:.85; }
+  .foot-tools button{ padding:4px 12px; border-radius:8px; background:rgba(255,255,255,.1); color:#fff; font-weight:700; }
+  .foot-tools button:hover{ background:rgba(255,255,255,.2); }
+  .report-btn{ opacity:.55; }
+  .report-btn:hover{ opacity:1; color:#c0392b; }
+  @media print{ .site-banner, .foot-tools{ display:none !important; } }
+  .tt-actions{ gap:10px; flex-wrap:wrap; }
+
+  /* ضبط نهائي للهيدر على الأعراض المتوسطة */
+  @media (max-width:1520px) and (min-width:881px){ .social-row{ display:none; } }
+  @media (max-width:1040px) and (min-width:881px){
+    nav a{ padding:7px 5px; font-size:.74rem; }
+    .nav-wrap{ gap:6px; padding-inline:10px; }
+    .btn.login-btn{ padding:8px 12px; font-size:.78rem; }
+    .brand img{ width:34px; height:34px; }
+  }
+
+  @media (max-width:1260px) and (min-width:881px){ .brand-text{ display:none; } }
 </style>
 
 </head>
 <body>
-<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true"><defs><symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9v10.5a1.5 1.5 0 0 0 1.5 1.5H10v-6h4v6h3.5a1.5 1.5 0 0 0 1.5-1.5V9"/></symbol><symbol id="i-newspaper" viewBox="0 0 24 24"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H17v16H6a2 2 0 0 1-2-2z"/><path d="M17 8h2.5A1.5 1.5 0 0 1 21 9.5V18a2 2 0 0 1-2 2h-2"/><path d="M8 8.5h5M8 12h5M8 15.5h3"/></symbol><symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="16.5" rx="3"/><path d="M8 2.5v4M16 2.5v4M3 10h18"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 17.5h.01M12 17.5h.01"/></symbol><symbol id="i-clipboard" viewBox="0 0 24 24"><rect x="5" y="3.5" width="14" height="17.5" rx="2.5"/><path d="M9 3.5h6V6H9z"/><path d="m9 13.5 2 2 4-4.5"/></symbol><symbol id="i-message" viewBox="0 0 24 24"><path d="M20.5 11.5a8 8 0 0 1-11.8 7L3.5 20l1.5-4.6A8 8 0 1 1 20.5 11.5z"/><path d="M9 11.5h.01M12 11.5h.01M15 11.5h.01"/></symbol><symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.7a3.5 3.5 0 0 1 0 6.6M18.5 14.2a6.5 6.5 0 0 1 3 5.8"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></symbol><symbol id="i-send" viewBox="0 0 24 24"><path d="M21.5 2.5 10.5 13.5"/><path d="m21.5 2.5-7 19-4-8.5-8.5-4z"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="m8 12.5 3 3 5-6"/></symbol><symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.3 3.9 1.9 18a2 2 0 0 0 1.7 3h16.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9.5v4M12 17h.01"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 2.8 4.5 5.6v5.7c0 4.6 3 8.2 7.5 9.9 4.5-1.7 7.5-5.3 7.5-9.9V5.6z"/><path d="m8.8 12 2.4 2.4 4-4.4"/></symbol><symbol id="i-login" viewBox="0 0 24 24"><path d="M14 3h4a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3h-4"/><path d="M9 7.5 4 12l5 4.5M4 12h12"/></symbol><symbol id="i-sparkles" viewBox="0 0 24 24"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4M5 17v4M3 19h4"/></symbol><symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5.2c2.2-1 5.2-1 8 1 2.8-2 5.8-2 8-1v13.6c-2.2-1-5.2-1-8 1-2.8-2-5.8-2-8-1z"/><path d="M12 6.2v13.6"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="m10 8.3 5.6 3.7-5.6 3.7z"/></symbol><symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M12 6.5V12l3.5 2"/></symbol><symbol id="i-printer" viewBox="0 0 24 24"><path d="M7 9V3.5h10V9"/><rect x="3" y="9" width="18" height="8" rx="2.5"/><path d="M7 14h10v6.5H7z"/></symbol><symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5.5M12 7.8h.01"/></symbol><symbol id="i-youtube" viewBox="0 0 24 24"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="m10 9.2 5 2.8-5 2.8z"/></symbol><symbol id="i-instagram" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.3 6.7h.01"/></symbol><symbol id="i-facebook" viewBox="0 0 24 24"><path d="M14 8.5V7a1.5 1.5 0 0 1 1.5-1.5H17V2.5h-2.5A4 4 0 0 0 10.5 6.5v2H8v3h2.5V21h3.5v-9.5h2.7l.5-3z"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol><symbol id="i-smile" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M8 14.2a5 5 0 0 0 8 0M9 9.5h.01M15 9.5h.01"/></symbol><symbol id="i-reply" viewBox="0 0 24 24"><path d="M9 14 4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 6 6v3"/></symbol><symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6"/><path d="M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12"/><path d="M9 7V4.5A1.5 1.5 0 0 1 10.5 3h3A1.5 1.5 0 0 1 15 4.5V7"/></symbol><symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.8"/><path d="m21 16-5-5-9 9"/></symbol><symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></symbol><symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11.5a7 7 0 0 0-14 0C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol><symbol id="i-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol></defs></svg>
+<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true"><defs><symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9v10.5a1.5 1.5 0 0 0 1.5 1.5H10v-6h4v6h3.5a1.5 1.5 0 0 0 1.5-1.5V9"/></symbol><symbol id="i-newspaper" viewBox="0 0 24 24"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H17v16H6a2 2 0 0 1-2-2z"/><path d="M17 8h2.5A1.5 1.5 0 0 1 21 9.5V18a2 2 0 0 1-2 2h-2"/><path d="M8 8.5h5M8 12h5M8 15.5h3"/></symbol><symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="16.5" rx="3"/><path d="M8 2.5v4M16 2.5v4M3 10h18"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 17.5h.01M12 17.5h.01"/></symbol><symbol id="i-clipboard" viewBox="0 0 24 24"><rect x="5" y="3.5" width="14" height="17.5" rx="2.5"/><path d="M9 3.5h6V6H9z"/><path d="m9 13.5 2 2 4-4.5"/></symbol><symbol id="i-message" viewBox="0 0 24 24"><path d="M20.5 11.5a8 8 0 0 1-11.8 7L3.5 20l1.5-4.6A8 8 0 1 1 20.5 11.5z"/><path d="M9 11.5h.01M12 11.5h.01M15 11.5h.01"/></symbol><symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.7a3.5 3.5 0 0 1 0 6.6M18.5 14.2a6.5 6.5 0 0 1 3 5.8"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></symbol><symbol id="i-send" viewBox="0 0 24 24"><path d="M21.5 2.5 10.5 13.5"/><path d="m21.5 2.5-7 19-4-8.5-8.5-4z"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="m8 12.5 3 3 5-6"/></symbol><symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.3 3.9 1.9 18a2 2 0 0 0 1.7 3h16.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9.5v4M12 17h.01"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 2.8 4.5 5.6v5.7c0 4.6 3 8.2 7.5 9.9 4.5-1.7 7.5-5.3 7.5-9.9V5.6z"/><path d="m8.8 12 2.4 2.4 4-4.4"/></symbol><symbol id="i-login" viewBox="0 0 24 24"><path d="M14 3h4a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3h-4"/><path d="M9 7.5 4 12l5 4.5M4 12h12"/></symbol><symbol id="i-sparkles" viewBox="0 0 24 24"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4M5 17v4M3 19h4"/></symbol><symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5.2c2.2-1 5.2-1 8 1 2.8-2 5.8-2 8-1v13.6c-2.2-1-5.2-1-8 1-2.8-2-5.8-2-8-1z"/><path d="M12 6.2v13.6"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="m10 8.3 5.6 3.7-5.6 3.7z"/></symbol><symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M12 6.5V12l3.5 2"/></symbol><symbol id="i-printer" viewBox="0 0 24 24"><path d="M7 9V3.5h10V9"/><rect x="3" y="9" width="18" height="8" rx="2.5"/><path d="M7 14h10v6.5H7z"/></symbol><symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5.5M12 7.8h.01"/></symbol><symbol id="i-youtube" viewBox="0 0 24 24"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="m10 9.2 5 2.8-5 2.8z"/></symbol><symbol id="i-instagram" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.3 6.7h.01"/></symbol><symbol id="i-facebook" viewBox="0 0 24 24"><path d="M14 8.5V7a1.5 1.5 0 0 1 1.5-1.5H17V2.5h-2.5A4 4 0 0 0 10.5 6.5v2H8v3h2.5V21h3.5v-9.5h2.7l.5-3z"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol><symbol id="i-smile" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M8 14.2a5 5 0 0 0 8 0M9 9.5h.01M15 9.5h.01"/></symbol><symbol id="i-reply" viewBox="0 0 24 24"><path d="M9 14 4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 6 6v3"/></symbol><symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6"/><path d="M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12"/><path d="M9 7V4.5A1.5 1.5 0 0 1 10.5 3h3A1.5 1.5 0 0 1 15 4.5V7"/></symbol><symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.8"/><path d="m21 16-5-5-9 9"/></symbol><symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></symbol><symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11.5a7 7 0 0 0-14 0C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol><symbol id="i-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol><symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V4M5 5h12l-2 4 2 4H5"/></symbol><symbol id="i-file" viewBox="0 0 24 24"><path d="M6 3h8l5 5v13H6z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></symbol><symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></symbol></defs></svg>
 <div id="scrollBar" aria-hidden="true"></div>
+<div id="siteBanner" class="site-banner" role="status" hidden></div>
 <noscript><div style="background:#a8402f;color:#fff;padding:12px;text-align:center;">يتطلب هذا الموقع تفعيل JavaScript ليعمل بشكل صحيح.</div></noscript>
 
 <header>
@@ -1314,6 +1375,7 @@
         <li><a href="#about">عن المتوسطة</a></li>
         <li class="nav-action-item"><button id="navSearchBtn" type="button"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg> بحث في الموقع</button></li>
         <li class="nav-action-item"><button id="navDarkModeBtn" type="button"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="navDarkModeIcon"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg> <span id="navDarkModeLabel">الوضع الداكن</span></button></li>
+        <li class="nav-action-item"><button id="navFontBtn" type="button"><b>Aa</b> حجم الخط</button></li>
       </ul>
     </nav>
     <div class="head-actions">
@@ -1445,6 +1507,7 @@
     <div class="hero-cta">
       <a class="btn gold" href="#news"><svg class="ic" aria-hidden="true"><use href="#i-newspaper"/></svg>تصفّح آخر الأخبار</a>
       <a class="btn ghost" href="#qa"><svg class="ic" aria-hidden="true"><use href="#i-message"/></svg>اطرح سؤالاً</a>
+      <a class="btn ghost" id="heroChannel" href="#" target="_blank" rel="noopener noreferrer" style="display:none;"><svg class="ic" aria-hidden="true"><use href="#i-send"/></svg><span>قناة المتوسطة</span></a>
     </div>
     <div class="home-highlights" id="homeHighlights"></div>
   </div>
@@ -1503,6 +1566,7 @@
       <div id="ttGridWrap"></div>
       <div class="tt-actions" id="ttActions" style="display:none;">
         <button class="btn" id="ttPrint" type="button"><svg class="ic" aria-hidden="true"><use href="#i-printer"/></svg>طباعة / حفظ PDF</button>
+        <button class="btn gold" id="ttIcs" type="button"><svg class="ic" aria-hidden="true"><use href="#i-calendar"/></svg>تصدير إلى تقويم الهاتف</button>
       </div>
     </div>
 
@@ -1554,6 +1618,17 @@
         <h3>معلومات الاتصال</h3>
         <div class="contact-list" id="aboutContacts"></div>
         <div class="map-box" id="aboutMap"></div>
+      </div>
+    </div>
+    <div class="about-grid" style="margin-top:22px;">
+      <div class="about-card reveal" id="docsCard" style="grid-column:1/-1; display:none;">
+        <h3>الوثائق والاستمارات</h3>
+        <div class="chips" id="docsFilter"></div>
+        <div class="docs-list" id="docsList"></div>
+      </div>
+      <div class="about-card reveal" id="menuCard" style="grid-column:1/-1; display:none;">
+        <h3>قائمة المطعم <small id="menuWeek" style="font-weight:400;color:var(--muted);margin-inline-start:8px;"></small></h3>
+        <div class="menu-grid" id="menuGrid"></div>
       </div>
     </div>
     <div class="about-grid" style="margin-top:22px;">
@@ -1799,12 +1874,13 @@
         </div>
       </div>
     </div>
+    <div class="foot-tools"><span>حجم الخط:</span><button id="fontDown" type="button" aria-label="تصغير الخط">A−</button><button id="fontReset" type="button" aria-label="الحجم الافتراضي">A</button><button id="fontUp" type="button" aria-label="تكبير الخط">A+</button></div>
     <div class="foot-bottom">© 2026 متوسطة شعيبي بومدين. جميع الحقوق محفوظة.</div>
   </div>
 </footer>
 
 <!-- Firebase (قاعدة بيانات حقيقية لحفظ الأخبار والمناسبات والأسئلة) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.6/purify.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.6/purify.min.js" crossorigin="anonymous"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
@@ -1829,6 +1905,7 @@
   try{
     firebase.initializeApp(firebaseConfig);
     db = firebase.firestore();
+    try{ db.enablePersistence({ synchronizeTabs:true }).catch(()=>{}); }catch(e){}
     auth = firebase.auth();
   }catch(e){ console.error('Firebase init failed', e); }
 </script>
@@ -2013,6 +2090,23 @@
   const sectionListeners = {};
   const sectionLoaded = { home:false, news:false, events:false, exams:false, qa:false };
 
+  function cloneJ(v){ return v === undefined ? v : JSON.parse(JSON.stringify(v)); }
+  // قراءة واحدة + تحديث لحظي (بدل get ثم onSnapshot): تقلل القراءات إلى النصف
+  function watchDoc(key, fallback, apply){
+    return new Promise(resolve=>{
+      if(!db){ apply(cloneJ(fallback)); resolve(); return; }
+      if(sectionListeners[key]){ resolve(); return; }
+      let first = true;
+      sectionListeners[key] = db.collection('siteData').doc(key).onSnapshot(doc=>{
+        const d = doc.exists ? doc.data() : null;
+        apply(d && d.items !== undefined ? d.items : cloneJ(fallback));
+        if(first){ first = false; resolve(); }
+      }, err=>{
+        console.error('Firestore watch failed for', key, err);
+        if(first){ first = false; apply(cloneJ(fallback)); resolve(); }
+      });
+    });
+  }
   const loadP = {};
   function ensureSectionLoaded(section){
     if(section === 'events' || section === 'home') section = 'news';
@@ -2020,25 +2114,25 @@
     if(loadP[section]) return loadP[section];
     loadP[section] = (async ()=>{
       if(section === 'news'){
-        siteNews = await loadJSON('site-news', DEFAULT_NEWS);
-        siteEvents = await loadJSON('site-events', DEFAULT_EVENTS);
-        renderNews(); renderEventsV3(); renderHomeHighlights();
-        attachRealtimeSync('site-news', items=>{ siteNews = items; renderNews(); renderHomeHighlights(); });
-        attachRealtimeSync('site-events', items=>{ siteEvents = items; renderEventsV3(); renderHomeHighlights(); });
+        await Promise.all([
+          watchDoc('site-news', DEFAULT_NEWS, items=>{ siteNews = items || []; renderNews(); renderHomeHighlights(); }),
+          watchDoc('site-events', DEFAULT_EVENTS, items=>{ siteEvents = items || []; renderEventsV3(); renderHomeHighlights(); })
+        ]);
       } else if(section === 'timetable'){
-        siteLevels = await loadJSON('site-levels', DEFAULT_LEVELS);
-        siteTT = await loadJSON('site-timetable', {});
-        buildExamTabs(); renderTimetable();
-        attachRealtimeSync('site-levels', items=>{ siteLevels = items; buildExamTabs(); });
-        attachRealtimeSync('site-timetable', items=>{ siteTT = items || {}; renderTimetable(); });
+        await Promise.all([
+          watchDoc('site-levels', DEFAULT_LEVELS, items=>{ siteLevels = items || {}; buildExamTabs(); }),
+          watchDoc('site-timetable', {}, items=>{ siteTT = items || {}; renderTimetable(); })
+        ]);
       } else if(section === 'media'){
-        siteMedia = await loadJSON('site-social', []);
-        renderMedia();
-        attachRealtimeSync('site-social', items=>{ siteMedia = items || []; renderMedia(); });
+        await watchDoc('site-social', [], items=>{ siteMedia = items || []; renderMedia(); });
+      } else if(section === 'info'){
+        await watchDoc('site-info', {}, items=>{ siteInfo = items || {}; renderAbout(); renderBanner(); });
       } else if(section === 'about'){
-        siteInfo = await loadJSON('site-info', {});
-        renderAbout();
-        attachRealtimeSync('site-info', items=>{ siteInfo = items || {}; renderAbout(); });
+        await Promise.all([
+          ensureSectionLoaded('info'),
+          watchDoc('site-docs', [], items=>{ siteDocs = items || []; renderDocs(); }),
+          watchDoc('site-menu', {}, items=>{ siteMenu = items || {}; renderMenu(); })
+        ]);
       } else if(section === 'qa'){
         attachQuestionsSync();
       }
@@ -2046,15 +2140,7 @@
     return loadP[section];
   }
 
-  async function initSiteData(){
-    const theme = await loadJSON('site-theme', null);
-    applyTheme(theme);
-    if(db){
-      db.collection('siteData').doc('site-theme').onSnapshot(doc=>{
-        if(doc.exists && doc.data().items) applyTheme(doc.data().items);
-      });
-    }
-  }
+  function initSiteData(){ watchDoc('site-theme', null, theme=> applyTheme(theme)); }
   initSiteData();
 
   // ---------- RENDERERS ----------
@@ -2067,15 +2153,16 @@
   }
   function renderNews(){
     if(!siteNews.length){ newsGrid.innerHTML = '<p class="empty-note">لا توجد أخبار منشورة حالياً.</p>'; return; }
-    newsGrid.innerHTML = siteNews.map(n=>{
-      const thumb = n.image
-        ? `<img loading="lazy" src="${safeImg(n.image)}" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">`
+    newsGrid.innerHTML = siteNews.slice().sort((a, b)=> (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0)).map(n=>{
+      const timg = n.thumb || n.image;
+      const thumb = timg
+        ? `<img loading="lazy" decoding="async" src="${safeImg(timg)}" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">`
         : icon(n.ic || 'newspaper', 26);
       return `
       <div class="news-card" data-open-article="${escapeHtml(n.id)}" style="cursor:pointer;">
         <div class="news-thumb" style="position:relative;">${thumb}</div>
         <div class="news-body">
-          <div class="date-badge">${escapeHtml(n.date)}</div>
+          <div class="date-badge">${escapeHtml(n.date)}${n.pinned ? `<span class="pin-badge">${ic('pin')} مثبّت</span>` : ''}</div>
           <h3>${escapeHtml(n.title)}</h3>
           <p>${escapeHtml(n.excerpt)}</p>
           <div class="news-foot"><span class="news-cat ${catClass(n.cat)}">${escapeHtml(n.cat)}</span><span class="read-more">اقرأ المزيد ${ic('arrow')}</span></div>
@@ -2213,12 +2300,13 @@
       return `<div class="ev-card ${w[1] === 'past' ? 'past' : ''}" tabindex="0" role="button" aria-label="${escapeHtml(e.title)}">
         <div class="ev-date">${p ? `<b>${p.d}</b><span>${p.m}</span>` : ic('calendar')}</div>
         <div class="ev-info"><h4>${escapeHtml(e.title)}</h4><p>${escapeHtml(e.desc || e.date || '')}</p>
-          ${w[0] ? `<span class="ev-when ${w[1] === 'soon' ? 'soon' : ''}">${w[0]}</span>` : `<span class="ev-when">${escapeHtml(e.date || '')}</span>`}</div></div>`;
+          ${w[0] ? `<span class="ev-when ${w[1] === 'soon' ? 'soon' : ''}">${w[0]}</span>` : `<span class="ev-when">${escapeHtml(e.date || '')}</span>`}${p ? `<br><button type="button" class="ev-ics" data-ics="${escapeHtml(e.id)}">${ic('calendar')} أضف للتقويم</button>` : ''}</div></div>`;
     }).join('');
     strip.querySelectorAll('.ev-card').forEach(c=>{
       c.addEventListener('click', ()=> c.classList.toggle('open'));
       c.addEventListener('keydown', (ev)=>{ if(ev.key === 'Enter') c.classList.toggle('open'); });
     });
+    strip.querySelectorAll('[data-ics]').forEach(b=> b.addEventListener('click', ev=>{ ev.stopPropagation(); exportEventIcs(b.dataset.ics); }));
     tlEl.innerHTML = evs.map(e=> `
       <div class="t-item">
         <div class="t-dot"><svg viewBox="0 0 24 24">${ICON_PATHS[e.ic] || ICON_PATHS.calendarStar}</svg></div>
@@ -2442,6 +2530,10 @@
     const rows = [];
     if(i.phone) rows.push(`<a class="contact-row" href="tel:${escapeHtml(String(i.phone).replace(/[^\d+]/g, ''))}"><span class="ci">${ic('phone')}</span><span>${escapeHtml(i.phone)}</span></a>`);
     rows.push(`<a class="contact-row" href="mailto:${escapeHtml(email)}"><span class="ci">${ic('mail')}</span><span>${escapeHtml(email)}</span></a>`);
+    const chUrl = safeUrl(i.channelUrl);
+    const hc = document.getElementById('heroChannel');
+    if(hc){ if(chUrl){ hc.href = chUrl; hc.querySelector('span').textContent = i.channelLabel || 'قناة المتوسطة'; hc.style.display = ''; } else hc.style.display = 'none'; }
+    if(chUrl) rows.push(`<a class="contact-row" href="${escapeHtml(chUrl)}" target="_blank" rel="noopener noreferrer"><span class="ci">${ic('send')}</span><span>${escapeHtml(i.channelLabel || 'قناة المتوسطة')}</span></a>`);
     if(i.address) rows.push(`<div class="contact-row"><span class="ci">${ic('pin')}</span><span>${escapeHtml(i.address)}</span></div>`);
     document.getElementById('aboutContacts').innerHTML = rows.join('');
     const q = i.mapQuery || 'متوسطة شعيبي بومدين وهران الجزائر';
@@ -2459,6 +2551,139 @@
     showToast('سيُفتح تطبيق البريد لإرسال رسالتك.');
   });
 
+  // =====================================================================
+  //  الإصدار 4: لافتة، وثائق، قائمة المطعم، تقويم ICS، إشراف، حجم الخط
+  // =====================================================================
+  let siteDocs = [], siteMenu = {};
+  function safeUrl(u){ u = String(u || '').trim(); return /^https?:\/\/[^\s"'<>`]+$/i.test(u) ? u : ''; }
+
+  function renderBanner(){
+    const b = document.getElementById('siteBanner'); if(!b) return;
+    const i = siteInfo || {};
+    if(!i.bannerOn || !i.bannerText){ b.hidden = true; return; }
+    const key = normAr(i.bannerText).slice(0, 60);
+    let closed = ''; try{ closed = localStorage.getItem('bannerClosed') || ''; }catch(e){}
+    if(closed === key){ b.hidden = true; return; }
+    const ext = safeUrl(i.bannerLink);
+    const internal = /^#[\w-]+$/.test(String(i.bannerLink || '').trim()) ? String(i.bannerLink).trim() : '';
+    b.innerHTML = `<span>${escapeHtml(i.bannerText)}</span>${(ext || internal) ? `<a href="${escapeHtml(ext || internal)}" ${ext ? 'target="_blank" rel="noopener noreferrer"' : ''}>التفاصيل</a>` : ''}<button type="button" aria-label="إغلاق">${ic('x')}</button>`;
+    b.hidden = false;
+    b.querySelector('button').onclick = ()=>{ b.hidden = true; try{ localStorage.setItem('bannerClosed', key); }catch(e){} };
+  }
+
+  let docsCat = '';
+  function renderDocs(){
+    const card = document.getElementById('docsCard'); if(!card) return;
+    const list = (siteDocs || []).filter(d=> safeUrl(d.url));
+    if(!list.length){ card.style.display = 'none'; return; }
+    card.style.display = '';
+    const cats = [...new Set(list.map(d=> d.cat || 'عام'))];
+    if(docsCat && !cats.includes(docsCat)) docsCat = '';
+    document.getElementById('docsFilter').innerHTML = cats.length > 1 ? ['', ...cats].map(c=> `<button class="chip sm ${c === docsCat ? 'active' : ''}" data-dc="${escapeHtml(c)}">${c ? escapeHtml(c) : 'الكل'}</button>`).join('') : '';
+    document.querySelectorAll('#docsFilter [data-dc]').forEach(b=> b.onclick = ()=>{ docsCat = b.dataset.dc; renderDocs(); });
+    document.getElementById('docsList').innerHTML = list.filter(d=> !docsCat || (d.cat || 'عام') === docsCat).map(d=>{
+      const u = safeUrl(d.url); const ext = (u.split('?')[0].split('.').pop() || '').toLowerCase();
+      const isFile = ['pdf','doc','docx','xls','xlsx','ppt','pptx','zip'].includes(ext) || /drive\.google|docs\.google|dropbox/.test(u);
+      return `<a class="doc-item" href="${escapeHtml(u)}" target="_blank" rel="noopener noreferrer"><span class="di">${ic('file')}</span><span style="min-width:0;"><span class="dt">${escapeHtml(d.title)}</span><span class="dd" style="display:block;">${escapeHtml(d.desc || d.cat || '')}</span></span><span class="dg">${ic(isFile ? 'download' : 'arrow')}</span></a>`;
+    }).join('');
+  }
+  function renderMenu(){
+    const card = document.getElementById('menuCard'); if(!card) return;
+    const rows = ((siteMenu && siteMenu.rows) || []).filter(r=> r && r.day && r.meal);
+    if(!rows.length){ card.style.display = 'none'; return; }
+    card.style.display = '';
+    document.getElementById('menuWeek').textContent = siteMenu.week || '';
+    document.getElementById('menuGrid').innerHTML = rows.map(r=> `<div class="menu-day"><b>${escapeHtml(r.day)}</b><span>${escapeHtml(r.meal)}</span></div>`).join('');
+  }
+
+  // ---------- تصدير إلى تقويم الهاتف (ICS) ----------
+  function icsDownload(name, body){
+    const blob = new Blob(['\ufeff' + body], { type:'text/calendar;charset=utf-8' });
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name;
+    document.body.appendChild(a); a.click(); setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); }, 500);
+  }
+  const icsEsc = s => String(s || '').replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\r?\n/g, '\\n');
+  const icsStamp = ()=> new Date().toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+  function icsWrap(name, events){
+    return ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Cem Chaibi Boumediene//AR','CALSCALE:GREGORIAN','METHOD:PUBLISH','X-WR-CALNAME:' + icsEsc(name), ...events.flat(), 'END:VCALENDAR'].join('\r\n');
+  }
+  function exportEventIcs(id){
+    const e = siteEvents.find(x=> x.id === id);
+    if(!e || !/^\d{4}-\d{2}-\d{2}$/.test(e.iso || '')) return;
+    const n = new Date(e.iso + 'T12:00:00'); n.setDate(n.getDate() + 1);
+    const end = n.getFullYear() + String(n.getMonth() + 1).padStart(2, '0') + String(n.getDate()).padStart(2, '0');
+    icsDownload('event.ics', icsWrap('مناسبات المتوسطة', [[ 'BEGIN:VEVENT', 'UID:' + e.id + '@cem-chaibi', 'DTSTAMP:' + icsStamp(), 'DTSTART;VALUE=DATE:' + e.iso.replace(/-/g, ''), 'DTEND;VALUE=DATE:' + end, 'SUMMARY:' + icsEsc(e.title), 'DESCRIPTION:' + icsEsc(e.desc || ''), 'END:VEVENT' ]]));
+  }
+  function exportTimetableIcs(){
+    const D = ttData(); const cls = D.classes.find(c=> c.id === ttState.cls); if(!cls) return;
+    const BY = ['SU','MO','TU','WE','TH','FR','SA']; const out = [];
+    D.days.forEach(day=>{
+      const dow = DAY_NAMES.indexOf(day); if(dow < 0) return;
+      D.slots.forEach(slot=>{
+        if(slot.brk) return; const r = parseSlot(slot.t); if(!r) return;
+        ttSessions(cls, day, slot).forEach((s, k)=>{
+          const d = new Date(); d.setHours(0,0,0,0); d.setDate(d.getDate() + ((dow - d.getDay() + 7) % 7));
+          const f = m => d.getFullYear() + String(d.getMonth() + 1).padStart(2, '0') + String(d.getDate()).padStart(2, '0') + 'T' + String(Math.floor(m / 60)).padStart(2, '0') + String(m % 60).padStart(2, '0') + '00';
+          out.push(['BEGIN:VEVENT', 'UID:' + cls.id + '-' + dow + '-' + slot.id + '-' + k + '@cem-chaibi', 'DTSTAMP:' + icsStamp(), 'DTSTART:' + f(r.a), 'DTEND:' + f(r.b), 'RRULE:FREQ=WEEKLY;COUNT=40;BYDAY=' + BY[dow], 'SUMMARY:' + icsEsc(s.subj), 'LOCATION:' + icsEsc(s.room || ''), 'DESCRIPTION:' + icsEsc(s.teacher || ''), 'END:VEVENT']);
+        });
+      });
+    });
+    if(!out.length){ showToast('لا توجد حصص لتصديرها.', true); return; }
+    icsDownload('timetable-' + cls.name + '.ics', icsWrap('جدول حصص ' + cls.name, out));
+    showToast('تم تنزيل الملف: افتحه لإضافة الجدول إلى تقويم هاتفك.');
+  }
+  document.getElementById('ttIcs').addEventListener('click', exportTimetableIcs);
+
+  // ---------- الإشراف: حظر، كلمات محظورة، بلاغات ----------
+  let bannedCache = { uid:null, v:false };
+  function hasBadWord(text){
+    const list = String((siteInfo && siteInfo.badWords) || '').split(/[,،\n]/).map(w=> normAr(w)).filter(Boolean);
+    if(!list.length) return false;
+    const nt = ' ' + normAr(text).replace(/[^\u0600-\u06FFa-z0-9\s]/gi, ' ').replace(/\s+/g, ' ') + ' ';
+    return list.some(w=> nt.includes(' ' + w + ' ') || (w.length >= 4 && nt.includes(w)));
+  }
+  async function canPost(text){
+    const u = auth && auth.currentUser; if(!u) return true;
+    try{ await ensureSectionLoaded('info'); }catch(e){}
+    if(bannedCache.uid !== u.uid){
+      bannedCache = { uid:u.uid, v:false };
+      try{ const d = await db.collection('bannedUsers').doc(u.uid).get(); bannedCache.v = d.exists; }catch(e){}
+    }
+    if(bannedCache.v){ showToast('تم تقييد حسابك من النشر. تواصل مع الإدارة.', true); return false; }
+    if(text && hasBadWord(text)){ showToast('يرجى استعمال لغة محترمة: النص يحتوي كلمات غير لائقة.', true); return false; }
+    return true;
+  }
+  async function reportContent(o){
+    const u = auth && auth.currentUser;
+    if(!u){ showToast('سجّل الدخول أولاً للإبلاغ.', true); if(typeof openModal === 'function') openModal(); return; }
+    if(!(await showConfirm('هل تريد الإبلاغ عن هذا المحتوى للإدارة؟'))) return;
+    const p = currentUserProfile;
+    try{
+      await db.collection('reports').add({
+        type:o.type, targetPath:o.path, text:String(o.text || '').slice(0, 300), author:String(o.author || '').slice(0, 120),
+        authorUid:String(o.authorUid || ''), link:o.link || '', reporterUid:u.uid,
+        reporterName:((p && ((p.firstName || '') + ' ' + (p.lastName || '')).trim()) || u.displayName || '').slice(0, 120),
+        createdAt:firebase.firestore.FieldValue.serverTimestamp()
+      });
+      showToast('تم إرسال البلاغ إلى الإدارة، شكراً لك.');
+    }catch(e){ console.error(e); showToast('تعذر إرسال البلاغ.', true); }
+  }
+  const reportBtn = (attrs)=> `<button class="q-foot-item report-btn" ${attrs} title="إبلاغ عن إساءة" aria-label="إبلاغ">${ic('flag')}<span>إبلاغ</span></button>`;
+
+  // ---------- حجم الخط ----------
+  let fontPct = 100; try{ fontPct = +localStorage.getItem('fontPct') || 100; }catch(e){}
+  function applyFont(){ document.documentElement.style.fontSize = fontPct + '%'; try{ localStorage.setItem('fontPct', fontPct); }catch(e){} }
+  function stepFont(d){ fontPct = Math.max(85, Math.min(135, fontPct + d)); applyFont(); }
+  applyFont();
+  [['fontDown', ()=> stepFont(-8)], ['fontUp', ()=> stepFont(8)], ['fontReset', ()=>{ fontPct = 100; applyFont(); }],
+   ['navFontBtn', ()=>{ fontPct = fontPct >= 124 ? 100 : fontPct + 12; applyFont(); }]].forEach(([id, fn])=>{ const el = document.getElementById(id); if(el) el.addEventListener('click', fn); });
+
+  document.getElementById('qaList').addEventListener('click', (e)=>{
+    const b = e.target.closest('[data-report]'); if(!b) return;
+    const q = siteQuestions.find(x=> x.id === b.dataset.qid); if(!q) return;
+    if(b.dataset.report === 'q') reportContent({ type:'question', path:'questions/' + q.id, text:q.body, author:q.author, authorUid:q.authorUid, link:'#qa' });
+    else { const r = (q.replies || []).find(x=> x.id === b.dataset.rid); if(r) reportContent({ type:'reply', path:'questions/' + q.id + '/replies/' + r.id, text:r.text, author:r.author, authorUid:r.uid, link:'#qa' }); }
+  });
   const qaList = document.getElementById('qaList');
   function asArray(x){ return Array.isArray(x) ? x : []; }
   function likeBtn(kind, qId, likedByArr, count, extra){
@@ -2557,7 +2782,7 @@
             </div>
             <div style="font-size:.88rem;">${escapeHtml(r.text)}</div>
             <div class="q-foot" style="margin-top:6px;">
-              ${likeBtn('reply', q.id, asArray(r.likes), asArray(r.likes).length, `data-reply-id="${escapeHtml(r.id||'')}"`)}
+              ${likeBtn('reply', q.id, asArray(r.likes), asArray(r.likes).length, `data-reply-id="${escapeHtml(r.id||'')}"`)}${!canManageR ? reportBtn(`data-report="r" data-qid="${escapeHtml(q.id)}" data-rid="${escapeHtml(r.id||'')}"`) : ''}
             </div>
           </div>
         </div>`;
@@ -2571,7 +2796,7 @@
           <p class="q-body" data-qbody>${escapeHtml(q.body)}</p>
           ${q.attachment ? `<img src="${safeImg(q.attachment)}" style="max-width:220px; border-radius:10px; margin:8px 0;">` : ''}
           <div class="q-foot" style="justify-content:space-between;">
-            <span style="display:flex; gap:14px;">${likeBtn('question', q.id, asArray(q.likes), asArray(q.likes).length)}</span>
+            <span style="display:flex; gap:14px;">${likeBtn('question', q.id, asArray(q.likes), asArray(q.likes).length)}${!canManageQ ? reportBtn(`data-report="q" data-qid="${escapeHtml(q.id)}"`) : ''}</span>
             ${canManageQ ? `
               <span style="display:flex; gap:10px;">
                 <button class="q-foot-item" data-edit-q="${escapeHtml(q.id)}"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4l11-11-4-4L4 16v4z"/></svg> تعديل</button>
@@ -2678,6 +2903,7 @@
           if(typeof openModal === 'function') openModal();
           return;
         }
+        if(!(await canPost(text))) return;
         input.disabled = true; sendBtn.disabled = true;
         try{
           await db.collection('questions').doc(qId).collection('replies').add({
@@ -2718,6 +2944,7 @@
       if(typeof openModal === 'function') openModal();
       return;
     }
+    if(!(await canPost(text))) return;
     const authorName = (currentUserProfile && (currentUserProfile.firstName + ' ' + currentUserProfile.lastName))
       || auth.currentUser.displayName || 'مستخدم مسجل';
     const submitBtn = document.getElementById('qaSubmit');
@@ -3248,7 +3475,7 @@
         Object.values(rx).forEach(c=>{ if(CHAT_REACTS[c]) counts[c] = (counts[c] || 0) + 1; });
         const reactHtml = Object.keys(counts).length ? `<div class="reacts">${Object.keys(counts).map(c=> `<button class="react-pill ${rx[user.uid] === c ? 'mine' : ''}" data-react="${c}" data-id="${m.id}">${CHAT_REACTS[c]}<small>${counts[c]}</small></button>`).join('')}</div>` : '';
         const q = m.replyTo ? `<div class="quote" data-jump="${escapeHtml(m.replyTo.id || '')}"><b>${escapeHtml(m.replyTo.author || '')}</b><span>${escapeHtml(m.replyTo.text || '')}</span></div>` : '';
-        const actions = `<div class="msg-actions">${Object.keys(CHAT_REACTS).map(c=> `<button data-act="react" data-react="${c}" data-id="${m.id}" aria-label="${c}">${CHAT_REACTS[c]}</button>`).join('')}<span class="sep"></span><button data-act="reply" data-id="${m.id}" aria-label="رد">${ic('reply')}</button>${canDel(m) ? `<button data-act="del" data-id="${m.id}" aria-label="حذف" style="color:#c0392b;">${ic('trash')}</button>` : ''}</div>`;
+        const actions = `<div class="msg-actions">${Object.keys(CHAT_REACTS).map(c=> `<button data-act="react" data-react="${c}" data-id="${m.id}" aria-label="${c}">${CHAT_REACTS[c]}</button>`).join('')}<span class="sep"></span><button data-act="reply" data-id="${m.id}" aria-label="رد">${ic('reply')}</button>${!canDel(m) ? `<button data-act="report" data-id="${m.id}" aria-label="إبلاغ" style="color:#c0392b;">${ic('flag')}</button>` : ''}${canDel(m) ? `<button data-act="del" data-id="${m.id}" aria-label="حذف" style="color:#c0392b;">${ic('trash')}</button>` : ''}</div>`;
         html += `<div class="msg ${isMe ? 'me' : ''} ${first ? 'first' : ''} ${selId === m.id ? 'sel' : ''}" id="m-${m.id}" data-id="${m.id}">
           ${isMe ? '' : `<div class="av ${last ? '' : 'ghost'}">${avatarHtml(m.author, m.authorPhoto, 32)}</div>`}
           <div class="bub">${first && !isMe ? `<div class="nm">${escapeHtml(m.author || 'ولي')}${nameBadge(m.isOwner)}</div>` : ''}${q}
@@ -3299,6 +3526,7 @@
         const id = act.dataset.id;
         if(act.dataset.act === 'react') react(id, act.dataset.react);
         else if(act.dataset.act === 'reply'){ const m = msgs.find(x=> x.id === id); if(m) setReply(m); }
+        else if(act.dataset.act === 'report'){ const m = msgs.find(x=> x.id === id); if(m) reportContent({ type:'chat', path:'parentsGeneralChat/' + id, text:m.text || '📷 صورة', author:m.author, authorUid:m.uid, link:'#parents-chat' }); }
         else if(act.dataset.act === 'del'){
           if(await showConfirm('هل تريد حذف هذه الرسالة؟')){ try{ await col.doc(id).delete(); }catch(err){ console.error(err); showToast('تعذر حذف الرسالة.', true); } }
         }
@@ -3340,6 +3568,7 @@
     async function send(){
       const text = input.value.trim();
       if((!text && !pendingImg) || sending) return;
+      if(!(await canPost(text))) return;
       sending = true; $('chatSend').disabled = true;
       const data = { uid: user.uid, author: myName, authorPhoto: profile.photoURL || null, isOwner: owner,
         text: text || null, image: pendingImg || null, time: firebase.firestore.FieldValue.serverTimestamp() };
@@ -3368,7 +3597,7 @@
     { title:'الوسائط: فيديوهات ومنشورات', hash:'#media', kw:'فيديو يوتيوب انستغرام فيسبوك صور' },
     { title:'فضاء الأسئلة', hash:'#qa', kw:'اسئلة نقاش تمارين دروس' },
     { title:'فضاء الأولياء', hash:'#parents', kw:'اولياء دردشة تواصل' },
-    { title:'عن المتوسطة واتصل بنا', hash:'#about', kw:'اتصال هاتف عنوان خريطة بريد من نحن اسئلة شائعة' },
+    { title:'عن المتوسطة واتصل بنا', hash:'#about', kw:'اتصال هاتف عنوان خريطة بريد من نحن اسئلة شائعة وثائق استمارات قائمة المطعم' },
     { title:'سياسة الخصوصية', hash:'#privacy', kw:'خصوصية بيانات حماية' }
   ];
   function buildSearchIndex(){
@@ -3389,6 +3618,7 @@
     });
     (siteMedia || []).forEach(m=>{ const p = parseSocial(m.url); if(p) add({ type:'وسائط', icon:PLAT[p.platform].i, title:m.title || PLAT[p.platform].n, sub:PLAT[p.platform].n, body:m.desc || '', go:()=>{ location.hash = '#media'; setTimeout(()=> openMedia(m.id), 200); } }); });
     (siteQuestions || []).forEach(q=> add({ type:'سؤال', icon:'message', title:(q.body || '').slice(0, 70), sub:'سؤال · ' + (q.subj || ''), body:q.body || '', go:()=>{ location.hash = '#qa'; } }));
+    (siteDocs || []).forEach(d=> add({ type:'وثيقة', icon:'file', title:d.title, sub:'وثيقة · ' + (d.cat || ''), body:d.desc || '', go:()=>{ location.hash = '#about'; setTimeout(()=>{ const c = document.getElementById('docsCard'); if(c) c.scrollIntoView({ behavior:'smooth' }); }, 350); } }));
     SEARCH_PAGES.forEach(p=> add({ type:'صفحة', icon:'sparkles', title:p.title, sub:'صفحة', body:p.kw, go:()=>{ if(p.pane) setTTPane(p.pane); location.hash = p.hash; } }));
     searchIdx = items;
     searchVocab = new Map();
@@ -3510,7 +3740,7 @@
     searchOverlay.classList.add('open');
     searchInput.focus();
     renderSearch();
-    await Promise.all(['news','timetable','media','qa'].map(ensureSectionLoaded));
+    await Promise.all(['news','timetable','media','about','qa'].map(ensureSectionLoaded));
     buildSearchIndex(); renderSearch();
   }
   function closeSearch(){ searchOverlay.classList.remove('open'); }
@@ -3547,13 +3777,23 @@
 
   // ================= صفحة تفاصيل الخبر (المدونة) =================
   let currentArticleUnsub = null;
+  const fullCache = {};
   async function renderArticle(id){
     const wrap = document.getElementById('articleContent');
     if(currentArticleUnsub){ currentArticleUnsub(); currentArticleUnsub = null; }
-    const n = siteNews.find(x=> x.id === id);
+    let n = siteNews.find(x=> x.id === id);
     if(!n){
       wrap.innerHTML = '<p class="empty-note">تعذر العثور على هذا المنشور.</p>';
       return;
+    }
+    if(n.split){
+      if(!fullCache[id]){
+        wrap.innerHTML = '<div class="skeleton-line" style="width:35%;"></div><div class="skeleton-line" style="width:90%;height:26px;margin:14px 0;"></div><div class="skeleton-line" style="width:100%;height:180px;"></div><div class="skeleton-line" style="width:80%;"></div>';
+        try{ const d = await db.collection('newsFull').doc(id).get(); fullCache[id] = d.exists ? d.data() : {}; }
+        catch(e){ console.error(e); fullCache[id] = {}; }
+        if(currentTarget !== 'article' || location.hash !== '#article-' + id) return;
+      }
+      n = Object.assign({}, n, fullCache[id]);
     }
     const isRichContent = !!n.content;
     const fullTextHtml = isRichContent ? sanitizeHtml(n.content) : escapeHtml(n.excerpt).replace(/\n/g, '<br>');
@@ -3610,6 +3850,11 @@
 
     // التعليقات (تتطلب تسجيل الدخول)
     const commentsBox = document.getElementById('articleComments');
+    commentsBox.addEventListener('click', (e)=>{
+      const b = e.target.closest('[data-report-comment]'); if(!b) return;
+      const row = b.closest('[data-comment-row]');
+      reportContent({ type:'comment', path:'newsComments/' + id + '/comments/' + b.dataset.reportComment, text:((row.querySelector('[data-comment-text]') || {}).textContent || ''), author:'', authorUid:row.dataset.authorUid || '', link:'#article-' + id });
+    });
     const commentsRef = db.collection('newsComments').doc(id).collection('comments').orderBy('time', 'asc');
     currentArticleUnsub = commentsRef.onSnapshot(snap=>{
       if(snap.empty){
@@ -3623,12 +3868,12 @@
         const likes = c.likes || [];
         const liked = uid && likes.includes(uid);
         const canManage = iAmOwner || (uid && uid === c.uid);
-        return `<div style="padding:10px 0; border-bottom:1px solid #f0e8d5; display:flex; gap:8px; align-items:flex-start;" data-comment-row="${d.id}">
+        return `<div style="padding:10px 0; border-bottom:1px solid #f0e8d5; display:flex; gap:8px; align-items:flex-start;" data-comment-row="${d.id}" data-author-uid="${escapeHtml(c.uid||'')}">
           ${avatarHtml(c.author, c.authorPhoto, 28)}
           <div style="flex:1; min-width:0;">
             <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:6px;">
               <div style="font-weight:700; font-size:.85rem; color:var(--royal);">${escapeHtml(c.author||'مستخدم')}${nameBadge(c.isOwner)}</div>
-              ${canManage ? `<span style="display:flex; gap:8px; flex-shrink:0;">
+              ${!canManage ? `<button class="item-del-btn report-btn" data-report-comment="${d.id}" title="إبلاغ" aria-label="إبلاغ" style="color:var(--muted);">${ic('flag')}</button>` : ''}${canManage ? `<span style="display:flex; gap:8px; flex-shrink:0;">
                 <button class="item-del-btn" data-edit-comment="${d.id}" title="تعديل" style="color:var(--muted);"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4l11-11-4-4L4 16v4z"/></svg></button>
                 <button class="item-del-btn" data-del-comment="${d.id}" title="حذف" style="color:var(--muted);"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 7h14M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2m-8 0 1 13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1l1-13"/></svg></button>
               </span>` : ''}
@@ -3707,6 +3952,7 @@
       }
       const authorName = (currentUserProfile && (currentUserProfile.firstName + ' ' + currentUserProfile.lastName))
         || auth.currentUser.displayName || 'مستخدم مسجل';
+      if(!(await canPost(text))) return;
       try{
         await db.collection('newsComments').doc(id).collection('comments').add({
           uid: auth.currentUser.uid, author: authorName, authorPhoto: (currentUserProfile && currentUserProfile.photoURL) || null, isOwner: isOwnerAccount(auth.currentUser), text, likes: [], time: firebase.firestore.FieldValue.serverTimestamp()
@@ -3889,6 +4135,7 @@
       });
     }
   })();
+  ensureSectionLoaded('info');
   if('scrollRestoration' in history) history.scrollRestoration = 'manual';
   const _top = ()=>{ if(window.scrollY < 250) window.scrollTo(0, 0); };
   window.addEventListener('load', ()=>{ _top(); setTimeout(_top, 250); });
