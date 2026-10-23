@@ -1,5 +1,5 @@
 /* Service Worker بسيط: يجعل الموقع يعمل كتطبيق ويعرض الصفحة عند انقطاع الإنترنت */
-const CACHE = 'cem-shell-v3';
+const CACHE = 'cem-shell-v4';
 const SHELL = ['./', 'index.html', 'logo.png', 'favicon.png', 'manifest.webmanifest'];
 
 self.addEventListener('install', (e)=>{
