@@ -1,16 +1,26 @@
 {
+  "id": "./",
   "name": "متوسطة شعيبي بومدين — الفضاء الرقمي",
   "short_name": "شعيبي بومدين",
   "description": "أخبار ومناسبات المتوسطة، جداول الحصص والفروض، فضاء الأسئلة ودردشة الأولياء.",
   "lang": "ar",
   "dir": "rtl",
-  "start_url": "./",
+  "start_url": "./?source=pwa",
   "scope": "./",
   "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
   "background_color": "#0e3b4c",
   "theme_color": "#0e3b4c",
+  "categories": ["education", "school"],
   "icons": [
     { "src": "logo.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "logo.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
     { "src": "favicon.png", "sizes": "64x64", "type": "image/png" }
+  ],
+  "shortcuts": [
+    { "name": "جدول الحصص", "short_name": "الحصص", "url": "./#timetable", "icons": [{ "src": "logo.png", "sizes": "192x192" }] },
+    { "name": "الأخبار والمناسبات", "short_name": "الأخبار", "url": "./#news", "icons": [{ "src": "logo.png", "sizes": "192x192" }] },
+    { "name": "فضاء الأسئلة", "short_name": "الأسئلة", "url": "./#qa", "icons": [{ "src": "logo.png", "sizes": "192x192" }] },
+    { "name": "دردشة الأولياء", "short_name": "الأولياء", "url": "./#parents-chat", "icons": [{ "src": "logo.png", "sizes": "192x192" }] }
   ]
 }
