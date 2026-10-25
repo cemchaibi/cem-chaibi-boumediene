@@ -1,5 +1,5 @@
-/* Service Worker بسيط: يجعل الموقع يعمل كتطبيق ويعرض الصفحة عند انقطاع الإنترنت */
-const CACHE = 'cem-shell-v4';
+/* Service Worker: يجعل الموقع تطبيقاً قابلاً للتثبيت، يعمل بلا إنترنت، ويعرض الإشعارات */
+const CACHE = 'cem-shell-v6';
 const SHELL = ['./', 'index.html', 'logo.png', 'favicon.png', 'manifest.webmanifest'];
 
 self.addEventListener('install', (e)=>{
@@ -14,7 +14,7 @@ self.addEventListener('fetch', (e)=>{
   const url = new URL(req.url);
   if(url.origin !== location.origin) return;           // لا نتدخل في Firebase ولا الخطوط ولا المنصات
   if(url.pathname.endsWith('admin.html')) return;       // لوحة الإدارة دائماً من الشبكة
-  if(req.mode === 'navigate'){                          // الصفحات: الشبكة أولاً، ثم النسخة المخزنة
+  if(req.mode === 'navigate'){                          // الصفحات: الشبكة أولاً ثم النسخة المخزنة
     e.respondWith(fetch(req).then(res=>{ const copy = res.clone(); caches.open(CACHE).then(c=> c.put('index.html', copy)); return res; })
       .catch(()=> caches.match('index.html')));
     return;
@@ -23,4 +23,13 @@ self.addEventListener('fetch', (e)=>{
     if(res.ok){ const copy = res.clone(); caches.open(CACHE).then(c=> c.put(req, copy)); }
     return res;
   })));
+});
+// النقر على إشعار: افتح التطبيق على القسم المطلوب
+self.addEventListener('notificationclick', (e)=>{
+  e.notification.close();
+  const hash = (e.notification.data && e.notification.data.hash) || '#home';
+  e.waitUntil(self.clients.matchAll({ type:'window', includeUncontrolled:true }).then(list=>{
+    for(const c of list){ if('focus' in c){ c.focus(); c.postMessage({ type:'nav', hash }); return; } }
+    return self.clients.openWindow('./' + hash);
+  }));
 });
