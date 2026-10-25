@@ -11,6 +11,11 @@
 <meta property="og:title" content="متوسطة شعيبي بومدين وهران — Cem Chaibi Boumediene Oran">
 <meta property="og:description" content="أخبار، مناسبات، مواعيد تقييم، فضاء أسئلة، وفضاء أولياء — الموقع الرسمي لمتوسطة شعيبي بومدين، وهران.">
 <meta property="og:type" content="website">
+<meta name="twitter:image" content="https://cemchaibi.github.io/cem-chaibi-boumediene/logo.png">
+<meta property="og:image:alt" content="شعار متوسطة شعيبي بومدين">
+<meta property="og:locale" content="ar_DZ">
+<meta property="og:site_name" content="متوسطة شعيبي بومدين">
+<!-- للتحقق من ملكية الموقع في Google Search Console: ضع هنا وسم google-site-verification الذي تمنحه لك المنصة -->
 <meta property="og:url" content="https://cemchaibi.github.io/cem-chaibi-boumediene/">
 <meta property="og:image" content="https://cemchaibi.github.io/cem-chaibi-boumediene/logo.png">
 <meta name="twitter:card" content="summary">
@@ -32,7 +37,7 @@
   "address": { "@type": "PostalAddress", "addressLocality": "وهران", "addressRegion": "Oran", "addressCountry": "DZ" }
 }
 </script>
-<script>(function(){try{var c=navigator.connection||{},m=navigator.deviceMemory,h=navigator.hardwareConcurrency;if(c.saveData||/(^|-)2g$/.test(c.effectiveType||'')||(m&&m<=2)||(h&&h<=2)||(window.matchMedia&&matchMedia('(prefers-reduced-data: reduce)').matches))document.documentElement.classList.add('lite');}catch(e){}})();</script>
+<script>(function(){try{var c=navigator.connection||{},m=navigator.deviceMemory,h=navigator.hardwareConcurrency;if(c.saveData||/(^|-)2g$/.test(c.effectiveType||'')||(m&&m<=2)||(h&&h<=2)||(window.matchMedia&&matchMedia('(prefers-reduced-data: reduce)').matches))document.documentElement.classList.add('lite');}catch(e){}try{var th=localStorage.getItem('theme');if(th==='dark'||th==='sepia')document.documentElement.setAttribute('data-theme',th);}catch(e){}})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://firestore.googleapis.com" crossorigin>
@@ -50,17 +55,20 @@
     --gold-light:#e6c467;
     --paper:#faf5ea;
     --paper-2:#f2e9d8;
+    --on-dark:#f2e9d8;
+    --link:#2f6ea8;
     --red:#a8402f;
     --white:#ffffff;
     --line: rgba(201,154,46,.35);
     --card-bg:#ffffff;
     --card-border:#ecdfc2;
-    --muted:#7c8b91;
+    --muted:#66767d;
   }
   html[data-theme="dark"]{
     --ink:#e8edf0;
     --paper:#0f1a1f;
     --paper-2:#16242b;
+    --link:#8fc1ee;
     --card-bg:#182831;
     --card-border:#233842;
     --line: rgba(201,154,46,.25);
@@ -134,13 +142,13 @@
   }
   .brand{display:flex; align-items:center; gap:12px;}
   .brand img{width:46px; height:46px; object-fit:contain;}
-  .brand-text{color:var(--paper);}
+  .brand-text{color:var(--on-dark);}
   .brand-text .school{font-family:'Cairo',sans-serif; font-size:1.05rem; color:#fff;}
   .brand-text .sub{font-size:.72rem; color:var(--gold-light); font-family:'Cairo',sans-serif;}
 
   nav ul{display:flex; gap:2px; flex-wrap:wrap; background:rgba(255,255,255,.04); padding:5px; border-radius:999px; border:1px solid rgba(255,255,255,.06);}
   nav a{
-    position:relative; color:var(--paper-2); font-size:.9rem; padding:9px 16px; border-radius:999px;
+    position:relative; color:var(--on-dark); font-size:.9rem; padding:9px 16px; border-radius:999px;
     transition:.25s; font-weight:500;
   }
   nav a:hover{color:var(--gold-light);}
@@ -162,7 +170,7 @@
   .soc-ic:hover svg{fill:var(--deep-2);}
   .login-btn{padding:9px 20px; font-size:.85rem; white-space:nowrap;}
   .user-chip{
-    display:flex; align-items:center; gap:8px; color:var(--paper); font-size:.85rem;
+    display:flex; align-items:center; gap:8px; color:var(--on-dark); font-size:.85rem;
     background:rgba(255,255,255,.06); border:1px solid var(--line); padding:6px 14px 6px 6px; border-radius:999px;
   }
   .user-chip .avatar{
@@ -239,7 +247,7 @@
   .auth-btn.google:hover{background:#f6f6f6;}
   .auth-btn.facebook{background:#1877F2; color:#fff; border-color:#1877F2;}
   .auth-btn.facebook:hover{background:#1565d8;}
-  .auth-btn.outline{background:#fff; color:var(--royal); border-color:var(--royal);}
+  .auth-btn.outline{background:#fff; color:var(--link); border-color:var(--royal);}
   .auth-btn.outline:hover{background:rgba(47,110,168,.06);}
 
   .or-sep{display:flex; align-items:center; gap:10px; margin:16px 0; color:#b6c0c4; font-size:.78rem;}
@@ -271,7 +279,7 @@
   .pill-opt.active{background:var(--royal); border-color:var(--royal); color:#fff;}
 
   .success-check{
-    width:56px; height:56px; border-radius:50%; background:rgba(47,110,168,.1); color:var(--royal);
+    width:56px; height:56px; border-radius:50%; background:rgba(47,110,168,.1); color:var(--link);
     font-size:1.6rem; display:flex; align-items:center; justify-content:center; margin:0 auto 14px;
   }
 
@@ -311,7 +319,7 @@
   }
   .hero h1{font-size:clamp(2rem, 5vw, 3.1rem); line-height:1.35; margin-bottom:14px;}
   .hero h1 span{color:var(--gold-light);}
-  .hero p{max-width:640px; margin:0 auto 30px; color:var(--paper-2); font-size:1.05rem;}
+  .hero p{max-width:640px; margin:0 auto 30px; color:var(--on-dark); font-size:1.05rem;}
 
   .share-row{
     display:flex; align-items:center; gap:10px; padding:16px 0;
@@ -380,14 +388,14 @@
   #parentsChatBox{ flex:1; padding:18px; }
 
   .breadcrumb{ font-size:.8rem; color:var(--muted); margin-bottom:14px; font-family:'Cairo',sans-serif; }
-  .breadcrumb a{ color:var(--royal); }
+  .breadcrumb a{ color:var(--link); }
   .breadcrumb span{ margin:0 4px; }
   #articleContent img{ cursor:zoom-in; }
   .article-rich-content h2{ font-size:1.25rem; margin:18px 0 10px; color:var(--deep); }
   .article-rich-content h3{ font-size:1.1rem; margin:14px 0 8px; color:var(--deep); }
   .article-rich-content p{ margin-bottom:10px; }
   .article-rich-content ul, .article-rich-content ol{ margin:10px 0 10px 24px; }
-  .article-rich-content a{ color:var(--royal); text-decoration:underline; }
+  .article-rich-content a{ color:var(--link); text-decoration:underline; }
 
   .skeleton-shimmer, .skeleton-line{
     background: linear-gradient(90deg, #eee 25%, #f5f5f5 37%, #eee 63%);
@@ -407,7 +415,7 @@
   }
   .highlight-card{
     display:block; background:rgba(255,255,255,.07); border:1px solid var(--line);
-    border-radius:16px; padding:18px 20px; transition:.25s; color:var(--paper);
+    border-radius:16px; padding:18px 20px; transition:.25s; color:var(--on-dark);
   }
   .highlight-card:hover{ background:rgba(255,255,255,.14); transform:translateY(-4px); box-shadow:0 12px 26px rgba(0,0,0,.2); }
   .highlight-card .hl-tag{ font-size:.72rem; color:var(--gold-light); font-weight:700; }
@@ -419,7 +427,7 @@
   .section-head{margin-bottom:36px; text-align:center;}
   .section-head .tag{
     display:inline-flex; align-items:center; gap:8px;
-    font-family:'Cairo',sans-serif; font-size:.78rem; color:var(--royal);
+    font-family:'Cairo',sans-serif; font-size:.78rem; color:var(--link);
     background:rgba(47,110,168,.09); padding:5px 14px; border-radius:999px; margin-bottom:12px;
   }
   .section-head .tag::before{content:"★"; color:var(--gold); font-size:.75rem;}
@@ -444,7 +452,7 @@
   .news-thumb .icon-badge{width:52px; height:52px; background:rgba(255,255,255,.14); color:#fff; z-index:1;}
   .news-thumb .icon-badge svg{width:26px; height:26px;}
   .news-body{padding:18px 20px 22px;}
-  .date-badge{font-size:.72rem; color:var(--royal); font-weight:700; letter-spacing:.4px;}
+  .date-badge{font-size:.72rem; color:var(--link); font-weight:700; letter-spacing:.4px;}
   .news-body h3{font-size:1.02rem; margin:8px 0 8px; color:var(--ink); line-height:1.5;}
   .news-body p{font-size:.86rem; color:var(--muted);}
   .news-cat{
@@ -465,7 +473,7 @@
   .t-dot{
     position:absolute; right:14px; top:-2px; width:32px; height:32px; border-radius:50%;
     background:var(--white); border:2.5px solid var(--gold); display:flex; align-items:center; justify-content:center;
-    z-index:2; color:var(--royal);
+    z-index:2; color:var(--link);
   }
   .t-dot svg{width:16px; height:16px;}
   .t-card{
@@ -501,7 +509,7 @@
     font-size:.72rem; padding:3px 10px; border-radius:999px; font-family:'Cairo',sans-serif;
   }
   .exam-tag.test{background:rgba(168,64,47,.1); color:var(--red);}
-  .exam-tag.hw{background:rgba(47,110,168,.1); color:var(--royal);}
+  .exam-tag.hw{background:rgba(47,110,168,.1); color:var(--link);}
 
   /* ===== Q&A ===== */
   .qa-wrap{max-width:820px; margin:0 auto;}
@@ -542,7 +550,7 @@
     box-shadow:0 4px 14px rgba(20,60,75,.05);
   }
   .q-top{display:flex; justify-content:space-between; align-items:flex-start; gap:10px; flex-wrap:wrap;}
-  .q-subject{font-size:.72rem; font-family:'Cairo',sans-serif; background:rgba(47,110,168,.09); color:var(--royal); padding:3px 12px; border-radius:999px;}
+  .q-subject{font-size:.72rem; font-family:'Cairo',sans-serif; background:rgba(47,110,168,.09); color:var(--link); padding:3px 12px; border-radius:999px;}
   .q-meta{font-size:.74rem; color:var(--muted); font-family:'Cairo',sans-serif;}
   .q-body{margin:10px 0 8px; font-size:.94rem; color:var(--ink); word-break:break-word; overflow-wrap:anywhere;}
   .q-card, .chat-bubble, #articleComments, .article-rich-content, .q-card *{ overflow-wrap:anywhere; word-break:break-word; min-width:0; }
@@ -574,7 +582,7 @@
   .parent-card .btn{width:100%; margin-top:18px; text-align:center;}
 
   /* ===== FOOTER ===== */
-  footer{background:var(--deep-2); color:var(--paper-2); padding:50px 0 24px;}
+  footer{background:var(--deep-2); color:var(--on-dark); padding:50px 0 24px;}
   .foot-grid{display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:34px; margin-bottom:30px;}
   @media(max-width:700px){.foot-grid{grid-template-columns:1fr;}}
   .foot-brand{display:flex; gap:12px; align-items:center; margin-bottom:12px;}
@@ -638,13 +646,13 @@
   #privacy.active-view{ display:block; animation:fadeInUp .4s ease; }
   .privacy-doc{ max-width:780px; margin:0 auto; background:var(--card-bg); border:1px solid var(--card-border); border-radius:18px; padding:32px 30px; line-height:2; }
   .privacy-doc h2{ font-size:1.5rem; margin-bottom:6px; }
-  .privacy-doc h3{ font-size:1.08rem; margin:22px 0 6px; color:var(--royal); }
+  .privacy-doc h3{ font-size:1.08rem; margin:22px 0 6px; color:var(--link); }
   .privacy-doc ul{ list-style:disc; margin:6px 22px 6px 0; }
   .privacy-doc .muted{ color:var(--muted); font-size:.85rem; }
   .field-check{ display:flex; align-items:flex-start; gap:8px; font-size:.82rem; margin:6px 0 12px; line-height:1.7; cursor:pointer; }
   .field-check input{ margin-top:5px; accent-color:var(--royal); }
-  .field-check a{ color:var(--royal); text-decoration:underline; }
-  .link-btn{ background:none; color:var(--royal); font-size:.8rem; text-decoration:underline; padding:4px; margin-top:4px; font-family:'Cairo',sans-serif; }
+  .field-check a{ color:var(--link); text-decoration:underline; }
+  .link-btn{ background:none; color:var(--link); font-size:.8rem; text-decoration:underline; padding:4px; margin-top:4px; font-family:'Cairo',sans-serif; }
   .btn-row-2{ display:flex; gap:8px; margin-top:10px; }
   .btn-row-2 .btn{ flex:1; }
   .pending-note{ background:rgba(201,154,46,.12); border:1px solid var(--line); border-radius:12px; padding:12px 14px; font-size:.86rem; margin-top:12px; }
@@ -725,7 +733,7 @@
   .share-icon-btn{ transition:transform .25s cubic-bezier(.3,1.5,.5,1), box-shadow .2s; }
   .share-icon-btn:hover{ transform:translateY(-4px) scale(1.08); }
   .item-del-btn, .q-foot-item{ transition:color .2s, transform .2s; }
-  .q-foot-item:hover{ color:var(--royal); }
+  .q-foot-item:hover{ color:var(--link); }
   .comment-composer{ transition:box-shadow .25s, border-color .25s; }
   .comment-composer:focus-within{ border-color:var(--royal); box-shadow:0 0 0 4px rgba(47,110,168,.14); }
   input:focus, textarea:focus, select:focus{ box-shadow:0 0 0 4px rgba(47,110,168,.14); border-color:var(--royal) !important; }
@@ -784,7 +792,7 @@
   @keyframes floaty{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-6px); } }
   .news-foot{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:12px; }
   .news-foot .news-cat{ margin-top:0; }
-  .read-more{ display:inline-flex; align-items:center; gap:6px; font-size:.78rem; font-weight:700; color:var(--royal); font-family:'Cairo',sans-serif; }
+  .read-more{ display:inline-flex; align-items:center; gap:6px; font-size:.78rem; font-weight:700; color:var(--link); font-family:'Cairo',sans-serif; }
   .read-more .ic{ transition:transform .3s; }
   .news-card:hover .read-more .ic{ transform:translateX(-5px); }
 
@@ -821,7 +829,7 @@
   .bnav-item span{ white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:100%; }
   .bnav-item .ic{ width:22px; height:22px; padding:0; transition:transform .35s cubic-bezier(.3,1.6,.5,1); }
   .bnav-item::before{ content:''; position:absolute; top:0; left:50%; width:26px; height:3px; border-radius:0 0 4px 4px; background:var(--gold); transform:translateX(-50%) scaleX(0); transition:transform .3s; }
-  .bnav-item.active{ color:var(--royal); }
+  .bnav-item.active{ color:var(--link); }
   html[data-theme="dark"] .bnav-item.active{ color:var(--gold-light); }
   .bnav-item.active::before{ transform:translateX(-50%) scaleX(1); }
   .bnav-item.active .ic{ transform:translateY(-2px) scale(1.18); }
@@ -1037,7 +1045,7 @@
   .ev-info h4{ font-size:.98rem; margin-bottom:4px; color:var(--ink); }
   .ev-info p{ font-size:.8rem; color:var(--muted); line-height:1.7; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
   .ev-card.open .ev-info p{ -webkit-line-clamp:unset; }
-  .ev-when{ display:inline-block; margin-top:8px; padding:2px 10px; border-radius:999px; font-size:.7rem; font-weight:700; background:rgba(47,110,168,.12); color:var(--royal); }
+  .ev-when{ display:inline-block; margin-top:8px; padding:2px 10px; border-radius:999px; font-size:.7rem; font-weight:700; background:rgba(47,110,168,.12); color:var(--link); }
   .ev-when.soon{ background:rgba(168,64,47,.12); color:var(--red); }
 
   /* ----- جدول الحصص ----- */
@@ -1056,7 +1064,7 @@
   .tt-table th, .tt-table td{ padding:10px 8px; text-align:center; border-bottom:1px solid var(--card-border); border-inline-start:1px solid var(--card-border); font-size:.84rem; vertical-align:middle; }
   .tt-table thead th{ background:linear-gradient(135deg,var(--deep),var(--deep-2)); color:#fff; font-family:'Cairo',sans-serif; font-weight:700; position:sticky; top:0; }
   .tt-table thead th.today{ background:linear-gradient(135deg,var(--gold),#a97d1c); color:var(--deep-2); }
-  .tt-table tbody th{ background:rgba(47,110,168,.06); font-family:'Cairo',sans-serif; font-weight:700; color:var(--royal); white-space:nowrap; font-size:.78rem; width:96px; }
+  .tt-table tbody th{ background:rgba(47,110,168,.06); font-family:'Cairo',sans-serif; font-weight:700; color:var(--link); white-space:nowrap; font-size:.78rem; width:96px; }
   .tt-table td.today{ background:rgba(201,154,46,.07); }
   .tt-table tr.brk td, .tt-table tr.brk th{ background:repeating-linear-gradient(135deg,rgba(120,130,135,.08),rgba(120,130,135,.08) 8px,transparent 8px,transparent 16px); color:var(--muted); font-size:.76rem; padding:6px; }
   .tt-table td.now{ position:relative; }
@@ -1072,7 +1080,7 @@
   .tt-day-pills{ display:flex; gap:8px; overflow-x:auto; padding:2px 2px 12px; scrollbar-width:none; }
   .tt-day-pills::-webkit-scrollbar{ display:none; }
   .tt-m-row{ display:flex; gap:12px; align-items:stretch; margin-bottom:10px; }
-  .tt-m-time{ flex:0 0 72px; font-family:'Cairo',sans-serif; font-weight:700; font-size:.74rem; color:var(--royal); text-align:center; padding-top:10px; line-height:1.5; }
+  .tt-m-time{ flex:0 0 72px; font-family:'Cairo',sans-serif; font-weight:700; font-size:.74rem; color:var(--link); text-align:center; padding-top:10px; line-height:1.5; }
   .tt-m-body{ flex:1; min-width:0; }
   .tt-m-row.brk .tt-m-body{ padding:8px 12px; border-radius:12px; background:rgba(120,130,135,.1); color:var(--muted); font-size:.8rem; text-align:center; }
   .tt-m-row.now .tt-sess{ box-shadow:0 0 0 2px #2dbf6c, 0 8px 20px rgba(45,191,108,.25); }
@@ -1097,25 +1105,25 @@
   .media-body{ padding:14px 16px 16px; }
   .media-body h4{ font-size:.98rem; margin-bottom:5px; color:var(--ink); line-height:1.5; }
   .media-body p{ font-size:.8rem; color:var(--muted); line-height:1.7; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
-  .media-body .m-date{ font-size:.72rem; color:var(--royal); font-weight:700; margin-bottom:4px; display:block; }
+  .media-body .m-date{ font-size:.72rem; color:var(--link); font-weight:700; margin-bottom:4px; display:block; }
   .media-modal-box{ max-width:760px !important; padding:18px !important; }
   .media-frame{ position:relative; width:100%; aspect-ratio:16/9; border-radius:16px; overflow:hidden; background:#000; }
   .media-frame.tall{ aspect-ratio:auto; height:min(640px,72vh); background:var(--card-bg); }
   .media-frame iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
   .media-modal-meta{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin:12px 4px 0; flex-wrap:wrap; }
   .media-modal-meta h4{ font-size:1rem; }
-  .media-modal-meta a{ font-size:.82rem; color:var(--royal); font-weight:700; text-decoration:underline; }
+  .media-modal-meta a{ font-size:.82rem; color:var(--link); font-weight:700; text-decoration:underline; }
 
   /* ----- عن المتوسطة ----- */
   .about-grid{ display:grid; grid-template-columns:1fr 1fr; gap:22px; }
   .about-card{ background:var(--card-bg); border:1px solid var(--card-border); border-radius:22px; padding:26px; box-shadow:0 10px 28px rgba(20,60,75,.07); }
-  .about-card h3{ font-size:1.1rem; margin-bottom:12px; color:var(--royal); }
+  .about-card h3{ font-size:1.1rem; margin-bottom:12px; color:var(--link); }
   .about-card p{ line-height:2; color:var(--ink); font-size:.92rem; }
   .about-hours{ margin-top:14px; padding:12px 14px; border-radius:14px; background:rgba(201,154,46,.1); font-size:.86rem; line-height:1.9; display:none; }
   .contact-list{ display:flex; flex-direction:column; gap:10px; margin-bottom:14px; }
-  .contact-row{ display:flex; align-items:center; gap:12px; padding:10px 12px; border-radius:14px; background:rgba(47,110,168,.06); color:var(--ink); font-size:.88rem; text-decoration:none; transition:transform .2s, background .2s; }
-  a.contact-row:hover{ transform:translateX(-4px); background:rgba(47,110,168,.12); }
-  .contact-row .ci{ width:38px; height:38px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.15rem; color:var(--deep-2); background:linear-gradient(135deg,var(--gold-light),var(--gold)); flex-shrink:0; }
+  .crow{ display:flex; align-items:center; gap:12px; padding:10px 12px; border-radius:14px; background:rgba(47,110,168,.06); color:var(--ink); font-size:.88rem; text-decoration:none; transition:transform .2s, background .2s; }
+  a.crow:hover{ transform:translateX(-4px); background:rgba(47,110,168,.12); }
+  .crow .ci{ width:38px; height:38px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.15rem; color:var(--deep-2); background:linear-gradient(135deg,var(--gold-light),var(--gold)); flex-shrink:0; }
   .map-box{ border-radius:16px; overflow:hidden; border:1px solid var(--card-border); }
   .map-box iframe{ width:100%; height:230px; border:0; display:block; }
   .contact-form{ display:flex; flex-direction:column; gap:10px; }
@@ -1143,7 +1151,7 @@
   .search-panel{ position:relative; width:min(640px,94vw); max-height:80vh; display:flex; flex-direction:column; border-radius:24px; background:var(--card-bg); border:1px solid var(--card-border); box-shadow:0 30px 80px rgba(0,0,0,.4); overflow:hidden; }
   .search-ov.open .search-panel{ animation:popIn .35s cubic-bezier(.2,.9,.3,1.2); }
   .search-bar{ display:flex; align-items:center; gap:10px; padding:16px 18px; border-bottom:1px solid var(--card-border); }
-  .search-bar .ic{ font-size:1.3rem; color:var(--royal); }
+  .search-bar .ic{ font-size:1.3rem; color:var(--link); }
   .search-bar input{ flex:1; border:none !important; background:transparent !important; box-shadow:none !important; font-size:1.05rem; font-family:inherit; color:var(--ink); outline:none; min-width:0; padding:4px 0; }
   .search-bar button{ font-size:.7rem; padding:4px 10px; border-radius:8px; border:1px solid var(--card-border); color:var(--muted); }
   .search-suggest{ display:flex; gap:7px; flex-wrap:wrap; padding:10px 18px 0; }
@@ -1159,7 +1167,7 @@
   .sr-go{ margin-inline-start:auto; color:var(--muted); font-size:.9rem; opacity:0; transition:opacity .15s; }
   .sr-item.sel .sr-go, .sr-item:hover .sr-go{ opacity:1; }
   .sr-empty{ text-align:center; padding:28px 10px; color:var(--muted); }
-  .sr-empty b{ color:var(--royal); cursor:pointer; text-decoration:underline; }
+  .sr-empty b{ color:var(--link); cursor:pointer; text-decoration:underline; }
   .search-foot{ display:flex; gap:16px; padding:9px 18px; border-top:1px solid var(--card-border); font-size:.7rem; color:var(--muted); }
   .search-foot kbd{ font-family:inherit; padding:1px 7px; border-radius:6px; border:1px solid var(--card-border); background:var(--paper-2,#f5f0e1); }
 
@@ -1196,7 +1204,7 @@
   html[data-theme="dark"] .msg:not(.me) .bub{ background:#1e3039; color:#e8eef0; }
   .msg:not(.first) .bub{ border-top-right-radius:18px; }
   .bub:active{ transform:scale(.985); }
-  .bub .nm{ font-size:.74rem; font-weight:800; color:var(--royal); margin-bottom:1px; display:flex; align-items:center; gap:4px; font-family:'Cairo',sans-serif; }
+  .bub .nm{ font-size:.74rem; font-weight:800; color:var(--link); margin-bottom:1px; display:flex; align-items:center; gap:4px; font-family:'Cairo',sans-serif; }
   html[data-theme="dark"] .bub .nm{ color:var(--gold-light); }
   .msg.me .bub .nm{ display:none; }
   .bub .txt{ white-space:pre-wrap; }
@@ -1224,14 +1232,14 @@
   .chat-skel div:nth-child(even){ align-self:flex-end; width:44%; }
   .chat-empty{ text-align:center; padding:60px 20px; color:var(--muted); }
   .chat-empty .em{ font-size:3rem; display:block; margin-bottom:8px; animation:floaty 3s ease-in-out infinite; }
-  .chat-down{ position:absolute; z-index:5; bottom:96px; left:16px; width:44px; height:44px; border-radius:50%; background:var(--card-bg); color:var(--royal); box-shadow:0 8px 22px rgba(0,0,0,.25); display:none; align-items:center; justify-content:center; font-size:1.2rem; }
+  .chat-down{ position:absolute; z-index:5; bottom:96px; left:16px; width:44px; height:44px; border-radius:50%; background:var(--card-bg); color:var(--link); box-shadow:0 8px 22px rgba(0,0,0,.25); display:none; align-items:center; justify-content:center; font-size:1.2rem; }
   .chat-down.show{ display:flex; animation:popIn .25s ease; }
   .chat-down b{ position:absolute; top:-6px; right:-4px; min-width:20px; height:20px; padding:0 5px; border-radius:999px; background:var(--gold); color:var(--deep-2); font-size:.7rem; display:flex; align-items:center; justify-content:center; }
   .chat-down b:empty{ display:none; }
   .chat-bar{ position:relative; z-index:3; display:none; align-items:center; gap:10px; padding:8px 14px; background:var(--card-bg); border-top:1px solid var(--card-border); font-size:.8rem; }
   .chat-bar.show{ display:flex; animation:fadeInUp .2s ease; }
   .chat-bar .qb{ flex:1; min-width:0; border-inline-start:3px solid var(--gold); padding-inline-start:10px; }
-  .chat-bar .qb b{ display:block; color:var(--royal); font-size:.76rem; }
+  .chat-bar .qb b{ display:block; color:var(--link); font-size:.76rem; }
   .chat-bar .qb span{ display:block; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
   .chat-bar img{ width:46px; height:46px; border-radius:10px; object-fit:cover; }
   .chat-bar .x{ width:30px; height:30px; border-radius:50%; background:rgba(0,0,0,.07); color:var(--ink); }
@@ -1241,7 +1249,7 @@
   html[data-theme="dark"] .chat-input-wrap{ background:#14242b; }
   .chat-input-wrap textarea{ flex:1; border:none !important; background:transparent !important; box-shadow:none !important; resize:none; max-height:120px; min-height:40px; padding:10px 6px; font-family:inherit; font-size:.95rem; color:var(--ink); outline:none; line-height:1.5; }
   .chat-ibtn{ width:38px; height:38px; border-radius:50%; color:var(--muted); display:flex; align-items:center; justify-content:center; font-size:1.25rem; cursor:pointer; transition:color .2s, background .2s, transform .2s; flex-shrink:0; }
-  .chat-ibtn:hover{ color:var(--royal); background:rgba(47,110,168,.1); transform:scale(1.1); }
+  .chat-ibtn:hover{ color:var(--link); background:rgba(47,110,168,.1); transform:scale(1.1); }
   .chat-send{ width:46px; height:46px; border-radius:50%; background:linear-gradient(135deg,var(--gold-light),var(--gold)); color:var(--deep-2); display:flex; align-items:center; justify-content:center; font-size:1.25rem; box-shadow:0 6px 16px rgba(201,154,46,.4); transition:transform .25s cubic-bezier(.3,1.6,.5,1), opacity .2s; flex-shrink:0; }
   .chat-send:hover{ transform:scale(1.1) rotate(-8deg); }
   .chat-send:disabled{ opacity:.45; transform:none; }
@@ -1317,20 +1325,17 @@
   .doc-item .di{ width:42px; height:42px; border-radius:13px; display:flex; align-items:center; justify-content:center; font-size:1.25rem; background:linear-gradient(135deg,var(--royal),var(--deep)); color:#fff; flex-shrink:0; }
   .doc-item .dt{ font-weight:700; font-size:.9rem; line-height:1.5; }
   .doc-item .dd{ font-size:.74rem; color:var(--muted); }
-  .doc-item .dg{ margin-inline-start:auto; color:var(--royal); font-size:1.1rem; }
+  .doc-item .dg{ margin-inline-start:auto; color:var(--link); font-size:1.1rem; }
   .menu-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; }
   .menu-day{ padding:12px; border-radius:14px; background:rgba(201,154,46,.1); border:1px solid var(--line); text-align:center; }
-  .menu-day b{ display:block; color:var(--royal); font-family:'Cairo',sans-serif; margin-bottom:4px; }
+  .menu-day b{ display:block; color:var(--link); font-family:'Cairo',sans-serif; margin-bottom:4px; }
   .menu-day span{ font-size:.84rem; line-height:1.8; }
   .pin-badge{ display:inline-flex; align-items:center; gap:4px; margin-inline-start:8px; padding:1px 9px; border-radius:999px; background:var(--gold); color:var(--deep-2); font-size:.68rem; font-weight:800; }
-  .ev-ics{ margin-top:8px; display:inline-flex; align-items:center; gap:5px; font-size:.72rem; font-weight:700; color:var(--royal); background:rgba(47,110,168,.1); padding:3px 10px; border-radius:999px; }
+  .ev-ics{ margin-top:8px; display:inline-flex; align-items:center; gap:5px; font-size:.72rem; font-weight:700; color:var(--link); background:rgba(47,110,168,.1); padding:3px 10px; border-radius:999px; }
   .ev-ics:hover{ background:rgba(47,110,168,.2); }
-  .foot-tools{ display:flex; justify-content:center; gap:8px; align-items:center; margin-bottom:10px; font-size:.8rem; opacity:.85; }
-  .foot-tools button{ padding:4px 12px; border-radius:8px; background:rgba(255,255,255,.1); color:#fff; font-weight:700; }
-  .foot-tools button:hover{ background:rgba(255,255,255,.2); }
   .report-btn{ opacity:.55; }
   .report-btn:hover{ opacity:1; color:#c0392b; }
-  @media print{ .site-banner, .foot-tools{ display:none !important; } }
+  @media print{ .site-banner{ display:none !important; } }
   .tt-actions{ gap:10px; flex-wrap:wrap; }
 
   /* ضبط نهائي للهيدر على الأعراض المتوسطة */
@@ -1343,11 +1348,206 @@
   }
 
   @media (max-width:1260px) and (min-width:881px){ .brand-text{ display:none; } }
+  .parent-card p{ color:#cfdadd !important; }
+
+  /* =====================================================================
+     الإصدار 5: وضع مريح للعين، إشعارات، ملفات الارتباط، استطلاعات، شارات،
+     عارض صور، دردشة الجوال، تحسينات الألوان
+     ===================================================================== */
+  html[data-theme="sepia"]{
+    --ink:#3f301c; --paper:#f3e6c9; --paper-2:#eadbb6; --card-bg:#fbf2dc; --card-border:#dac69b;
+    --line:rgba(140,100,30,.38); --muted:#715f3c; --link:#7a4a10;
+  }
+  html[data-theme="sepia"] body{ background:var(--paper); color:var(--ink); }
+  html[data-theme="sepia"] .alt-bg{ background:var(--paper-2); }
+  html[data-theme="sepia"] input, html[data-theme="sepia"] textarea, html[data-theme="sepia"] select{ background:#fffaf0; color:var(--ink); border-color:var(--card-border); }
+  html[data-theme="sepia"] .tab-btn, html[data-theme="sepia"] .chip, html[data-theme="sepia"] .pill-opt{ background:var(--card-bg); color:var(--ink); border-color:var(--card-border); }
+  html[data-theme="sepia"] .chip.active, html[data-theme="sepia"] .tab-btn.active, html[data-theme="sepia"] .pill-opt.active{ color:#fff; }
+  html[data-theme="sepia"] .bottom-nav{ background:rgba(247,236,210,.9); }
+  html[data-theme="sepia"] .msg:not(.me) .bub{ background:#fffaf0; color:var(--ink); }
+  html[data-theme="sepia"] .chatapp{ --chat-bg:#e9d9b4; }
+  html[data-theme="sepia"] .modal-box{ background:rgba(251,242,220,.96); color:var(--ink); }
+  html[data-theme="sepia"] .section-head h2, html[data-theme="sepia"] .news-body h3, html[data-theme="sepia"] .t-card h3{ color:var(--ink); }
+  html[data-theme="sepia"] .site-banner{ color:#2a1d08; }
+
+  /* ----- ألوان فئات الأخبار ----- */
+  .news-card{ --cc:var(--gold); border-top:4px solid var(--cc); }
+  .news-card.cat-urgent{ --cc:#c0392b; } .news-card.cat-activity{ --cc:#2e9b5b; } .news-card.cat-learn{ --cc:#2f6ea8; }
+  .news-card .news-cat{ background:color-mix(in srgb,var(--cc) 14%,transparent); color:var(--cc); border-color:color-mix(in srgb,var(--cc) 45%,transparent); }
+  html[data-theme="dark"] .news-card.cat-urgent .news-cat{ color:#ff8a7a; } html[data-theme="dark"] .news-card.cat-activity .news-cat{ color:#6fd69a; } html[data-theme="dark"] .news-card.cat-learn .news-cat{ color:#8fc1ee; }
+  .news-card.cat-urgent .news-thumb{ background-image:linear-gradient(135deg,#c0392b,#6f160e); }
+  .news-card.cat-activity .news-thumb{ background-image:linear-gradient(135deg,#2e9b5b,#12502d); }
+  .news-card.cat-learn .news-thumb{ background-image:linear-gradient(135deg,#2f6ea8,#0e3b4c); }
+  .news-legend{ display:flex; flex-wrap:wrap; gap:14px; justify-content:center; font-size:.76rem; color:var(--muted); margin:-6px 0 14px; }
+  .news-legend i{ display:inline-block; width:10px; height:10px; border-radius:50%; margin-inline-end:5px; vertical-align:-1px; }
+
+  /* ----- رسومات مدرسية للبطاقات بلا صور ----- */
+  .news-thumb.noimg::before{
+    content:''; position:absolute; inset:0; opacity:.16; pointer-events:none;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='150' viewBox='0 0 150 150' fill='none' stroke='white' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><path d='M14 38 38 14l8 8-24 24-11 3z'/><path d='M34 18l8 8'/><path d='M76 20c8-5 18-5 26 0 8-5 18-5 26 0v34c-8-5-18-5-26 0-8-5-18-5-26 0z'/><path d='M102 20v34'/><rect x='14' y='84' width='46' height='14' rx='2'/><path d='M22 84v6M30 84v8M38 84v6M46 84v8M54 84v6'/><ellipse cx='108' cy='108' rx='22' ry='8'/><ellipse cx='108' cy='108' rx='22' ry='8' transform='rotate(60 108 108)'/><ellipse cx='108' cy='108' rx='22' ry='8' transform='rotate(120 108 108)'/><circle cx='108' cy='108' r='2.5'/><path d='M40 124l3 7 7 1-5 5 1 7-6-4-6 4 1-7-5-5 7-1z'/><path d='M80 78h8M84 74v8'/></svg>");
+    background-size:150px 150px;
+  }
+  .news-thumb.noimg .icon-badge{ position:relative; z-index:1; }
+
+  /* ----- شارات التلاميذ النشطين ----- */
+  .u-badge{ display:inline-flex; align-items:center; gap:3px; margin-inline-start:6px; padding:0 8px; border-radius:999px; font-size:.64rem; font-weight:700; background:rgba(201,154,46,.18); color:#8a6410; vertical-align:middle; white-space:nowrap; }
+  html[data-theme="dark"] .u-badge{ color:var(--gold-light); background:rgba(230,196,103,.15); }
+  .badge-legend{ font-size:.76rem; color:var(--muted); margin-top:10px; line-height:1.9; }
+
+  /* ----- جرس الإشعارات ----- */
+  .notif-btn{ position:relative; width:40px; height:40px; border-radius:50%; padding:0 !important; display:inline-flex; align-items:center; justify-content:center; color:#fff; background:transparent; box-shadow:none !important; transition:background .2s, transform .3s; flex-shrink:0; }
+  .notif-btn:hover{ background:rgba(255,255,255,.14); transform:rotate(-12deg); }
+  .notif-btn .ic{ font-size:1.25rem; }
+  .notif-btn.ring .ic{ animation:bellRing 1.2s ease 2; transform-origin:50% 0; }
+  @keyframes bellRing{ 0%,100%{ transform:rotate(0); } 15%{ transform:rotate(16deg); } 30%{ transform:rotate(-14deg); } 45%{ transform:rotate(10deg); } 60%{ transform:rotate(-8deg); } 75%{ transform:rotate(4deg); } }
+  .notif-badge{ position:absolute; top:1px; right:0; min-width:18px; height:18px; padding:0 5px; border-radius:999px; background:#e0453a; color:#fff; font-size:.66rem; font-weight:800; display:flex; align-items:center; justify-content:center; border:2px solid var(--deep); }
+  .notif-badge[hidden]{ display:none; }
+  .notif-panel{ position:fixed; z-index:1200; top:68px; left:14px; width:min(390px,calc(100vw - 28px)); max-height:min(76vh,620px); display:flex; flex-direction:column; border-radius:22px; background:var(--card-bg); color:var(--ink); border:1px solid var(--card-border); box-shadow:0 30px 80px rgba(0,0,0,.4); overflow:hidden; animation:popIn .25s cubic-bezier(.2,.9,.3,1.2); }
+  .notif-panel[hidden]{ display:none; }
+  .notif-head{ display:flex; align-items:center; justify-content:space-between; gap:10px; padding:14px 16px; border-bottom:1px solid var(--card-border); font-family:'Cairo',sans-serif; font-weight:800; }
+  .notif-head button{ font-size:.76rem; font-weight:700; color:var(--link); }
+  .notif-list{ overflow-y:auto; padding:6px; flex:1; }
+  .notif-item{ display:flex; gap:12px; align-items:flex-start; padding:11px 12px; border-radius:14px; cursor:pointer; transition:background .15s; position:relative; }
+  .notif-item:hover{ background:rgba(47,110,168,.09); }
+  .notif-item .ni{ width:38px; height:38px; border-radius:12px; flex-shrink:0; display:flex; align-items:center; justify-content:center; color:#fff; font-size:1.05rem; background:linear-gradient(135deg,var(--royal),var(--deep)); }
+  .notif-item.urgent .ni{ background:linear-gradient(135deg,#e0453a,#8c1d14); }
+  .notif-item .nt{ font-weight:700; font-size:.88rem; line-height:1.5; }
+  .notif-item .ns{ font-size:.74rem; color:var(--muted); margin-top:1px; }
+  .notif-item::after{ content:''; position:absolute; top:14px; left:10px; width:8px; height:8px; border-radius:50%; background:#2e9b5b; }
+  .notif-empty{ text-align:center; padding:34px 16px; color:var(--muted); font-size:.88rem; }
+  .notif-foot{ padding:10px 12px 12px; border-top:1px solid var(--card-border); display:flex; flex-direction:column; gap:8px; }
+  .notif-foot .btn{ width:100%; justify-content:center; padding:10px 14px; font-size:.84rem; }
+  .notif-foot small{ color:var(--muted); font-size:.72rem; line-height:1.7; text-align:center; }
+  .live-dot{ position:absolute; top:4px; left:50%; margin-left:8px; width:9px; height:9px; border-radius:50%; background:#2dd36f; box-shadow:0 0 0 0 rgba(45,211,111,.7); animation:livePulse 1.8s infinite; pointer-events:none; }
+  nav a{ position:relative; }
+  nav a .live-dot{ top:2px; left:4px; margin:0; }
+  .bnav-item{ position:relative; }
+
+  /* ----- ملفات الارتباط ----- */
+  .cookie-bar{ position:fixed; z-index:960; bottom:16px; left:50%; transform:translateX(-50%); width:min(760px,calc(100vw - 24px)); display:flex; align-items:center; gap:16px; padding:16px 18px; border-radius:20px; background:var(--card-bg); color:var(--ink); border:1px solid var(--card-border); box-shadow:0 24px 60px rgba(0,0,0,.32); animation:fadeInUp .45s ease; }
+  .cookie-bar[hidden]{ display:none; }
+  .cookie-text{ flex:1; min-width:0; }
+  .cookie-text b{ font-family:'Cairo',sans-serif; display:block; margin-bottom:3px; }
+  .cookie-text p{ font-size:.8rem; line-height:1.85; color:var(--muted); }
+  .cookie-text a{ color:var(--link); text-decoration:underline; font-weight:700; }
+  .cookie-actions{ display:flex; flex-direction:column; gap:8px; flex-shrink:0; }
+  .cookie-actions .btn{ padding:10px 20px; font-size:.84rem; justify-content:center; }
+  .cookie-bar .btn.ghost{ background:transparent; color:var(--ink); border:1px solid var(--card-border); }
+  @media (max-width:880px){ .cookie-bar{ bottom:calc(76px + env(safe-area-inset-bottom)); flex-direction:column; align-items:stretch; gap:12px; } .cookie-actions{ flex-direction:row; } .cookie-actions .btn{ flex:1; } }
+
+  /* ----- استطلاعات الرأي ----- */
+  #pollsBox{ display:grid; gap:16px; margin-bottom:8px; }
+  .poll-card{ padding:20px 22px; border-radius:22px; background:linear-gradient(135deg,var(--card-bg),color-mix(in srgb,var(--gold) 9%,var(--card-bg))); border:1px solid var(--line); box-shadow:0 12px 30px rgba(20,60,75,.09); }
+  .poll-tag{ display:inline-flex; align-items:center; gap:6px; font-size:.74rem; font-weight:800; color:var(--link); margin-bottom:6px; font-family:'Cairo',sans-serif; }
+  .poll-q{ font-size:1.05rem; font-weight:800; font-family:'Cairo',sans-serif; margin-bottom:14px; line-height:1.7; color:var(--ink); }
+  .poll-opt{ position:relative; display:block; width:100%; text-align:start; padding:12px 16px; margin-bottom:8px; border-radius:14px; border:1.5px solid var(--card-border); background:var(--card-bg); color:var(--ink); font-weight:700; font-size:.9rem; overflow:hidden; transition:transform .2s, border-color .2s, box-shadow .2s; }
+  button.poll-opt:hover{ transform:translateY(-2px); border-color:var(--royal); box-shadow:0 8px 20px rgba(47,110,168,.18); }
+  .poll-opt .bar{ position:absolute; inset:0 auto 0 0; background:linear-gradient(90deg,color-mix(in srgb,var(--royal) 30%,transparent),color-mix(in srgb,var(--royal) 14%,transparent)); transition:width .8s cubic-bezier(.2,.8,.3,1); z-index:0; }
+  .poll-opt.mine{ border-color:var(--gold); }
+  .poll-opt.mine .bar{ background:linear-gradient(90deg,color-mix(in srgb,var(--gold) 55%,transparent),color-mix(in srgb,var(--gold) 20%,transparent)); }
+  .poll-opt span{ position:relative; z-index:1; display:flex; justify-content:space-between; gap:10px; }
+  .poll-meta{ font-size:.76rem; color:var(--muted); display:flex; justify-content:space-between; gap:8px; flex-wrap:wrap; margin-top:6px; }
+  .poll-meta button{ color:var(--link); font-weight:700; text-decoration:underline; }
+
+  /* ----- عارض الصور ----- */
+  #lightboxOverlay{ position:fixed; inset:0; z-index:3000; display:none; align-items:center; justify-content:center; background:rgba(5,12,16,.94); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); touch-action:pan-y; }
+  #lightboxOverlay .vw-stage{ width:100%; height:100%; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  #lightboxOverlay img{ max-width:94vw; max-height:88vh; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,.6); transition:transform .3s cubic-bezier(.2,.8,.3,1); cursor:zoom-in; user-select:none; -webkit-user-drag:none; }
+  #lightboxOverlay img.zoom{ transform:scale(2.1); cursor:zoom-out; }
+  .vw-btn{ position:absolute; z-index:2; width:46px; height:46px; border-radius:50%; background:rgba(255,255,255,.14); color:#fff; display:flex; align-items:center; justify-content:center; font-size:1.3rem; transition:background .2s, transform .2s; }
+  .vw-btn:hover{ background:rgba(255,255,255,.28); transform:scale(1.08); }
+  .vw-close{ top:16px; right:16px; } .vw-prev{ right:16px; top:50%; margin-top:-23px; } .vw-next{ left:16px; top:50%; margin-top:-23px; }
+  .vw-count{ position:absolute; bottom:18px; left:50%; transform:translateX(-50%); color:#fff; background:rgba(0,0,0,.5); padding:4px 14px; border-radius:999px; font-size:.78rem; }
+  .vw-btn[hidden], .vw-count[hidden]{ display:none; }
+
+  /* ----- خط زمني: علامة اليوم ----- */
+  .t-now{ position:relative; text-align:center; margin:4px 0 22px; padding-inline-start:70px; }
+  .t-now span{ display:inline-block; padding:5px 22px; border-radius:999px; background:linear-gradient(135deg,#2e9b5b,#17693a); color:#fff; font-weight:800; font-size:.8rem; box-shadow:0 8px 20px rgba(46,155,91,.4); animation:livePulse 2.2s infinite; }
+  .t-item.past{ opacity:.62; }
+
+  /* ----- صندوق الاقتراحات ----- */
+  .sug-kinds{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px; }
+  .sug-form textarea{ min-height:110px; }
+  .sug-anon{ display:flex; align-items:flex-start; gap:8px; font-size:.82rem; line-height:1.7; margin:4px 0 6px; cursor:pointer; }
+  .sug-anon input{ width:auto; margin-top:5px; }
+
+  /* ----- قراءة المقال ----- */
+  .read-time{ margin-inline-start:6px; color:var(--muted); }
+
+  /* ----- بحث: إخفاء اختصارات لوحة المفاتيح على اللمس ----- */
+  #closeSearchBtn .ic{ display:none; font-size:1.05rem; }
+  #closeSearchBtn{ min-width:38px; height:34px; display:inline-flex; align-items:center; justify-content:center; }
+  @media (pointer:coarse), (max-width:880px){
+    .search-foot{ display:none !important; }
+    #closeSearchBtn .kbd-esc{ display:none; } #closeSearchBtn .ic{ display:inline-block; }
+    #closeSearchBtn{ width:40px; height:40px; border-radius:50%; border:none; background:rgba(120,130,135,.15); }
+  }
+
+  /* ----- الدردشة: بدون تذييل، بدون تمرير الصفحة ----- */
+  body.on-chat footer, body.on-chat #backTop, body.on-chat .cookie-bar{ display:none !important; }
+  body.on-chat{ overflow:hidden; }
+  .chatapp{ --vvh:100dvh; }
+  .chat-menu-btn{ margin-inline-start:auto; }
+  .sheet-bd{ position:absolute; inset:0; z-index:20; background:rgba(5,12,16,.5); opacity:0; pointer-events:none; transition:opacity .25s; }
+  .sheet-bd.show{ opacity:1; pointer-events:auto; }
+  .chat-sheet{ position:absolute; z-index:21; left:0; right:0; bottom:0; max-height:80%; overflow-y:auto; padding:10px 14px calc(16px + env(safe-area-inset-bottom)); border-radius:24px 24px 0 0; background:var(--card-bg); color:var(--ink); box-shadow:0 -16px 50px rgba(0,0,0,.35); transform:translateY(105%); transition:transform .3s cubic-bezier(.2,.8,.3,1); }
+  .chat-sheet.show{ transform:none; }
+  .sh-handle{ width:42px; height:4px; border-radius:4px; background:rgba(120,130,135,.45); margin:2px auto 12px; }
+  .sh-prev{ font-size:.8rem; color:var(--muted); padding:8px 12px; border-radius:12px; background:var(--paper-2); margin-bottom:12px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .sh-react{ display:flex; justify-content:space-around; margin-bottom:10px; padding:6px; border-radius:18px; background:var(--paper-2); }
+  .sh-react button{ width:52px; height:52px; border-radius:50%; font-size:1.7rem; transition:transform .2s cubic-bezier(.3,1.8,.5,1), background .2s; }
+  .sh-react button:active{ transform:scale(1.35); } .sh-react button.mine{ background:rgba(201,154,46,.3); }
+  .sh-act{ display:flex; align-items:center; gap:14px; width:100%; padding:14px 12px; border-radius:14px; font-size:.95rem; font-weight:700; color:var(--ink); text-align:start; }
+  .sh-act:active, .sh-act:hover{ background:rgba(47,110,168,.1); }
+  .sh-act .ic{ font-size:1.25rem; color:var(--link); } .sh-act.danger, .sh-act.danger .ic{ color:#c0392b; }
+  .msg.sel.below .msg-actions{ top:auto; bottom:-46px; }
+  @media (max-width:880px){
+    html.chat-open, body.on-chat{ overflow:hidden; overscroll-behavior:none; }
+    .chatapp{ position:fixed; left:0; right:0; top:var(--vtop,0px); height:var(--vvh,100dvh); margin:0; border-radius:0; z-index:50; }
+    .chat-scroll{ padding:12px 10px 6px; }
+    .chat-down{ bottom:84px; }
+    .msg-actions{ display:none !important; }
+    .emoji-panel{ bottom:70px; }
+  }
+  @media (min-width:881px){ .chat-sheet, .sheet-bd{ display:none; } }
+
+  /* ----- تطبيق مثبّت (PWA) ----- */
+  header{ padding-top:env(safe-area-inset-top, 0px); }
+  .install-hint{ font-size:.74rem; color:var(--muted); text-align:center; line-height:1.8; }
+  @media (display-mode: standalone){
+    body{ overscroll-behavior-y:contain; -webkit-touch-callout:none; }
+    .is-installed-hide{ display:none !important; }
+  }
+  .update-toast{ position:fixed; z-index:4500; bottom:calc(84px + env(safe-area-inset-bottom)); left:50%; transform:translateX(-50%); display:flex; align-items:center; gap:12px; padding:11px 18px; border-radius:999px; background:var(--deep); color:#fff; box-shadow:0 14px 40px rgba(0,0,0,.4); font-size:.86rem; animation:fadeInUp .4s ease; }
+  .update-toast button{ background:var(--gold); color:var(--deep-2); font-weight:800; padding:5px 14px; border-radius:999px; }
+
+  /* ----- شاشات صغيرة جداً (320–360px) ----- */
+  @media (max-width:380px){
+    .nav-wrap{ padding:8px 10px; gap:6px; }
+    .brand img{ width:32px; height:32px; }
+    .brand-text .sub{ display:none; }
+    .brand-text .school{ font-size:.72rem; max-width:30vw; }
+    .btn.login-btn{ padding:7px 10px; font-size:.72rem; }
+    .btn.login-btn svg{ display:none; }
+    .notif-btn{ width:36px; height:36px; }
+    .hero h1{ font-size:1.55rem; }
+    .section-head h2{ font-size:1.35rem; }
+    .container{ padding:0 12px; }
+    .news-foot{ flex-wrap:wrap; }
+    .poll-card{ padding:16px 14px; }
+    .chat-titles h3{ font-size:.88rem; }
+  }
+  @media print{ .notif-panel, .cookie-bar, .update-toast{ display:none !important; } }
+  .inapp-warn{ margin-bottom:14px; padding:12px 14px; border-radius:14px; background:rgba(224,69,58,.1); border:1px solid rgba(224,69,58,.4); color:var(--ink); font-size:.8rem; line-height:1.9; }
+  html[data-theme="sepia"] .chip.active, html[data-theme="sepia"] .tab-btn.active, html[data-theme="sepia"] .pill-opt.active{ background:linear-gradient(135deg,var(--royal),var(--deep)); color:#fff; border-color:transparent; }
+  body.on-chat .site-banner, body.on-chat #scrollBar{ display:none !important; }
+  html.chat-open{ overflow:hidden !important; height:100%; }
+  @media (max-width:1400px) and (min-width:881px){ .brand-text{ display:none; } }
 </style>
 
 </head>
 <body>
-<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true"><defs><symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9v10.5a1.5 1.5 0 0 0 1.5 1.5H10v-6h4v6h3.5a1.5 1.5 0 0 0 1.5-1.5V9"/></symbol><symbol id="i-newspaper" viewBox="0 0 24 24"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H17v16H6a2 2 0 0 1-2-2z"/><path d="M17 8h2.5A1.5 1.5 0 0 1 21 9.5V18a2 2 0 0 1-2 2h-2"/><path d="M8 8.5h5M8 12h5M8 15.5h3"/></symbol><symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="16.5" rx="3"/><path d="M8 2.5v4M16 2.5v4M3 10h18"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 17.5h.01M12 17.5h.01"/></symbol><symbol id="i-clipboard" viewBox="0 0 24 24"><rect x="5" y="3.5" width="14" height="17.5" rx="2.5"/><path d="M9 3.5h6V6H9z"/><path d="m9 13.5 2 2 4-4.5"/></symbol><symbol id="i-message" viewBox="0 0 24 24"><path d="M20.5 11.5a8 8 0 0 1-11.8 7L3.5 20l1.5-4.6A8 8 0 1 1 20.5 11.5z"/><path d="M9 11.5h.01M12 11.5h.01M15 11.5h.01"/></symbol><symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.7a3.5 3.5 0 0 1 0 6.6M18.5 14.2a6.5 6.5 0 0 1 3 5.8"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></symbol><symbol id="i-send" viewBox="0 0 24 24"><path d="M21.5 2.5 10.5 13.5"/><path d="m21.5 2.5-7 19-4-8.5-8.5-4z"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="m8 12.5 3 3 5-6"/></symbol><symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.3 3.9 1.9 18a2 2 0 0 0 1.7 3h16.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9.5v4M12 17h.01"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 2.8 4.5 5.6v5.7c0 4.6 3 8.2 7.5 9.9 4.5-1.7 7.5-5.3 7.5-9.9V5.6z"/><path d="m8.8 12 2.4 2.4 4-4.4"/></symbol><symbol id="i-login" viewBox="0 0 24 24"><path d="M14 3h4a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3h-4"/><path d="M9 7.5 4 12l5 4.5M4 12h12"/></symbol><symbol id="i-sparkles" viewBox="0 0 24 24"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4M5 17v4M3 19h4"/></symbol><symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5.2c2.2-1 5.2-1 8 1 2.8-2 5.8-2 8-1v13.6c-2.2-1-5.2-1-8 1-2.8-2-5.8-2-8-1z"/><path d="M12 6.2v13.6"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="m10 8.3 5.6 3.7-5.6 3.7z"/></symbol><symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M12 6.5V12l3.5 2"/></symbol><symbol id="i-printer" viewBox="0 0 24 24"><path d="M7 9V3.5h10V9"/><rect x="3" y="9" width="18" height="8" rx="2.5"/><path d="M7 14h10v6.5H7z"/></symbol><symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5.5M12 7.8h.01"/></symbol><symbol id="i-youtube" viewBox="0 0 24 24"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="m10 9.2 5 2.8-5 2.8z"/></symbol><symbol id="i-instagram" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.3 6.7h.01"/></symbol><symbol id="i-facebook" viewBox="0 0 24 24"><path d="M14 8.5V7a1.5 1.5 0 0 1 1.5-1.5H17V2.5h-2.5A4 4 0 0 0 10.5 6.5v2H8v3h2.5V21h3.5v-9.5h2.7l.5-3z"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol><symbol id="i-smile" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M8 14.2a5 5 0 0 0 8 0M9 9.5h.01M15 9.5h.01"/></symbol><symbol id="i-reply" viewBox="0 0 24 24"><path d="M9 14 4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 6 6v3"/></symbol><symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6"/><path d="M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12"/><path d="M9 7V4.5A1.5 1.5 0 0 1 10.5 3h3A1.5 1.5 0 0 1 15 4.5V7"/></symbol><symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.8"/><path d="m21 16-5-5-9 9"/></symbol><symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></symbol><symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11.5a7 7 0 0 0-14 0C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol><symbol id="i-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol><symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V4M5 5h12l-2 4 2 4H5"/></symbol><symbol id="i-file" viewBox="0 0 24 24"><path d="M6 3h8l5 5v13H6z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></symbol><symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></symbol></defs></svg>
+<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true"><defs><symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9v10.5a1.5 1.5 0 0 0 1.5 1.5H10v-6h4v6h3.5a1.5 1.5 0 0 0 1.5-1.5V9"/></symbol><symbol id="i-newspaper" viewBox="0 0 24 24"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H17v16H6a2 2 0 0 1-2-2z"/><path d="M17 8h2.5A1.5 1.5 0 0 1 21 9.5V18a2 2 0 0 1-2 2h-2"/><path d="M8 8.5h5M8 12h5M8 15.5h3"/></symbol><symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="16.5" rx="3"/><path d="M8 2.5v4M16 2.5v4M3 10h18"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 17.5h.01M12 17.5h.01"/></symbol><symbol id="i-clipboard" viewBox="0 0 24 24"><rect x="5" y="3.5" width="14" height="17.5" rx="2.5"/><path d="M9 3.5h6V6H9z"/><path d="m9 13.5 2 2 4-4.5"/></symbol><symbol id="i-message" viewBox="0 0 24 24"><path d="M20.5 11.5a8 8 0 0 1-11.8 7L3.5 20l1.5-4.6A8 8 0 1 1 20.5 11.5z"/><path d="M9 11.5h.01M12 11.5h.01M15 11.5h.01"/></symbol><symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.7a3.5 3.5 0 0 1 0 6.6M18.5 14.2a6.5 6.5 0 0 1 3 5.8"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></symbol><symbol id="i-send" viewBox="0 0 24 24"><path d="M21.5 2.5 10.5 13.5"/><path d="m21.5 2.5-7 19-4-8.5-8.5-4z"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="m8 12.5 3 3 5-6"/></symbol><symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.3 3.9 1.9 18a2 2 0 0 0 1.7 3h16.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9.5v4M12 17h.01"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 2.8 4.5 5.6v5.7c0 4.6 3 8.2 7.5 9.9 4.5-1.7 7.5-5.3 7.5-9.9V5.6z"/><path d="m8.8 12 2.4 2.4 4-4.4"/></symbol><symbol id="i-login" viewBox="0 0 24 24"><path d="M14 3h4a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3h-4"/><path d="M9 7.5 4 12l5 4.5M4 12h12"/></symbol><symbol id="i-sparkles" viewBox="0 0 24 24"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4M5 17v4M3 19h4"/></symbol><symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5.2c2.2-1 5.2-1 8 1 2.8-2 5.8-2 8-1v13.6c-2.2-1-5.2-1-8 1-2.8-2-5.8-2-8-1z"/><path d="M12 6.2v13.6"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="m10 8.3 5.6 3.7-5.6 3.7z"/></symbol><symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M12 6.5V12l3.5 2"/></symbol><symbol id="i-printer" viewBox="0 0 24 24"><path d="M7 9V3.5h10V9"/><rect x="3" y="9" width="18" height="8" rx="2.5"/><path d="M7 14h10v6.5H7z"/></symbol><symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5.5M12 7.8h.01"/></symbol><symbol id="i-youtube" viewBox="0 0 24 24"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="m10 9.2 5 2.8-5 2.8z"/></symbol><symbol id="i-instagram" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.3 6.7h.01"/></symbol><symbol id="i-facebook" viewBox="0 0 24 24"><path d="M14 8.5V7a1.5 1.5 0 0 1 1.5-1.5H17V2.5h-2.5A4 4 0 0 0 10.5 6.5v2H8v3h2.5V21h3.5v-9.5h2.7l.5-3z"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol><symbol id="i-smile" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M8 14.2a5 5 0 0 0 8 0M9 9.5h.01M15 9.5h.01"/></symbol><symbol id="i-reply" viewBox="0 0 24 24"><path d="M9 14 4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 6 6v3"/></symbol><symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6"/><path d="M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12"/><path d="M9 7V4.5A1.5 1.5 0 0 1 10.5 3h3A1.5 1.5 0 0 1 15 4.5V7"/></symbol><symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.8"/><path d="m21 16-5-5-9 9"/></symbol><symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></symbol><symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11.5a7 7 0 0 0-14 0C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol><symbol id="i-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol><symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V4M5 5h12l-2 4 2 4H5"/></symbol><symbol id="i-file" viewBox="0 0 24 24"><path d="M6 3h8l5 5v13H6z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></symbol><symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></symbol><symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 17V11a6 6 0 0 1 12 0v6l1.5 2h-15z"/><path d="M10 21a2 2 0 0 0 4 0"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-grid" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></symbol><symbol id="i-bars" viewBox="0 0 24 24"><path d="M5 20V10M12 20V4M19 20v-7"/></symbol><symbol id="i-chev-l" viewBox="0 0 24 24"><path d="m15 6-6 6 6 6"/></symbol><symbol id="i-chev-r" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol></defs></svg>
 <div id="scrollBar" aria-hidden="true"></div>
 <div id="siteBanner" class="site-banner" role="status" hidden></div>
 <noscript><div style="background:#a8402f;color:#fff;padding:12px;text-align:center;">يتطلب هذا الموقع تفعيل JavaScript ليعمل بشكل صحيح.</div></noscript>
@@ -1375,7 +1575,6 @@
         <li><a href="#about">عن المتوسطة</a></li>
         <li class="nav-action-item"><button id="navSearchBtn" type="button"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg> بحث في الموقع</button></li>
         <li class="nav-action-item"><button id="navDarkModeBtn" type="button"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="navDarkModeIcon"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg> <span id="navDarkModeLabel">الوضع الداكن</span></button></li>
-        <li class="nav-action-item"><button id="navFontBtn" type="button"><b>Aa</b> حجم الخط</button></li>
       </ul>
     </nav>
     <div class="head-actions">
@@ -1393,10 +1592,11 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.4 3.8 5.6 3.8 9s-1.3 6.6-3.8 9c-2.5-2.4-3.8-5.6-3.8-9S9.5 5.4 12 3z"/></svg>
         </a>
       </div>
-      <button class="btn login-btn header-icon-btn" id="siteSearchBtn" style="background:transparent; box-shadow:none; color:var(--paper);" aria-label="بحث">
+      <button class="btn notif-btn" id="notifBtn" type="button" aria-label="الإشعارات" aria-haspopup="true"><svg class="ic" aria-hidden="true"><use href="#i-bell"/></svg><span class="notif-badge" id="notifBadge" hidden>0</span></button>
+      <button class="btn login-btn header-icon-btn" id="siteSearchBtn" style="background:transparent; box-shadow:none; color:var(--on-dark);" aria-label="بحث">
         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
       </button>
-      <button class="btn login-btn header-icon-btn" id="darkModeBtn" style="background:transparent; box-shadow:none; color:var(--paper);" aria-label="تبديل الوضع الداكن">
+      <button class="btn login-btn header-icon-btn" id="darkModeBtn" style="background:transparent; box-shadow:none; color:var(--on-dark);" aria-label="تبديل المظهر (فاتح / مريح للعين / داكن)">
         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="darkModeIcon"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
       </button>
       <button class="btn login-btn" id="openAuthBtn"><svg class="ic" aria-hidden="true"><use href="#i-login"/></svg>تسجيل الدخول</button>
@@ -1527,6 +1727,7 @@
       <button class="chip" data-feed="news" role="tab"><svg class="ic" aria-hidden="true"><use href="#i-newspaper"/></svg>الأخبار</button>
       <button class="chip" data-feed="events" role="tab"><svg class="ic" aria-hidden="true"><use href="#i-calendar"/></svg>المناسبات</button>
     </div>
+    <div id="pollsBox"></div>
     <div id="eventsBlock">
       <div class="block-title"><svg class="ic" aria-hidden="true"><use href="#i-calendar"/></svg><span id="eventsBlockTitle">المناسبات القادمة</span></div>
       <div class="events-strip" id="eventsStrip"></div>
@@ -1534,6 +1735,7 @@
     </div>
     <div id="newsBlock">
       <div class="block-title"><svg class="ic" aria-hidden="true"><use href="#i-newspaper"/></svg><span>آخر الأخبار</span></div>
+      <div class="news-legend"><span><i style="background:#c0392b"></i>عاجل / هام</span><span><i style="background:#2e9b5b"></i>أنشطة ومسابقات</span><span><i style="background:#2f6ea8"></i>تربوي ودراسي</span></div>
       <div class="news-grid reveal-stagger" id="newsGrid">
         <div class="news-card skeleton-card"><div class="news-thumb skeleton-shimmer"></div><div class="news-body"><div class="skeleton-line" style="width:40%;"></div><div class="skeleton-line" style="width:80%;"></div></div></div>
         <div class="news-card skeleton-card"><div class="news-thumb skeleton-shimmer"></div><div class="news-body"><div class="skeleton-line" style="width:40%;"></div><div class="skeleton-line" style="width:80%;"></div></div></div>
@@ -1632,6 +1834,19 @@
       </div>
     </div>
     <div class="about-grid" style="margin-top:22px;">
+      <div class="about-card reveal" style="grid-column:1/-1;">
+        <h3><svg class="ic" aria-hidden="true"><use href="#i-send"/></svg> صندوق الاقتراحات والشكاوى</h3>
+        <p style="font-size:.86rem;color:var(--muted);margin-bottom:12px;">لديك فكرة لتحسين المتوسطة أو ملاحظة؟ أرسلها مباشرة إلى المدير. يمكنك الإرسال <b>دون كشف هويتك</b>: لا نحفظ اسمك ولا بريدك ولا معرّف حسابك.</p>
+        <form id="sugForm" class="sug-form contact-form">
+          <div class="sug-kinds" id="sugKinds"><button type="button" class="chip sm active" data-k="اقتراح">💡 اقتراح</button><button type="button" class="chip sm" data-k="شكوى">📣 شكوى</button><button type="button" class="chip sm" data-k="استفسار">❓ استفسار</button></div>
+          <textarea id="sugText" maxlength="1000" placeholder="اكتب رسالتك هنا..." required></textarea>
+          <input type="text" id="sugName" maxlength="80" placeholder="اسمك (اختياري)">
+          <label class="sug-anon"><input type="checkbox" id="sugAnon"> أرسل رسالتي دون كشف هويتي</label>
+          <button class="btn gold" type="submit"><svg class="ic" aria-hidden="true"><use href="#i-send"/></svg> إرسال إلى المدير</button>
+        </form>
+      </div>
+    </div>
+    <div class="about-grid" style="margin-top:22px;">
       <div class="about-card reveal">
         <h3>راسل الإدارة</h3>
         <form id="contactForm" class="contact-form" autocomplete="on">
@@ -1661,6 +1876,7 @@
       <div class="tag"><svg class="ic" aria-hidden="true"><use href="#i-message"/></svg>فضاء تفاعلي</div>
       <h2>اسأل، ناقش، وحلّ التمارين</h2>
       <p>منصة يطرح فيها التلاميذ أسئلتهم حول الدروس والتمارين، ويتناقشون فيما بينهم وبمساعدة الأساتذة.</p>
+      <p class="badge-legend">الشارات: 🌱 مساهم (3 ردود) · 🤝 تلميذ متعاون (8) · ⭐ نجم المساعدة (15) · 🏅 متميز في مادة (4 ردود فيها)</p>
     </div>
     <div class="qa-wrap reveal">
       <div class="qa-compose">
@@ -1749,9 +1965,13 @@
       <h3>القاصرون</h3>
       <p>إن كنت دون سن الرشد فيجب أن يتم تسجيلك بعلم ولي أمرك. يُنصح بعدم نشر معلومات شخصية حساسة (عنوان، هاتف) في الأسئلة والتعليقات.</p>
       <h3>حقوقك</h3>
-      <p>يمكنك تعديل أو حذف منشوراتك، وحذف حسابك نهائياً من نافذة «حسابي». ولأي طلب آخر يخص بياناتك راسلنا على <a href="mailto:cemchaibi@gmail.com" style="color:var(--royal);text-decoration:underline;">cemchaibi@gmail.com</a>.</p>
-      <h3>التخزين المحلي</h3>
-      <p>نحفظ في متصفحك تفضيل الوضع الداكن فقط، ولا نستعمل ملفات تتبّع إعلانية.</p>
+      <p>يمكنك تعديل أو حذف منشوراتك، وحذف حسابك نهائياً من نافذة «حسابي». ولأي طلب آخر يخص بياناتك راسلنا على <a href="mailto:cemchaibi@gmail.com" style="color:var(--link);text-decoration:underline;">cemchaibi@gmail.com</a>.</p>
+      <h3>ملفات تعريف الارتباط والتخزين المحلي</h3>
+      <p>نستعمل التخزين المحلي في متصفحك لحفظ: المظهر المفضّل (فاتح / مريح للعين / داكن)، قسمك المختار في جدول الحصص، سجل بحثك، وما قرأته من إشعارات. تُحفظ هذه التفضيلات <b>بموافقتك فقط</b> («قبول الكل»)، وإن اخترت «الضروري فقط» فلن نحفظ منها شيئاً بين زياراتك. تسجيل الدخول يستعمل تخزين Firebase الضروري. لا نستعمل أي ملفات تتبّع أو إعلانات. يمكنك تغيير اختيارك في أي وقت من رابط «إعدادات ملفات الارتباط» أسفل الموقع.</p>
+      <h3>الإشعارات</h3>
+      <p>إشعارات المتصفح اختيارية، ولا تُفعَّل إلا بموافقتك الصريحة، ويمكنك إيقافها من إعدادات المتصفح. تُعرض فقط عندما يكون الموقع مفتوحاً أو مثبّتاً كتطبيق.</p>
+      <h3>صندوق الاقتراحات</h3>
+      <p>عند اختيار «دون كشف هويتي» لا نحفظ اسمك ولا بريدك ولا معرّف حسابك مع الرسالة.</p>
     </div>
   </div>
 </section>
@@ -1762,12 +1982,18 @@
     <div class="search-bar">
       <svg class="ic" aria-hidden="true"><use href="#i-search"/></svg>
       <input type="text" id="siteSearchInput" autocomplete="off" placeholder="ابحث في الأخبار والحصص والأساتذة والأسئلة...">
-      <button id="closeSearchBtn" type="button">Esc</button>
+      <button id="closeSearchBtn" type="button" aria-label="إغلاق"><span class="kbd-esc">Esc</span><svg class="ic" aria-hidden="true"><use href="#i-x"/></svg></button>
     </div>
     <div class="search-suggest" id="searchSuggest"></div>
     <div class="search-body" id="siteSearchResults"></div>
     <div class="search-foot"><span><kbd>↑</kbd> <kbd>↓</kbd> تنقّل</span><span><kbd>Enter</kbd> فتح</span><span><kbd>Ctrl</kbd>+<kbd>K</kbd> بحث سريع</span></div>
   </div>
+</div>
+
+<div class="notif-panel" id="notifPanel" hidden role="dialog" aria-label="الإشعارات"></div>
+<div class="cookie-bar" id="cookieBar" role="dialog" aria-label="ملفات تعريف الارتباط" hidden>
+  <div class="cookie-text"><b>🍪 خصوصيتك تهمّنا</b><p>نستعمل التخزين المحلي لحفظ تفضيلاتك (المظهر، قسمك في جدول الحصص، سجل البحث، حالة الإشعارات)، وخدمات Firebase الضرورية لتسجيل الدخول. لا نستعمل أي تتبّع إعلاني. <a href="#privacy">التفاصيل</a></p></div>
+  <div class="cookie-actions"><button class="btn gold" id="cookieAll" type="button">قبول الكل</button><button class="btn ghost" id="cookieEss" type="button">الضروري فقط</button></div>
 </div>
 
 <!-- ================= MEDIA VIEWER ================= -->
@@ -1791,7 +2017,7 @@
       <input type="file" id="accountPhotoInput" accept="image/*" style="display:none;">
     </div>
     <h3 id="accountName" style="margin-bottom:4px;"></h3>
-    <div id="accountType" style="font-size:.82rem; color:var(--royal); font-family:'Cairo',sans-serif; margin-bottom:6px;"></div>
+    <div id="accountType" style="font-size:.82rem; color:var(--link); font-family:'Cairo',sans-serif; margin-bottom:6px;"></div>
     <div id="accountEmail" style="font-size:.8rem; color:var(--muted); margin-bottom:22px;"></div>
     <button class="btn" id="accountLogoutBtn" style="width:100%; margin-bottom:10px; background:var(--paper-2); color:var(--ink);">تسجيل الخروج</button>
     <button class="btn" id="accountDeleteBtn" style="width:100%; background:var(--red);">حذف الحساب نهائياً</button>
@@ -1817,8 +2043,12 @@
 
 <button id="backTop" type="button" aria-label="العودة للأعلى"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
 
-<div id="lightboxOverlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.9); z-index:3000; align-items:center; justify-content:center; cursor:zoom-out;">
-  <img id="lightboxImg" style="max-width:92vw; max-height:92vh; object-fit:contain; border-radius:6px;">
+<div id="lightboxOverlay" role="dialog" aria-label="عارض الصور">
+  <button class="vw-btn vw-close" id="vwClose" type="button" aria-label="إغلاق"><svg class="ic" aria-hidden="true"><use href="#i-x"/></svg></button>
+  <button class="vw-btn vw-prev" id="vwPrev" type="button" aria-label="السابقة" hidden><svg class="ic" aria-hidden="true"><use href="#i-chev-r"/></svg></button>
+  <div class="vw-stage"><img id="lightboxImg" alt=""></div>
+  <button class="vw-btn vw-next" id="vwNext" type="button" aria-label="التالية" hidden><svg class="ic" aria-hidden="true"><use href="#i-chev-l"/></svg></button>
+  <div class="vw-count" id="vwCount" hidden></div>
 </div>
 
 <footer>
@@ -1874,8 +2104,7 @@
         </div>
       </div>
     </div>
-    <div class="foot-tools"><span>حجم الخط:</span><button id="fontDown" type="button" aria-label="تصغير الخط">A−</button><button id="fontReset" type="button" aria-label="الحجم الافتراضي">A</button><button id="fontUp" type="button" aria-label="تكبير الخط">A+</button></div>
-    <div class="foot-bottom">© 2026 متوسطة شعيبي بومدين. جميع الحقوق محفوظة.</div>
+    <div class="foot-bottom">© 2026 متوسطة شعيبي بومدين. جميع الحقوق محفوظة. · <a href="#" id="cookieSettings" style="text-decoration:underline;">إعدادات ملفات الارتباط</a> · <a href="#" id="installLink" style="text-decoration:underline;display:none;">تثبيت التطبيق</a></div>
   </div>
 </footer>
 
@@ -2146,10 +2375,11 @@
   // ---------- RENDERERS ----------
   const newsGrid = document.getElementById('newsGrid');
   function catClass(cat){
-    const c = (cat || '').toLowerCase();
-    if(c.includes('إعلان') || c.includes('إداري')) return 'cat-admin';
-    if(c.includes('فرض') || c.includes('اختبار') || c.includes('تقييم')) return 'cat-exam';
-    return 'cat-activity';
+    const c = normAr(cat || '');
+    if(/عاجل|هام|اعلان|اداري|اضراب|عطله|تنبيه|تغيير/.test(c)) return 'cat-urgent';
+    if(/فرض|اختبار|تقييم|درس|دعم|تربوي|بيداغوجي|دراسي|جدول|امتحان|تعليم/.test(c)) return 'cat-learn';
+    if(/نشاط|مسابق|تكريم|رحل|احتفال|ثقاف|رياض|معرض|فعالي/.test(c)) return 'cat-activity';
+    return 'cat-info';
   }
   function renderNews(){
     if(!siteNews.length){ newsGrid.innerHTML = '<p class="empty-note">لا توجد أخبار منشورة حالياً.</p>'; return; }
@@ -2159,8 +2389,8 @@
         ? `<img loading="lazy" decoding="async" src="${safeImg(timg)}" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">`
         : icon(n.ic || 'newspaper', 26);
       return `
-      <div class="news-card" data-open-article="${escapeHtml(n.id)}" style="cursor:pointer;">
-        <div class="news-thumb" style="position:relative;">${thumb}</div>
+      <div class="news-card ${catClass(n.cat)}" data-open-article="${escapeHtml(n.id)}" style="cursor:pointer;">
+        <div class="news-thumb ${timg ? '' : 'noimg'}" style="position:relative;">${thumb}</div>
         <div class="news-body">
           <div class="date-badge">${escapeHtml(n.date)}${n.pinned ? `<span class="pin-badge">${ic('pin')} مثبّت</span>` : ''}</div>
           <h3>${escapeHtml(n.title)}</h3>
@@ -2225,6 +2455,17 @@
   // =====================================================================
   //  الإصدار 3 — مساعدات + الأخبار/المناسبات + جدول الحصص + الوسائط + عن المتوسطة
   // =====================================================================
+  // ---------- تخزين محلي يحترم موافقة المستخدم ----------
+  const LS = {
+    mem: {},
+    consent(){ try{ return localStorage.getItem('cookieConsent') || ''; }catch(e){ return ''; } },
+    allowed(){ return this.consent() === 'all'; },
+    get(k){ if(this.allowed()){ try{ return localStorage.getItem(k); }catch(e){ return null; } } return this.mem[k] === undefined ? null : this.mem[k]; },
+    set(k, v){ if(this.allowed()){ try{ localStorage.setItem(k, v); }catch(e){} } else this.mem[k] = String(v); },
+    remove(k){ try{ localStorage.removeItem(k); }catch(e){} delete this.mem[k]; },
+    clearOptional(){ ['ttSel','searchRecent','bannerClosed','notifSeen'].forEach(k=>{ try{ localStorage.removeItem(k); }catch(e){} }); }
+  };
+
   function normAr(s){
     return String(s || '').toLowerCase()
       .replace(/[\u064B-\u0652\u0640\u0670]/g, '')
@@ -2307,15 +2548,23 @@
       c.addEventListener('keydown', (ev)=>{ if(ev.key === 'Enter') c.classList.toggle('open'); });
     });
     strip.querySelectorAll('[data-ics]').forEach(b=> b.addEventListener('click', ev=>{ ev.stopPropagation(); exportEventIcs(b.dataset.ics); }));
-    tlEl.innerHTML = evs.map(e=> `
-      <div class="t-item">
+    let nowPlaced = false;
+    const hasPast = evs.some(e=>{ const p = evParts(e); return p && daysUntil(p.t) < 0; });
+    const nowMark = '<div class="t-now"><span>اليوم</span></div>';
+    tlEl.innerHTML = evs.map(e=>{
+      const p = evParts(e); const past = !!(p && daysUntil(p.t) < 0);
+      let pre = '';
+      if(hasPast && !nowPlaced && !past){ nowPlaced = true; pre = nowMark; }
+      return pre + `
+      <div class="t-item ${past ? 'past' : ''}">
         <div class="t-dot"><svg viewBox="0 0 24 24">${ICON_PATHS[e.ic] || ICON_PATHS.calendarStar}</svg></div>
         <div class="t-card">
           <div class="t-date">${escapeHtml(e.date)}</div>
           <h3>${escapeHtml(e.title)}</h3>
           <p>${escapeHtml(e.desc)}</p>
         </div>
-      </div>`).join('');
+      </div>`;
+    }).join('') + (hasPast && !nowPlaced ? nowMark : '');
     tlEl.classList.add('show');
   }
   function syncFeedUI(){
@@ -2332,7 +2581,7 @@
   ];
   let siteTT = {};
   let ttState = { level:'', cls:'', group:'', day:'', pane:'sessions' };
-  try{ const sv = JSON.parse(localStorage.getItem('ttSel') || 'null'); if(sv){ ttState.cls = sv.cls || ''; ttState.group = sv.group || ''; } }catch(e){}
+  try{ const sv = JSON.parse(LS.get('ttSel') || 'null'); if(sv){ ttState.cls = sv.cls || ''; ttState.group = sv.group || ''; } }catch(e){}
   function ttData(){
     const d = siteTT || {};
     return { days: (d.days && d.days.length) ? d.days : ['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس'],
@@ -2396,7 +2645,7 @@
     lv.querySelectorAll('[data-lv]').forEach(b=> b.onclick = ()=>{ ttState.level = b.dataset.lv; ttState.cls = ''; ttState.group = ''; renderTimetable(); });
     cl.querySelectorAll('[data-cl]').forEach(b=> b.onclick = ()=>{ ttState.cls = b.dataset.cl; ttState.group = ''; renderTimetable(); });
     gr.querySelectorAll('[data-gr]').forEach(b=> b.onclick = ()=>{ ttState.group = b.dataset.gr; renderTimetable(); });
-    try{ localStorage.setItem('ttSel', JSON.stringify({ cls: ttState.cls, group: ttState.group })); }catch(e){}
+    try{ LS.set('ttSel', JSON.stringify({ cls: ttState.cls, group: ttState.group })); }catch(e){}
 
     const live = ttNowCard(cls, D);
     const today = DAY_NAMES[new Date().getDay()];
@@ -2480,7 +2729,7 @@
       const pl = PLAT[m.p.platform];
       const thumb = m.p.thumb
         ? `<img loading="lazy" src="${escapeHtml(m.p.thumb)}" alt=""><span class="media-play">${ic('play')}</span>`
-        : `<span class="big">${ic(pl.i)}</span><span class="media-play" style="color:var(--royal);">${ic('play')}</span>`;
+        : `<span class="big">${ic(pl.i)}</span><span class="media-play" style="color:var(--link);">${ic('play')}</span>`;
       return `<article class="media-card" tabindex="0" data-mid="${escapeHtml(m.id)}">
         <div class="media-thumb ${pl.c}"><span class="media-badge">${ic(pl.i)}${pl.n}</span>${thumb}</div>
         <div class="media-body">${m.date ? `<span class="m-date">${escapeHtml(m.date)}</span>` : ''}<h4>${escapeHtml(m.title || pl.n)}</h4>${m.desc ? `<p>${escapeHtml(m.desc)}</p>` : ''}</div></article>`;
@@ -2528,13 +2777,13 @@
     if(i.hours){ hrs.style.display = 'block'; hrs.innerHTML = '<b>أوقات العمل</b><br>' + escapeHtml(i.hours).replace(/\n/g, '<br>'); } else hrs.style.display = 'none';
     const email = i.email || 'cemchaibi@gmail.com';
     const rows = [];
-    if(i.phone) rows.push(`<a class="contact-row" href="tel:${escapeHtml(String(i.phone).replace(/[^\d+]/g, ''))}"><span class="ci">${ic('phone')}</span><span>${escapeHtml(i.phone)}</span></a>`);
-    rows.push(`<a class="contact-row" href="mailto:${escapeHtml(email)}"><span class="ci">${ic('mail')}</span><span>${escapeHtml(email)}</span></a>`);
+    if(i.phone) rows.push(`<a class="crow" href="tel:${escapeHtml(String(i.phone).replace(/[^\d+]/g, ''))}"><span class="ci">${ic('phone')}</span><span>${escapeHtml(i.phone)}</span></a>`);
+    rows.push(`<a class="crow" href="mailto:${escapeHtml(email)}"><span class="ci">${ic('mail')}</span><span>${escapeHtml(email)}</span></a>`);
     const chUrl = safeUrl(i.channelUrl);
     const hc = document.getElementById('heroChannel');
     if(hc){ if(chUrl){ hc.href = chUrl; hc.querySelector('span').textContent = i.channelLabel || 'قناة المتوسطة'; hc.style.display = ''; } else hc.style.display = 'none'; }
-    if(chUrl) rows.push(`<a class="contact-row" href="${escapeHtml(chUrl)}" target="_blank" rel="noopener noreferrer"><span class="ci">${ic('send')}</span><span>${escapeHtml(i.channelLabel || 'قناة المتوسطة')}</span></a>`);
-    if(i.address) rows.push(`<div class="contact-row"><span class="ci">${ic('pin')}</span><span>${escapeHtml(i.address)}</span></div>`);
+    if(chUrl) rows.push(`<a class="crow" href="${escapeHtml(chUrl)}" target="_blank" rel="noopener noreferrer"><span class="ci">${ic('send')}</span><span>${escapeHtml(i.channelLabel || 'قناة المتوسطة')}</span></a>`);
+    if(i.address) rows.push(`<div class="crow"><span class="ci">${ic('pin')}</span><span>${escapeHtml(i.address)}</span></div>`);
     document.getElementById('aboutContacts').innerHTML = rows.join('');
     const q = i.mapQuery || 'متوسطة شعيبي بومدين وهران الجزائر';
     document.getElementById('aboutMap').innerHTML = `<iframe loading="lazy" title="موقع المتوسطة على الخريطة" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=${encodeURIComponent(q)}&output=embed&hl=ar"></iframe>`;
@@ -2562,13 +2811,13 @@
     const i = siteInfo || {};
     if(!i.bannerOn || !i.bannerText){ b.hidden = true; return; }
     const key = normAr(i.bannerText).slice(0, 60);
-    let closed = ''; try{ closed = localStorage.getItem('bannerClosed') || ''; }catch(e){}
+    let closed = ''; try{ closed = LS.get('bannerClosed') || ''; }catch(e){}
     if(closed === key){ b.hidden = true; return; }
     const ext = safeUrl(i.bannerLink);
     const internal = /^#[\w-]+$/.test(String(i.bannerLink || '').trim()) ? String(i.bannerLink).trim() : '';
     b.innerHTML = `<span>${escapeHtml(i.bannerText)}</span>${(ext || internal) ? `<a href="${escapeHtml(ext || internal)}" ${ext ? 'target="_blank" rel="noopener noreferrer"' : ''}>التفاصيل</a>` : ''}<button type="button" aria-label="إغلاق">${ic('x')}</button>`;
     b.hidden = false;
-    b.querySelector('button').onclick = ()=>{ b.hidden = true; try{ localStorage.setItem('bannerClosed', key); }catch(e){} };
+    b.querySelector('button').onclick = ()=>{ b.hidden = true; try{ LS.set('bannerClosed', key); }catch(e){} };
   }
 
   let docsCat = '';
@@ -2670,13 +2919,266 @@
   }
   const reportBtn = (attrs)=> `<button class="q-foot-item report-btn" ${attrs} title="إبلاغ عن إساءة" aria-label="إبلاغ">${ic('flag')}<span>إبلاغ</span></button>`;
 
-  // ---------- حجم الخط ----------
-  let fontPct = 100; try{ fontPct = +localStorage.getItem('fontPct') || 100; }catch(e){}
-  function applyFont(){ document.documentElement.style.fontSize = fontPct + '%'; try{ localStorage.setItem('fontPct', fontPct); }catch(e){} }
-  function stepFont(d){ fontPct = Math.max(85, Math.min(135, fontPct + d)); applyFont(); }
-  applyFont();
-  [['fontDown', ()=> stepFont(-8)], ['fontUp', ()=> stepFont(8)], ['fontReset', ()=>{ fontPct = 100; applyFont(); }],
-   ['navFontBtn', ()=>{ fontPct = fontPct >= 124 ? 100 : fontPct + 12; applyFont(); }]].forEach(([id, fn])=>{ const el = document.getElementById(id); if(el) el.addEventListener('click', fn); });
+  try{ localStorage.removeItem('fontPct'); }catch(e){}
+  document.documentElement.style.fontSize = '';
+
+  // =====================================================================
+  //  الإصدار 5: ملفات الارتباط، الإشعارات، استطلاعات، اقتراحات، شارات، عارض صور
+  // =====================================================================
+  // ---------- ملفات الارتباط ----------
+  (function(){
+    const bar = document.getElementById('cookieBar');
+    const show = ()=>{ bar.hidden = false; };
+    function choose(v){
+      try{ localStorage.setItem('cookieConsent', v); }catch(e){}
+      if(v === 'essential') LS.clearOptional();
+      else Object.keys(LS.mem).forEach(k=>{ try{ localStorage.setItem(k, LS.mem[k]); }catch(e){} });
+      bar.hidden = true;
+      showToast(v === 'all' ? 'تم حفظ تفضيلاتك. شكراً!' : 'سنكتفي بالتخزين الضروري فقط.');
+      Notif.saveSeen();
+    }
+    document.getElementById('cookieAll').addEventListener('click', ()=> choose('all'));
+    document.getElementById('cookieEss').addEventListener('click', ()=> choose('essential'));
+    const link = document.getElementById('cookieSettings');
+    if(link) link.addEventListener('click', (e)=>{ e.preventDefault(); show(); });
+    if(!LS.consent()) setTimeout(show, 1200);
+  })();
+
+  // ---------- التثبيت والتحديث ----------
+  let deferredPrompt = null;
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  const isStandalone = (window.matchMedia && matchMedia('(display-mode: standalone)').matches) || navigator.standalone === true;
+  window.addEventListener('beforeinstallprompt', (e)=>{ e.preventDefault(); deferredPrompt = e; refreshInstallUI(); });
+  window.addEventListener('appinstalled', ()=>{ deferredPrompt = null; showToast('تم تثبيت التطبيق 🎉'); refreshInstallUI(); });
+  async function doInstall(){ if(!deferredPrompt) return; deferredPrompt.prompt(); try{ await deferredPrompt.userChoice; }catch(e){} deferredPrompt = null; refreshInstallUI(); }
+  function refreshInstallUI(){
+    const l = document.getElementById('installLink');
+    if(l) l.style.display = (deferredPrompt && !isStandalone) ? '' : 'none';
+    if(typeof renderNotifPanel === 'function') renderNotifPanel();
+  }
+  document.getElementById('installLink').addEventListener('click', (e)=>{ e.preventDefault(); doInstall(); });
+  function showUpdateToast(){
+    if(document.querySelector('.update-toast')) return;
+    const d = document.createElement('div'); d.className = 'update-toast';
+    d.innerHTML = '<span>تحديث جديد للموقع متاح</span><button type="button">تحديث الآن</button>';
+    d.querySelector('button').onclick = ()=> location.reload();
+    document.body.appendChild(d);
+  }
+  function pushLocal(title, body, hash){
+    if(!('Notification' in window) || Notification.permission !== 'granted') return;
+    const opts = { body: body || '', icon:'logo.png', badge:'favicon.png', dir:'rtl', lang:'ar', tag: hash || 'site', data:{ hash: hash || '#home' } };
+    try{
+      if(navigator.serviceWorker) navigator.serviceWorker.getRegistration().then(reg=>{ if(reg) reg.showNotification(title, opts); else new Notification(title, opts); });
+      else new Notification(title, opts);
+    }catch(e){}
+  }
+
+  // ---------- مركز الإشعارات ----------
+  let sitePolls = [], pollVotes = {}, pollShow = {}, myQuestions = [], qaLatest = null, chatLatest = null;
+  const Notif = { seen:new Set(), known:new Set(), items:[], t0:Date.now(), hadStored:false };
+  (function(){ const raw = LS.get('notifSeen'); Notif.hadStored = raw !== null; try{ Notif.seen = new Set(JSON.parse(raw || '[]')); }catch(e){} })();
+  Notif.saveSeen = function(){ LS.set('notifSeen', JSON.stringify([...Notif.seen].slice(-400))); };
+  function gatherNotifs(){
+    const out = [];
+    const i = siteInfo || {};
+    if(i.bannerOn && i.bannerText) out.push({ key:'banner:' + normAr(i.bannerText).slice(0, 40), icon:'alert', title:i.bannerText, sub:'إعلان عاجل من الإدارة', hash:'#home', urgent:true });
+    (siteNews || []).forEach(n=> out.push({ key:'news:' + n.id, icon:'newspaper', title:n.title, sub:'خبر جديد · ' + (n.date || ''), hash:'#article-' + n.id }));
+    (siteEvents || []).forEach(e=> out.push({ key:'event:' + e.id, icon:'calendar', title:e.title, sub:'مناسبة · ' + (e.date || ''), hash:'#news', pre:()=>{ feedFilter = 'events'; syncFeedUI(); } }));
+    (sitePolls || []).forEach(p=> out.push({ key:'poll:' + p.id, icon:'bars', title:p.question, sub:'استطلاع رأي جديد', hash:'#news' }));
+    (siteDocs || []).forEach(d=> out.push({ key:'doc:' + d.id, icon:'file', title:d.title, sub:'وثيقة جديدة', hash:'#about' }));
+    (siteMedia || []).forEach(m=> out.push({ key:'media:' + m.id, icon:'play', title:m.title || 'منشور جديد', sub:'الوسائط', hash:'#media' }));
+    (myQuestions || []).filter(q=> q.answer).forEach(q=> out.push({ key:'ans:' + q.id, icon:'check', title:'تمت الإجابة عن سؤالك', sub:(q.body || '').slice(0, 70), hash:'#qa' }));
+    if(qaLatest && !qaLatest.mine) out.push({ key:'qa:' + qaLatest.id, icon:'message', title:'سؤال جديد في فضاء الأسئلة', sub:qaLatest.text, hash:'#qa' });
+    if(chatLatest) out.push({ key:'chat:' + chatLatest, icon:'users', title:'رسائل جديدة في دردشة الأولياء', sub:'اضغط لقراءتها', hash:'#parents-chat' });
+    return out;
+  }
+  function refreshNotifs(){
+    const items = gatherNotifs();
+    const baseline = (Date.now() - Notif.t0) < 7000;
+    const fresh = [];
+    items.forEach(it=>{
+      if(Notif.known.has(it.key)) return;
+      Notif.known.add(it.key);
+      if(baseline){ if(!Notif.hadStored) Notif.seen.add(it.key); }
+      else if(!Notif.seen.has(it.key)) fresh.push(it);
+    });
+    if(baseline && !Notif.hadStored) Notif.saveSeen();
+    Notif.items = items.filter(it=> !Notif.seen.has(it.key));
+    paintNotifs();
+    if(fresh.length) announceFresh(fresh);
+  }
+  function setLive(href, on){
+    document.querySelectorAll('nav a[href="' + href + '"], .bnav-item[href="' + href + '"]').forEach(a=>{
+      let d = a.querySelector('.live-dot');
+      if(on && !d){ d = document.createElement('i'); d.className = 'live-dot'; a.appendChild(d); }
+      else if(!on && d) d.remove();
+    });
+  }
+  function paintNotifs(){
+    const n = Notif.items.length, b = document.getElementById('notifBadge');
+    b.hidden = !n; b.textContent = n > 9 ? '9+' : n;
+    setLive('#qa', Notif.items.some(i=> i.key.startsWith('qa:') || i.key.startsWith('ans:')));
+    setLive('#parents', Notif.items.some(i=> i.key.startsWith('chat:')));
+    renderNotifPanel();
+  }
+  function announceFresh(list){
+    const first = list[0];
+    showToast('🔔 ' + (list.length > 1 ? list.length + ' إشعارات جديدة' : first.title));
+    const bell = document.getElementById('notifBtn'); bell.classList.remove('ring'); void bell.offsetWidth; bell.classList.add('ring');
+    if(document.hidden) pushLocal(list.length > 1 ? 'متوسطة شعيبي بومدين' : first.title, list.length > 1 ? list.slice(0, 3).map(i=> i.title).join(' • ') : first.sub, first.hash);
+  }
+  function markSeen(keys){
+    let ch = false; keys.forEach(k=>{ if(!Notif.seen.has(k)){ Notif.seen.add(k); ch = true; } });
+    if(ch){ Notif.saveSeen(); Notif.items = Notif.items.filter(i=> !Notif.seen.has(i.key)); paintNotifs(); }
+  }
+  function notifVisit(target){
+    const map = { news:['news:','event:','poll:','banner:'], home:['banner:'], media:['media:'], about:['doc:'], qa:['qa:','ans:'], 'parents-chat':['chat:'], parents:['chat:'] };
+    const pre = map[target]; if(!pre) return;
+    markSeen(Notif.items.filter(i=> pre.some(p=> i.key.startsWith(p))).map(i=> i.key));
+  }
+  const notifPanel = document.getElementById('notifPanel');
+  function renderNotifPanel(){
+    if(!notifPanel) return;
+    const items = Notif.items.slice(0, 25);
+    const canNotify = 'Notification' in window;
+    const perm = canNotify ? Notification.permission : 'unsupported';
+    notifPanel.innerHTML = `
+      <div class="notif-head"><span>الإشعارات</span>${items.length ? '<button type="button" id="notifAllRead">تحديد الكل كمقروء</button>' : ''}</div>
+      <div class="notif-list">${items.length ? items.map((it, k)=> `<div class="notif-item ${it.urgent ? 'urgent' : ''}" data-ni="${k}"><span class="ni">${ic(it.icon)}</span><div style="min-width:0;"><div class="nt">${escapeHtml(it.title)}</div><div class="ns">${escapeHtml(it.sub || '')}</div></div></div>`).join('') : '<div class="notif-empty">لا توجد إشعارات جديدة 🎉<br><small>سنخبرك عند نشر خبر أو مناسبة أو وثيقة جديدة.</small></div>'}</div>
+      <div class="notif-foot">
+        ${perm === 'default' ? '<button class="btn" id="notifEnable" type="button">' + ic('bell') + ' تفعيل إشعارات المتصفح</button>' : ''}
+        ${perm === 'granted' ? '<small>✓ إشعارات المتصفح مفعّلة: ستصلك تنبيهات عند وجود جديد.</small>' : ''}
+        ${perm === 'denied' ? '<small>إشعارات المتصفح محظورة من إعدادات الموقع في متصفحك.</small>' : ''}
+        ${deferredPrompt && !isStandalone ? '<button class="btn gold" id="notifInstall" type="button">' + ic('download') + ' تثبيت التطبيق على جهازك</button>' : ''}
+        ${isIOS && !isStandalone ? '<div class="install-hint">لتثبيت التطبيق على آيفون: اضغط زر المشاركة ⬆︎ ثم «إضافة إلى الشاشة الرئيسية».</div>' : ''}
+      </div>`;
+    notifPanel.querySelectorAll('[data-ni]').forEach(el=> el.onclick = ()=>{
+      const it = items[+el.dataset.ni]; if(!it) return;
+      markSeen([it.key]); notifPanel.hidden = true;
+      if(it.pre) it.pre();
+      if(location.hash === it.hash) showMainSection(); else location.hash = it.hash;
+    });
+    const ar = document.getElementById('notifAllRead'); if(ar) ar.onclick = ()=> markSeen(Notif.items.map(i=> i.key));
+    const en = document.getElementById('notifEnable');
+    if(en) en.onclick = async ()=>{ try{ const r = await Notification.requestPermission(); if(r === 'granted'){ showToast('تم تفعيل إشعارات المتصفح.'); pushLocal('متوسطة شعيبي بومدين', 'سنخبرك بكل جديد.', '#home'); } }catch(e){} renderNotifPanel(); };
+    const inst = document.getElementById('notifInstall'); if(inst) inst.onclick = doInstall;
+  }
+  document.getElementById('notifBtn').addEventListener('click', (e)=>{ e.stopPropagation(); renderNotifPanel(); notifPanel.hidden = !notifPanel.hidden; });
+  document.addEventListener('click', (e)=>{ if(!notifPanel.hidden && !e.target.closest('#notifPanel, #notifBtn')) notifPanel.hidden = true; });
+  document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') notifPanel.hidden = true; });
+  let qaWatch = null, chatWatch = null, myQWatch = null;
+  function startQaWatch(){
+    if(qaWatch || !db) return;
+    qaWatch = db.collection('questions').orderBy('createdAt', 'desc').limit(1).onSnapshot(s=>{
+      const d = s.docs[0];
+      qaLatest = d ? { id:d.id, mine:!!(auth && auth.currentUser && d.data().authorUid === auth.currentUser.uid), text:(d.data().body || '').slice(0, 60) } : null;
+      refreshNotifs();
+    }, ()=>{});
+  }
+  function stopUserWatches(){ [myQWatch, chatWatch].forEach(u=>{ if(u) u(); }); myQWatch = chatWatch = null; myQuestions = []; chatLatest = null; }
+  function startUserWatches(user, profile){
+    stopUserWatches();
+    if(!db || !user) return;
+    myQWatch = db.collection('questions').where('authorUid', '==', user.uid).onSnapshot(s=>{ myQuestions = s.docs.map(d=> Object.assign({ id:d.id }, d.data())); refreshNotifs(); }, ()=>{});
+    if(isOwnerAccount(user) || (profile && profile.role === 'ولي')){
+      chatWatch = db.collection('parentsGeneralChat').orderBy('time', 'desc').limit(1).onSnapshot(s=>{
+        const d = s.docs[0];
+        chatLatest = (d && !d.metadata.hasPendingWrites && d.data().uid !== user.uid) ? d.id : null;
+        refreshNotifs();
+      }, ()=>{});
+    }
+  }
+
+  // ---------- استطلاعات الرأي ----------
+  let pollsWatch = null; const pollUnsubs = {};
+  function startPolls(){
+    if(pollsWatch || !db) return;
+    pollsWatch = db.collection('polls').where('active', '==', true).onSnapshot(snap=>{
+      sitePolls = snap.docs.map(d=> Object.assign({ id:d.id }, d.data()));
+      sitePolls.forEach(p=>{
+        if(pollUnsubs[p.id]) return;
+        pollUnsubs[p.id] = db.collection('polls').doc(p.id).collection('votes').limit(1000).onSnapshot(vs=>{
+          pollVotes[p.id] = vs.docs.map(d=> ({ uid:d.id, choice:d.data().choice }));
+          renderPolls();
+        }, ()=>{});
+      });
+      renderPolls(); refreshNotifs();
+    }, (e)=> console.warn('polls', e));
+  }
+  async function votePoll(pid, idx){
+    const u = auth && auth.currentUser;
+    if(!u){ showToast('سجّل الدخول للمشاركة في الاستطلاع.', true); openModal(); return; }
+    if(!(await canPost())) return;
+    try{
+      await db.collection('polls').doc(pid).collection('votes').doc(u.uid).set({ choice: idx, at: firebase.firestore.FieldValue.serverTimestamp() });
+      showToast('شكراً! تم تسجيل صوتك.');
+    }catch(e){ console.error(e); showToast('تعذر تسجيل صوتك (ربما شاركتَ مسبقاً).', true); }
+  }
+  function renderPolls(){
+    const box = document.getElementById('pollsBox'); if(!box) return;
+    const u = auth && auth.currentUser;
+    box.innerHTML = sitePolls.map(p=>{
+      const votes = pollVotes[p.id] || [], total = votes.length;
+      const mine = u ? votes.find(v=> v.uid === u.uid) : null;
+      const show = !!mine || pollShow[p.id];
+      const opts = p.options || [];
+      const counts = opts.map((_, i)=> votes.filter(v=> v.choice === i).length);
+      return `<div class="poll-card" data-pid="${escapeHtml(p.id)}"><div class="poll-tag">${ic('bars')} استطلاع رأي</div><div class="poll-q">${escapeHtml(p.question)}</div>
+        ${opts.map((o, i)=> show
+          ? `<div class="poll-opt ${mine && mine.choice === i ? 'mine' : ''}"><i class="bar" style="width:${total ? Math.round(counts[i] / total * 100) : 0}%"></i><span><b>${escapeHtml(o)}</b><em style="font-style:normal;">${total ? Math.round(counts[i] / total * 100) : 0}% · ${counts[i]}</em></span></div>`
+          : `<button type="button" class="poll-opt" data-pv="${i}"><span><b>${escapeHtml(o)}</b></span></button>`).join('')}
+        <div class="poll-meta"><span>${total} مشارك</span>${!show ? '<button type="button" data-pshow>عرض النتائج</button>' : (mine ? '<span>✓ شاركتَ في هذا الاستطلاع</span>' : '')}</div></div>`;
+    }).join('');
+    box.querySelectorAll('[data-pv]').forEach(b=> b.onclick = ()=> votePoll(b.closest('.poll-card').dataset.pid, +b.dataset.pv));
+    box.querySelectorAll('[data-pshow]').forEach(b=> b.onclick = ()=>{ pollShow[b.closest('.poll-card').dataset.pid] = true; renderPolls(); });
+  }
+
+  // ---------- صندوق الاقتراحات والشكاوى ----------
+  let lastSug = 0;
+  document.querySelectorAll('#sugKinds .chip').forEach(b=> b.addEventListener('click', ()=>{
+    document.querySelectorAll('#sugKinds .chip').forEach(x=> x.classList.toggle('active', x === b));
+  }));
+  document.getElementById('sugForm').addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    const u = auth && auth.currentUser;
+    if(!u){ showToast('سجّل الدخول لإرسال رسالتك. عند اختيار الإخفاء لا تُحفظ هويتك.', true); openModal(); return; }
+    const text = document.getElementById('sugText').value.trim();
+    if(text.length < 5){ showToast('اكتب رسالتك بوضوح (5 أحرف على الأقل).', true); return; }
+    if(Date.now() - lastSug < 60000){ showToast('انتظر قليلاً قبل إرسال رسالة أخرى.', true); return; }
+    if(!(await canPost(text))) return;
+    const anon = document.getElementById('sugAnon').checked;
+    const p = currentUserProfile;
+    const name = anon ? '' : (document.getElementById('sugName').value.trim() || (p && ((p.firstName || '') + ' ' + (p.lastName || '')).trim()) || '');
+    try{
+      await db.collection('suggestions').add({ kind: document.querySelector('#sugKinds .chip.active').dataset.k, text: text.slice(0, 1000), name: name.slice(0, 80), contact: '', anonymous: anon, createdAt: firebase.firestore.FieldValue.serverTimestamp() });
+      lastSug = Date.now(); document.getElementById('sugText').value = '';
+      showToast(anon ? 'وصلت رسالتك للإدارة دون كشف هويتك. شكراً لك.' : 'وصلت رسالتك إلى إدارة المتوسطة. شكراً لك.');
+    }catch(err){ console.error(err); showToast('تعذر إرسال الرسالة، حاول لاحقاً.', true); }
+  });
+
+  // ---------- شارات التلاميذ النشطين ----------
+  function computeBadges(){
+    const st = {};
+    (siteQuestions || []).forEach(q=> (q.replies || []).forEach(r=>{
+      if(!r.uid || r.isOwner) return;
+      const s = st[r.uid] = st[r.uid] || { n:0, subj:{} };
+      s.n++; s.subj[q.subj] = (s.subj[q.subj] || 0) + 1;
+    }));
+    const out = {};
+    Object.keys(st).forEach(uid=>{
+      const s = st[uid], b = [];
+      if(s.n >= 15) b.push(['⭐', 'نجم المساعدة']); else if(s.n >= 8) b.push(['🤝', 'تلميذ متعاون']); else if(s.n >= 3) b.push(['🌱', 'مساهم']);
+      const top = Object.entries(s.subj).sort((a, c)=> c[1] - a[1])[0];
+      if(top && top[1] >= 4) b.push(['🏅', 'متميز في ' + top[0]]);
+      out[uid] = b;
+    });
+    return out;
+  }
+  let BADGES = {};
+  function badgesHtml(uid){
+    const b = (uid && BADGES[uid]) || [];
+    return b.slice(0, 2).map(x=> `<span class="u-badge" title="${escapeHtml(x[1])}">${x[0]} ${escapeHtml(x[1])}</span>`).join('');
+  }
 
   document.getElementById('qaList').addEventListener('click', (e)=>{
     const b = e.target.closest('[data-report]'); if(!b) return;
@@ -2765,6 +3267,7 @@
   }
   function renderQAInner(){
     if(!siteQuestions.length){ qaList.innerHTML = '<p class="empty-note">لا توجد أسئلة بعد — كن أول من يطرح سؤالاً.</p>'; return; }
+    BADGES = computeBadges();
     const myUid = auth && auth.currentUser ? auth.currentUser.uid : null;
     const iAmOwner = auth && isOwnerAccount(auth.currentUser);
     qaList.innerHTML = siteQuestions.map(q=> {
@@ -2777,7 +3280,7 @@
           ${avatarHtml(r.author, r.authorPhoto, 24)}
           <div style="flex:1; min-width:0;">
             <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:6px;">
-              <div style="font-size:.78rem; color:var(--royal); font-weight:700; margin-bottom:4px;">${escapeHtml(r.author||'مستخدم')}${nameBadge(r.isOwner)}</div>
+              <div style="font-size:.78rem; color:var(--link); font-weight:700; margin-bottom:4px;">${escapeHtml(r.author||'مستخدم')}${nameBadge(r.isOwner)}${badgesHtml(r.uid)}</div>
               ${canManageR ? `<button class="item-del-btn" data-del-reply="${escapeHtml(r.id||'')}" data-qid="${escapeHtml(q.id)}" title="حذف الرد" style="color:var(--muted); flex-shrink:0;"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 7h14M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2m-8 0 1 13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1l1-13"/></svg></button>` : ''}
             </div>
             <div style="font-size:.88rem;">${escapeHtml(r.text)}</div>
@@ -2791,7 +3294,7 @@
         <div class="q-card" data-qid="${escapeHtml(q.id)}">
           <div class="q-top">
             <span class="q-subject">${escapeHtml(q.subj)}</span>
-            <span class="q-meta">${escapeHtml(q.author)}${nameBadge(q.isOwner)} · ${escapeHtml(q.time)}</span>
+            <span class="q-meta">${escapeHtml(q.author)}${nameBadge(q.isOwner)}${badgesHtml(q.authorUid)} · ${escapeHtml(q.time)}</span>
           </div>
           <p class="q-body" data-qbody>${escapeHtml(q.body)}</p>
           ${q.attachment ? `<img src="${safeImg(q.attachment)}" style="max-width:220px; border-radius:10px; margin:8px 0;">` : ''}
@@ -2805,7 +3308,7 @@
           </div>
           ${q.answer ? `
             <div style="margin-top:12px; padding:12px; background:var(--paper-2); border-radius:12px;">
-              <div style="font-size:.78rem; color:var(--royal); font-weight:700; margin-bottom:4px;">إجابة الإدارة/الأستاذ — ${escapeHtml(q.answer.author||'')}</div>
+              <div style="font-size:.78rem; color:var(--link); font-weight:700; margin-bottom:4px;">إجابة الإدارة/الأستاذ — ${escapeHtml(q.answer.author||'')}</div>
               <div style="font-size:.9rem;">${escapeHtml(q.answer.text)}</div>
               <div class="q-foot" style="margin-top:8px;">
                 ${likeBtn('answer', q.id, asArray(q.answer.likes), asArray(q.answer.likes).length)}
@@ -3063,11 +3566,18 @@
       await afterAuthSuccess(result.user);
     }catch(e){
       console.error(e);
+      if(['auth/popup-blocked', 'auth/operation-not-supported-in-this-environment', 'auth/web-storage-unsupported'].includes(e.code)){
+        try{ document.getElementById('loadingTitle').textContent = 'جاري التحويل لإكمال تسجيل الدخول...'; await auth.signInWithRedirect(providerObj); return; }
+        catch(e2){ console.error(e2); }
+      }
       showStep(stepMethod);
       showAuthError(friendlyAuthError(e.code));
     }
   }
 
+  const IN_APP = /FBAN|FBAV|Instagram|Line\/|MicroMessenger|TikTok|Snapchat|Messenger|; wv\)/i.test(navigator.userAgent);
+  if(IN_APP) stepMethod.insertAdjacentHTML('afterbegin', '<div class="inapp-warn"><b>تنبيه:</b> أنت تتصفح من داخل تطبيق (فيسبوك / انستغرام...) وقد يمنع Google وFacebook تسجيل الدخول هنا. افتح الرابط في <b>Chrome أو Safari</b> (زر ⋮ ثم «فتح في المتصفح»)، أو سجّل الدخول بالبريد الإلكتروني.</div>');
+  if(auth && auth.getRedirectResult){ auth.getRedirectResult().then(r=>{ if(r && r.user) afterAuthSuccess(r.user); }).catch(e=>{ if(e && e.code !== 'auth/no-auth-event') console.warn(e); }); }
   document.getElementById('openAuthBtn').addEventListener('click', openModal);
   document.getElementById('closeAuthBtn').addEventListener('click', closeModal);
   overlay.addEventListener('click', (e)=>{ if(e.target === overlay) closeModal(); });
@@ -3308,8 +3818,10 @@
         if(document.getElementById('openAuthBtn')) renderLoggedInUI(user, currentUserProfile);
       }
       if(user && !currentUserProfile && !isOwnerAccount(user) && !(db === null)){ promptCompleteProfile(user); }
+      if(user) startUserWatches(user, currentUserProfile); else stopUserWatches();
       renderParentsSpace(user, currentUserProfile);
       renderQA();
+      renderPolls();
       if(location.hash.replace('#','') === 'parents-chat') renderParentsChatPage(user, currentUserProfile);
     });
   } else {
@@ -3415,7 +3927,9 @@
     if(diff === 1) return 'أمس';
     return d.toLocaleDateString('ar-DZ', { weekday:'long', day:'numeric', month:'long' });
   }
+  let chatFitCleanup = null;
   function renderParentsChatPage(user, profile){
+    if(chatFitCleanup){ chatFitCleanup(); chatFitCleanup = null; }
     const wrap = document.getElementById('parentsChatContent');
     if(parentsChatUnsub){ parentsChatUnsub(); parentsChatUnsub = null; }
     const owner = isOwnerAccount(user);
@@ -3431,11 +3945,14 @@
           <a href="#parents" class="chat-hbtn" aria-label="عودة">${ic('arrow')}</a>
           <div class="chat-gavatar">${ic('users')}</div>
           <div class="chat-titles"><h3>أولياء متوسطة شعيبي بومدين</h3><small><i></i><span id="chatSub">جاري الاتصال...</span></small></div>
+          <a href="#home" class="chat-hbtn chat-menu-btn" aria-label="الرئيسية">${ic('home')}</a>
+          <button class="chat-hbtn" id="chatMenuBtn" type="button" aria-label="التنقل في الموقع">${ic('grid')}</button>
         </div>
         <div class="chat-scroll" id="chatScroll"><div class="chat-skel"><div></div><div></div><div></div><div></div></div></div>
         <button class="chat-down" id="chatDown" aria-label="إلى آخر رسالة">${ic('down')}<b id="chatDownBadge"></b></button>
         <div class="chat-bar" id="chatReplyBar"><div class="qb"><b id="crName"></b><span id="crText"></span></div><button class="x" id="crClose" aria-label="إلغاء الرد">${ic('x')}</button></div>
         <div class="chat-bar" id="chatImgBar"><img id="chatImgPrev" alt=""><div class="qb"><b>صورة جاهزة للإرسال</b></div><button class="x" id="ciClose" aria-label="إزالة">${ic('x')}</button></div>
+        <div class="sheet-bd" id="sheetBd"></div><div class="chat-sheet" id="actSheet"></div><div class="chat-sheet" id="navSheet"></div>
         <div class="emoji-panel" id="emojiPanel">${CHAT_EMOJIS.map(e=> `<button type="button">${e}</button>`).join('')}</div>
         <div class="chat-composer">
           <div class="chat-input-wrap">
@@ -3453,6 +3970,55 @@
     const canDel = m => owner || m.uid === user.uid;
     const nearBottom = ()=> scroll.scrollHeight - scroll.scrollTop - scroll.clientHeight < 160;
     const toBottom = (smooth)=>{ scroll.scrollTo({ top: scroll.scrollHeight, behavior: smooth ? 'smooth' : 'auto' }); unread = 0; $('chatDown').classList.remove('show'); $('chatDownBadge').textContent = ''; };
+
+    const mobileChat = ()=> window.matchMedia('(max-width:880px)').matches;
+    const sheetBd = $('sheetBd'), actSheet = $('actSheet'), navSheet = $('navSheet');
+    function closeSheets(){ sheetBd.classList.remove('show'); actSheet.classList.remove('show'); navSheet.classList.remove('show'); }
+    function openActSheet(id){
+      const m = msgs.find(x=> x.id === id); if(!m) return;
+      const mine = (m.reactions || {})[user.uid];
+      actSheet.dataset.id = id;
+      actSheet.innerHTML = `<div class="sh-handle"></div><div class="sh-prev">${escapeHtml((m.text || '📷 صورة').slice(0, 160))}</div>
+        <div class="sh-react">${Object.keys(CHAT_REACTS).map(c=> `<button type="button" data-sr="${c}" class="${mine === c ? 'mine' : ''}" aria-label="${c}">${CHAT_REACTS[c]}</button>`).join('')}</div>
+        <button type="button" class="sh-act" data-sa="reply">${ic('reply')} رد على الرسالة</button>
+        ${m.text ? `<button type="button" class="sh-act" data-sa="copy">${ic('file')} نسخ النص</button>` : ''}
+        ${!canDel(m) ? `<button type="button" class="sh-act danger" data-sa="report">${ic('flag')} إبلاغ عن إساءة</button>` : ''}
+        ${canDel(m) ? `<button type="button" class="sh-act danger" data-sa="del">${ic('trash')} حذف الرسالة</button>` : ''}`;
+      sheetBd.classList.add('show'); actSheet.classList.add('show'); navSheet.classList.remove('show');
+    }
+    function openNavSheet(){
+      const links = [['#home','home','الرئيسية'],['#news','newspaper','الأخبار والمناسبات'],['#timetable','calendar','جدول الحصص'],['#media','play','الوسائط'],['#qa','message','فضاء الأسئلة'],['#parents','users','فضاء الأولياء'],['#about','info','عن المتوسطة']];
+      navSheet.innerHTML = '<div class="sh-handle"></div>' + links.map(l=> `<a class="sh-act" href="${l[0]}">${ic(l[1])} ${l[2]}</a>`).join('') + `<button type="button" class="sh-act" data-sa="down">${ic('down')} الانتقال لآخر رسالة</button>`;
+      sheetBd.classList.add('show'); navSheet.classList.add('show'); actSheet.classList.remove('show');
+    }
+    sheetBd.addEventListener('click', closeSheets);
+    actSheet.addEventListener('click', async (e)=>{
+      const r = e.target.closest('[data-sr]'), a = e.target.closest('[data-sa]');
+      const id = actSheet.dataset.id, m = msgs.find(x=> x.id === id);
+      if(!m){ closeSheets(); return; }
+      if(r){ react(id, r.dataset.sr); closeSheets(); return; }
+      if(!a) return;
+      const k = a.dataset.sa; closeSheets();
+      if(k === 'reply') setReply(m);
+      else if(k === 'copy'){ try{ await navigator.clipboard.writeText(m.text || ''); showToast('تم نسخ النص.'); }catch(err){ showToast('تعذر نسخ النص.', true); } }
+      else if(k === 'report') reportContent({ type:'chat', path:'parentsGeneralChat/' + id, text:m.text || '📷 صورة', author:m.author, authorUid:m.uid, link:'#parents-chat' });
+      else if(k === 'del'){ if(await showConfirm('هل تريد حذف هذه الرسالة؟')){ try{ await col.doc(id).delete(); }catch(err){ showToast('تعذر حذف الرسالة.', true); } } }
+    });
+    navSheet.addEventListener('click', (e)=>{ if(e.target.closest('a')) closeSheets(); else if(e.target.closest('[data-sa="down"]')){ closeSheets(); toBottom(true); } });
+    $('chatMenuBtn').addEventListener('click', openNavSheet);
+    const chatRoot = wrap.querySelector('.chatapp'), vv = window.visualViewport;
+    function fit(){
+      if(!mobileChat()){ chatRoot.style.removeProperty('--vvh'); chatRoot.style.removeProperty('--vtop'); return; }
+      const was = nearBottom();
+      chatRoot.style.setProperty('--vvh', (vv ? vv.height : window.innerHeight) + 'px');
+      chatRoot.style.setProperty('--vtop', (vv ? vv.offsetTop : 0) + 'px');
+      if(was) toBottom(false);
+    }
+    if(vv){ vv.addEventListener('resize', fit); vv.addEventListener('scroll', fit); }
+    window.addEventListener('resize', fit); window.addEventListener('orientationchange', fit);
+    chatFitCleanup = ()=>{ if(vv){ vv.removeEventListener('resize', fit); vv.removeEventListener('scroll', fit); } window.removeEventListener('resize', fit); window.removeEventListener('orientationchange', fit); };
+    fit();
+    input.addEventListener('focus', ()=> setTimeout(()=> toBottom(false), 320));
 
     function draw(){
       if(!msgs.length){
@@ -3534,7 +4100,7 @@
         return;
       }
       if(pill){ react(pill.dataset.id, pill.dataset.react); return; }
-      if(pic){ lightboxImg.src = pic.src; lightboxOverlay.style.display = 'flex'; return; }
+      if(pic){ openViewer([pic.src], 0); return; }
       if(jump){
         const t = document.getElementById('m-' + jump.dataset.jump);
         if(t){ t.scrollIntoView({ block:'center', behavior:'smooth' }); t.animate([{ background:'rgba(230,196,103,.5)' }, { background:'transparent' }], { duration:1400 }); }
@@ -3542,8 +4108,11 @@
       }
       const msgEl = e.target.closest('.msg');
       scroll.querySelectorAll('.msg.sel').forEach(x=> x.classList.remove('sel'));
-      if(msgEl && e.target.closest('.bub') && selId !== msgEl.dataset.id){ selId = msgEl.dataset.id; msgEl.classList.add('sel'); }
-      else selId = null;
+      if(msgEl && e.target.closest('.bub')){
+        if(mobileChat()){ selId = null; openActSheet(msgEl.dataset.id); return; }
+        if(selId !== msgEl.dataset.id){ selId = msgEl.dataset.id; msgEl.classList.toggle('below', msgEl.offsetTop - scroll.scrollTop < 70); msgEl.classList.add('sel'); }
+        else selId = null;
+      } else selId = null;
     });
     $('crClose').addEventListener('click', ()=>{ replyTo = null; $('chatReplyBar').classList.remove('show'); });
     $('ciClose').addEventListener('click', ()=>{ pendingImg = null; $('chatImgBar').classList.remove('show'); $('chatImgInput').value = ''; });
@@ -3659,11 +4228,11 @@
     });
     return res.sort((a, b)=> b.score - a.score);
   }
-  function getRecent(){ try{ return JSON.parse(localStorage.getItem('searchRecent') || '[]'); }catch(e){ return []; } }
+  function getRecent(){ try{ return JSON.parse(LS.get('searchRecent') || '[]'); }catch(e){ return []; } }
   function saveRecent(q){
     q = q.trim(); if(!q) return;
     const r = [q, ...getRecent().filter(x=> x !== q)].slice(0, 6);
-    try{ localStorage.setItem('searchRecent', JSON.stringify(r)); }catch(e){}
+    try{ LS.set('searchRecent', JSON.stringify(r)); }catch(e){}
   }
   function suggestWords(q){
     const parts = q.split(/\s+/); const last = normAr(parts[parts.length - 1] || '');
@@ -3695,7 +4264,7 @@
       searchBody.innerHTML = h + '<div id="srList"></div>';
       drawList(document.getElementById('srList'), searchFlat, []);
       searchBody.querySelectorAll('[data-q]').forEach(b=> b.onclick = ()=>{ searchInput.value = b.dataset.q; renderSearch(); });
-      const cb = searchBody.querySelector('[data-clear]'); if(cb) cb.onclick = ()=>{ localStorage.removeItem('searchRecent'); renderSearch(); };
+      const cb = searchBody.querySelector('[data-clear]'); if(cb) cb.onclick = ()=>{ LS.remove('searchRecent'); renderSearch(); };
       return;
     }
     const sug = suggestWords(q);
@@ -3771,7 +4340,10 @@
       hero.addEventListener('pointerleave', ()=>{ scene.style.setProperty('--rx', '0deg'); scene.style.setProperty('--ry', '0deg'); });
     }
     if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
-      window.addEventListener('load', ()=> navigator.serviceWorker.register('sw.js').catch(()=>{}));
+      window.addEventListener('load', ()=> navigator.serviceWorker.register('sw.js').then(reg=>{
+        reg.addEventListener('updatefound', ()=>{ const nw = reg.installing; if(nw) nw.addEventListener('statechange', ()=>{ if(nw.state === 'installed' && navigator.serviceWorker.controller) showUpdateToast(); }); });
+      }).catch(()=>{}));
+      navigator.serviceWorker.addEventListener('message', (e)=>{ if(e.data && e.data.type === 'nav' && e.data.hash) location.hash = e.data.hash; });
     }
   })();
 
@@ -3801,9 +4373,10 @@
     if(bc) bc.textContent = n.title;
     const gallery = (n.gallery || []).map(src=> `<img src="${safeImg(src)}" style="width:100%; border-radius:14px; margin-bottom:12px;">`).join('');
     const shareUrl = location.origin + location.pathname + '#article-' + n.id;
+    const readMin = Math.max(1, Math.round(stripHtml(fullTextHtml).split(/\s+/).filter(Boolean).length / 170));
 
     wrap.innerHTML = `
-      <div class="date-badge" style="display:inline-block; margin-bottom:10px;">${escapeHtml(n.date)} · ${escapeHtml(n.cat)}</div>
+      <div class="date-badge" style="display:inline-block; margin-bottom:10px;">${escapeHtml(n.date)} · ${escapeHtml(n.cat)}<span class="read-time">· ⏱ ${readMin} د قراءة</span></div>
       <h1 style="font-size:1.6rem; margin-bottom:16px;">${escapeHtml(n.title)}</h1>
       ${n.image ? `<img src="${safeImg(n.image)}" style="width:100%; border-radius:16px; margin-bottom:20px;">` : ''}
       <div class="article-rich-content" style="font-size:.98rem; line-height:2; color:var(--ink); margin-bottom:20px;">${fullTextHtml}</div>
@@ -3872,7 +4445,7 @@
           ${avatarHtml(c.author, c.authorPhoto, 28)}
           <div style="flex:1; min-width:0;">
             <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:6px;">
-              <div style="font-weight:700; font-size:.85rem; color:var(--royal);">${escapeHtml(c.author||'مستخدم')}${nameBadge(c.isOwner)}</div>
+              <div style="font-weight:700; font-size:.85rem; color:var(--link);">${escapeHtml(c.author||'مستخدم')}${nameBadge(c.isOwner)}</div>
               ${!canManage ? `<button class="item-del-btn report-btn" data-report-comment="${d.id}" title="إبلاغ" aria-label="إبلاغ" style="color:var(--muted);">${ic('flag')}</button>` : ''}${canManage ? `<span style="display:flex; gap:8px; flex-shrink:0;">
                 <button class="item-del-btn" data-edit-comment="${d.id}" title="تعديل" style="color:var(--muted);"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4l11-11-4-4L4 16v4z"/></svg></button>
                 <button class="item-del-btn" data-del-comment="${d.id}" title="حذف" style="color:var(--muted);"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 7h14M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2m-8 0 1 13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1l1-13"/></svg></button>
@@ -3968,28 +4541,27 @@
   // ================= الوضع الداكن =================
   const SUN_PATH = '<circle cx="12" cy="12" r="4.5"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/>';
   const MOON_PATH = '<path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/>';
+  const EYE_PATH = '<path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>';
+  const THEME_ORDER = ['light', 'sepia', 'dark'];
+  const THEME_META = { light:{ icon:SUN_PATH, label:'الوضع الفاتح', color:'#0e3b4c' }, sepia:{ icon:EYE_PATH, label:'وضع مريح للعين', color:'#7a5a1f' }, dark:{ icon:MOON_PATH, label:'الوضع الداكن', color:'#0a1d26' } };
+  function savedTheme(){ let s = 'light'; try{ s = localStorage.getItem('theme') || 'light'; }catch(e){} return THEME_ORDER.includes(s) ? s : 'light'; }
   function applyDarkModePreference(){
-    const saved = localStorage.getItem('theme');
-    const icon = document.getElementById('darkModeIcon');
-    const navIcon = document.getElementById('navDarkModeIcon');
-    const navLabel = document.getElementById('navDarkModeLabel');
-    if(saved === 'dark'){
-      document.documentElement.setAttribute('data-theme', 'dark');
-      if(icon) icon.innerHTML = SUN_PATH;
-      if(navIcon) navIcon.innerHTML = SUN_PATH;
-      if(navLabel) navLabel.textContent = 'الوضع الفاتح';
-    } else {
-      document.documentElement.removeAttribute('data-theme');
-      if(icon) icon.innerHTML = MOON_PATH;
-      if(navIcon) navIcon.innerHTML = MOON_PATH;
-      if(navLabel) navLabel.textContent = 'الوضع الداكن';
-    }
+    const cur = savedTheme();
+    if(cur === 'light') document.documentElement.removeAttribute('data-theme'); else document.documentElement.setAttribute('data-theme', cur);
+    const next = THEME_ORDER[(THEME_ORDER.indexOf(cur) + 1) % THEME_ORDER.length];
+    const icon = document.getElementById('darkModeIcon'), navIcon = document.getElementById('navDarkModeIcon'), navLabel = document.getElementById('navDarkModeLabel');
+    if(icon) icon.innerHTML = THEME_META[next].icon;
+    if(navIcon) navIcon.innerHTML = THEME_META[next].icon;
+    if(navLabel) navLabel.textContent = THEME_META[next].label;
+    const btn = document.getElementById('darkModeBtn'); if(btn) btn.title = 'التبديل إلى: ' + THEME_META[next].label;
+    const mt = document.querySelector('meta[name="theme-color"]'); if(mt) mt.setAttribute('content', THEME_META[cur].color);
   }
   applyDarkModePreference();
   function toggleDarkMode(){
-    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    const cur = savedTheme(), next = THEME_ORDER[(THEME_ORDER.indexOf(cur) + 1) % THEME_ORDER.length];
+    try{ localStorage.setItem('theme', next); }catch(e){}
     applyDarkModePreference();
+    showToast('المظهر: ' + THEME_META[next].label);
   }
   document.getElementById('darkModeBtn').addEventListener('click', toggleDarkMode);
   document.getElementById('navDarkModeBtn').addEventListener('click', ()=>{
@@ -4061,22 +4633,47 @@
     const navKey = target === 'article' ? 'news' : (target === 'parents-chat' ? 'parents' : target);
     document.querySelectorAll('.bnav-item').forEach(a=> a.classList.toggle('active', a.dataset.sec === navKey));
     document.body.classList.toggle('on-chat', target === 'parents-chat');
+    document.documentElement.classList.toggle('chat-open', target === 'parents-chat');
+    if(target !== 'parents-chat' && typeof parentsChatUnsub === 'function'){ parentsChatUnsub(); parentsChatUnsub = null; }
+    if(target === 'article') markSeen(['news:' + rawHash.replace('article-', '')]); else notifVisit(target);
     document.title = (target === 'home' ? 'متوسطة شعيبي بومدين — الفضاء الرقمي' : (SECTION_TITLES[target] || '') + ' | متوسطة شعيبي بومدين');
     window.scrollTo(0, 0);
   }
   window.addEventListener('hashchange', showMainSection);
 
-  // ================= معاين الصور (Lightbox) =================
+  // ================= عارض الصور (تنقل + تكبير + سحب) =================
   const lightboxOverlay = document.getElementById('lightboxOverlay');
   const lightboxImg = document.getElementById('lightboxImg');
+  const viewer = { list:[], i:0 };
+  function drawViewer(){
+    lightboxImg.classList.remove('zoom'); lightboxImg.src = viewer.list[viewer.i];
+    const multi = viewer.list.length > 1;
+    document.getElementById('vwPrev').hidden = !multi; document.getElementById('vwNext').hidden = !multi;
+    const c = document.getElementById('vwCount'); c.hidden = !multi; c.textContent = (viewer.i + 1) + ' / ' + viewer.list.length;
+  }
+  function openViewer(list, i){ viewer.list = list; viewer.i = i || 0; drawViewer(); lightboxOverlay.style.display = 'flex'; }
+  function closeViewer(){ lightboxOverlay.style.display = 'none'; lightboxImg.classList.remove('zoom'); }
+  function stepViewer(d){ if(viewer.list.length < 2) return; viewer.i = (viewer.i + d + viewer.list.length) % viewer.list.length; drawViewer(); }
   document.addEventListener('click', (e)=>{
     const img = e.target.closest('#articleContent img');
-    if(img){
-      lightboxImg.src = img.src;
-      lightboxOverlay.style.display = 'flex';
-    }
+    if(img){ const imgs = [...document.querySelectorAll('#articleContent img')]; openViewer(imgs.map(x=> x.src), Math.max(0, imgs.indexOf(img))); }
   });
-  lightboxOverlay.addEventListener('click', ()=>{ lightboxOverlay.style.display = 'none'; });
+  lightboxImg.addEventListener('click', (e)=>{ e.stopPropagation(); lightboxImg.classList.toggle('zoom'); });
+  lightboxOverlay.addEventListener('click', (e)=>{ if(e.target === lightboxOverlay || e.target.classList.contains('vw-stage')) closeViewer(); });
+  document.getElementById('vwClose').addEventListener('click', (e)=>{ e.stopPropagation(); closeViewer(); });
+  document.getElementById('vwPrev').addEventListener('click', (e)=>{ e.stopPropagation(); stepViewer(-1); });
+  document.getElementById('vwNext').addEventListener('click', (e)=>{ e.stopPropagation(); stepViewer(1); });
+  document.addEventListener('keydown', (e)=>{
+    if(lightboxOverlay.style.display !== 'flex') return;
+    if(e.key === 'ArrowLeft') stepViewer(1); else if(e.key === 'ArrowRight') stepViewer(-1);
+  });
+  let vwX = null;
+  lightboxOverlay.addEventListener('touchstart', (e)=>{ vwX = e.touches[0].clientX; }, { passive:true });
+  lightboxOverlay.addEventListener('touchend', (e)=>{
+    if(vwX === null || lightboxImg.classList.contains('zoom')) { vwX = null; return; }
+    const dx = e.changedTouches[0].clientX - vwX; vwX = null;
+    if(Math.abs(dx) > 60) stepViewer(dx < 0 ? 1 : -1);
+  }, { passive:true });
   // ---------- زر العودة للأعلى + حالة الاتصال + مفتاح Esc ----------
   const backTop = document.getElementById('backTop');
   window.addEventListener('scroll', ()=> backTop.classList.toggle('show', window.scrollY > 600), { passive:true });
@@ -4136,6 +4733,7 @@
     }
   })();
   ensureSectionLoaded('info');
+  (window.requestIdleCallback || (f=> setTimeout(f, 1800)))(()=>{ ensureSectionLoaded('media'); ensureSectionLoaded('about'); startPolls(); startQaWatch(); }, { timeout:4000 });
   if('scrollRestoration' in history) history.scrollRestoration = 'manual';
   const _top = ()=>{ if(window.scrollY < 250) window.scrollTo(0, 0); };
   window.addEventListener('load', ()=>{ _top(); setTimeout(_top, 250); });
