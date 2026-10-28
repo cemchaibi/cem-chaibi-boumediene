@@ -11,14 +11,16 @@
 <meta property="og:title" content="متوسطة شعيبي بومدين وهران — Cem Chaibi Boumediene Oran">
 <meta property="og:description" content="أخبار، مناسبات، مواعيد تقييم، فضاء أسئلة، وفضاء أولياء — الموقع الرسمي لمتوسطة شعيبي بومدين، وهران.">
 <meta property="og:type" content="website">
-<meta name="twitter:image" content="https://cemchaibi.github.io/cem-chaibi-boumediene/logo.png">
+<meta name="twitter:image" content="https://cemchaibi.github.io/cem-chaibi-boumediene/og-image.png">
 <meta property="og:image:alt" content="شعار متوسطة شعيبي بومدين">
 <meta property="og:locale" content="ar_DZ">
 <meta property="og:site_name" content="متوسطة شعيبي بومدين">
 <!-- للتحقق من ملكية الموقع في Google Search Console: ضع هنا وسم google-site-verification الذي تمنحه لك المنصة -->
 <meta property="og:url" content="https://cemchaibi.github.io/cem-chaibi-boumediene/">
-<meta property="og:image" content="https://cemchaibi.github.io/cem-chaibi-boumediene/logo.png">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://cemchaibi.github.io/cem-chaibi-boumediene/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="apple-touch-icon" href="logo.png">
 <meta name="theme-color" content="#0e3b4c">
 <link rel="manifest" href="manifest.webmanifest">
@@ -76,7 +78,7 @@
   }
   html[data-theme="dark"] body{ color:var(--ink); }
   html[data-theme="dark"] .empty-note{ color:var(--muted); }
-  html[data-theme="dark"] .modal-box{ background:rgba(24,40,49,.82); color:var(--ink); border-color:rgba(255,255,255,.08); box-shadow:0 24px 60px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.05); }
+  html[data-theme="dark"] .modal-box{ background:rgba(24,40,49,.985); color:var(--ink); border-color:rgba(255,255,255,.08); box-shadow:0 24px 60px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.05); }
   html[data-theme="dark"] header{ background:rgba(10,30,38,.75); }
   html[data-theme="dark"] .q-body, html[data-theme="dark"] .article-rich-content{ color:var(--ink); }
   html[data-theme="dark"] .comment-composer{ background:var(--paper-2); border-color:var(--card-border); }
@@ -110,7 +112,7 @@
   a{color:inherit; text-decoration:none;}
   ul{list-style:none;}
   img{max-width:100%; display:block;}
-  button{font-family:inherit; cursor:pointer; border:none;}
+  button{font-family:inherit; cursor:pointer; border:none; background:transparent; color:inherit;}
 
   .container{max-width:1180px; margin:0 auto; padding:0 24px;}
 
@@ -218,7 +220,7 @@
   }
   .modal-overlay.open{display:flex;}
   .modal-box{
-    background:rgba(255,255,255,.78); border-radius:22px; padding:32px 30px; width:100%; max-width:420px;
+    background:rgba(255,255,255,.975); border-radius:22px; padding:32px 30px; width:100%; max-width:420px;
     position:relative; max-height:88vh; overflow-y:auto;
     box-shadow:0 24px 60px rgba(10,30,38,.35), inset 0 1px 0 rgba(255,255,255,.7);
     -webkit-backdrop-filter:blur(28px) saturate(190%);
@@ -1543,13 +1545,107 @@
   body.on-chat .site-banner, body.on-chat #scrollBar{ display:none !important; }
   html.chat-open{ overflow:hidden !important; height:100%; }
   @media (max-width:1400px) and (min-width:881px){ .brand-text{ display:none; } }
+
+  /* =====================================================================
+     الإصدار 6: إصلاح الأزرار، شعارات حقيقية، أسئلة محسّنة، وسائط تلقائية، هاتف
+     ===================================================================== */
+  :root{ --liked:#9a6b0f; }
+  html[data-theme="dark"]{ --liked:#f0cd6e; }
+  html[data-theme="sepia"]{ --liked:#8a5a0a; }
+  bdi{ unicode-bidi:isolate; }
+
+  /* أزرار صغيرة داخل البطاقات (كانت تظهر بيضاء في الوضع الداكن) */
+  .q-foot-item{ padding:6px 13px; border-radius:999px; background:var(--paper-2); color:var(--ink); border:1px solid var(--card-border); font-size:.8rem; font-weight:600; transition:background .2s, color .2s, transform .15s; }
+  .q-foot-item:hover{ background:color-mix(in srgb,var(--royal) 14%,var(--paper-2)); }
+  .q-foot-item:active{ transform:scale(.94); }
+  .q-foot-item.report-btn{ background:transparent; border-color:transparent; }
+  .sh-react button{ background:var(--card-bg); box-shadow:0 2px 8px rgba(0,0,0,.12); }
+  .sh-act{ background:transparent; }
+
+  /* ----- أزرار الدخول بشعارات رسمية ----- */
+  .auth-btn.google{ background:#fff !important; color:#3c4043 !important; border:1px solid #dadce0 !important; font-weight:600; }
+  .auth-btn.google:hover{ background:#f8f9fa !important; box-shadow:0 2px 10px rgba(60,64,67,.25); }
+  .auth-btn.facebook{ background:#1877F2 !important; color:#fff !important; border:1px solid #1877F2 !important; font-weight:600; }
+  .auth-btn.facebook:hover{ background:#166fe0 !important; }
+  .auth-btn svg{ width:22px; height:22px; flex-shrink:0; }
+  .brand-ic{ width:1.15em; height:1.15em; flex-shrink:0; vertical-align:-.22em; }
+  .soc-ic svg.brand{ width:22px; height:22px; fill:initial; }
+  .soc-ic{ background:rgba(255,255,255,.12); }
+  .soc-ic:hover{ background:rgba(255,255,255,.26); }
+
+  /* ----- تخطّي إلى المحتوى ----- */
+  .skip-link{ position:fixed; top:-60px; right:12px; z-index:5000; padding:10px 18px; border-radius:12px; background:var(--gold); color:var(--deep-2); font-weight:800; text-decoration:none; transition:top .25s; }
+  .skip-link:focus{ top:10px; }
+
+  /* ----- فلاتر الأسئلة ----- */
+  .qa-filters{ margin-bottom:18px; padding:14px; border-radius:20px; background:var(--card-bg); border:1px solid var(--card-border); }
+  .qa-filters .row{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-bottom:10px; }
+  .qa-filters .row:last-child{ margin-bottom:0; }
+  .qa-filters input[type=search]{ flex:1; min-width:170px; padding:10px 14px; border-radius:12px; border:1px solid var(--card-border); background:var(--paper-2); color:var(--ink); font-family:inherit; }
+  .qa-filters select{ padding:9px 12px; border-radius:12px; border:1px solid var(--card-border); background:var(--paper-2); color:var(--ink); font-family:inherit; }
+  .qa-filters .chips{ margin:0; }
+  .qa-count{ font-size:.78rem; color:var(--muted); }
+  .q-tag{ display:inline-flex; align-items:center; gap:4px; padding:2px 10px; border-radius:999px; font-size:.7rem; font-weight:800; margin-inline-start:6px; }
+  .q-tag.solved{ background:rgba(46,155,91,.16); color:#1e7a45; }
+  .q-tag.open{ background:rgba(224,69,58,.12); color:#b3342a; }
+  .q-tag.answered{ background:rgba(47,110,168,.14); color:var(--link); }
+  html[data-theme="dark"] .q-tag.solved{ color:#6fd69a; } html[data-theme="dark"] .q-tag.open{ color:#ff8a7a; }
+  .reply.best, .best-reply{ border:1.5px solid #2e9b5b !important; background:color-mix(in srgb,#2e9b5b 10%,var(--card-bg)) !important; position:relative; }
+  .best-label{ display:inline-flex; align-items:center; gap:5px; font-size:.72rem; font-weight:800; color:#1e7a45; margin-bottom:4px; }
+  html[data-theme="dark"] .best-label{ color:#6fd69a; }
+  .qa-note{ font-size:.76rem; color:var(--muted); margin:6px 0 0; line-height:1.8; }
+
+  /* ----- وسائط تلقائية ----- */
+  .auto-tag{ position:absolute; top:10px; left:10px; z-index:2; padding:3px 10px; border-radius:999px; background:rgba(46,155,91,.92); color:#fff; font-size:.66rem; font-weight:800; }
+  .site-banner.media{ background:linear-gradient(90deg,#c4302b,#e0453a,#c4302b); color:#fff; }
+  .site-banner.media button.watch{ position:static; transform:none; width:auto; height:auto; padding:3px 14px; border-radius:999px; background:#fff; color:#b3201b; font-weight:800; font-size:.8rem; }
+  .site-banner.media a{ color:#fff; }
+
+  /* ----- تجربة الهاتف والحركة ----- */
+  header{ transition:transform .35s cubic-bezier(.2,.8,.3,1), box-shadow .3s, background .3s; }
+  header.hdr-hide{ transform:translateY(-110%); }
+  .rv{ opacity:0; transform:translateY(22px) scale(.985); transition:opacity .6s cubic-bezier(.2,.8,.3,1), transform .6s cubic-bezier(.2,.8,.3,1); transition-delay:var(--d,0s); }
+  .rv.in{ opacity:1; transform:none; }
+  @media (hover:none){
+    .btn:active, .chip:active, .tab-btn:active, .auth-btn:active, .doc-item:active, .media-card:active, .ev-card:active{ transform:scale(.965); transition-duration:.08s; }
+    .news-card:active{ transform:scale(.982); transition-duration:.08s; }
+    .bnav-item:active .ic{ transform:scale(.85); }
+  }
+  @media (max-width:880px){
+    body{ padding-bottom:calc(86px + env(safe-area-inset-bottom)); }
+    .chip, .tab-btn, .pill-opt{ min-height:40px; }
+    .q-foot-item{ min-height:36px; }
+    .bnav-item{ padding:10px 2px 9px; }
+    .bnav-item.active::after{ content:''; position:absolute; inset:5px 6px; border-radius:14px; background:color-mix(in srgb,var(--gold) 16%,transparent); z-index:-1; animation:popIn .3s ease; }
+    .qa-filters{ padding:12px; }
+  }
+  html.lite .rv{ opacity:1; transform:none; transition:none; }
+  @media (prefers-reduced-motion: reduce){ .rv{ opacity:1; transform:none; transition:none; } header{ transition:none; } }
+  .modal-overlay{ -webkit-backdrop-filter:blur(7px); backdrop-filter:blur(7px); }
+
+  /* إصلاحات التباين المكتشفة بالفحص الآلي في الحالات التفاعلية */
+  .msg:not(.me) .bub .quote b{ color:var(--link); }
+  .msg:not(.me) .bub .quote{ background:rgba(0,0,0,.06); }
+  .bub .meta{ opacity:.8; }
+  .tt-empty{ opacity:.6; color:var(--muted); }
+  .or-sep span{ color:var(--muted) !important; background:var(--card-bg) !important; }
+  .t-item.past{ opacity:.9; }
+  html[data-theme="dark"] .t-card .t-date{ color:#ff9b8c; background:rgba(255,138,122,.14); }
+  html[data-theme="sepia"] .t-card .t-date{ color:#8d2f20; }
+  .q-foot-item.report-btn{ opacity:1; color:var(--muted); }
+  .q-foot-item.report-btn:hover{ color:#c0392b; }
+  html[data-theme="dark"] .q-foot-item.report-btn:hover, html[data-theme="dark"] .sh-act.danger, html[data-theme="dark"] .sh-act.danger .ic{ color:#ff8a7a; }
+  html[data-theme="dark"] .msg-actions button[style*="c0392b"]{ color:#ff8a7a !important; }
+  .msg.me .bub .quote b{ color:#fff6d6; }
+  .tt-empty{ opacity:1; color:var(--muted); }
 </style>
 
 </head>
 <body>
-<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true"><defs><symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9v10.5a1.5 1.5 0 0 0 1.5 1.5H10v-6h4v6h3.5a1.5 1.5 0 0 0 1.5-1.5V9"/></symbol><symbol id="i-newspaper" viewBox="0 0 24 24"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H17v16H6a2 2 0 0 1-2-2z"/><path d="M17 8h2.5A1.5 1.5 0 0 1 21 9.5V18a2 2 0 0 1-2 2h-2"/><path d="M8 8.5h5M8 12h5M8 15.5h3"/></symbol><symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="16.5" rx="3"/><path d="M8 2.5v4M16 2.5v4M3 10h18"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 17.5h.01M12 17.5h.01"/></symbol><symbol id="i-clipboard" viewBox="0 0 24 24"><rect x="5" y="3.5" width="14" height="17.5" rx="2.5"/><path d="M9 3.5h6V6H9z"/><path d="m9 13.5 2 2 4-4.5"/></symbol><symbol id="i-message" viewBox="0 0 24 24"><path d="M20.5 11.5a8 8 0 0 1-11.8 7L3.5 20l1.5-4.6A8 8 0 1 1 20.5 11.5z"/><path d="M9 11.5h.01M12 11.5h.01M15 11.5h.01"/></symbol><symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.7a3.5 3.5 0 0 1 0 6.6M18.5 14.2a6.5 6.5 0 0 1 3 5.8"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></symbol><symbol id="i-send" viewBox="0 0 24 24"><path d="M21.5 2.5 10.5 13.5"/><path d="m21.5 2.5-7 19-4-8.5-8.5-4z"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="m8 12.5 3 3 5-6"/></symbol><symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.3 3.9 1.9 18a2 2 0 0 0 1.7 3h16.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9.5v4M12 17h.01"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 2.8 4.5 5.6v5.7c0 4.6 3 8.2 7.5 9.9 4.5-1.7 7.5-5.3 7.5-9.9V5.6z"/><path d="m8.8 12 2.4 2.4 4-4.4"/></symbol><symbol id="i-login" viewBox="0 0 24 24"><path d="M14 3h4a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3h-4"/><path d="M9 7.5 4 12l5 4.5M4 12h12"/></symbol><symbol id="i-sparkles" viewBox="0 0 24 24"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4M5 17v4M3 19h4"/></symbol><symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5.2c2.2-1 5.2-1 8 1 2.8-2 5.8-2 8-1v13.6c-2.2-1-5.2-1-8 1-2.8-2-5.8-2-8-1z"/><path d="M12 6.2v13.6"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="m10 8.3 5.6 3.7-5.6 3.7z"/></symbol><symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M12 6.5V12l3.5 2"/></symbol><symbol id="i-printer" viewBox="0 0 24 24"><path d="M7 9V3.5h10V9"/><rect x="3" y="9" width="18" height="8" rx="2.5"/><path d="M7 14h10v6.5H7z"/></symbol><symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5.5M12 7.8h.01"/></symbol><symbol id="i-youtube" viewBox="0 0 24 24"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="m10 9.2 5 2.8-5 2.8z"/></symbol><symbol id="i-instagram" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.3 6.7h.01"/></symbol><symbol id="i-facebook" viewBox="0 0 24 24"><path d="M14 8.5V7a1.5 1.5 0 0 1 1.5-1.5H17V2.5h-2.5A4 4 0 0 0 10.5 6.5v2H8v3h2.5V21h3.5v-9.5h2.7l.5-3z"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol><symbol id="i-smile" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M8 14.2a5 5 0 0 0 8 0M9 9.5h.01M15 9.5h.01"/></symbol><symbol id="i-reply" viewBox="0 0 24 24"><path d="M9 14 4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 6 6v3"/></symbol><symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6"/><path d="M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12"/><path d="M9 7V4.5A1.5 1.5 0 0 1 10.5 3h3A1.5 1.5 0 0 1 15 4.5V7"/></symbol><symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.8"/><path d="m21 16-5-5-9 9"/></symbol><symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></symbol><symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11.5a7 7 0 0 0-14 0C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol><symbol id="i-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol><symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V4M5 5h12l-2 4 2 4H5"/></symbol><symbol id="i-file" viewBox="0 0 24 24"><path d="M6 3h8l5 5v13H6z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></symbol><symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></symbol><symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 17V11a6 6 0 0 1 12 0v6l1.5 2h-15z"/><path d="M10 21a2 2 0 0 0 4 0"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-grid" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></symbol><symbol id="i-bars" viewBox="0 0 24 24"><path d="M5 20V10M12 20V4M19 20v-7"/></symbol><symbol id="i-chev-l" viewBox="0 0 24 24"><path d="m15 6-6 6 6 6"/></symbol><symbol id="i-chev-r" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol></defs></svg>
+<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true"><defs><symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9v10.5a1.5 1.5 0 0 0 1.5 1.5H10v-6h4v6h3.5a1.5 1.5 0 0 0 1.5-1.5V9"/></symbol><symbol id="i-newspaper" viewBox="0 0 24 24"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H17v16H6a2 2 0 0 1-2-2z"/><path d="M17 8h2.5A1.5 1.5 0 0 1 21 9.5V18a2 2 0 0 1-2 2h-2"/><path d="M8 8.5h5M8 12h5M8 15.5h3"/></symbol><symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="16.5" rx="3"/><path d="M8 2.5v4M16 2.5v4M3 10h18"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 17.5h.01M12 17.5h.01"/></symbol><symbol id="i-clipboard" viewBox="0 0 24 24"><rect x="5" y="3.5" width="14" height="17.5" rx="2.5"/><path d="M9 3.5h6V6H9z"/><path d="m9 13.5 2 2 4-4.5"/></symbol><symbol id="i-message" viewBox="0 0 24 24"><path d="M20.5 11.5a8 8 0 0 1-11.8 7L3.5 20l1.5-4.6A8 8 0 1 1 20.5 11.5z"/><path d="M9 11.5h.01M12 11.5h.01M15 11.5h.01"/></symbol><symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.7a3.5 3.5 0 0 1 0 6.6M18.5 14.2a6.5 6.5 0 0 1 3 5.8"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></symbol><symbol id="i-send" viewBox="0 0 24 24"><path d="M21.5 2.5 10.5 13.5"/><path d="m21.5 2.5-7 19-4-8.5-8.5-4z"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="m8 12.5 3 3 5-6"/></symbol><symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.3 3.9 1.9 18a2 2 0 0 0 1.7 3h16.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9.5v4M12 17h.01"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 2.8 4.5 5.6v5.7c0 4.6 3 8.2 7.5 9.9 4.5-1.7 7.5-5.3 7.5-9.9V5.6z"/><path d="m8.8 12 2.4 2.4 4-4.4"/></symbol><symbol id="i-login" viewBox="0 0 24 24"><path d="M14 3h4a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3h-4"/><path d="M9 7.5 4 12l5 4.5M4 12h12"/></symbol><symbol id="i-sparkles" viewBox="0 0 24 24"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4M5 17v4M3 19h4"/></symbol><symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5.2c2.2-1 5.2-1 8 1 2.8-2 5.8-2 8-1v13.6c-2.2-1-5.2-1-8 1-2.8-2-5.8-2-8-1z"/><path d="M12 6.2v13.6"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="m10 8.3 5.6 3.7-5.6 3.7z"/></symbol><symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M12 6.5V12l3.5 2"/></symbol><symbol id="i-printer" viewBox="0 0 24 24"><path d="M7 9V3.5h10V9"/><rect x="3" y="9" width="18" height="8" rx="2.5"/><path d="M7 14h10v6.5H7z"/></symbol><symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5.5M12 7.8h.01"/></symbol><symbol id="i-youtube" viewBox="0 0 24 24"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="m10 9.2 5 2.8-5 2.8z"/></symbol><symbol id="i-instagram" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.3 6.7h.01"/></symbol><symbol id="i-facebook" viewBox="0 0 24 24"><path d="M14 8.5V7a1.5 1.5 0 0 1 1.5-1.5H17V2.5h-2.5A4 4 0 0 0 10.5 6.5v2H8v3h2.5V21h3.5v-9.5h2.7l.5-3z"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol><symbol id="i-smile" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M8 14.2a5 5 0 0 0 8 0M9 9.5h.01M15 9.5h.01"/></symbol><symbol id="i-reply" viewBox="0 0 24 24"><path d="M9 14 4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 6 6v3"/></symbol><symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6"/><path d="M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12"/><path d="M9 7V4.5A1.5 1.5 0 0 1 10.5 3h3A1.5 1.5 0 0 1 15 4.5V7"/></symbol><symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.8"/><path d="m21 16-5-5-9 9"/></symbol><symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></symbol><symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11.5a7 7 0 0 0-14 0C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol><symbol id="i-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol><symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V4M5 5h12l-2 4 2 4H5"/></symbol><symbol id="i-file" viewBox="0 0 24 24"><path d="M6 3h8l5 5v13H6z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></symbol><symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></symbol><symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 17V11a6 6 0 0 1 12 0v6l1.5 2h-15z"/><path d="M10 21a2 2 0 0 0 4 0"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-grid" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></symbol><symbol id="i-bars" viewBox="0 0 24 24"><path d="M5 20V10M12 20V4M19 20v-7"/></symbol><symbol id="i-chev-l" viewBox="0 0 24 24"><path d="m15 6-6 6 6 6"/></symbol><symbol id="i-chev-r" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol><symbol id="b-google" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></symbol><symbol id="b-facebook" viewBox="0 0 24 24"><path fill="#1877F2" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></symbol><symbol id="b-facebook-w" viewBox="0 0 24 24"><path fill="#fff" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></symbol><symbol id="b-instagram" viewBox="0 0 24 24"><defs><linearGradient id="igGrad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#FEDA75"/><stop offset="30%" stop-color="#FA7E1E"/><stop offset="55%" stop-color="#D62976"/><stop offset="80%" stop-color="#962FBF"/><stop offset="100%" stop-color="#4F5BD5"/></linearGradient></defs><rect x="1" y="1" width="22" height="22" rx="6.2" fill="url(#igGrad)"/><rect x="5.2" y="5.2" width="13.6" height="13.6" rx="4.2" fill="none" stroke="#fff" stroke-width="1.8"/><circle cx="12" cy="12" r="3.3" fill="none" stroke="#fff" stroke-width="1.8"/><circle cx="16.3" cy="7.7" r="1.1" fill="#fff"/></symbol><symbol id="b-youtube" viewBox="0 0 24 24"><rect x="1" y="4.4" width="22" height="15.2" rx="4.4" fill="#FF0000"/><path fill="#fff" d="M9.8 8.9v6.2L15.3 12z"/></symbol></defs></svg>
 <div id="scrollBar" aria-hidden="true"></div>
 <div id="siteBanner" class="site-banner" role="status" hidden></div>
+<a class="skip-link" id="skipLink" href="#">تخطَّ إلى المحتوى</a>
 <noscript><div style="background:#a8402f;color:#fff;padding:12px;text-align:center;">يتطلب هذا الموقع تفعيل JavaScript ليعمل بشكل صحيح.</div></noscript>
 
 <header>
@@ -1579,16 +1675,10 @@
     </nav>
     <div class="head-actions">
       <div class="social-row">
-        <a href="https://share.google/fVCazroCX34Up9VPe" target="_blank" rel="noopener" aria-label="فيسبوك" class="soc-ic">
-          <svg viewBox="0 0 24 24"><path d="M13.5 21v-7.7h2.6l.4-3h-3v-1.9c0-.87.24-1.46 1.5-1.46h1.6V4.3c-.28-.04-1.23-.12-2.34-.12-2.32 0-3.9 1.4-3.9 4V10.3H7.8v3h2.6V21h3.1z"/></svg>
-        </a>
-        <a href="https://share.google/dIt6zbO9FOyQWr9KF" target="_blank" rel="noopener" aria-label="انستغرام" class="soc-ic">
-          <svg viewBox="0 0 24 24"><path d="M12 3.6c2.4 0 2.7 0 3.66.05 2.4.11 3.53 1.25 3.64 3.64.05.96.05 1.24.05 3.66s0 2.7-.05 3.66c-.11 2.38-1.23 3.53-3.64 3.64-.96.05-1.24.05-3.66.05s-2.7 0-3.66-.05c-2.4-.11-3.53-1.25-3.64-3.64C4.65 13.7 4.65 13.42 4.65 11s0-2.7.05-3.66C4.81 5 5.94 3.85 8.34 3.74 9.3 3.7 9.58 3.6 12 3.6zm0-1.6C9.55 2 9.25 2 8.29 2.05c-3.1.14-4.82 1.86-4.96 4.96C3.28 8.02 3.28 8.32 3.28 12s0 3.98.05 4.99c.14 3.1 1.86 4.82 4.96 4.96 1.01.05 1.31.05 4.29.05s3.98 0 4.99-.05c3.1-.14 4.82-1.86 4.96-4.96.05-1.01.05-1.31.05-4.99s0-3.98-.05-4.99c-.14-3.1-1.86-4.82-4.96-4.96C15.98 2 15.68 2 12 2zm0 5.3a4.7 4.7 0 1 0 0 9.4 4.7 4.7 0 0 0 0-9.4zm0 7.7a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm5.9-7.9a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0z"/></svg>
-        </a>
-        <a href="https://share.google/ZutoycXpwLywmuaNu" target="_blank" rel="noopener" aria-label="يوتيوب" class="soc-ic">
-          <svg viewBox="0 0 24 24"><path d="M21.6 7.6a2.7 2.7 0 0 0-1.9-1.9C18 5.2 12 5.2 12 5.2s-6 0-7.7.5A2.7 2.7 0 0 0 2.4 7.6 28 28 0 0 0 2 12a28 28 0 0 0 .4 4.4 2.7 2.7 0 0 0 1.9 1.9c1.7.5 7.7.5 7.7.5s6 0 7.7-.5a2.7 2.7 0 0 0 1.9-1.9A28 28 0 0 0 22 12a28 28 0 0 0-.4-4.4zM10 15V9l5.2 3-5.2 3z"/></svg>
-        </a>
-        <a href="https://share.google/ZrWTth1lUYADKCIu3" target="_blank" rel="noopener" aria-label="الموقع الرسمي" class="soc-ic stroke-ic">
+        <a href="https://share.google/fVCazroCX34Up9VPe" target="_blank" rel="noopener" aria-label="فيسبوك" class="soc-ic" data-soc="facebook"><svg class="brand" viewBox="0 0 24 24" aria-hidden="true"><use href="#b-facebook"/></svg></a>
+        <a href="https://share.google/dIt6zbO9FOyQWr9KF" target="_blank" rel="noopener" aria-label="انستغرام" class="soc-ic" data-soc="instagram"><svg class="brand" viewBox="0 0 24 24" aria-hidden="true"><use href="#b-instagram"/></svg></a>
+        <a href="https://share.google/ZutoycXpwLywmuaNu" target="_blank" rel="noopener" aria-label="يوتيوب" class="soc-ic" data-soc="youtube"><svg class="brand" viewBox="0 0 24 24" aria-hidden="true"><use href="#b-youtube"/></svg></a>
+        <a href="https://share.google/ZrWTth1lUYADKCIu3" target="_blank" rel="noopener" aria-label="الموقع الرسمي" class="soc-ic stroke-ic" data-soc="web">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.4 3.8 5.6 3.8 9s-1.3 6.6-3.8 9c-2.5-2.4-3.8-5.6-3.8-9S9.5 5.4 12 3z"/></svg>
         </a>
       </div>
@@ -1614,15 +1704,9 @@
     <div class="modal-step" id="stepMethod">
       <div class="modal-logo"><img src="logo.png" alt=""></div>
       <h3>مرحباً بكم في فضاء المتوسطة</h3>
-      <p class="modal-sub">سجّلوا للوصول إلى فضاء الأسئلة ومتابعة الأولياء</p>
-      <button class="auth-btn google" id="authGoogle">
-        <svg viewBox="0 0 24 24" width="20" height="20"><path fill="#EA4335" d="M12 10.2v3.9h5.5c-.24 1.4-1.7 4.1-5.5 4.1-3.3 0-6-2.7-6-6.2s2.7-6.2 6-6.2c1.9 0 3.2.8 3.9 1.5l2.7-2.6C16.9 3.1 14.7 2 12 2 6.9 2 2.7 6.2 2.7 11.3S6.9 20.6 12 20.6c6.9 0 9.6-4.8 9.6-7.3 0-.5-.05-.9-.13-1.3H12z"/></svg>
-        متابعة عبر Google
-      </button>
-      <button class="auth-btn facebook" id="authFacebook">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="#fff"><path d="M13.5 21v-7.7h2.6l.4-3h-3v-1.9c0-.87.24-1.46 1.5-1.46h1.6V4.3c-.28-.04-1.23-.12-2.34-.12-2.32 0-3.9 1.4-3.9 4V10.3H7.8v3h2.6V21h3.1z"/></svg>
-        متابعة عبر Facebook
-      </button>
+      <p class="modal-sub">سجّلوا للوصول إلى فضاء الأسئلة، والتواصل مع الإدارة، ومتابعة أخبار التلميذ</p>
+      <button class="auth-btn google" id="authGoogle" type="button"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#b-google"/></svg>متابعة عبر Google</button>
+      <button class="auth-btn facebook" id="authFacebook" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#b-facebook-w"/></svg>متابعة عبر Facebook</button>
       <div class="or-sep"><span>أو</span></div>
       <button class="auth-btn outline" id="authEmailToggle">المتابعة بالبريد الإلكتروني</button>
 
@@ -1726,6 +1810,7 @@
       <button class="chip active" data-feed="all" role="tab">الكل</button>
       <button class="chip" data-feed="news" role="tab"><svg class="ic" aria-hidden="true"><use href="#i-newspaper"/></svg>الأخبار</button>
       <button class="chip" data-feed="events" role="tab"><svg class="ic" aria-hidden="true"><use href="#i-calendar"/></svg>المناسبات</button>
+      <button class="chip" data-feed="archive" role="tab"><svg class="ic" aria-hidden="true"><use href="#i-clock"/></svg>الأرشيف</button>
     </div>
     <div id="pollsBox"></div>
     <div id="eventsBlock">
@@ -1735,7 +1820,7 @@
     </div>
     <div id="newsBlock">
       <div class="block-title"><svg class="ic" aria-hidden="true"><use href="#i-newspaper"/></svg><span>آخر الأخبار</span></div>
-      <div class="news-legend"><span><i style="background:#c0392b"></i>عاجل / هام</span><span><i style="background:#2e9b5b"></i>أنشطة ومسابقات</span><span><i style="background:#2f6ea8"></i>تربوي ودراسي</span></div>
+      <div class="news-legend"><span><i style="background:#c0392b"></i>عاجل / هام</span><span><i style="background:#2e9b5b"></i>أنشطة ومسابقات</span><span><i style="background:#2f6ea8"></i>أخبار تربوية ودراسية</span></div>
       <div class="news-grid reveal-stagger" id="newsGrid">
         <div class="news-card skeleton-card"><div class="news-thumb skeleton-shimmer"></div><div class="news-body"><div class="skeleton-line" style="width:40%;"></div><div class="skeleton-line" style="width:80%;"></div></div></div>
         <div class="news-card skeleton-card"><div class="news-thumb skeleton-shimmer"></div><div class="news-body"><div class="skeleton-line" style="width:40%;"></div><div class="skeleton-line" style="width:80%;"></div></div></div>
@@ -1794,9 +1879,9 @@
     </div>
     <div class="chips center" id="mediaFilter">
       <button class="chip active" data-mf="all">الكل</button>
-      <button class="chip" data-mf="youtube"><svg class="ic" aria-hidden="true"><use href="#i-youtube"/></svg>يوتيوب</button>
-      <button class="chip" data-mf="instagram"><svg class="ic" aria-hidden="true"><use href="#i-instagram"/></svg>انستغرام</button>
-      <button class="chip" data-mf="facebook"><svg class="ic" aria-hidden="true"><use href="#i-facebook"/></svg>فيسبوك</button>
+      <button class="chip" data-mf="youtube"><svg class="brand-ic" aria-hidden="true"><use href="#b-youtube"/></svg>يوتيوب</button>
+      <button class="chip" data-mf="instagram"><svg class="brand-ic" aria-hidden="true"><use href="#b-instagram"/></svg>انستغرام</button>
+      <button class="chip" data-mf="facebook"><svg class="brand-ic" aria-hidden="true"><use href="#b-facebook"/></svg>فيسبوك</button>
     </div>
     <div class="media-grid reveal-stagger" id="mediaGrid"></div>
   </div>
@@ -1876,7 +1961,7 @@
       <div class="tag"><svg class="ic" aria-hidden="true"><use href="#i-message"/></svg>فضاء تفاعلي</div>
       <h2>اسأل، ناقش، وحلّ التمارين</h2>
       <p>منصة يطرح فيها التلاميذ أسئلتهم حول الدروس والتمارين، ويتناقشون فيما بينهم وبمساعدة الأساتذة.</p>
-      <p class="badge-legend">الشارات: 🌱 مساهم (3 ردود) · 🤝 تلميذ متعاون (8) · ⭐ نجم المساعدة (15) · 🏅 متميز في مادة (4 ردود فيها)</p>
+      <p class="badge-legend">الشارات تُمنح عن الردود <b>النافعة فقط</b> (التي نالت إعجاباً أو اختارها صاحب السؤال أفضل إجابة): 🌱 مساهم (3) · 🤝 تلميذ متعاون (8) · ⭐ نجم المساعدة (15) · 🏅 متميز في مادة (4 ردود نافعة فيها)</p>
     </div>
     <div class="qa-wrap reveal">
       <div class="qa-compose">
@@ -1891,6 +1976,7 @@
         </div>
         <img id="qaAttachPreview" style="max-width:140px; border-radius:10px; margin-bottom:8px; display:none;">
         <div class="qa-row">
+          <select id="qaLevel" aria-label="المستوى"><option value="">المستوى (اختياري)</option><option>الأولى متوسط</option><option>الثانية متوسط</option><option>الثالثة متوسط</option><option>الرابعة متوسط</option></select>
           <select id="qaSubject">
             <option>رياضيات</option>
             <option>فيزياء</option>
@@ -1903,6 +1989,16 @@
           <button class="btn" id="qaSubmit"><svg class="ic" aria-hidden="true"><use href="#i-send"/></svg>نشر السؤال</button>
         </div>
       </div>
+      <p class="qa-note" style="margin:-6px 4px 14px;">🔒 لا تكتب رقم هاتفك أو بريدك أو حساباتك على مواقع التواصل في الأسئلة والردود. تُحجب الرسائل التي تحتوي بيانات شخصية حفاظاً على سلامتك.</p>
+      <div class="qa-filters" id="qaFilters">
+        <div class="row">
+          <input type="search" id="qaSearch" placeholder="ابحث في الأسئلة والردود..." aria-label="بحث في الأسئلة">
+          <select id="qaLevelF" aria-label="تصفية حسب المستوى"><option value="">كل المستويات</option><option>الأولى متوسط</option><option>الثانية متوسط</option><option>الثالثة متوسط</option><option>الرابعة متوسط</option></select>
+          <select id="qaSort" aria-label="الترتيب"><option value="new">الأحدث</option><option value="useful">الأكثر فائدة</option><option value="likes">الأكثر إعجاباً</option><option value="replies">الأكثر ردوداً</option></select>
+        </div>
+        <div class="row"><div class="chips" id="qaSubjChips"></div></div>
+        <div class="row"><div class="chips" id="qaStatusChips"></div><span class="qa-count" id="qaCount"></span></div>
+      </div>
       <div id="qaList"></div>
     </div>
   </div>
@@ -1914,7 +2010,7 @@
     <div class="section-head reveal">
       <div class="tag"><svg class="ic" aria-hidden="true"><use href="#i-shield"/></svg>مخصص للأولياء فقط</div>
       <h3>فضاء الأولياء</h3>
-      <p>فضاء خاص لا يظهر محتواه إلا لحساب ولي التلميذ — دردشة عامة مع أولياء آخرين حول المتوسطة وأبنائهم.</p>
+      <p>فضاء تواصل خاص بالأولياء تحت إشراف الإدارة، لا يظهر محتواه إلا لحساب ولي التلميذ.</p>
     </div>
     <div id="parentsGate"></div>
   </div>
@@ -2061,15 +2157,9 @@
         </div>
         <p>فضاء رقمي يجمع أخبار المتوسطة، مناسباتها، ومواعيد تقييم التلاميذ، إلى جانب منصة تفاعلية للأسئلة وفضاء خاص بالأولياء.</p>
         <div class="social-row" style="margin-top:16px;">
-          <a href="https://share.google/fVCazroCX34Up9VPe" target="_blank" rel="noopener" aria-label="فيسبوك" class="soc-ic">
-            <svg viewBox="0 0 24 24"><path d="M13.5 21v-7.7h2.6l.4-3h-3v-1.9c0-.87.24-1.46 1.5-1.46h1.6V4.3c-.28-.04-1.23-.12-2.34-.12-2.32 0-3.9 1.4-3.9 4V10.3H7.8v3h2.6V21h3.1z"/></svg>
-          </a>
-          <a href="https://share.google/dIt6zbO9FOyQWr9KF" target="_blank" rel="noopener" aria-label="انستغرام" class="soc-ic">
-            <svg viewBox="0 0 24 24"><path d="M12 3.6c2.4 0 2.7 0 3.66.05 2.4.11 3.53 1.25 3.64 3.64.05.96.05 1.24.05 3.66s0 2.7-.05 3.66c-.11 2.38-1.23 3.53-3.64 3.64-.96.05-1.24.05-3.66.05s-2.7 0-3.66-.05c-2.4-.11-3.53-1.25-3.64-3.64C4.65 13.7 4.65 13.42 4.65 11s0-2.7.05-3.66C4.81 5 5.94 3.85 8.34 3.74 9.3 3.7 9.58 3.6 12 3.6zm0-1.6C9.55 2 9.25 2 8.29 2.05c-3.1.14-4.82 1.86-4.96 4.96C3.28 8.02 3.28 8.32 3.28 12s0 3.98.05 4.99c.14 3.1 1.86 4.82 4.96 4.96 1.01.05 1.31.05 4.29.05s3.98 0 4.99-.05c3.1-.14 4.82-1.86 4.96-4.96.05-1.01.05-1.31.05-4.99s0-3.98-.05-4.99c-.14-3.1-1.86-4.82-4.96-4.96C15.98 2 15.68 2 12 2zm0 5.3a4.7 4.7 0 1 0 0 9.4 4.7 4.7 0 0 0 0-9.4zm0 7.7a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm5.9-7.9a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0z"/></svg>
-          </a>
-          <a href="https://share.google/ZutoycXpwLywmuaNu" target="_blank" rel="noopener" aria-label="يوتيوب" class="soc-ic">
-            <svg viewBox="0 0 24 24"><path d="M21.6 7.6a2.7 2.7 0 0 0-1.9-1.9C18 5.2 12 5.2 12 5.2s-6 0-7.7.5A2.7 2.7 0 0 0 2.4 7.6 28 28 0 0 0 2 12a28 28 0 0 0 .4 4.4 2.7 2.7 0 0 0 1.9 1.9c1.7.5 7.7.5 7.7.5s6 0 7.7-.5a2.7 2.7 0 0 0 1.9-1.9A28 28 0 0 0 22 12a28 28 0 0 0-.4-4.4zM10 15V9l5.2 3-5.2 3z"/></svg>
-          </a>
+          <a href="https://share.google/fVCazroCX34Up9VPe" target="_blank" rel="noopener" aria-label="فيسبوك" class="soc-ic" data-soc="facebook"><svg class="brand" viewBox="0 0 24 24" aria-hidden="true"><use href="#b-facebook"/></svg></a>
+          <a href="https://share.google/dIt6zbO9FOyQWr9KF" target="_blank" rel="noopener" aria-label="انستغرام" class="soc-ic" data-soc="instagram"><svg class="brand" viewBox="0 0 24 24" aria-hidden="true"><use href="#b-instagram"/></svg></a>
+          <a href="https://share.google/ZutoycXpwLywmuaNu" target="_blank" rel="noopener" aria-label="يوتيوب" class="soc-ic" data-soc="youtube"><svg class="brand" viewBox="0 0 24 24" aria-hidden="true"><use href="#b-youtube"/></svg></a>
         </div>
       </div>
       <div>
@@ -2205,14 +2295,14 @@
       cards += `<a href="#article-${escapeHtml(latestNews.id)}" class="highlight-card">
         <span class="hl-ic">${ic('newspaper')}</span><span class="hl-tag">آخر خبر</span>
         <h4>${escapeHtml(latestNews.title)}</h4>
-        <span class="hl-date">${escapeHtml(latestNews.date)}</span>
+        <span class="hl-date">${escapeHtml(newsDate(latestNews))}</span>
       </a>`;
     }
     if(nextEvent){
       cards += `<a href="#news" class="highlight-card">
         <span class="hl-ic">${ic('calendar')}</span><span class="hl-tag">أقرب مناسبة</span>
         <h4>${escapeHtml(nextEvent.title)}</h4>
-        <span class="hl-date">${escapeHtml(nextEvent.date)}</span>
+        <span class="hl-date">${escapeHtml(evDate(nextEvent))}</span>
       </a>`;
     }
     cards += `<a href="#timetable" class="highlight-card">
@@ -2298,7 +2388,7 @@
           const canvas = document.createElement('canvas');
           canvas.width = w; canvas.height = h;
           const ctx = canvas.getContext('2d'); ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, w, h); ctx.drawImage(img, 0, 0, w, h);
-          resolve(canvas.toDataURL('image/jpeg', quality));
+          let out = ''; try{ out = canvas.toDataURL('image/webp', quality); }catch(e){} resolve(out.startsWith('data:image/webp') ? out : canvas.toDataURL('image/jpeg', quality));
         };
         img.onerror = reject;
         img.src = e.target.result;
@@ -2344,7 +2434,7 @@
     loadP[section] = (async ()=>{
       if(section === 'news'){
         await Promise.all([
-          watchDoc('site-news', DEFAULT_NEWS, items=>{ siteNews = items || []; renderNews(); renderHomeHighlights(); }),
+          watchDoc('site-news', DEFAULT_NEWS, items=>{ siteNews = (items || []).filter(n=> !n.iso || n.iso <= todayIso()); renderNews(); renderHomeHighlights(); }),
           watchDoc('site-events', DEFAULT_EVENTS, items=>{ siteEvents = items || []; renderEventsV3(); renderHomeHighlights(); })
         ]);
       } else if(section === 'timetable'){
@@ -2353,9 +2443,9 @@
           watchDoc('site-timetable', {}, items=>{ siteTT = items || {}; renderTimetable(); })
         ]);
       } else if(section === 'media'){
-        await watchDoc('site-social', [], items=>{ siteMedia = items || []; renderMedia(); });
+        await Promise.all([ watchDoc('site-social', [], items=>{ siteMediaManual = items || []; rebuildMedia(); }), loadFeed() ]);
       } else if(section === 'info'){
-        await watchDoc('site-info', {}, items=>{ siteInfo = items || {}; renderAbout(); renderBanner(); });
+        await watchDoc('site-info', {}, items=>{ siteInfo = items || {}; renderAbout(); if(loadP.media) rebuildMedia(); else renderBanner(); });
       } else if(section === 'about'){
         await Promise.all([
           ensureSectionLoaded('info'),
@@ -2386,13 +2476,13 @@
     newsGrid.innerHTML = siteNews.slice().sort((a, b)=> (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0)).map(n=>{
       const timg = n.thumb || n.image;
       const thumb = timg
-        ? `<img loading="lazy" decoding="async" src="${safeImg(timg)}" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">`
+        ? `<img loading="lazy" decoding="async" src="${safeImg(timg)}" alt="${escapeHtml(n.title)}" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">`
         : icon(n.ic || 'newspaper', 26);
       return `
       <div class="news-card ${catClass(n.cat)}" data-open-article="${escapeHtml(n.id)}" style="cursor:pointer;">
         <div class="news-thumb ${timg ? '' : 'noimg'}" style="position:relative;">${thumb}</div>
         <div class="news-body">
-          <div class="date-badge">${escapeHtml(n.date)}${n.pinned ? `<span class="pin-badge">${ic('pin')} مثبّت</span>` : ''}</div>
+          <div class="date-badge">${escapeHtml(newsDate(n))}${n.pinned ? `<span class="pin-badge">${ic('pin')} مثبّت</span>` : ''}</div>
           <h3>${escapeHtml(n.title)}</h3>
           <p>${escapeHtml(n.excerpt)}</p>
           <div class="news-foot"><span class="news-cat ${catClass(n.cat)}">${escapeHtml(n.cat)}</span><span class="read-more">اقرأ المزيد ${ic('arrow')}</span></div>
@@ -2489,6 +2579,21 @@
   }
   function stripHtml(h){ const d = document.createElement('div'); d.innerHTML = String(h || ''); return d.textContent || ''; }
   const AR_MONTHS = ['جانفي','فيفري','مارس','أفريل','ماي','جوان','جويلية','أوت','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+  function toLatinDigits(s){ return String(s || '').replace(/[٠-٩]/g, d=> '٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[۰-۹]/g, d=> '۰۱۲۳۴۵۶۷۸۹'.indexOf(d)); }
+  function todayIso(){ return new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 10); }
+  function fmtIso(iso){ const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || ''); return m ? (+m[3]) + ' ' + AR_MONTHS[+m[2] - 1] + ' ' + m[1] : ''; }
+  function normalizeDateText(s){
+    s = toLatinDigits(s).replace(/\s+/g, ' ').trim();
+    let m = s.match(/^(\d{1,2})(20\d{2})\s*([^\d\s]+)$/); if(m) return m[1] + ' ' + m[3] + ' ' + m[2];
+    m = s.match(/^([^\d\s]+)\s*(\d{1,2})\s*,?\s*(20\d{2})$/); if(m) return m[2] + ' ' + m[1] + ' ' + m[3];
+    m = s.match(/^(\d{1,2})\s*[\/\-.]\s*(\d{1,2})\s*[\/\-.]\s*(20\d{2})$/); if(m && +m[2] >= 1 && +m[2] <= 12) return (+m[1]) + ' ' + AR_MONTHS[+m[2] - 1] + ' ' + m[3];
+    m = s.match(/^(20\d{2})\s*[\/\-.]\s*(\d{1,2})\s*[\/\-.]\s*(\d{1,2})$/); if(m && +m[2] >= 1 && +m[2] <= 12) return (+m[3]) + ' ' + AR_MONTHS[+m[2] - 1] + ' ' + m[1];
+    return s;
+  }
+  const newsDate = n => n.iso ? fmtIso(n.iso) : normalizeDateText(n.date);
+  const evDate = e => e.iso ? fmtIso(e.iso) : normalizeDateText(e.date);
+  function fmtDateAr(d){ return d.getDate() + ' ' + AR_MONTHS[d.getMonth()] + ' ' + d.getFullYear(); }
+  const brandIc = n => `<svg class="brand-ic" aria-hidden="true"><use href="#b-${n}"/></svg>`;
   const DAY_NAMES = ['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
   const SUBJ_PALETTE = ['#2f6ea8','#a8402f','#c99a2e','#5a8f3d','#3d9f8f','#7452a8','#b2691f','#d1558a','#4f6bd6','#6b8e23','#c0562b','#2a8ca0'];
   function subjColor(name){
@@ -2522,26 +2627,27 @@
     const strip = document.getElementById('eventsStrip');
     const tlEl = document.getElementById('timelineList');
     if(!strip || !tlEl) return;
-    const full = feedFilter === 'events';
+    const full = feedFilter === 'events' || feedFilter === 'archive';
     document.getElementById('eventsBlock').style.display = feedFilter === 'news' ? 'none' : '';
     document.getElementById('newsBlock').style.display = full ? 'none' : '';
-    document.getElementById('eventsBlockTitle').textContent = full ? 'تقويم المناسبات' : 'المناسبات القادمة';
+    document.getElementById('eventsBlockTitle').textContent = feedFilter === 'archive' ? 'أرشيف المناسبات المنتهية' : (full ? 'تقويم المناسبات القادمة' : 'المناسبات القادمة');
     strip.style.display = full ? 'none' : '';
     tlEl.style.display = full ? '' : 'none';
-    const evs = sortedEvents();
+    const tIso = todayIso();
+    const isPastEv = e=> !!(e.iso && e.iso < tIso);
+    let evs = sortedEvents();
+    evs = feedFilter === 'archive' ? evs.filter(isPastEv).reverse() : evs.filter(e=> !isPastEv(e));
     if(!evs.length){
-      const msg = '<p class="empty-note">لا توجد مناسبات مسجلة حالياً.</p>';
+      const msg = '<p class="empty-note">' + (feedFilter === 'archive' ? 'لا توجد مناسبات منتهية في الأرشيف.' : 'لا توجد مناسبات قادمة حالياً.') + '</p>';
       strip.innerHTML = msg; tlEl.innerHTML = msg; return;
     }
-    // الشريط: القادمة فقط (أو آخر المنتهية إن لم توجد قادمة)
-    let list = evs.filter(e=>{ const p = evParts(e); return !p || daysUntil(p.t) >= 0; });
-    if(!list.length) list = evs.slice(-4);
+    const list = evs;
     strip.innerHTML = list.slice(0, 10).map(e=>{
       const p = evParts(e); const w = evWhen(p);
       return `<div class="ev-card ${w[1] === 'past' ? 'past' : ''}" tabindex="0" role="button" aria-label="${escapeHtml(e.title)}">
         <div class="ev-date">${p ? `<b>${p.d}</b><span>${p.m}</span>` : ic('calendar')}</div>
-        <div class="ev-info"><h4>${escapeHtml(e.title)}</h4><p>${escapeHtml(e.desc || e.date || '')}</p>
-          ${w[0] ? `<span class="ev-when ${w[1] === 'soon' ? 'soon' : ''}">${w[0]}</span>` : `<span class="ev-when">${escapeHtml(e.date || '')}</span>`}${p ? `<br><button type="button" class="ev-ics" data-ics="${escapeHtml(e.id)}">${ic('calendar')} أضف للتقويم</button>` : ''}</div></div>`;
+        <div class="ev-info"><h4>${escapeHtml(e.title)}</h4><p>${escapeHtml(e.desc || evDate(e) || '')}</p>
+          ${w[0] ? `<span class="ev-when ${w[1] === 'soon' ? 'soon' : ''}">${w[0]}</span>` : `<span class="ev-when">${escapeHtml(evDate(e))}</span>`}${p ? `<br><button type="button" class="ev-ics" data-ics="${escapeHtml(e.id)}">${ic('calendar')} أضف للتقويم</button>` : ''}</div></div>`;
     }).join('');
     strip.querySelectorAll('.ev-card').forEach(c=>{
       c.addEventListener('click', ()=> c.classList.toggle('open'));
@@ -2559,7 +2665,7 @@
       <div class="t-item ${past ? 'past' : ''}">
         <div class="t-dot"><svg viewBox="0 0 24 24">${ICON_PATHS[e.ic] || ICON_PATHS.calendarStar}</svg></div>
         <div class="t-card">
-          <div class="t-date">${escapeHtml(e.date)}</div>
+          <div class="t-date">${escapeHtml(evDate(e))}</div>
           <h3>${escapeHtml(e.title)}</h3>
           <p>${escapeHtml(e.desc)}</p>
         </div>
@@ -2691,8 +2797,39 @@
   setInterval(()=>{ if(currentTarget === 'timetable' && ttState.pane === 'sessions') renderTimetable(); }, 60000);
 
   // ---------- الوسائط ----------
-  let siteMedia = [];
+  let siteMedia = [], siteMediaManual = [], siteFeed = [];
   let mediaFilter = 'all';
+  const ytTitles = (()=>{ try{ return JSON.parse(LS.get('ytTitles') || '{}'); }catch(e){ return {}; } })();
+  const ytPending = {};
+  const normUrl = u => String(u || '').trim().replace(/^https?:\/\/(www\.|m\.)?/i, '').replace(/#.*$/, '').replace(/\/$/, '').toLowerCase();
+  function mediaKey(m){ const p = parseSocial(m.url); return p && p.id ? p.platform + ':' + p.id : normUrl(m.url); }
+  function rebuildMedia(){
+    const hidden = new Set((siteInfo && siteInfo.hiddenFeed) || []);
+    const seen = new Set(siteMediaManual.map(mediaKey));
+    const feed = (siteFeed || []).filter(f=> f && f.url && !hidden.has(f.id) && !seen.has(mediaKey(f))).map(f=> Object.assign({}, f, { auto:true }));
+    siteMedia = siteMediaManual.concat(feed).map((m, i)=> Object.assign({ _i:i }, m)).sort((a, b)=> (b.ts || 0) - (a.ts || 0) || a._i - b._i);
+    renderMedia(); renderBanner();
+    if(typeof refreshNotifs === 'function') refreshNotifs();
+  }
+  async function loadFeed(){
+    if(location.protocol === 'file:') return;
+    try{
+      const r = await fetch('media-feed.json?v=' + Math.floor(Date.now() / 600000), { cache:'no-cache' });
+      if(!r.ok) return;
+      const j = await r.json(); siteFeed = Array.isArray(j.items) ? j.items : [];
+      rebuildMedia();
+    }catch(e){}
+  }
+  async function fetchYtTitle(url){
+    const p = parseSocial(url);
+    if(!p || p.platform !== 'youtube' || ytTitles[p.id] !== undefined || ytPending[p.id]) return;
+    ytPending[p.id] = 1;
+    try{
+      const r = await fetch('https://www.youtube.com/oembed?format=json&url=' + encodeURIComponent(url));
+      if(r.ok){ const j = await r.json(); ytTitles[p.id] = j.title || ''; LS.set('ytTitles', JSON.stringify(ytTitles)); renderMedia(); renderBanner(); }
+    }catch(e){}
+  }
+  function mediaTitle(m, pl){ const p = m.p || parseSocial(m.url); return m.title || (p && ytTitles[p.id]) || (pl ? pl.n : ''); }
   function parseSocial(url){
     url = String(url || '').trim();
     let u; try{ u = new URL(url); }catch(e){ return null; }
@@ -2729,11 +2866,12 @@
       const pl = PLAT[m.p.platform];
       const thumb = m.p.thumb
         ? `<img loading="lazy" src="${escapeHtml(m.p.thumb)}" alt=""><span class="media-play">${ic('play')}</span>`
-        : `<span class="big">${ic(pl.i)}</span><span class="media-play" style="color:var(--link);">${ic('play')}</span>`;
+        : `<span class="big">${brandIc(pl.i)}</span><span class="media-play" style="color:var(--link);">${ic('play')}</span>`;
       return `<article class="media-card" tabindex="0" data-mid="${escapeHtml(m.id)}">
-        <div class="media-thumb ${pl.c}"><span class="media-badge">${ic(pl.i)}${pl.n}</span>${thumb}</div>
-        <div class="media-body">${m.date ? `<span class="m-date">${escapeHtml(m.date)}</span>` : ''}<h4>${escapeHtml(m.title || pl.n)}</h4>${m.desc ? `<p>${escapeHtml(m.desc)}</p>` : ''}</div></article>`;
+        <div class="media-thumb ${pl.c}"><span class="media-badge">${brandIc(pl.i)}${pl.n}</span>${m.auto ? '<span class="auto-tag">جديد تلقائياً</span>' : ''}${thumb}</div>
+        <div class="media-body">${(m.date || m.ts) ? `<span class="m-date">${escapeHtml(m.date || fmtDateAr(new Date(m.ts)))}</span>` : ''}<h4>${escapeHtml(mediaTitle(m, pl))}</h4>${m.desc ? `<p>${escapeHtml(m.desc)}</p>` : ''}</div></article>`;
     }).join('');
+    items.forEach(m=>{ if(!m.title) fetchYtTitle(m.url); });
     grid.querySelectorAll('.media-card').forEach(c=>{
       const open = ()=> openMedia(c.dataset.mid);
       c.addEventListener('click', open);
@@ -2747,12 +2885,12 @@
     frame.className = 'media-frame' + (p.tall ? ' tall' : '');
     frame.innerHTML = '';
     const f = document.createElement('iframe');
-    f.src = p.embed; f.title = m.title || 'وسائط';
+    f.src = p.embed; f.title = mediaTitle(m, PLAT[p.platform]) || 'وسائط';
     f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
     f.setAttribute('allowfullscreen', ''); f.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
     f.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-popups allow-presentation allow-forms');
     frame.appendChild(f);
-    document.getElementById('mediaModalTitle').textContent = m.title || PLAT[p.platform].n;
+    document.getElementById('mediaModalTitle').textContent = mediaTitle(m, PLAT[p.platform]);
     document.getElementById('mediaModalLink').href = p.link;
     document.getElementById('mediaOverlay').classList.add('open');
   }
@@ -2779,6 +2917,7 @@
     const rows = [];
     if(i.phone) rows.push(`<a class="crow" href="tel:${escapeHtml(String(i.phone).replace(/[^\d+]/g, ''))}"><span class="ci">${ic('phone')}</span><span>${escapeHtml(i.phone)}</span></a>`);
     rows.push(`<a class="crow" href="mailto:${escapeHtml(email)}"><span class="ci">${ic('mail')}</span><span>${escapeHtml(email)}</span></a>`);
+    [['facebook', i.facebookUrl], ['instagram', i.instagramUrl], ['youtube', i.youtubeUrl], ['web', i.websiteUrl]].forEach(([k, u])=>{ const su = safeUrl(u); if(su) document.querySelectorAll('a.soc-ic[data-soc="' + k + '"]').forEach(a=> a.href = su); });
     const chUrl = safeUrl(i.channelUrl);
     const hc = document.getElementById('heroChannel');
     if(hc){ if(chUrl){ hc.href = chUrl; hc.querySelector('span').textContent = i.channelLabel || 'قناة المتوسطة'; hc.style.display = ''; } else hc.style.display = 'none'; }
@@ -2809,15 +2948,31 @@
   function renderBanner(){
     const b = document.getElementById('siteBanner'); if(!b) return;
     const i = siteInfo || {};
-    if(!i.bannerOn || !i.bannerText){ b.hidden = true; return; }
-    const key = normAr(i.bannerText).slice(0, 60);
+    b.className = 'site-banner';
     let closed = ''; try{ closed = LS.get('bannerClosed') || ''; }catch(e){}
+    if(i.bannerOn && i.bannerText){
+      const key = normAr(i.bannerText).slice(0, 60);
+      if(closed === key){ b.hidden = true; return; }
+      const ext = safeUrl(i.bannerLink);
+      const internal = /^#[\w-]+$/.test(String(i.bannerLink || '').trim()) ? String(i.bannerLink).trim() : '';
+      b.innerHTML = `<span>${escapeHtml(i.bannerText)}</span>${(ext || internal) ? `<a href="${escapeHtml(ext || internal)}" ${ext ? 'target="_blank" rel="noopener noreferrer"' : ''}>التفاصيل</a>` : ''}<button type="button" aria-label="إغلاق">${ic('x')}</button>`;
+      b.hidden = false;
+      b.querySelector('button').onclick = ()=>{ b.hidden = true; try{ LS.set('bannerClosed', key); }catch(e){} };
+      return;
+    }
+    const days = (i.announceDays !== undefined && i.announceDays !== '' && i.announceDays !== null) ? +i.announceDays : 3;
+    const m = (days > 0 && i.announceMedia !== false) ? (siteMedia || []).filter(x=> x.ts && x.ts >= Date.now() - days * 86400000 && parseSocial(x.url)).sort((a, c)=> c.ts - a.ts)[0] : null;
+    if(!m){ b.hidden = true; return; }
+    const key = 'media:' + m.id;
     if(closed === key){ b.hidden = true; return; }
-    const ext = safeUrl(i.bannerLink);
-    const internal = /^#[\w-]+$/.test(String(i.bannerLink || '').trim()) ? String(i.bannerLink).trim() : '';
-    b.innerHTML = `<span>${escapeHtml(i.bannerText)}</span>${(ext || internal) ? `<a href="${escapeHtml(ext || internal)}" ${ext ? 'target="_blank" rel="noopener noreferrer"' : ''}>التفاصيل</a>` : ''}<button type="button" aria-label="إغلاق">${ic('x')}</button>`;
+    const p = parseSocial(m.url), pl = PLAT[p.platform];
+    if(!m.title) fetchYtTitle(m.url);
+    b.classList.add('media');
+    b.innerHTML = `<span>${brandIc(pl.i)} جديد على ${pl.n}: <b>${escapeHtml(mediaTitle(Object.assign({ p }, m), pl))}</b></span><button type="button" class="watch">شاهد الآن</button><button type="button" aria-label="إغلاق">${ic('x')}</button>`;
     b.hidden = false;
-    b.querySelector('button').onclick = ()=>{ b.hidden = true; try{ LS.set('bannerClosed', key); }catch(e){} };
+    const dismiss = ()=>{ b.hidden = true; try{ LS.set('bannerClosed', key); }catch(e){} };
+    b.querySelector('.watch').onclick = ()=>{ dismiss(); location.hash = '#media'; setTimeout(()=> openMedia(m.id), 350); };
+    b.querySelector('button:not(.watch)').onclick = dismiss;
   }
 
   let docsCat = '';
@@ -2891,7 +3046,14 @@
     const nt = ' ' + normAr(text).replace(/[^\u0600-\u06FFa-z0-9\s]/gi, ' ').replace(/\s+/g, ' ') + ' ';
     return list.some(w=> nt.includes(' ' + w + ' ') || (w.length >= 4 && nt.includes(w)));
   }
-  async function canPost(text){
+  function hasPersonalData(text){
+    const s = toLatinDigits(text).replace(/[\s.\-_()]/g, '');
+    if(/(?:\+?213|0)[567]\d{8}/.test(s)) return true;
+    if(/[\w.+-]+@[\w-]+\.[\w.]+/i.test(text)) return true;
+    if(/(facebook\.com|fb\.com|instagram\.com|wa\.me|whatsapp|t\.me|telegram|snapchat|tiktok\.com)/i.test(text)) return true;
+    return false;
+  }
+  async function canPost(text, opts){
     const u = auth && auth.currentUser; if(!u) return true;
     try{ await ensureSectionLoaded('info'); }catch(e){}
     if(bannedCache.uid !== u.uid){
@@ -2899,6 +3061,7 @@
       try{ const d = await db.collection('bannedUsers').doc(u.uid).get(); bannedCache.v = d.exists; }catch(e){}
     }
     if(bannedCache.v){ showToast('تم تقييد حسابك من النشر. تواصل مع الإدارة.', true); return false; }
+    if(text && opts && opts.privacy && hasPersonalData(text)){ showToast('لا تنشر رقم هاتفك أو بريدك أو حساباتك هنا، حفاظاً على سلامتك.', true); return false; }
     if(text && hasBadWord(text)){ showToast('يرجى استعمال لغة محترمة: النص يحتوي كلمات غير لائقة.', true); return false; }
     return true;
   }
@@ -2982,8 +3145,8 @@
     const out = [];
     const i = siteInfo || {};
     if(i.bannerOn && i.bannerText) out.push({ key:'banner:' + normAr(i.bannerText).slice(0, 40), icon:'alert', title:i.bannerText, sub:'إعلان عاجل من الإدارة', hash:'#home', urgent:true });
-    (siteNews || []).forEach(n=> out.push({ key:'news:' + n.id, icon:'newspaper', title:n.title, sub:'خبر جديد · ' + (n.date || ''), hash:'#article-' + n.id }));
-    (siteEvents || []).forEach(e=> out.push({ key:'event:' + e.id, icon:'calendar', title:e.title, sub:'مناسبة · ' + (e.date || ''), hash:'#news', pre:()=>{ feedFilter = 'events'; syncFeedUI(); } }));
+    (siteNews || []).forEach(n=> out.push({ key:'news:' + n.id, icon:'newspaper', title:n.title, sub:'خبر جديد · ' + newsDate(n), hash:'#article-' + n.id }));
+    (siteEvents || []).forEach(e=> out.push({ key:'event:' + e.id, icon:'calendar', title:e.title, sub:'مناسبة · ' + evDate(e), hash:'#news', pre:()=>{ feedFilter = 'events'; syncFeedUI(); } }));
     (sitePolls || []).forEach(p=> out.push({ key:'poll:' + p.id, icon:'bars', title:p.question, sub:'استطلاع رأي جديد', hash:'#news' }));
     (siteDocs || []).forEach(d=> out.push({ key:'doc:' + d.id, icon:'file', title:d.title, sub:'وثيقة جديدة', hash:'#about' }));
     (siteMedia || []).forEach(m=> out.push({ key:'media:' + m.id, icon:'play', title:m.title || 'منشور جديد', sub:'الوسائط', hash:'#media' }));
@@ -3161,6 +3324,8 @@
     const st = {};
     (siteQuestions || []).forEach(q=> (q.replies || []).forEach(r=>{
       if(!r.uid || r.isOwner) return;
+      const useful = asArray(r.likes).some(u=> u !== r.uid) || (r.id && r.id === q.bestReplyId);
+      if(!useful) return;
       const s = st[r.uid] = st[r.uid] || { n:0, subj:{} };
       s.n++; s.subj[q.subj] = (s.subj[q.subj] || 0) + 1;
     }));
@@ -3180,6 +3345,15 @@
     return b.slice(0, 2).map(x=> `<span class="u-badge" title="${escapeHtml(x[1])}">${x[0]} ${escapeHtml(x[1])}</span>`).join('');
   }
 
+  document.getElementById('qaList').addEventListener('click', async (e)=>{
+    const bb = e.target.closest('[data-best]'); if(!bb) return;
+    const q0 = siteQuestions.find(x=> x.id === bb.dataset.qid); if(!q0) return;
+    const turnOn = q0.bestReplyId !== bb.dataset.best;
+    try{
+      await db.collection('questions').doc(q0.id).update(turnOn ? { bestReplyId: bb.dataset.best, solved: true } : { bestReplyId: firebase.firestore.FieldValue.delete(), solved: false });
+      showToast(turnOn ? 'تم تثبيت أفضل إجابة ✓' : 'أُلغي تثبيت الإجابة.');
+    }catch(err){ console.error(err); showToast('تعذر التحديث، حاول لاحقاً.', true); }
+  });
   document.getElementById('qaList').addEventListener('click', (e)=>{
     const b = e.target.closest('[data-report]'); if(!b) return;
     const q = siteQuestions.find(x=> x.id === b.dataset.qid); if(!q) return;
@@ -3191,7 +3365,7 @@
   function likeBtn(kind, qId, likedByArr, count, extra){
     const uid = auth && auth.currentUser ? auth.currentUser.uid : null;
     const liked = uid && (likedByArr || []).includes(uid);
-    return `<button class="q-foot-item like-btn" data-like="${kind}" data-qid="${escapeHtml(qId)}" ${extra||''} style="${liked ? 'color:var(--gold); font-weight:700;' : ''}">
+    return `<button class="q-foot-item like-btn" data-like="${kind}" data-qid="${escapeHtml(qId)}" ${extra||''} style="${liked ? 'color:var(--liked); font-weight:700;' : ''}">
       <svg viewBox="0 0 24 24" width="14" height="14" fill="${liked ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10.5v9M3 11h3v8H3a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1z"/><path d="M7 10.5l3-7a2 2 0 0 1 3.6 1.7L12.5 9H19a2 2 0 0 1 2 2.4l-1.4 6A2 2 0 0 1 17.6 19H10a3 3 0 0 1-3-1.5"/></svg> إعجاب${count ? ' (' + count + ')' : ''}
     </button>`;
   }
@@ -3200,7 +3374,7 @@
   let qaDocs = [], qaReplies = {};
   let qaDirty = false;
   function tsToDate(t){ try{ return t && t.toDate ? t.toDate() : null; }catch(e){ return null; } }
-  function fmtTs(t){ const d = tsToDate(t); return d ? d.toLocaleDateString('ar-DZ') : 'الآن'; }
+  function fmtTs(t){ const d = tsToDate(t); return d ? fmtDateAr(d) : 'الآن'; }
   function tsMs(t){ const d = tsToDate(t); return d ? d.getTime() : Date.now(); }
   function rebuildQuestions(){
     siteQuestions = qaDocs.map(q=> Object.assign({}, q, {
@@ -3265,27 +3439,81 @@
     if(qaList.querySelector('[data-qbody-edit]')){ qaDirty = true; return; }
     qaForceRender();
   }
+  const QA_SUBJECTS = ['رياضيات','فيزياء','لغة عربية','لغة فرنسية','لغة إنجليزية','علوم طبيعية','تاريخ وجغرافيا'];
+  const QA_LEVELS = ['الأولى متوسط','الثانية متوسط','الثالثة متوسط','الرابعة متوسط'];
+  const QA_STATUS = [['', 'الكل'], ['open', 'بلا إجابة'], ['answered', 'تمت الإجابة'], ['solved', 'محلول ✓']];
+  const qaF = { q:'', subj:'', level:'', status:'', sort:'new' };
+  function qLevel(q){
+    if(q.level) return q.level;
+    const m = toLatinDigits(q.author || '').match(/([1-4])\s*(?:متوسط|م\b)/);
+    return m ? QA_LEVELS[+m[1] - 1] : '';
+  }
+  function qStatus(q){ if(q.solved || q.bestReplyId) return 'solved'; if(q.answer || asArray(q.replies).length) return 'answered'; return 'open'; }
+  function qTags(q){
+    const s = qStatus(q);
+    return (s === 'solved' ? '<span class="q-tag solved">✓ تم الحل</span>' : s === 'answered' ? '<span class="q-tag answered">تمت الإجابة</span>' : '<span class="q-tag open">بلا إجابة</span>');
+  }
+  function qaView(){
+    const term = normAr(qaF.q);
+    const list = siteQuestions.filter(q=>{
+      if(qaF.subj && q.subj !== qaF.subj) return false;
+      if(qaF.level && qLevel(q) !== qaF.level) return false;
+      const st = qStatus(q);
+      if(qaF.status === 'open' && st !== 'open') return false;
+      if(qaF.status === 'answered' && st === 'open') return false;
+      if(qaF.status === 'solved' && st !== 'solved') return false;
+      if(term){
+        const hay = normAr(q.body + ' ' + q.subj + ' ' + q.author + ' ' + asArray(q.replies).map(r=> r.text).join(' '));
+        if(!term.split(' ').every(w=> hay.includes(w))) return false;
+      }
+      return true;
+    });
+    const score = q=> asArray(q.likes).length * 2 + asArray(q.replies).length + (qStatus(q) === 'solved' ? 3 : 0) + (q.answer ? 2 : 0);
+    if(qaF.sort === 'likes') list.sort((a, b)=> asArray(b.likes).length - asArray(a.likes).length);
+    else if(qaF.sort === 'replies') list.sort((a, b)=> asArray(b.replies).length - asArray(a.replies).length);
+    else if(qaF.sort === 'useful') list.sort((a, b)=> score(b) - score(a));
+    return list;
+  }
+  function renderQaFilters(){
+    const subs = document.getElementById('qaSubjChips'), st = document.getElementById('qaStatusChips'); if(!subs || !st) return;
+    const cnt = {}; siteQuestions.forEach(q=>{ cnt[q.subj] = (cnt[q.subj] || 0) + 1; });
+    subs.innerHTML = [''].concat(QA_SUBJECTS).map(s=> `<button type="button" class="chip sm ${qaF.subj === s ? 'active' : ''}" data-qs="${escapeHtml(s)}">${s ? escapeHtml(s) + (cnt[s] ? ' (' + cnt[s] + ')' : '') : 'كل المواد'}</button>`).join('');
+    st.innerHTML = QA_STATUS.map(([k, l])=> `<button type="button" class="chip sm ${qaF.status === k ? 'active' : ''}" data-qst="${k}">${l}</button>`).join('');
+    subs.querySelectorAll('[data-qs]').forEach(b=> b.onclick = ()=>{ qaF.subj = b.dataset.qs; renderQA(); });
+    st.querySelectorAll('[data-qst]').forEach(b=> b.onclick = ()=>{ qaF.status = b.dataset.qst; renderQA(); });
+  }
+  (function(){
+    const on = (id, ev, fn)=>{ const el = document.getElementById(id); if(el) el.addEventListener(ev, fn); };
+    on('qaSearch', 'input', e=>{ qaF.q = e.target.value; renderQA(); });
+    on('qaLevelF', 'change', e=>{ qaF.level = e.target.value; renderQA(); });
+    on('qaSort', 'change', e=>{ qaF.sort = e.target.value; renderQA(); });
+  })();
   function renderQAInner(){
-    if(!siteQuestions.length){ qaList.innerHTML = '<p class="empty-note">لا توجد أسئلة بعد — كن أول من يطرح سؤالاً.</p>'; return; }
     BADGES = computeBadges();
+    renderQaFilters();
+    const view = qaView();
+    const cEl = document.getElementById('qaCount'); if(cEl) cEl.textContent = siteQuestions.length ? view.length + ' من ' + siteQuestions.length + ' سؤال' : '';
+    if(!siteQuestions.length){ qaList.innerHTML = '<p class="empty-note">لا توجد أسئلة بعد — كن أول من يطرح سؤالاً.</p>'; return; }
+    if(!view.length){ qaList.innerHTML = '<p class="empty-note">لا توجد أسئلة تطابق بحثك. جرّب تغيير المادة أو الحالة.</p>'; return; }
     const myUid = auth && auth.currentUser ? auth.currentUser.uid : null;
     const iAmOwner = auth && isOwnerAccount(auth.currentUser);
-    qaList.innerHTML = siteQuestions.map(q=> {
-      const replies = asArray(q.replies);
+    qaList.innerHTML = view.map(q=> {
+      const replies = asArray(q.replies).slice().sort((a, b)=> (b.id === q.bestReplyId ? 1 : 0) - (a.id === q.bestReplyId ? 1 : 0));
       const canManageQ = iAmOwner || (myUid && myUid === q.authorUid);
       const repliesHtml = replies.map((r, idx)=> {
         const canManageR = iAmOwner || (myUid && myUid === r.uid);
+        const isBest = !!(r.id && r.id === q.bestReplyId);
         return `
-        <div style="margin-top:8px; padding:10px 12px; background:var(--paper-2); border-radius:10px; display:flex; gap:8px; align-items:flex-start;">
+        <div class="${isBest ? 'best-reply' : ''}" style="margin-top:8px; padding:10px 12px; background:var(--paper-2); border-radius:10px; display:flex; gap:8px; align-items:flex-start;">
           ${avatarHtml(r.author, r.authorPhoto, 24)}
           <div style="flex:1; min-width:0;">
             <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:6px;">
-              <div style="font-size:.78rem; color:var(--link); font-weight:700; margin-bottom:4px;">${escapeHtml(r.author||'مستخدم')}${nameBadge(r.isOwner)}${badgesHtml(r.uid)}</div>
+              <div style="font-size:.78rem; color:var(--link); font-weight:700; margin-bottom:4px;">${isBest ? '<div class="best-label">✓ أفضل إجابة</div>' : ''}<bdi>${escapeHtml(r.author||'مستخدم')}</bdi>${nameBadge(r.isOwner)}${badgesHtml(r.uid)}</div>
               ${canManageR ? `<button class="item-del-btn" data-del-reply="${escapeHtml(r.id||'')}" data-qid="${escapeHtml(q.id)}" title="حذف الرد" style="color:var(--muted); flex-shrink:0;"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 7h14M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2m-8 0 1 13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1l1-13"/></svg></button>` : ''}
             </div>
             <div style="font-size:.88rem;">${escapeHtml(r.text)}</div>
             <div class="q-foot" style="margin-top:6px;">
-              ${likeBtn('reply', q.id, asArray(r.likes), asArray(r.likes).length, `data-reply-id="${escapeHtml(r.id||'')}"`)}${!canManageR ? reportBtn(`data-report="r" data-qid="${escapeHtml(q.id)}" data-rid="${escapeHtml(r.id||'')}"`) : ''}
+              ${likeBtn('reply', q.id, asArray(r.likes), asArray(r.likes).length, `data-reply-id="${escapeHtml(r.id||'')}"`)}${!canManageR ? reportBtn(`data-report="r" data-qid="${escapeHtml(q.id)}" data-rid="${escapeHtml(r.id||'')}"`) : ''}${canManageQ && r.id ? `<button type="button" class="q-foot-item" data-best="${escapeHtml(r.id)}" data-qid="${escapeHtml(q.id)}">${isBest ? 'إلغاء التثبيت' : '✓ أفضل إجابة'}</button>` : ''}
             </div>
           </div>
         </div>`;
@@ -3293,8 +3521,8 @@
       return `
         <div class="q-card" data-qid="${escapeHtml(q.id)}">
           <div class="q-top">
-            <span class="q-subject">${escapeHtml(q.subj)}</span>
-            <span class="q-meta">${escapeHtml(q.author)}${nameBadge(q.isOwner)}${badgesHtml(q.authorUid)} · ${escapeHtml(q.time)}</span>
+            <span class="q-subject">${escapeHtml(q.subj)}</span>${qTags(q)}
+            <span class="q-meta"><bdi>${escapeHtml(q.author)}</bdi>${nameBadge(q.isOwner)}${badgesHtml(q.authorUid)}${qLevel(q) ? ' · <bdi>' + escapeHtml(qLevel(q)) + '</bdi>' : ''} · <bdi>${escapeHtml(q.time)}</bdi></span>
           </div>
           <p class="q-body" data-qbody>${escapeHtml(q.body)}</p>
           ${q.attachment ? `<img src="${safeImg(q.attachment)}" style="max-width:220px; border-radius:10px; margin:8px 0;">` : ''}
@@ -3406,7 +3634,7 @@
           if(typeof openModal === 'function') openModal();
           return;
         }
-        if(!(await canPost(text))) return;
+        if(!(await canPost(text, { privacy:true }))) return;
         input.disabled = true; sendBtn.disabled = true;
         try{
           await db.collection('questions').doc(qId).collection('replies').add({
@@ -3447,23 +3675,25 @@
       if(typeof openModal === 'function') openModal();
       return;
     }
-    if(!(await canPost(text))) return;
+    if(!(await canPost(text, { privacy:true }))) return;
     const authorName = (currentUserProfile && (currentUserProfile.firstName + ' ' + currentUserProfile.lastName))
       || auth.currentUser.displayName || 'مستخدم مسجل';
     const submitBtn = document.getElementById('qaSubmit');
     submitBtn.disabled = true;
     try{
-      await db.collection('questions').add({
-        subj: subject, body: text.slice(0, 1000), author: authorName, authorUid: auth.currentUser.uid,
+      const premod = !!(siteInfo && siteInfo.qaPremod) && !isOwnerAccount(auth.currentUser);
+      await db.collection(premod ? 'questionsPending' : 'questions').add({
+        subj: subject, level: document.getElementById('qaLevel').value || '', body: text.slice(0, 1000), author: authorName, authorUid: auth.currentUser.uid,
         authorPhoto: myPhoto(), isOwner: isOwnerAccount(auth.currentUser),
         likes: [], answerLikes: [], attachment: safeImg(pendingQaAttachment) ? pendingQaAttachment : null,
         createdAt: firebase.firestore.FieldValue.serverTimestamp()
       });
+      if(premod) showToast('تم إرسال سؤالك للمراجعة، وسيظهر بعد موافقة الإدارة.');
       input.value = "";
       pendingQaAttachment = null;
       document.getElementById('qaAttachName').textContent = '';
       document.getElementById('qaAttachPreview').style.display = 'none';
-      showToast('تم نشر سؤالك.');
+      if(!(siteInfo && siteInfo.qaPremod) || isOwnerAccount(auth.currentUser)) showToast('تم نشر سؤالك.');
     }catch(e){
       console.error(e);
       showToast('تعذر نشر السؤال — تحقق من الاتصال أو قلّل حجم الصورة.', true);
@@ -4022,7 +4252,7 @@
 
     function draw(){
       if(!msgs.length){
-        scroll.innerHTML = '<div class="chat-empty"><span class="em">💬</span><b>لا توجد رسائل بعد</b><br>ابدأ الحديث مع أولياء آخرين.</div>';
+        scroll.innerHTML = '<div class="chat-empty"><span class="em">💬</span><b>لا توجد رسائل بعد</b><br>كن أول من يبدأ الحديث.</div>';
         return;
       }
       let html = '', lastDay = '';
@@ -4172,8 +4402,8 @@
   function buildSearchIndex(){
     const items = [];
     const add = (o)=>{ o.nt = normAr(o.title); o.ns = normAr(o.sub || ''); o.nb = normAr(o.body || ''); items.push(o); };
-    siteNews.forEach(n=> add({ type:'خبر', icon:'newspaper', title:n.title, sub:'خبر · ' + (n.date || ''), body:(n.excerpt || '') + ' ' + (n.cat || '') + ' ' + stripHtml(n.content || ''), go:()=>{ location.hash = '#article-' + n.id; } }));
-    siteEvents.forEach(e=> add({ type:'مناسبة', icon:'calendar', title:e.title, sub:'مناسبة · ' + (e.date || ''), body:e.desc || '', go:()=>{ feedFilter = 'events'; syncFeedUI(); location.hash = '#news'; } }));
+    siteNews.forEach(n=> add({ type:'خبر', icon:'newspaper', title:n.title, sub:'خبر · ' + newsDate(n), body:(n.excerpt || '') + ' ' + (n.cat || '') + ' ' + stripHtml(n.content || ''), go:()=>{ location.hash = '#article-' + n.id; } }));
+    siteEvents.forEach(e=> add({ type:'مناسبة', icon:'calendar', title:e.title, sub:'مناسبة · ' + evDate(e), body:e.desc || '', go:()=>{ feedFilter = 'events'; syncFeedUI(); location.hash = '#news'; } }));
     Object.keys(siteLevels || {}).forEach(lvl=> (siteLevels[lvl] || []).forEach(r=> add({ type:'فرض', icon:'clipboard', title:r.subj + ' — ' + lvl, sub:(r.type === 'test' ? 'اختبار' : 'واجب منزلي') + ' · ' + (r.date || ''), body:r.time || '', go:()=>{ setTTPane('exams'); location.hash = '#timetable'; } })));
     const D = ttData(); const teachers = {};
     D.classes.forEach(c=>{
@@ -4358,6 +4588,7 @@
       wrap.innerHTML = '<p class="empty-note">تعذر العثور على هذا المنشور.</p>';
       return;
     }
+    setMeta(n.title + ' | متوسطة شعيبي بومدين', n.excerpt);
     if(n.split){
       if(!fullCache[id]){
         wrap.innerHTML = '<div class="skeleton-line" style="width:35%;"></div><div class="skeleton-line" style="width:90%;height:26px;margin:14px 0;"></div><div class="skeleton-line" style="width:100%;height:180px;"></div><div class="skeleton-line" style="width:80%;"></div>';
@@ -4371,14 +4602,14 @@
     const fullTextHtml = isRichContent ? sanitizeHtml(n.content) : escapeHtml(n.excerpt).replace(/\n/g, '<br>');
     const bc = document.getElementById('breadcrumbTitle');
     if(bc) bc.textContent = n.title;
-    const gallery = (n.gallery || []).map(src=> `<img src="${safeImg(src)}" style="width:100%; border-radius:14px; margin-bottom:12px;">`).join('');
+    const gallery = (n.gallery || []).map(src=> `<img src="${safeImg(src)}" alt="${escapeHtml(n.title)}" loading="lazy" style="width:100%; border-radius:14px; margin-bottom:12px;">`).join('');
     const shareUrl = location.origin + location.pathname + '#article-' + n.id;
     const readMin = Math.max(1, Math.round(stripHtml(fullTextHtml).split(/\s+/).filter(Boolean).length / 170));
 
     wrap.innerHTML = `
-      <div class="date-badge" style="display:inline-block; margin-bottom:10px;">${escapeHtml(n.date)} · ${escapeHtml(n.cat)}<span class="read-time">· ⏱ ${readMin} د قراءة</span></div>
+      <div class="date-badge" style="display:inline-block; margin-bottom:10px;">${escapeHtml(newsDate(n))} · ${escapeHtml(n.cat)}<span class="read-time">· ⏱ ${readMin} د قراءة</span></div>
       <h1 style="font-size:1.6rem; margin-bottom:16px;">${escapeHtml(n.title)}</h1>
-      ${n.image ? `<img src="${safeImg(n.image)}" style="width:100%; border-radius:16px; margin-bottom:20px;">` : ''}
+      ${n.image ? `<img src="${safeImg(n.image)}" alt="${escapeHtml(n.title)}" style="width:100%; border-radius:16px; margin-bottom:20px;">` : ''}
       <div class="article-rich-content" style="font-size:.98rem; line-height:2; color:var(--ink); margin-bottom:20px;">${fullTextHtml}</div>
       ${gallery ? `<div style="margin-bottom:20px;">${gallery}</div>` : ''}
 
@@ -4452,7 +4683,7 @@
               </span>` : ''}
             </div>
             <div style="font-size:.9rem; color:var(--ink);" data-comment-text>${escapeHtml(c.text)}</div>
-            <button class="q-foot-item comment-like-btn" data-comment-id="${d.id}" style="margin-top:4px; ${liked ? 'color:var(--gold); font-weight:700;' : ''}">
+            <button class="q-foot-item comment-like-btn" data-comment-id="${d.id}" style="margin-top:4px; ${liked ? 'color:var(--liked); font-weight:700;' : ''}">
               <svg viewBox="0 0 24 24" width="13" height="13" fill="${liked ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10.5v9M3 11h3v8H3a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1z"/><path d="M7 10.5l3-7a2 2 0 0 1 3.6 1.7L12.5 9H19a2 2 0 0 1 2 2.4l-1.4 6A2 2 0 0 1 17.6 19H10a3 3 0 0 1-3-1.5"/></svg> إعجاب${likes.length ? ' (' + likes.length + ')' : ''}
             </button>
           </div>
@@ -4525,7 +4756,7 @@
       }
       const authorName = (currentUserProfile && (currentUserProfile.firstName + ' ' + currentUserProfile.lastName))
         || auth.currentUser.displayName || 'مستخدم مسجل';
-      if(!(await canPost(text))) return;
+      if(!(await canPost(text, { privacy:true }))) return;
       try{
         await db.collection('newsComments').doc(id).collection('comments').add({
           uid: auth.currentUser.uid, author: authorName, authorPhoto: (currentUserProfile && currentUserProfile.photoURL) || null, isOwner: isOwnerAccount(auth.currentUser), text, likes: [], time: firebase.firestore.FieldValue.serverTimestamp()
@@ -4603,10 +4834,27 @@
   }
 
   // ================= عرض قسم واحد فقط في كل مرة (كصفحات منفصلة) =================
+  const PAGE_META = {
+    home:{ t:'متوسطة شعيبي بومدين — الفضاء الرقمي', d:'الموقع الرسمي لمتوسطة شعيبي بومدين بوهران: أخبار المؤسسة ومناسباتها، جداول الحصص والفروض، فضاء الأسئلة، ودردشة الأولياء.' },
+    news:{ t:'الأخبار والمناسبات | متوسطة شعيبي بومدين', d:'آخر أخبار متوسطة شعيبي بومدين والإعلانات الإدارية، مع تقويم المناسبات والاحتفالات القادمة.' },
+    timetable:{ t:'جدول الحصص والفروض | متوسطة شعيبي بومدين', d:'جدول الحصص الأسبوعي لكل قسم وفوج، ومواعيد الفروض والاختبارات في متوسطة شعيبي بومدين.' },
+    media:{ t:'الوسائط: فيديوهات ومنشورات | متوسطة شعيبي بومدين', d:'أحدث فيديوهات ومنشورات متوسطة شعيبي بومدين على يوتيوب وانستغرام وفيسبوك.' },
+    qa:{ t:'فضاء الأسئلة | متوسطة شعيبي بومدين', d:'فضاء يطرح فيه التلاميذ أسئلتهم حول الدروس والتمارين ويتناقشون بمساعدة الأساتذة.' },
+    parents:{ t:'فضاء الأولياء | متوسطة شعيبي بومدين', d:'فضاء تواصل خاص بأولياء التلاميذ تحت إشراف إدارة المتوسطة.' },
+    about:{ t:'عن المتوسطة واتصل بنا | متوسطة شعيبي بومدين', d:'معلومات متوسطة شعيبي بومدين، سبل التواصل، الوثائق والاستمارات، وصندوق الاقتراحات والشكاوى.' },
+    privacy:{ t:'سياسة الخصوصية | متوسطة شعيبي بومدين', d:'كيف نحمي بياناتك في موقع متوسطة شعيبي بومدين وما نحفظه من تفضيلات.' }
+  };
+  function setMeta(title, desc){
+    if(title) document.title = title;
+    const set = (sel, attr, val)=>{ const el = document.querySelector(sel); if(el && val) el.setAttribute(attr, val); };
+    set('meta[name="description"]', 'content', desc); set('meta[property="og:title"]', 'content', title); set('meta[property="og:description"]', 'content', desc);
+    set('meta[name="twitter:title"]', 'content', title); set('meta[name="twitter:description"]', 'content', desc);
+  }
+  function setPageMeta(target){ const m = PAGE_META[target] || PAGE_META.home; setMeta(m.t, m.d); }
   const MAIN_SECTIONS = ['home','news','timetable','media','qa','parents','parents-chat','about','privacy'];
   const SECTION_TITLES = { home:'الرئيسية', news:'الأخبار والمناسبات', timetable:'جدول الحصص والفروض', media:'الوسائط', qa:'فضاء الأسئلة', parents:'فضاء الأولياء', 'parents-chat':'دردشة الأولياء', about:'عن المتوسطة', privacy:'سياسة الخصوصية', article:'خبر' };
   function showMainSection(){
-    let rawHash = (location.hash || '#home').replace('#','');
+    let rawHash = (location.hash || '').replace('#', '') || document.body.dataset.page || 'home';
     if(rawHash === 'events'){ feedFilter = 'events'; syncFeedUI(); rawHash = 'news'; history.replaceState(null, '', '#news'); }
     if(rawHash === 'exams'){ setTTPane('exams'); rawHash = 'timetable'; history.replaceState(null, '', '#timetable'); }
     const isArticle = rawHash.startsWith('article-');
@@ -4619,7 +4867,8 @@
       if(el) el.classList.toggle('active-view', id === target);
     });
     document.querySelectorAll('nav a[href^="#"]').forEach(a=>{
-      a.classList.toggle('active', a.getAttribute('href') === '#' + (target === 'article' ? 'news' : target));
+      const on = a.getAttribute('href') === '#' + (target === 'article' ? 'news' : target);
+      a.classList.toggle('active', on); if(on) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
     });
     if(isArticle){
       ensureSectionLoaded('news').then(()=> renderArticle(rawHash.replace('article-','')));
@@ -4636,7 +4885,7 @@
     document.documentElement.classList.toggle('chat-open', target === 'parents-chat');
     if(target !== 'parents-chat' && typeof parentsChatUnsub === 'function'){ parentsChatUnsub(); parentsChatUnsub = null; }
     if(target === 'article') markSeen(['news:' + rawHash.replace('article-', '')]); else notifVisit(target);
-    document.title = (target === 'home' ? 'متوسطة شعيبي بومدين — الفضاء الرقمي' : (SECTION_TITLES[target] || '') + ' | متوسطة شعيبي بومدين');
+    setPageMeta(target);
     window.scrollTo(0, 0);
   }
   window.addEventListener('hashchange', showMainSection);
@@ -4734,6 +4983,38 @@
   })();
   ensureSectionLoaded('info');
   (window.requestIdleCallback || (f=> setTimeout(f, 1800)))(()=>{ ensureSectionLoaded('media'); ensureSectionLoaded('about'); startPolls(); startQaWatch(); }, { timeout:4000 });
+  document.getElementById('skipLink').addEventListener('click', (e)=>{ e.preventDefault(); const s = document.querySelector('section.active-view'); if(s){ s.setAttribute('tabindex', '-1'); s.focus(); } });
+  document.addEventListener('keydown', (e)=>{
+    if(e.key !== 'Tab') return;
+    const box = document.querySelector('.modal-overlay.open .modal-box'); if(!box) return;
+    const f = [...box.querySelectorAll('a[href], button:not([disabled]), input:not([type=hidden]):not([disabled]), select, textarea, [tabindex]:not([tabindex="-1"])')].filter(x=> x.offsetParent !== null);
+    if(!f.length) return;
+    const first = f[0], last = f[f.length - 1];
+    if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+    else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+  });
+  function haptic(ms){ try{ if(navigator.vibrate && !(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) navigator.vibrate(ms || 10); }catch(e){} }
+  document.addEventListener('click', (e)=>{ if(e.target.closest('.bnav-item, .like-btn, .chat-send, .poll-opt, .chip')) haptic(8); });
+  (function(){
+    const hdr = document.querySelector('header'); let lastY = window.scrollY;
+    window.addEventListener('scroll', ()=>{
+      const y = window.scrollY;
+      if(window.innerWidth <= 880 && !document.getElementById('mainNav').classList.contains('open')){
+        if(y > lastY + 8 && y > 140) hdr.classList.add('hdr-hide'); else if(y < lastY - 8 || y < 90) hdr.classList.remove('hdr-hide');
+      } else hdr.classList.remove('hdr-hide');
+      lastY = y;
+    }, { passive:true });
+    if(!('IntersectionObserver' in window)) return;
+    const io = new IntersectionObserver((es)=> es.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } }), { rootMargin:'0px 0px -6% 0px', threshold:.06 });
+    const SEL = '.news-card,.ev-card,.media-card,.q-card,.doc-item,.poll-card,.about-card,.menu-day';
+    let pend = false;
+    const scan = ()=>{ pend = false; let i = 0; document.querySelectorAll(SEL).forEach(el=>{
+      if(el.classList.contains('rv') || el.classList.contains('skeleton-card') || el.closest('.reveal-stagger')) return;
+      el.classList.add('rv'); el.style.setProperty('--d', (Math.min(i++ % 8, 7) * 0.05) + 's'); io.observe(el);
+    }); };
+    scan();
+    new MutationObserver(()=>{ if(!pend){ pend = true; setTimeout(scan, 60); } }).observe(document.body, { childList:true, subtree:true });
+  })();
   if('scrollRestoration' in history) history.scrollRestoration = 'manual';
   const _top = ()=>{ if(window.scrollY < 250) window.scrollTo(0, 0); };
   window.addEventListener('load', ()=>{ _top(); setTimeout(_top, 250); });

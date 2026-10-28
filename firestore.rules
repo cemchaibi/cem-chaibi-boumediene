@@ -1,0 +1,243 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ---------------------------------------------------------------
+    // بريد المالك (يجب أن يطابق OWNER_EMAIL في index.html و ADMIN_EMAILS في admin.html)
+    // يُشترط أن يكون البريد مؤكَّداً (حسابات Google مؤكَّدة تلقائياً)
+    // ---------------------------------------------------------------
+    function signedIn() { return request.auth != null; }
+    // مالك الموقع (الوحيد الذي يضيف مشرفين آخرين)
+    function isOwner() {
+      return signedIn() &&
+             request.auth.token.email != null &&
+             request.auth.token.email_verified == true &&
+             request.auth.token.email.lower() in ["cemchaibi@gmail.com"];
+    }
+    // مشرفون إضافيون: قائمة البريد في المستند config/admins (يديرها المالك من لوحة الإدارة)
+    function isExtraAdmin() {
+      return signedIn() &&
+             request.auth.token.email != null &&
+             request.auth.token.email_verified == true &&
+             exists(/databases/$(database)/documents/config/admins) &&
+             request.auth.token.email.lower() in get(/databases/$(database)/documents/config/admins).data.get('emails', []);
+    }
+    function isAdmin() { return isOwner() || isExtraAdmin(); }
+    // حساب محظور من النشر (يضعه المشرف في bannedUsers)
+    function notBanned() {
+      return !exists(/databases/$(database)/documents/bannedUsers/$(request.auth.uid));
+    }
+    // علامة "الحساب الرسمي" لا يضعها إلا المدير
+    function ownerFlagOk() {
+      return request.resource.data.get('isOwner', false) == isAdmin();
+    }
+    // صفة "ولي" مأخوذة من ملف المستخدم في قاعدة البيانات وليس من الواجهة
+    function isParent() {
+      return signedIn() &&
+        exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.get('role', '') == 'ولي';
+    }
+    function textOk(field, maxLen) {
+      return request.resource.data.get(field, '') is string &&
+             request.resource.data.get(field, '').size() <= maxLen;
+    }
+    function imageOk(field) {
+      return request.resource.data.get(field, null) == null ||
+             (request.resource.data.get(field, null) is string &&
+              request.resource.data.get(field, null).size() < 400000 &&
+              (request.resource.data.get(field, null).matches('^data:image/(png|jpeg|jpg|webp|gif);base64,[A-Za-z0-9+/=]+$') ||
+               request.resource.data.get(field, null).matches('^https://[^\\s"\'<>`]+$')));
+    }
+    // الإعجاب: المستخدم يضيف أو يحذف معرّفه هو فقط، ولا يلمس أي حقل آخر
+    function onlyOwnLikeToggled(field) {
+      let before = resource.data.get(field, []).toSet();
+      let after = request.resource.data.get(field, []).toSet();
+      return signedIn() &&
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly([field]) &&
+        after.difference(before).union(before.difference(after)) == [request.auth.uid].toSet();
+    }
+
+    // بيانات الموقع (الأخبار، المناسبات، الفروض، الألوان): يقرأها الجميع، يكتبها المدير فقط
+    // (site-questions القديم يبقى للقراءة فقط إلى أن يُنقل من لوحة التحكم)
+    match /siteData/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // نص الخبر الكامل وصوره: مستند مستقل لكل خبر (حتى لا يمتلئ مستند القائمة)
+    match /newsFull/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // إعدادات حساسة: قائمة المشرفين (قراءتها للمشرفين، وكتابتها للمالك فقط)
+    match /config/{docId} {
+      allow read: if isAdmin();
+      allow write: if isOwner();
+    }
+
+    // المحظورون: المشرف يديرهم، والمستخدم يقرأ حالته فقط
+    match /bannedUsers/{uid} {
+      allow read: if isAdmin() || (signedIn() && request.auth.uid == uid);
+      allow write: if isAdmin();
+    }
+
+    // استطلاعات الرأي: المشرف ينشرها، والمسجل يصوّت مرة واحدة (معرّف الصوت = معرّف الحساب)
+    match /polls/{pid} {
+      allow read: if true;
+      allow write: if isAdmin();
+      match /votes/{uid} {
+        allow read: if true;
+        allow create: if signedIn() && notBanned() && request.auth.uid == uid &&
+          request.resource.data.keys().hasOnly(['choice', 'at']) &&
+          request.resource.data.choice is int &&
+          request.resource.data.choice >= 0 &&
+          request.resource.data.choice < get(/databases/$(database)/documents/polls/$(pid)).data.options.size() &&
+          get(/databases/$(database)/documents/polls/$(pid)).data.active == true &&
+          request.resource.data.at == request.time;
+        allow update: if false;
+        allow delete: if isAdmin();
+      }
+    }
+
+    // صندوق الاقتراحات والشكاوى: لا يُخزَّن معرّف الحساب أبداً، وقراءته للمشرف فقط
+    match /suggestions/{sid} {
+      allow create: if signedIn() && notBanned() &&
+        request.resource.data.keys().hasOnly(['kind', 'text', 'name', 'contact', 'anonymous', 'createdAt']) &&
+        request.resource.data.kind in ['اقتراح', 'شكوى', 'استفسار'] &&
+        request.resource.data.text is string &&
+        request.resource.data.text.size() >= 5 && request.resource.data.text.size() <= 1000 &&
+        request.resource.data.get('name', '') is string && request.resource.data.get('name', '').size() <= 80 &&
+        request.resource.data.get('contact', '') is string && request.resource.data.get('contact', '').size() <= 120 &&
+        request.resource.data.anonymous is bool &&
+        request.resource.data.createdAt == request.time;
+      allow read, update, delete: if isAdmin();
+    }
+
+    // البلاغات: أي مستخدم مسجل يرسل بلاغاً، والمشرف وحده يراها ويعالجها
+    match /reports/{rid} {
+      allow create: if signedIn() && notBanned() &&
+        request.resource.data.keys().hasOnly(['type', 'targetPath', 'text', 'author', 'authorUid', 'link', 'reporterUid', 'reporterName', 'createdAt']) &&
+        request.resource.data.reporterUid == request.auth.uid &&
+        request.resource.data.createdAt == request.time &&
+        request.resource.data.get('text', '') is string && request.resource.data.get('text', '').size() <= 300 &&
+        request.resource.data.get('targetPath', '') is string && request.resource.data.get('targetPath', '').size() <= 200;
+      allow read, update, delete: if isAdmin();
+    }
+
+    // الأسئلة: كل سؤال مستند مستقل
+    match /questions/{qid} {
+      allow read: if true;
+      allow create: if isAdmin() || (
+        signedIn() && notBanned() &&
+        request.resource.data.authorUid == request.auth.uid &&
+        textOk('body', 1000) && request.resource.data.body.size() > 0 &&
+        textOk('subj', 60) && textOk('author', 120) &&
+        imageOk('attachment') && imageOk('authorPhoto') &&
+        ownerFlagOk() &&
+        request.resource.data.get('likes', []) == [] &&
+        request.resource.data.get('answerLikes', []) == [] &&
+        !('answer' in request.resource.data) &&
+        request.resource.data.createdAt == request.time
+      );
+      allow update: if isAdmin()
+        || (signedIn() && request.auth.uid == resource.data.authorUid &&
+            request.resource.data.diff(resource.data).affectedKeys().hasOnly(['body']) &&
+            textOk('body', 1000) && request.resource.data.body.size() > 0)
+        // صاحب السؤال يثبّت «أفضل إجابة»
+        || (signedIn() && request.auth.uid == resource.data.authorUid &&
+            request.resource.data.diff(resource.data).affectedKeys().hasOnly(['bestReplyId', 'solved']) &&
+            request.resource.data.get('solved', false) is bool)
+        || onlyOwnLikeToggled('likes')
+        || onlyOwnLikeToggled('answerLikes');
+      allow delete: if isAdmin() || (signedIn() && request.auth.uid == resource.data.authorUid);
+
+      match /replies/{rid} {
+        allow read: if true;
+        allow create: if isAdmin() || (
+          signedIn() && notBanned() &&
+          request.resource.data.uid == request.auth.uid &&
+          textOk('text', 500) && request.resource.data.text.size() > 0 &&
+          textOk('author', 120) && imageOk('authorPhoto') &&
+          ownerFlagOk() &&
+          request.resource.data.get('likes', []) == [] &&
+          request.resource.data.createdAt == request.time
+        );
+        allow update: if onlyOwnLikeToggled('likes');
+        allow delete: if isAdmin() ||
+          (signedIn() && request.auth.uid == resource.data.uid) ||
+          (signedIn() && get(/databases/$(database)/documents/questions/$(qid)).data.authorUid == request.auth.uid);
+      }
+    }
+    // أسئلة بانتظار مراجعة الإدارة (عند تفعيل «مراجعة قبل النشر»): يراها صاحبها والمشرف فقط
+    match /questionsPending/{pid} {
+      allow create: if signedIn() && notBanned() &&
+        request.resource.data.authorUid == request.auth.uid &&
+        textOk('body', 1000) && request.resource.data.body.size() > 0 &&
+        textOk('subj', 60) && textOk('author', 120) &&
+        imageOk('attachment') && imageOk('authorPhoto') &&
+        ownerFlagOk() &&
+        request.resource.data.createdAt == request.time;
+      allow read: if isAdmin() || (signedIn() && resource.data.authorUid == request.auth.uid);
+      allow update: if false;
+      allow delete: if isAdmin();
+    }
+    // لازم لاستعلام collectionGroup('replies') و collectionGroup('comments')
+    match /{path=**}/replies/{rid} { allow read: if true; }
+    match /{path=**}/comments/{cid} { allow read: if true; }
+
+    // ملفات المستخدمين: كل مستخدم يقرأ/يكتب ملفه فقط، والمدير يقرأ الجميع
+    // لا أحد غير المدير يستطيع أن يعطي نفسه صفة "إدارة"
+    match /users/{userId} {
+      allow read: if isAdmin() || (signedIn() && request.auth.uid == userId);
+      allow create, update: if signedIn() && request.auth.uid == userId &&
+        (request.resource.data.get('role', '') != 'إدارة' || isAdmin()) &&
+        imageOk('photoURL');
+      allow delete: if isAdmin() || (signedIn() && request.auth.uid == userId);
+    }
+
+    // دردشة الأولياء: للأولياء (حسب ملفهم في قاعدة البيانات) والمدير فقط
+    match /parentsGeneralChat/{messageId} {
+      allow read: if isAdmin() || isParent();
+      allow create: if (isAdmin() || (isParent() && notBanned())) &&
+        request.resource.data.uid == request.auth.uid &&
+        ownerFlagOk() &&
+        request.resource.data.time == request.time &&
+        (request.resource.data.get('text', null) == null || textOk('text', 2000)) &&
+        imageOk('image') && imageOk('authorPhoto') &&
+        (!('replyTo' in request.resource.data) || (
+          request.resource.data.replyTo is map &&
+          request.resource.data.replyTo.keys().hasOnly(['id', 'author', 'text']) &&
+          request.resource.data.replyTo.get('text', '').size() <= 200));
+      // تفاعلات الرموز التعبيرية: كل عضو يعدّل خانته فقط داخل reactions
+      allow update: if (isAdmin() || isParent()) &&
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly(['reactions']) &&
+        request.resource.data.reactions.diff(resource.data.get('reactions', {})).affectedKeys().hasOnly([request.auth.uid]) &&
+        (!(request.auth.uid in request.resource.data.reactions) ||
+          request.resource.data.reactions[request.auth.uid] in ['like', 'love', 'laugh', 'pray', 'wow']);
+      // حذف الرسالة: صاحبها أو الإدارة
+      allow delete: if isAdmin() || (isParent() && resource.data.uid == request.auth.uid);
+    }
+
+    // تعليقات الأخبار
+    match /newsComments/{articleId}/comments/{commentId} {
+      allow read: if true;
+      allow create: if signedIn() && notBanned() &&
+        request.resource.data.uid == request.auth.uid &&
+        textOk('text', 2000) && request.resource.data.text.size() > 0 &&
+        ownerFlagOk() && imageOk('authorPhoto') &&
+        request.resource.data.time == request.time &&
+        request.resource.data.get('likes', []) == [];
+      allow update: if onlyOwnLikeToggled('likes')
+        || (signedIn() && request.auth.uid == resource.data.uid &&
+            request.resource.data.diff(resource.data).affectedKeys().hasOnly(['text']) &&
+            textOk('text', 2000));
+      allow delete: if isAdmin() || (signedIn() && request.auth.uid == resource.data.uid);
+    }
+
+    // أي مسار آخر: ممنوع
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

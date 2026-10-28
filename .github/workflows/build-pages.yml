@@ -1,0 +1,25 @@
+name: توليد صفحات الأقسام وخريطة الموقع
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'scripts/build_pages.py'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python3 scripts/build_pages.py
+      - name: حفظ الصفحات المولّدة
+        run: |
+          git config user.name "pages-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add news.html timetable.html media.html qa.html about.html privacy.html sitemap.xml
+          git diff --cached --quiet || (git commit -m "chore: توليد صفحات الأقسام" && git push)

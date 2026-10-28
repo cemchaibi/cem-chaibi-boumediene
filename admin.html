@@ -1,0 +1,2094 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>لوحة تحكم متوسطة شعيبي بومدين</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#123240;
+    --deep:#0e3b4c;
+    --deep-2:#0a2c3a;
+    --royal:#2f6ea8;
+    --royal-light:#4f8fc7;
+    --gold:#c99a2e;
+    --gold-light:#e6c467;
+    --paper:#faf5ea;
+    --paper-2:#f2e9d8;
+    --red:#a8402f;
+    --white:#ffffff;
+    --line: rgba(201,154,46,.35);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans Arabic', sans-serif;
+    line-height:1.75;
+  }
+  h1,h2,h3,h4{ font-family:'Almarai', sans-serif; font-weight:800; }
+  a{color:inherit; text-decoration:none;}
+  input, textarea, select, button{ font:inherit; }
+  button{ border:none; cursor:pointer; }
+
+  .btn{
+    background:var(--royal); color:#fff; padding:11px 24px; border-radius:12px; font-size:.88rem; font-family:'Cairo',sans-serif; font-weight:700; transition:.25s;
+    box-shadow:0 4px 14px rgba(47,110,168,.25); display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  }
+  .btn:hover{background:var(--deep); transform:translateY(-2px); box-shadow:0 8px 20px rgba(14,59,76,.3);}
+  .btn.gold{background:var(--gold); color:var(--deep-2); box-shadow:0 4px 14px rgba(201,154,46,.3);}
+  .btn.gold:hover{background:var(--gold-light); box-shadow:0 8px 20px rgba(201,154,46,.35);}
+
+  .auth-btn{
+    width:100%; display:flex; align-items:center; justify-content:center; gap:10px;
+    padding:12px; border-radius:11px; font-size:.9rem; font-weight:700; margin-bottom:12px;
+    border:1px solid #e4d9bd; font-family:'Cairo',sans-serif; transition:.2s;
+  }
+  .auth-btn.google{background:#fff; color:var(--ink);}
+  .auth-btn.google:hover{background:#f6f6f6;}
+
+  /* ===== ADMIN PANEL ===== */
+  .admin-login-wrap{
+    min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px;
+    background:radial-gradient(ellipse at 50% -10%, #164a5e 0%, var(--deep) 55%, var(--deep-2) 100%);
+  }
+  .admin-login-card{
+    background:#fff; border-radius:20px; padding:34px 30px; width:100%; max-width:380px;
+    box-shadow:0 24px 60px rgba(10,30,38,.35); text-align:center;
+  }
+  .admin-login-card h3{color:var(--deep); font-size:1.15rem; margin-bottom:6px;}
+  .admin-login-card p{color:#7c8b91; font-size:.85rem; margin-bottom:22px;}
+  .admin-login-card input{
+    width:100%; border:1px solid #e4d9bd; border-radius:10px; padding:12px 14px; margin-bottom:12px;
+    font-family:'IBM Plex Sans Arabic',sans-serif; font-size:.9rem; outline:none; color:var(--ink); text-align:center;
+  }
+  .admin-login-card input:focus{border-color:var(--royal);}
+  .admin-error{color:var(--red); font-size:.8rem; margin-bottom:10px; display:none;}
+
+  .admin-shell{display:none;}
+  .admin-shell.open{display:block;}
+  .admin-topbar{
+    background:var(--deep); color:#fff; padding:16px 24px; display:flex; align-items:center;
+    justify-content:space-between; position:sticky; top:0; z-index:5; border-bottom:1px solid var(--line);
+  }
+  .admin-topbar .t-left{display:flex; align-items:center; gap:12px; font-family:'Almarai',sans-serif; font-weight:700;}
+  .admin-topbar .exit-link{font-size:.85rem; color:var(--gold-light); font-family:'Cairo',sans-serif; cursor:pointer;}
+
+  .admin-body{max-width:1100px; margin:0 auto; padding:30px 24px 70px;}
+  .admin-tabs{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:26px;}
+  .admin-tab-btn{
+    background:#fff; border:1px solid var(--line); color:var(--deep); padding:10px 18px;
+    border-radius:12px; font-size:.87rem; font-family:'Cairo',sans-serif; transition:.2s; font-weight:600;
+  }
+  .admin-tab-btn.active{background:var(--deep); color:#fff; border-color:var(--deep);}
+  .admin-panel-section{display:none;}
+  .admin-panel-section.active{display:block;}
+
+  .admin-card{
+    background:#fff; border:1px solid #ecdfc2; border-radius:18px; padding:22px;
+    box-shadow:0 6px 20px rgba(20,60,75,.06); margin-bottom:22px; overflow-wrap:anywhere; word-break:break-word;
+  }
+  .admin-card h4{color:var(--deep); font-size:1rem; margin-bottom:16px;}
+  .admin-field{margin-bottom:14px;}
+  .admin-field label{display:block; font-size:.8rem; font-weight:700; color:var(--ink); margin-bottom:6px; font-family:'Cairo',sans-serif;}
+  .admin-field input, .admin-field textarea, .admin-field select{
+    width:100%; border:1px solid #e4d9bd; border-radius:10px; padding:10px 13px;
+    font-family:'IBM Plex Sans Arabic',sans-serif; font-size:.88rem; outline:none; color:var(--ink); background:#fff;
+  }
+  .admin-field textarea{min-height:70px; resize:vertical;}
+  .admin-field input:focus, .admin-field textarea:focus, .admin-field select:focus{border-color:var(--royal);}
+  .admin-grid-2{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+  @media(max-width:600px){.admin-grid-2{grid-template-columns:1fr;}}
+
+  .img-upload-box{
+    border:1.5px dashed #d9cba0; border-radius:12px; padding:16px; text-align:center; cursor:pointer;
+    color:#8a8375; font-size:.82rem; transition:.2s;
+  }
+  .img-upload-box:hover{border-color:var(--royal); color:var(--royal);}
+  .img-preview{max-width:160px; border-radius:10px; margin:10px auto 0; display:none;}
+
+  .admin-list-item{
+    display:flex; align-items:center; gap:14px; padding:14px; border:1px solid #f0e8d5; border-radius:14px;
+    margin-bottom:10px; background:#fffdf7;
+  }
+  .admin-list-thumb{
+    width:48px; height:48px; border-radius:10px; background:var(--paper-2); flex-shrink:0; overflow:hidden;
+    display:flex; align-items:center; justify-content:center; color:var(--royal);
+  }
+  .admin-list-thumb img{width:100%; height:100%; object-fit:cover;}
+  .admin-list-info{flex:1; min-width:0;}
+  .admin-list-info .t{font-size:.9rem; font-weight:700; color:var(--ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .admin-list-info .s{font-size:.78rem; color:#8a959a; font-family:'Cairo',sans-serif;}
+  .admin-list-actions{display:flex; gap:6px; flex-shrink:0;}
+  .admin-mini-btn{
+    width:32px; height:32px; border-radius:9px; display:flex; align-items:center; justify-content:center;
+    background:var(--paper-2); color:var(--ink); transition:.2s;
+  }
+  .admin-mini-btn.danger:hover{background:var(--red); color:#fff;}
+  .admin-mini-btn.edit:hover{background:var(--royal); color:#fff;}
+
+  .admin-level-tabs{display:flex; gap:6px; flex-wrap:wrap; margin-bottom:16px;}
+  .empty-note{color:#a2aeb2; font-size:.85rem; text-align:center; padding:20px 0;}
+
+  /* ===== الإصدار 3: أدوات جدول الحصص والوسائط ===== */
+  .chk-row{ display:flex; flex-wrap:wrap; gap:8px; }
+  .chk-row label{ display:inline-flex; align-items:center; gap:6px; padding:7px 14px; border:1px solid #e4d9bd; border-radius:999px; cursor:pointer; font-size:.85rem; background:#fff; }
+  .chk-row label:has(input:checked){ background:#0e3b4c; color:#fff; border-color:#0e3b4c; }
+  .slot-row{ display:grid; grid-template-columns:1.2fr 1.4fr auto auto auto; gap:8px; margin-bottom:8px; align-items:center; }
+  .slot-row input{ width:100%; }
+  .tt-adm-wrap{ overflow-x:auto; border:1px solid #e4d9bd; border-radius:14px; background:#fff; }
+  table.tt-adm{ width:100%; min-width:680px; border-collapse:collapse; }
+  .tt-adm th, .tt-adm td{ border:1px solid #efe5c8; padding:6px; text-align:center; font-size:.78rem; vertical-align:top; }
+  .tt-adm thead th{ background:#0e3b4c; color:#fff; }
+  .tt-adm tbody th{ background:#f6f0de; white-space:nowrap; font-size:.74rem; }
+  .tt-adm td.cell{ cursor:pointer; min-width:96px; height:52px; transition:background .15s; }
+  .tt-adm td.cell:hover{ background:#eaf2fa; }
+  .tt-adm td.cell.sel{ outline:3px solid #c99a2e; outline-offset:-3px; background:#fff8e3; }
+  .tt-adm tr.brk td, .tt-adm tr.brk th{ background:#f1f1f1; color:#8a959a; }
+  .tt-adm .mini{ display:block; padding:2px 6px; margin:1px 0; border-radius:6px; background:#e7f0f8; font-size:.72rem; }
+  .tt-adm .mini i{ font-style:normal; color:#a8402f; font-size:.66rem; }
+  .cell-editor{ margin-top:14px; padding:14px; border:1px dashed #c99a2e; border-radius:14px; background:#fffcf2; }
+  .cell-editor h5{ font-size:.95rem; margin-bottom:10px; color:#0e3b4c; }
+  .sess-row{ display:flex; align-items:center; gap:10px; padding:8px 10px; border-radius:10px; background:#fff; border:1px solid #efe5c8; margin-bottom:6px; font-size:.84rem; }
+  .sess-row b{ flex:1; }
+  .admin-grid-4{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+  .detect-line{ display:flex; align-items:center; gap:10px; font-size:.82rem; margin:-4px 0 12px; min-height:34px; }
+  .detect-line img{ height:34px; border-radius:6px; }
+  .pill-p{ padding:2px 12px; border-radius:999px; background:#0e3b4c; color:#fff; font-size:.74rem; }
+  @media (max-width:700px){ .admin-grid-4{ grid-template-columns:1fr 1fr; } .slot-row{ grid-template-columns:1fr 1fr; } }
+
+  .chk-row input{ width:auto !important; flex:none; margin:0; }
+  .chk-row label{ white-space:nowrap; flex:none; }
+  .slot-row .s-t{ direction:ltr; text-align:center; }
+  .admin-list-actions .admin-mini-btn{ white-space:nowrap; width:auto; min-width:34px; padding:0 10px; }
+
+  @media (max-width:700px){
+    .admin-tabs{ flex-wrap:nowrap; overflow-x:auto; padding-bottom:8px; margin-inline:-14px; padding-inline:14px; scrollbar-width:none; }
+    .admin-tabs::-webkit-scrollbar{ display:none; }
+    .admin-tab-btn{ flex-shrink:0; white-space:nowrap; }
+    .admin-list-item{ flex-wrap:wrap; }
+    .admin-card{ padding:16px; }
+  }
+
+  .dash-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; margin-bottom:18px; }
+  .dash-card{ position:relative; padding:16px 14px; border-radius:16px; background:#fff; border:1px solid #e4d9bd; text-align:center; cursor:pointer; transition:transform .2s, box-shadow .2s; overflow:hidden; }
+  .dash-card:hover{ transform:translateY(-3px); box-shadow:0 12px 26px rgba(20,60,75,.14); }
+  .dash-card::before{ content:''; position:absolute; top:0; right:0; left:0; height:4px; background:var(--c,#2f6ea8); }
+  .dash-card b{ display:block; font-size:1.9rem; color:var(--c,#0e3b4c); font-family:'Cairo',sans-serif; line-height:1.3; }
+  .dash-card span{ font-size:.8rem; color:#6a7a81; }
+  .dash-card small{ display:block; font-size:.7rem; color:#9aa6ab; margin-top:2px; }
+  .dash-actions{ display:flex; flex-wrap:wrap; gap:10px; }
+  .dash-check{ margin:0; padding:0 18px 0 0; font-size:.86rem; line-height:2.1; color:#46575e; }
+  .meter{ height:12px; border-radius:99px; background:#eee7d3; overflow:hidden; margin:6px 0 4px; }
+  .meter i{ display:block; height:100%; border-radius:99px; background:linear-gradient(90deg,#2e9b5b,#c99a2e); }
+  .meter.warn i{ background:linear-gradient(90deg,#c99a2e,#c0392b); }
+  .health-row{ margin-bottom:12px; font-size:.84rem; }
+  .u-ctrl{ display:flex; flex-wrap:wrap; gap:10px; margin-bottom:14px; align-items:center; }
+  .u-ctrl input[type=text]{ flex:1; min-width:180px; }
+  .u-ctrl select{ min-width:130px; }
+  .u-ava{ width:48px; height:48px; border-radius:50%; background:#e4edf3; color:#0e3b4c; display:flex; align-items:center; justify-content:center; font-weight:800; overflow:hidden; flex-shrink:0; border:2px solid #fff; box-shadow:0 2px 8px rgba(0,0,0,.15); }
+  .u-ava img{ width:100%; height:100%; object-fit:cover; cursor:zoom-in; }
+  .u-badge-ban{ display:inline-block; margin-inline-start:6px; padding:1px 9px; border-radius:99px; background:#c0392b; color:#fff; font-size:.68rem; }
+  .poll-res{ margin-top:8px; font-size:.82rem; }
+  .poll-res .row{ display:flex; align-items:center; gap:10px; margin-bottom:5px; }
+  .poll-res .row i{ display:block; height:10px; border-radius:99px; background:#2f6ea8; min-width:3px; }
+  #adminPhotoModal{ position:fixed; inset:0; z-index:9000; background:rgba(5,12,16,.85); display:none; align-items:center; justify-content:center; padding:20px; }
+  #adminPhotoModal.open{ display:flex; }
+  #adminPhotoModal .box{ background:#fff; border-radius:20px; padding:18px; max-width:min(440px,94vw); text-align:center; }
+  #adminPhotoModal img{ max-width:100%; max-height:62vh; border-radius:14px; }
+  #adminPhotoModal .cap{ margin:10px 0; font-size:.9rem; line-height:1.8; }
+</style>
+<link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="admin-login-wrap" id="adminLoginWrap">
+    <div class="admin-login-card">
+      <h3>لوحة تحكم المتوسطة</h3>
+      <p>هذه الصفحة مخصصة للمدير فقط — سجّل الدخول بحسابك المخوّل للمتابعة</p>
+      <div class="admin-error" id="adminError">هذا الحساب غير مخوّل بالدخول إلى لوحة التحكم</div>
+      <button class="auth-btn google" id="adminGoogleBtn" style="width:100%; margin-bottom:10px;">
+        <svg viewBox="0 0 24 24" width="20" height="20"><path fill="#EA4335" d="M12 10.2v3.9h5.5c-.24 1.4-1.7 4.1-5.5 4.1-3.3 0-6-2.7-6-6.2s2.7-6.2 6-6.2c1.9 0 3.2.8 3.9 1.5l2.7-2.6C16.9 3.1 14.7 2 12 2 6.9 2 2.7 6.2 2.7 11.3S6.9 20.6 12 20.6c6.9 0 9.6-4.8 9.6-7.3 0-.5-.05-.9-.13-1.3H12z"/></svg>
+        دخول المدير عبر Google
+      </button>
+      <div style="font-size:.8rem; color:#7c8b91; margin:8px 0;">أو بالبريد الإلكتروني وكلمة المرور:</div>
+      <input type="email" id="adminEmailInput" placeholder="البريد الإلكتروني" style="margin-bottom:8px;">
+      <input type="password" id="adminPassInput" placeholder="كلمة المرور">
+      <button class="btn gold" id="adminLoginBtn" style="width:100%;">دخول</button>
+    </div>
+  </div>
+
+  <div class="admin-shell" id="adminShell">
+    <div class="admin-topbar">
+      <div class="t-left">لوحة تحكم متوسطة شعيبي بومدين</div>
+      <span class="exit-link" id="adminLogoutBtn">تسجيل الخروج</span>
+    </div>
+    <div class="admin-body">
+      <div class="admin-tabs" id="adminTabs">
+        <button class="admin-tab-btn active" data-tab="dashboard">📊 نظرة عامة</button>
+        <button class="admin-tab-btn" data-tab="news">الأخبار والمناسبات</button>
+        <button class="admin-tab-btn" data-tab="timetable">جدول الحصص</button>
+        <button class="admin-tab-btn" data-tab="exams">الفروض والاختبارات</button>
+        <button class="admin-tab-btn" data-tab="media">الوسائط (يوتيوب/انستغرام/فيسبوك)</button>
+        <button class="admin-tab-btn" data-tab="docs">الوثائق وقائمة المطعم</button>
+        <button class="admin-tab-btn" data-tab="moderation">الإشراف والبلاغات <span id="repBadge" style="color:#c0392b;font-weight:800;"></span></button>
+        <button class="admin-tab-btn" data-tab="polls">الاستطلاعات</button>
+        <button class="admin-tab-btn" data-tab="suggestions">الاقتراحات والشكاوى <span id="sugBadge" style="color:#c0392b;font-weight:800;"></span></button>
+        <button class="admin-tab-btn" data-tab="qpending">مراجعة الأسئلة <span id="qpBadge" style="color:#c0392b;font-weight:800;"></span></button>
+        <button class="admin-tab-btn" data-tab="qa">فضاء الأسئلة</button>
+        <button class="admin-tab-btn" data-tab="users">المستخدمون والإحصائيات</button>
+        <button class="admin-tab-btn" data-tab="parentmsgs">دردشة الأولياء العامة</button>
+        <button class="admin-tab-btn" data-tab="settings">إعدادات ومظهر الموقع</button>
+      </div>
+
+      <!-- DASHBOARD TAB -->
+      <div class="admin-panel-section active" id="tabDashboard">
+        <div class="dash-grid" id="dashCards"></div>
+        <div class="admin-card">
+          <h4>إجراءات سريعة</h4>
+          <div class="dash-actions">
+            <button class="btn gold" data-jump="news" type="button">+ نشر خبر</button>
+            <button class="btn" data-jump="timetable" type="button">تعديل جدول الحصص</button>
+            <button class="btn" data-jump="polls" type="button">استطلاع جديد</button>
+            <button class="btn" data-jump="media" type="button">إضافة فيديو</button>
+            <button class="btn" data-jump="docs" type="button">رفع وثيقة</button>
+            <button class="btn" data-jump="moderation" type="button">البلاغات</button>
+          </div>
+        </div>
+        <div class="admin-card">
+          <h4>إعلان عاجل (نشر سريع)</h4>
+          <p style="font-size:.8rem;color:#7c8b91;margin-bottom:10px;">يظهر كلافتة ذهبية أعلى الموقع ويصل كإشعار للزوار. اتركه معطّلاً عند عدم الحاجة.</p>
+          <div class="admin-field"><input type="text" id="qBannerText" placeholder="مثال: غداً لا دراسة بسبب الأحوال الجوية"></div>
+          <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+            <label style="display:flex;gap:8px;align-items:center;cursor:pointer;"><input type="checkbox" id="qBannerOn" style="width:auto;"> تفعيل اللافتة</label>
+            <button class="btn gold" id="qBannerSave" type="button">نشر</button>
+          </div>
+        </div>
+        <div class="admin-card">
+          <h4>صحة الموقع وحجم البيانات</h4>
+          <div id="dashHealth"></div>
+        </div>
+        <div class="admin-card">
+          <h4>قائمة تحقق</h4>
+          <ul class="dash-check">
+            <li>نشر قواعد Firestore الأخيرة (Rules → Publish).</li>
+            <li>ترحيل الأخبار القديمة إلى النظام الجديد إن ظهر لك تنبيه في تبويب الأخبار.</li>
+            <li>تفعيل <b>App Check</b> وتقييد مفتاح API بنطاق الموقع من Google Cloud.</li>
+            <li>إضافة مشرف احتياطي من «إعدادات ومظهر الموقع».</li>
+            <li>تحميل نسخة احتياطية كل أسبوع.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- POLLS TAB -->
+      <div class="admin-panel-section" id="tabPolls">
+        <div class="admin-card">
+          <h4>إنشاء استطلاع رأي</h4>
+          <div class="admin-field"><label>السؤال</label><input type="text" id="pollQuestion" placeholder="مثال: ما المادة التي تحتاجون فيها حصص دعم؟"></div>
+          <div class="admin-field"><label>الخيارات (كل خيار في سطر، من 2 إلى 6)</label><textarea id="pollOptions" placeholder="رياضيات&#10;فيزياء&#10;لغة فرنسية"></textarea></div>
+          <button class="btn gold" id="pollCreateBtn" type="button">نشر الاستطلاع</button>
+        </div>
+        <div id="pollsAdminList"><p class="empty-note">جاري التحميل...</p></div>
+      </div>
+
+      <!-- SUGGESTIONS TAB -->
+      <div class="admin-panel-section" id="tabSuggestions">
+        <div class="admin-card">
+          <h4>صندوق الاقتراحات والشكاوى <span id="sugCount" class="pill-p" style="margin-inline-start:6px;"></span></h4>
+          <div class="chk-row" id="sugFilter" style="margin-bottom:12px;">
+            <label><input type="radio" name="sugf" value="" checked> الكل</label><label><input type="radio" name="sugf" value="اقتراح"> اقتراحات</label><label><input type="radio" name="sugf" value="شكوى"> شكاوى</label><label><input type="radio" name="sugf" value="استفسار"> استفسارات</label>
+          </div>
+          <div id="sugList"><p class="empty-note">جاري التحميل...</p></div>
+        </div>
+      </div>
+
+      <!-- NEWS + EVENTS TAB (مدمجة) -->
+      <div class="admin-panel-section" id="tabNews">
+        <div class="admin-level-tabs" id="feedSwitch" style="margin-bottom:16px;">
+          <button class="admin-tab-btn level-tab-btn active" data-sub="news" type="button">الأخبار</button>
+          <button class="admin-tab-btn level-tab-btn" data-sub="events" type="button">المناسبات</button>
+        </div>
+        <div id="feedNewsPane">
+<div id="newsLegacyNotice" class="admin-card" style="display:none;background:#fff8e3;border-color:#c99a2e;font-size:.86rem;line-height:1.9;"></div>
+        <div class="admin-card">
+          <h4 id="newsFormTitle">إضافة خبر جديد</h4>
+          <input type="hidden" id="newsEditId">
+          <div class="admin-grid-2">
+            <div class="admin-field"><label>عنوان الخبر</label><input type="text" id="newsTitle" placeholder="مثال: تكريم التلاميذ المتفوقين"></div>
+            <div class="admin-field"><label>تاريخ النشر <small style="color:#7c8b91;">(اختر تاريخاً مستقبلياً لجدولة الخبر)</small></label><input type="date" id="newsDate"><div id="newsDateOld" data-old="" style="display:none;font-size:.76rem;color:#9a6b0f;margin-top:4px;"></div></div>
+          </div>
+          <div class="admin-field"><label>التصنيف</label><input type="text" id="newsCat" placeholder="مثال: نشاط ثقافي"></div>
+          <div class="admin-field"><label style="display:flex;gap:8px;align-items:center;cursor:pointer;"><input type="checkbox" id="newsPinned" style="width:auto;"> تثبيت هذا الخبر في أعلى القائمة</label></div>
+          <div class="admin-field"><label>نص مختصر (يظهر في قائمة الأخبار)</label><textarea id="newsExcerpt" placeholder="تفاصيل مختصرة عن الخبر..."></textarea></div>
+          <div class="admin-field">
+            <label>المحتوى الكامل (يظهر في صفحة الخبر — اختياري، وإلا يُستعمل النص المختصر)</label>
+            <div id="newsContentEditor" style="background:#fff; border-radius:0 0 10px 10px;"></div>
+          </div>
+          <div class="admin-field">
+            <label>صورة الخبر الرئيسية (اختياري)</label>
+            <div class="img-upload-box" id="newsImgBox">اضغط هنا لاختيار صورة، أو اتركها فارغة لاستخدام أيقونة افتراضية</div>
+            <input type="file" id="newsImgInput" accept="image/*" style="display:none;">
+            <img class="img-preview" id="newsImgPreview">
+          </div>
+          <div class="admin-field">
+            <label>صور إضافية (معرض الصور داخل صفحة الخبر — اختياري)</label>
+            <div class="img-upload-box" id="newsGalleryBox">اضغط هنا لإضافة صورة إلى المعرض (يمكن تكرار الإضافة)</div>
+            <input type="file" id="newsGalleryInput" accept="image/*" style="display:none;">
+            <div id="newsGalleryPreview" style="display:flex; gap:8px; flex-wrap:wrap; margin-top:10px;"></div>
+          </div>
+          <div style="display:flex; gap:10px;">
+            <button class="btn gold" id="newsSaveBtn">حفظ الخبر</button>
+            <button class="btn" id="newsCancelEdit" style="display:none; background:#c7ceD1;">إلغاء التعديل</button>
+          </div>
+        </div>
+        <div id="newsAdminList"></div>
+        </div>
+        <div id="feedEventsPane" style="display:none;">
+        <div class="admin-card">
+          <h4 id="eventFormTitle">إضافة مناسبة جديدة</h4>
+          <input type="hidden" id="eventEditId">
+          <div class="admin-grid-2">
+            <div class="admin-field"><label>عنوان المناسبة</label><input type="text" id="eventTitle" placeholder="مثال: احتفالية عيد العلم"></div>
+            <div class="admin-field"><label>التاريخ</label><input type="text" id="eventDate" placeholder="مثال: 16 أفريل 2027"></div>
+          </div>
+          <div class="admin-field"><label>التاريخ الفعلي (لترتيب المناسبات واختيار «أقرب مناسبة» تلقائياً)</label><input type="date" id="eventIso"></div>
+          <div class="admin-field"><label>وصف مختصر</label><textarea id="eventDesc" placeholder="تفاصيل عن المناسبة..."></textarea></div>
+          <div style="display:flex; gap:10px;">
+            <button class="btn gold" id="eventSaveBtn">حفظ المناسبة</button>
+            <button class="btn" id="eventCancelEdit" style="display:none; background:#c7ceD1;">إلغاء التعديل</button>
+          </div>
+        </div>
+        <div id="eventsAdminList"></div>
+        </div>
+      </div>
+
+      <!-- EXAMS TAB -->
+      <div class="admin-panel-section" id="tabExams">
+        <div class="admin-level-tabs" id="adminLevelTabs"></div>
+        <div class="admin-card">
+          <h4>إضافة فرض / اختبار</h4>
+          <div class="admin-grid-2">
+            <div class="admin-field"><label>المادة</label><input type="text" id="examSubj" placeholder="مثال: رياضيات"></div>
+            <div class="admin-field">
+              <label>النوع</label>
+              <select id="examType"><option value="test">اختبار</option><option value="hw">واجب منزلي</option></select>
+            </div>
+          </div>
+          <div class="admin-grid-2">
+            <div class="admin-field"><label>التاريخ</label><input type="text" id="examDate" placeholder="مثال: 30 سبتمبر 2026"></div>
+            <div class="admin-field"><label>التوقيت</label><input type="text" id="examTime" placeholder="مثال: 09:00 — 10:00"></div>
+          </div>
+          <button class="btn gold" id="examSaveBtn">إضافة إلى الجدول</button>
+        </div>
+        <div id="examAdminList"></div>
+      </div>
+
+      <!-- TIMETABLE TAB -->
+      <div class="admin-panel-section" id="tabTimetable">
+        <div class="admin-card">
+          <h4>1) الأيام والتوقيتات (تُطبَّق على كل الأقسام)</h4>
+          <div class="admin-field"><label>أيام الدراسة</label><div class="chk-row" id="ttDaysChecks"></div></div>
+          <div class="admin-field">
+            <label>الحصص — اكتب التوقيت بصيغة 08:00 - 09:00، وإن كانت فاصلاً (استراحة) اكتب اسمه في الخانة الثانية</label>
+            <div id="ttSlotsEditor"></div>
+            <button class="btn" id="ttAddSlot" type="button" style="margin-top:6px;">+ إضافة حصة</button>
+          </div>
+          <button class="btn gold" id="ttSaveStruct" type="button">حفظ الأيام والتوقيتات</button>
+        </div>
+
+        <div class="admin-card">
+          <h4>2) الأقسام</h4>
+          <div class="admin-grid-2">
+            <div class="admin-field"><label>المستوى</label>
+              <select id="ttClsLevel"><option>الأولى متوسط</option><option>الثانية متوسط</option><option>الثالثة متوسط</option><option>الرابعة متوسط</option></select></div>
+            <div class="admin-field"><label>اسم القسم</label><input type="text" id="ttClsName" placeholder="مثال: 1م1"></div>
+          </div>
+          <div class="admin-field"><label>الأفواج (اختياري — افصل بينها بفاصلة)</label><input type="text" id="ttClsGroups" placeholder="الفوج 1، الفوج 2"></div>
+          <button class="btn gold" id="ttAddClass" type="button">إضافة القسم</button>
+          <div id="ttClassList" style="margin-top:14px;"></div>
+        </div>
+
+        <div class="admin-card" id="ttEditorCard" style="display:none;">
+          <h4 id="ttEditorTitle">تحرير جدول القسم</h4>
+          <p style="font-size:.8rem;color:#7c8b91;margin-bottom:10px;">اضغط على أي خانة لإضافة حصة أو تعديلها. التغييرات تُحفظ تلقائياً.</p>
+          <div class="tt-adm-wrap"><table class="tt-adm" id="ttAdminGrid"></table></div>
+          <div class="cell-editor" id="ttCellEditor" style="display:none;"></div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;align-items:center;">
+            <select id="ttCopyTo" style="min-width:160px;"></select>
+            <button class="btn" id="ttCopyBtn" type="button">نسخ هذا الجدول إلى القسم المحدد</button>
+            <button class="btn" id="ttClearBtn" type="button" style="background:#a8402f;">مسح كل حصص هذا القسم</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- MEDIA TAB -->
+      <div class="admin-panel-section" id="tabMedia">
+        <div class="admin-card">
+          <h4 id="mediaFormTitle">إضافة فيديو / منشور</h4>
+          <input type="hidden" id="mediaEditId">
+          <div class="admin-field"><label>رابط المنشور (يوتيوب أو انستغرام أو فيسبوك)</label><input type="url" id="mediaUrl" placeholder="https://www.youtube.com/watch?v=..." dir="ltr"></div>
+          <div class="detect-line" id="mediaDetect"></div>
+          <div class="admin-grid-2">
+            <div class="admin-field"><label>العنوان</label><input type="text" id="mediaTitle" placeholder="مثال: حفل تكريم المتفوقين"></div>
+            <div class="admin-field"><label>التاريخ (نص حر)</label><input type="text" id="mediaDate" placeholder="مثال: 12 جوان 2026"></div>
+          </div>
+          <div class="admin-field"><label>وصف مختصر (اختياري)</label><textarea id="mediaDesc"></textarea></div>
+          <div style="display:flex;gap:10px;">
+            <button class="btn gold" id="mediaSaveBtn" type="button">حفظ</button>
+            <button class="btn" id="mediaCancelBtn" type="button" style="display:none;background:#c7ceD1;">إلغاء التعديل</button>
+          </div>
+        </div>
+        <div id="mediaAdminList"></div>
+        <div class="admin-card" style="margin-top:22px;">
+          <h4>المنشورات التلقائية <span id="feedCount" class="pill-p" style="margin-inline-start:6px;"></span></h4>
+          <p style="font-size:.82rem;color:#5d6d73;line-height:1.9;margin-bottom:10px;">تُضاف هنا تلقائياً كل ساعة آخر فيديوهات يوتيوب ومنشورات انستغرام وفيسبوك، وتظهر في الوسائط بعنوانها الأصلي، ويُعلَن عن الجديد منها بلافتة بارزة. إن لم تظهر منشورات فالمزامنة لم تُفعَّل بعد (راجع ملف <b>إعداد-المزامنة.md</b>). يمكنك إخفاء أي عنصر لا تريده.</p>
+          <div id="feedAdminList"><p class="empty-note">جاري التحميل...</p></div>
+        </div>
+
+      </div>
+
+      <!-- DOCS + MENU TAB -->
+      <div class="admin-panel-section" id="tabDocs">
+        <div class="admin-card">
+          <h4 id="docFormTitle">إضافة وثيقة أو استمارة</h4>
+          <p style="font-size:.8rem;color:#7c8b91;margin-bottom:10px;">ارفع الملف أولاً إلى Google Drive (مشاركة «أي شخص لديه الرابط») أو إلى مستودع GitHub، ثم الصق رابطه هنا.</p>
+          <input type="hidden" id="docEditId">
+          <div class="admin-grid-2">
+            <div class="admin-field"><label>عنوان الوثيقة</label><input type="text" id="docTitle" placeholder="مثال: استمارة تسجيل التلاميذ"></div>
+            <div class="admin-field"><label>الفئة</label><input type="text" id="docCat" placeholder="استمارات / لوائح / قوائم الكتب..."></div>
+          </div>
+          <div class="admin-field"><label>الرابط</label><input type="url" id="docUrl" placeholder="https://..." dir="ltr"></div>
+          <div class="admin-field"><label>وصف قصير (اختياري)</label><input type="text" id="docDesc"></div>
+          <div style="display:flex;gap:10px;"><button class="btn gold" id="docSaveBtn" type="button">حفظ</button><button class="btn" id="docCancelBtn" type="button" style="display:none;background:#c7ced1;">إلغاء التعديل</button></div>
+        </div>
+        <div id="docsAdminList"></div>
+
+        <div class="admin-card" style="margin-top:24px;">
+          <h4>قائمة المطعم الأسبوعية (اتركها فارغة لإخفائها)</h4>
+          <div class="admin-field"><label>عنوان الأسبوع</label><input type="text" id="menuWeekInput" placeholder="من 25 إلى 29 أكتوبر"></div>
+          <div id="menuRowsEditor"></div>
+          <button class="btn gold" id="menuSaveBtn" type="button" style="margin-top:8px;">حفظ القائمة</button>
+        </div>
+      </div>
+
+      <!-- MODERATION TAB -->
+      <div class="admin-panel-section" id="tabModeration">
+        <div class="admin-card">
+          <h4>البلاغات الواردة <span id="repCount" class="pill-p" style="margin-inline-start:6px;"></span></h4>
+          <div id="reportsList"><p class="empty-note">جاري التحميل...</p></div>
+        </div>
+        <div class="admin-card">
+          <h4>الحسابات المحظورة من النشر</h4>
+          <div class="admin-grid-2">
+            <div class="admin-field"><label>معرّف المستخدم (UID)</label><input type="text" id="banUid" dir="ltr" placeholder="يظهر في البلاغ أو في قائمة المستخدمين"></div>
+            <div class="admin-field"><label>السبب (اختياري)</label><input type="text" id="banReason"></div>
+          </div>
+          <button class="btn" id="banAddBtn" type="button" style="background:#a8402f;">حظر</button>
+          <div id="bannedList" style="margin-top:14px;"></div>
+        </div>
+      </div>
+
+      <!-- QUESTIONS PENDING REVIEW TAB -->
+      <div class="admin-panel-section" id="tabQpending">
+        <div class="admin-card">
+          <h4>أسئلة بانتظار المراجعة <span id="qpCount" class="pill-p" style="margin-inline-start:6px;"></span></h4>
+          <p style="font-size:.8rem;color:#7c8b91;margin-bottom:10px;">تظهر هنا الأسئلة الجديدة عند تفعيل «مراجعة الأسئلة قبل النشر» من الإعدادات. الموافقة تنشر السؤال فوراً في فضاء الأسئلة.</p>
+          <div id="qpList"><p class="empty-note">جاري التحميل...</p></div>
+        </div>
+      </div>
+
+      <!-- QA TAB -->
+      <div class="admin-panel-section" id="tabQa">
+        <div id="qaAdminList"></div>
+      </div>
+
+      <!-- USERS & STATS TAB -->
+      <div class="admin-panel-section" id="tabUsers">
+        <div class="admin-card" id="userStatsCards">
+          <h4>نظرة عامة</h4>
+          <div id="userStatsSummary" style="display:flex; gap:20px; flex-wrap:wrap;"></div>
+        </div>
+        <div class="admin-card">
+          <h4>قائمة المسجلين</h4>
+          <div id="usersAdminList">جاري التحميل...</div>
+        </div>
+      </div>
+
+      <!-- PARENT MESSAGES TAB -->
+      <div class="admin-panel-section" id="tabParentmsgs">
+        <div id="parentThreadsAdminList">جاري التحميل...</div>
+      </div>
+
+      <!-- SETTINGS / THEME TAB -->
+      <div class="admin-panel-section" id="tabSettings">
+        <div class="admin-card" id="adminsCard" style="display:none;">
+          <h4>المشرفون الإضافيون (للمالك فقط)</h4>
+          <p style="font-size:.8rem;color:#7c8b91;margin-bottom:10px;">اكتب بريد كل مشرف في سطر. يجب أن يسجّل الدخول بحساب Google مؤكَّد البريد. لهم نفس صلاحياتك ما عدا إدارة هذه القائمة.</p>
+          <div class="admin-field"><textarea id="extraAdmins" dir="ltr" placeholder="assistant@gmail.com"></textarea></div>
+          <button class="btn gold" id="extraAdminsSave" type="button">حفظ المشرفين</button>
+        </div>
+
+        <div class="admin-card">
+          <h4>معلومات المتوسطة (صفحة «عن المتوسطة»)</h4>
+          <div class="admin-field"><label>نبذة عن المتوسطة</label><textarea id="infoAbout" placeholder="اتركه فارغاً لاستعمال النص الافتراضي"></textarea></div>
+          <div class="admin-grid-2">
+            <div class="admin-field"><label>رقم الهاتف</label><input type="text" id="infoPhone" placeholder="0550 00 00 00" dir="ltr"></div>
+            <div class="admin-field"><label>البريد الإلكتروني للتواصل</label><input type="email" id="infoEmail" placeholder="cemchaibi@gmail.com" dir="ltr"></div>
+          </div>
+          <div class="admin-field"><label>العنوان</label><input type="text" id="infoAddress" placeholder="الحي، المدينة"></div>
+          <div class="admin-field"><label>أوقات العمل</label><textarea id="infoHours" placeholder="الأحد – الخميس: 08:00 – 16:00"></textarea></div>
+          <div class="admin-field"><label>عبارة البحث على خريطة Google (لعرض الموقع)</label><input type="text" id="infoMap" placeholder="متوسطة شعيبي بومدين وهران"></div>
+          <div class="admin-field" style="margin-top:6px;"><label style="display:flex;gap:8px;align-items:center;cursor:pointer;"><input type="checkbox" id="infoBannerOn" style="width:auto;"> تفعيل لافتة إعلان عاجل أعلى الموقع</label></div>
+          <div class="admin-grid-2">
+            <div class="admin-field"><label>نص اللافتة</label><input type="text" id="infoBannerText" placeholder="مثال: اجتماع الأولياء يوم الخميس 15:00"></div>
+            <div class="admin-field"><label>رابط «التفاصيل» (اختياري: https://… أو #news)</label><input type="text" id="infoBannerLink" dir="ltr"></div>
+          </div>
+          <div class="admin-grid-2">
+            <div class="admin-field"><label>رابط قناة واتساب/تيليغرام (اختياري)</label><input type="url" id="infoChannel" dir="ltr" placeholder="https://whatsapp.com/channel/..."></div>
+            <div class="admin-field"><label>نص زر القناة</label><input type="text" id="infoChannelLabel" placeholder="قناة المتوسطة على واتساب"></div>
+          </div>
+          <div class="admin-field"><label>كلمات محظورة في الأسئلة والتعليقات والدردشة (افصل بينها بفاصلة)</label><textarea id="infoBadWords" placeholder="تُمنع الرسالة التي تحتوي إحداها قبل إرسالها"></textarea></div>
+          <div class="admin-grid-2">
+            <div class="admin-field"><label>رابط صفحة فيسبوك الرسمية</label><input type="url" id="infoFb" dir="ltr" placeholder="https://www.facebook.com/اسم-الصفحة"></div>
+            <div class="admin-field"><label>رابط حساب انستغرام</label><input type="url" id="infoIg" dir="ltr" placeholder="https://www.instagram.com/اسم-الحساب"></div>
+          </div>
+          <div class="admin-grid-2">
+            <div class="admin-field"><label>رابط قناة يوتيوب</label><input type="url" id="infoYt" dir="ltr" placeholder="https://www.youtube.com/@اسم-القناة"></div>
+            <div class="admin-field"><label>رابط الموقع الرسمي (اختياري)</label><input type="url" id="infoWeb" dir="ltr" placeholder="https://..."></div>
+          </div>
+          <p style="font-size:.76rem;color:#7c8b91;margin:-4px 0 12px;">هذه الروابط تظهر في أيقونات أعلى الموقع وفي التذييل. استعمل رابط الصفحة المباشر وليس رابط المشاركة المختصر.</p>
+          <div class="admin-field"><label style="display:flex;gap:8px;align-items:center;cursor:pointer;"><input type="checkbox" id="infoAnnounce" style="width:auto;"> إعلان تلقائي بارز عند نشر فيديو أو منشور جديد في الوسائط</label></div>
+          <div class="admin-field"><label>مدة بقاء الإعلان (بالأيام)</label><input type="number" id="infoAnnounceDays" min="1" max="30" value="3" style="max-width:140px;"></div>
+          <div class="admin-field"><label style="display:flex;gap:8px;align-items:center;cursor:pointer;"><input type="checkbox" id="infoQaPremod" style="width:auto;"> مراجعة الأسئلة قبل نشرها (تظهر بعد موافقتك)</label></div>
+          <button class="btn gold" id="infoSaveBtn" type="button">حفظ المعلومات</button>
+        </div>
+
+        <div class="admin-card">
+          <h4>ألوان الموقع</h4>
+          <p style="font-size:.82rem; color:#7c8b91; margin-bottom:14px;">غيّر ألوان الموقع الرئيسية دون الحاجة لتعديل أي كود. التغيير يظهر لكل الزوار فور الحفظ.</p>
+          <div class="admin-grid-2">
+            <div class="admin-field">
+              <label>اللون الأساسي (الأزرق الغامق)</label>
+              <input type="color" id="themeDeep" value="#0e3b4c" style="height:44px; padding:4px;">
+            </div>
+            <div class="admin-field">
+              <label>اللون الذهبي (الأزرار والتمييز)</label>
+              <input type="color" id="themeGold" value="#c99a2e" style="height:44px; padding:4px;">
+            </div>
+            <div class="admin-field">
+              <label>الأزرق الملكي (روابط وأزرار ثانوية)</label>
+              <input type="color" id="themeRoyal" value="#2f6ea8" style="height:44px; padding:4px;">
+            </div>
+          </div>
+          <div style="display:flex; gap:10px; margin-top:10px;">
+            <button class="btn gold" id="themeSaveBtn">حفظ الألوان</button>
+            <button class="btn" id="themeResetBtn" style="background:#c7ceD1;">استرجاع الألوان الافتراضية</button>
+          </div>
+        </div>
+
+        <div class="admin-card">
+          <h4>نسخة احتياطية من بيانات الموقع</h4>
+          <p style="font-size:.82rem; color:#7c8b91; margin-bottom:14px;">حمّل نسخة من كل الأخبار والمناسبات والفروض والأسئلة كملف واحد، للاحتفاظ بها لديك.</p>
+          <button class="btn gold" id="exportBackupBtn">تحميل نسخة احتياطية (JSON)</button>
+        </div>
+        <div class="admin-card">
+          <h4>استعادة نسخة احتياطية</h4>
+          <p style="font-size:.82rem; color:#7c8b91; margin-bottom:12px;">يستعيد: الأخبار (ونصوصها وصورها) والمناسبات والفروض وجدول الحصص والوسائط والوثائق والمطعم ومعلومات الموقع. <b>لا</b> يستعيد الأسئلة والمستخدمين. سيحل محل البيانات الحالية.</p>
+          <label class="btn" style="cursor:pointer;display:inline-flex;">اختيار ملف النسخة (JSON)<input type="file" id="restoreFile" accept="application/json,.json" style="display:none;"></label>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyDZ4hr_MISEoJs67DrPLYxqO0LfsSYPtXY",
+    authDomain: "chaibi-1c3aa.firebaseapp.com",
+    projectId: "chaibi-1c3aa",
+    storageBucket: "chaibi-1c3aa.firebasestorage.app",
+    messagingSenderId: "420312727383",
+    appId: "1:420312727383:web:68e84368b932e50facc812",
+    measurementId: "G-B21K02ZS8Y"
+  };
+  // بريد/بريدات المدير — يجب أن يطابق نفس القائمة الموجودة في index.html وفي firestore.rules
+  const ADMIN_EMAILS = ["cemchaibi@gmail.com"];
+
+  let db = null, auth = null;
+  try{
+    firebase.initializeApp(firebaseConfig);
+    db = firebase.firestore();
+    auth = firebase.auth();
+  }catch(e){ console.error('Firebase init failed', e); }
+
+  function isAdminUser(user){
+    return !!(user && user.email && ADMIN_EMAILS.map(e=>e.toLowerCase()).includes(user.email.toLowerCase()));
+  }
+  // يقبل فقط صور data:image بترميز base64 سليم أو روابط https — يمنع حقن الشيفرات عبر روابط الصور (XSS)
+  function safeImg(src){
+    src = String(src || '');
+    if(/^data:image\/(png|jpe?g|webp|gif);base64,[A-Za-z0-9+/=]+$/.test(src)) return src;
+    if(/^https:\/\/[^\s"'<>`]+$/.test(src)) return escapeHtml(src);
+    return '';
+  }
+  function escapeHtml(s){
+    return (s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+  function friendlyAuthError(code){
+    const map = {
+      'auth/wrong-password':'كلمة المرور غير صحيحة.',
+      'auth/user-not-found':'لا يوجد حساب بهذا البريد.',
+      'auth/invalid-email':'صيغة البريد الإلكتروني غير صحيحة.',
+      'auth/popup-closed-by-user':'تم إغلاق نافذة تسجيل الدخول قبل الإتمام.',
+      'auth/network-request-failed':'تعذر الاتصال بالشبكة.',
+      'auth/invalid-credential':'البريد أو كلمة المرور غير صحيحة.',
+      'auth/too-many-requests':'محاولات كثيرة متتالية، انتظر قليلاً ثم أعد المحاولة.'
+    };
+    return map[code] || 'حدث خطأ أثناء تسجيل الدخول، حاول مجدداً.';
+  }
+
+  // ================= أيقونات =================
+  const ICON_PATHS = {
+    school: '<path d="M4 21V8.5l8-4.2 8 4.2V21"/><path d="M9 21v-6.5h6V21"/><path d="M9 11h.01M15 11h.01"/>',
+    book: '<path d="M4 5.2c2.2-1 5.2-1 8 1 2.8-2 5.8-2 8-1v13.6c-2.2-1-5.2-1-8 1-2.8-2-5.8-2-8-1V5.2z"/><path d="M12 6.2v13.6"/>',
+    trophy: '<path d="M8 4h8v4.2a4 4 0 0 1-8 0V4z"/><path d="M6 5H4.5A2 2 0 0 0 6 9"/><path d="M18 5h1.5A2 2 0 0 1 18 9"/><path d="M12 12.2V16"/><path d="M9 20h6"/><path d="M10 16h4v4h-4z"/>',
+    flask: '<path d="M9.5 3h5"/><path d="M10.2 3v6.3l-5 8.7a1.8 1.8 0 0 0 1.6 2.7h10.4a1.8 1.8 0 0 0 1.6-2.7l-5-8.7V3"/><path d="M7.8 15h8.4"/>',
+    palette: '<path d="M12 3.2a8.8 8.8 0 1 0 0 17.6c1.1 0 1.9-.6 1.9-1.8 0-.5-.2-.9-.5-1.3-.3-.4-.5-.8-.5-1.2 0-.9.7-1.6 1.6-1.6h1.9a3.9 3.9 0 0 0 3.9-3.9c0-4.3-3.7-7.8-8.3-7.8z"/><circle cx="7.6" cy="12" r="1"/><circle cx="9.4" cy="8.2" r="1"/><circle cx="14.4" cy="7.6" r="1"/><circle cx="16.6" cy="11" r="1"/>',
+    clipboard: '<rect x="5.5" y="4" width="13" height="17" rx="2"/><path d="M9 4V3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/><path d="M9 12.3l2 2 4-4.3"/>',
+    backpack: '<path d="M9 3.2h6a1 1 0 0 1 1 1v1.6h1a2 2 0 0 1 2 2V18a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3V7.8a2 2 0 0 1 2-2h1V4.2a1 1 0 0 1 1-1z"/><path d="M9 12h6"/><path d="M9 3.2v3.6h6V3.2"/>',
+    globe: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.4 3.8 5.6 3.8 9s-1.3 6.6-3.8 9c-2.5-2.4-3.8-5.6-3.8-9S9.5 5.4 12 3z"/>',
+    flag: '<path d="M5.5 3v18"/><path d="M5.5 4.2h11l-2 3.8 2 3.8h-11"/>',
+    flower: '<circle cx="12" cy="12" r="2.2"/><path d="M12 3.2a2.8 2.8 0 1 1 0 5.6 2.8 2.8 0 0 1 0-5.6z"/><path d="M12 15.2a2.8 2.8 0 1 1 0 5.6 2.8 2.8 0 0 1 0-5.6z"/><path d="M3.2 12a2.8 2.8 0 1 1 5.6 0 2.8 2.8 0 0 1-5.6 0z"/><path d="M15.2 12a2.8 2.8 0 1 1 5.6 0 2.8 2.8 0 0 1-5.6 0z"/>',
+    cap: '<path d="M12 3.2 2.5 8l9.5 4.8L21.5 8 12 3.2z"/><path d="M6.2 10.4V16c0 1.6 2.8 3 5.8 3s5.8-1.4 5.8-3v-5.6"/><path d="M21.5 8v6"/>',
+    newspaper: '<rect x="3" y="5.2" width="13.2" height="14.6" rx="1.6"/><path d="M16.2 8h4.3v8.6a2 2 0 0 1-2 2h-2.3"/><path d="M6 9.4h7.2M6 12.2h7.2M6 15h4.8"/>',
+    calendarStar: '<rect x="3" y="5" width="18" height="16" rx="2.2"/><path d="M3 10h18"/><path d="M8 3v4M16 3v4"/><path d="M12 13.2l.9 1.8 2 .3-1.4 1.4.3 2-1.8-.9-1.8.9.3-2-1.4-1.4 2-.3z"/>',
+    message: '<path d="M21 11.6a8.5 8.5 0 0 1-9 8.5 8.7 8.7 0 0 1-3.8-.9L3 20.2l1.2-4.4A8.5 8.5 0 1 1 21 11.6z"/>',
+  };
+  function icon(name, size){
+    size = size || 20;
+    return `<span class="icon-badge"><svg viewBox="0 0 24 24" width="${size}" height="${size}">${ICON_PATHS[name] || ''}</svg></span>`;
+  }
+
+  // ================= بيانات افتراضية (تُستخدم فقط إن كانت القاعدة فارغة) =================
+  const DEFAULT_NEWS = [];
+  const DEFAULT_EVENTS = [];
+  const DEFAULT_LEVELS = {
+    "الأولى متوسط":[], "الثانية متوسط":[], "الثالثة متوسط":[], "الرابعة متوسط":[]
+  };
+  const DEFAULT_QUESTIONS = [];
+
+  let siteNews = [], siteEvents = [], siteLevels = {}, siteQuestions = [];
+
+  function toast(msg){
+    const d = document.createElement('div');
+    d.textContent = msg;
+    d.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#0e3b4c;color:#fff;padding:11px 22px;border-radius:999px;font-size:.88rem;z-index:5000;box-shadow:0 10px 30px rgba(0,0,0,.25);';
+    document.body.appendChild(d);
+    setTimeout(()=> d.remove(), 2600);
+  }
+  function genId(){ return 'id' + Date.now() + Math.floor(Math.random()*1000); }
+  async function loadJSON(key, fallback){
+    if(!db){ return JSON.parse(JSON.stringify(fallback)); }
+    try{
+      const doc = await db.collection('siteData').doc(key).get();
+      if(doc.exists && doc.data().items !== undefined) return doc.data().items;
+    }catch(e){ console.error('Firestore load failed for', key, e); }
+    return JSON.parse(JSON.stringify(fallback));
+  }
+  async function saveJSON(key, data){
+    if(!db){ alert('تعذر الاتصال بقاعدة البيانات'); return false; }
+    const bytes = new Blob([JSON.stringify({items:data})]).size;
+    if(bytes > 1000000){ alert('تعذر الحفظ: حجم البيانات (' + Math.round(bytes/1024) + ' كيلوبايت) تجاوز حد Firestore (1 ميغابايت للمستند). احذف بعض الصور أو الأخبار القديمة ثم أعد المحاولة.'); return false; }
+    if(bytes > 800000) alert('تنبيه: حجم «' + key + '» وصل إلى ' + Math.round(bytes/1024) + ' كيلوبايت من أصل 1024. احذف صوراً أو أخباراً قديمة قريباً حتى لا يتوقف الحفظ.');
+    try{ await db.collection('siteData').doc(key).set({items:data}); return true; }
+    catch(e){ console.error('Firestore save failed for', key, e); alert('تعذر الحفظ — تحقق من اتصالك بالإنترنت أو من صلاحيات Firestore Rules'); return false; }
+  }
+
+
+  // =====================================================================
+  //  الإصدار 3: دمج الأخبار/المناسبات + جدول الحصص + الوسائط + معلومات الموقع
+  // =====================================================================
+  document.querySelectorAll('#feedSwitch [data-sub]').forEach(b=> b.addEventListener('click', ()=>{
+    document.querySelectorAll('#feedSwitch [data-sub]').forEach(x=> x.classList.toggle('active', x === b));
+    document.getElementById('feedNewsPane').style.display = b.dataset.sub === 'news' ? '' : 'none';
+    document.getElementById('feedEventsPane').style.display = b.dataset.sub === 'events' ? '' : 'none';
+  }));
+
+  // ---------- جدول الحصص ----------
+  const ALL_DAYS = ['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+  const TT_DEFAULT_SLOTS = [
+    {id:'s1', t:'08:00 - 09:00'}, {id:'s2', t:'09:00 - 10:00'}, {id:'s3', t:'10:00 - 10:15', brk:'استراحة'},
+    {id:'s4', t:'10:15 - 11:15'}, {id:'s5', t:'11:15 - 12:15'}, {id:'s6', t:'12:15 - 13:30', brk:'استراحة الغداء'},
+    {id:'s7', t:'13:30 - 14:30'}, {id:'s8', t:'14:30 - 15:30'}
+  ];
+  const SUBJECT_SUGGEST = ['رياضيات','لغة عربية','لغة فرنسية','لغة إنجليزية','علوم طبيعية','فيزياء','تاريخ وجغرافيا','تربية إسلامية','تربية مدنية','تربية تشكيلية','تربية موسيقية','تربية بدنية','إعلام آلي','أمازيغية'];
+  let siteTT = {}, siteMedia = [], siteInfo = {};
+  let ttSelCls = '', ttSelCell = null;
+  function ttNorm(){
+    if(!siteTT || typeof siteTT !== 'object' || Array.isArray(siteTT)) siteTT = {};
+    if(!siteTT.days || !siteTT.days.length) siteTT.days = ['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس'];
+    if(!siteTT.slots || !siteTT.slots.length) siteTT.slots = JSON.parse(JSON.stringify(TT_DEFAULT_SLOTS));
+    if(!siteTT.classes) siteTT.classes = [];
+  }
+  async function saveTT(msg){
+    const ok = await saveJSON('site-timetable', siteTT);
+    if(ok && msg) toast(msg);
+    return ok;
+  }
+  function renderTTStruct(){
+    ttNorm();
+    document.getElementById('ttDaysChecks').innerHTML = ALL_DAYS.map(d=> `<label><input type="checkbox" value="${d}" ${siteTT.days.includes(d) ? 'checked' : ''}> ${d}</label>`).join('');
+    drawSlotRows(siteTT.slots);
+  }
+  function drawSlotRows(slots){
+    const box = document.getElementById('ttSlotsEditor');
+    box.innerHTML = slots.map((s, i)=> `<div class="slot-row" data-id="${escapeHtml(s.id)}">
+      <input type="text" class="s-t" value="${escapeHtml(s.t)}" placeholder="08:00 - 09:00" dir="ltr">
+      <input type="text" class="s-b" value="${escapeHtml(s.brk || '')}" placeholder="اسم الفاصل إن وُجد (استراحة)">
+      <button class="admin-mini-btn" data-up="${i}" title="أعلى" type="button">▲</button>
+      <button class="admin-mini-btn" data-down="${i}" title="أسفل" type="button">▼</button>
+      <button class="admin-mini-btn danger" data-rm="${i}" title="حذف" type="button">✕</button></div>`).join('');
+    const read = ()=> [...box.querySelectorAll('.slot-row')].map(r=> ({ id: r.dataset.id, t: r.querySelector('.s-t').value.trim(), brk: r.querySelector('.s-b').value.trim() || undefined }));
+    box.querySelectorAll('[data-up]').forEach(b=> b.onclick = ()=>{ const a = read(), i = +b.dataset.up; if(i > 0){ [a[i-1], a[i]] = [a[i], a[i-1]]; drawSlotRows(a); } });
+    box.querySelectorAll('[data-down]').forEach(b=> b.onclick = ()=>{ const a = read(), i = +b.dataset.down; if(i < a.length - 1){ [a[i+1], a[i]] = [a[i], a[i+1]]; drawSlotRows(a); } });
+    box.querySelectorAll('[data-rm]').forEach(b=> b.onclick = ()=>{ const a = read(); a.splice(+b.dataset.rm, 1); drawSlotRows(a); });
+    box._read = read;
+  }
+  document.getElementById('ttAddSlot').addEventListener('click', ()=>{
+    const box = document.getElementById('ttSlotsEditor');
+    const cur = box._read ? box._read() : siteTT.slots.slice();
+    cur.push({ id: 's' + Date.now().toString(36), t: '' });
+    drawSlotRows(cur);
+  });
+  document.getElementById('ttSaveStruct').addEventListener('click', async ()=>{
+    const days = [...document.querySelectorAll('#ttDaysChecks input:checked')].map(i=> i.value);
+    const slots = document.getElementById('ttSlotsEditor')._read().filter(s=> s.t || s.brk);
+    if(!days.length || !slots.length){ alert('اختر يوماً واحداً وحصة واحدة على الأقل.'); return; }
+    if(slots.some(s=> !s.brk && !/^\s*\d{1,2}\s*[:hH.]\s*\d{2}\s*[-–—]\s*\d{1,2}\s*[:hH.]\s*\d{2}\s*$/.test(s.t))){
+      if(!confirm('بعض التوقيتات ليست بصيغة 08:00 - 09:00، وقد لا تعمل ميزة «الحصة الحالية» معها. المتابعة؟')) return;
+    }
+    ttNorm(); siteTT.days = days; siteTT.slots = slots;
+    await saveTT('تم حفظ الأيام والتوقيتات.');
+    renderTTStruct(); renderTTGrid();
+  });
+  document.getElementById('ttAddClass').addEventListener('click', async ()=>{
+    ttNorm();
+    const level = document.getElementById('ttClsLevel').value;
+    const name = document.getElementById('ttClsName').value.trim();
+    const groups = document.getElementById('ttClsGroups').value.split(/[,،]/).map(s=> s.trim()).filter(Boolean);
+    if(!name){ alert('اكتب اسم القسم.'); return; }
+    if(siteTT.classes.some(c=> c.level === level && c.name === name)){ alert('هذا القسم موجود مسبقاً.'); return; }
+    const c = { id: genId(), level, name, groups, cells: {} };
+    siteTT.classes.push(c);
+    if(!(await saveTT('تمت إضافة القسم.'))){ siteTT.classes.pop(); return; }
+    document.getElementById('ttClsName').value = ''; document.getElementById('ttClsGroups').value = '';
+    ttSelCls = c.id; ttSelCell = null; renderTTClasses(); renderTTGrid();
+  });
+  function renderTTClasses(){
+    ttNorm();
+    const box = document.getElementById('ttClassList');
+    if(!siteTT.classes.length){ box.innerHTML = '<p class="empty-note">لا توجد أقسام بعد</p>'; document.getElementById('ttEditorCard').style.display = 'none'; return; }
+    box.innerHTML = siteTT.classes.map(c=> `<div class="admin-list-item" style="${c.id === ttSelCls ? 'border-color:#c99a2e;background:#fffaf0;' : ''}">
+      <div class="admin-list-info"><div class="t">${escapeHtml(c.name)} <span class="pill-p">${escapeHtml(c.level)}</span></div><div class="s">${c.groups && c.groups.length ? 'الأفواج: ' + escapeHtml(c.groups.join('، ')) : 'بدون أفواج'} · ${Object.values(c.cells || {}).reduce((n, a)=> n + (a ? a.length : 0), 0)} حصة</div></div>
+      <div class="admin-list-actions">
+        <button class="btn gold" data-edit-cls="${c.id}" type="button" style="padding:6px 14px;font-size:.78rem;">تحرير الجدول</button>
+        <button class="admin-mini-btn" data-groups-cls="${c.id}" title="تعديل الأفواج" type="button">أفواج</button>
+        <button class="admin-mini-btn danger" data-del-cls="${c.id}" title="حذف" type="button">✕</button>
+      </div></div>`).join('');
+    box.querySelectorAll('[data-edit-cls]').forEach(b=> b.onclick = ()=>{ ttSelCls = b.dataset.editCls; ttSelCell = null; renderTTClasses(); renderTTGrid(); document.getElementById('ttEditorCard').scrollIntoView({ behavior:'smooth' }); });
+    box.querySelectorAll('[data-groups-cls]').forEach(b=> b.onclick = async ()=>{
+      const c = siteTT.classes.find(x=> x.id === b.dataset.groupsCls);
+      const v = prompt('الأفواج (افصل بينها بفاصلة، واتركها فارغة لإلغاء الأفواج):', (c.groups || []).join('، '));
+      if(v === null) return;
+      c.groups = v.split(/[,،]/).map(s=> s.trim()).filter(Boolean);
+      await saveTT('تم تحديث الأفواج.'); renderTTClasses(); renderTTGrid();
+    });
+    box.querySelectorAll('[data-del-cls]').forEach(b=> b.onclick = async ()=>{
+      if(!confirm('حذف هذا القسم وكل حصصه؟')) return;
+      siteTT.classes = siteTT.classes.filter(x=> x.id !== b.dataset.delCls);
+      if(ttSelCls === b.dataset.delCls){ ttSelCls = ''; ttSelCell = null; }
+      await saveTT('تم حذف القسم.'); renderTTClasses(); renderTTGrid();
+    });
+  }
+  function curClass(){ return (siteTT.classes || []).find(c=> c.id === ttSelCls); }
+  function renderTTGrid(){
+    ttNorm();
+    const card = document.getElementById('ttEditorCard'), c = curClass();
+    if(!c){ card.style.display = 'none'; return; }
+    card.style.display = '';
+    document.getElementById('ttEditorTitle').textContent = 'جدول القسم: ' + c.name + ' — ' + c.level;
+    let h = '<thead><tr><th>الوقت</th>' + siteTT.days.map(d=> `<th>${d}</th>`).join('') + '</tr></thead><tbody>';
+    siteTT.slots.forEach(s=>{
+      if(s.brk){ h += `<tr class="brk"><th>${escapeHtml(s.t)}</th><td colspan="${siteTT.days.length}">${escapeHtml(s.brk)}</td></tr>`; return; }
+      h += `<tr><th>${escapeHtml(s.t)}</th>` + siteTT.days.map(d=>{
+        const arr = (c.cells || {})[d + '|' + s.id] || [];
+        const sel = ttSelCell && ttSelCell.day === d && ttSelCell.slot === s.id;
+        return `<td class="cell ${sel ? 'sel' : ''}" data-day="${d}" data-slot="${escapeHtml(s.id)}">${arr.map(x=> `<span class="mini">${escapeHtml(x.subj)}${x.group ? ' <i>' + escapeHtml(x.group) + '</i>' : ''}</span>`).join('')}</td>`;
+      }).join('') + '</tr>';
+    });
+    document.getElementById('ttAdminGrid').innerHTML = h + '</tbody>';
+    document.querySelectorAll('#ttAdminGrid td.cell').forEach(td=> td.onclick = ()=>{ ttSelCell = { day: td.dataset.day, slot: td.dataset.slot }; renderTTGrid(); renderCellEditor(); });
+    const sel = document.getElementById('ttCopyTo');
+    sel.innerHTML = '<option value="">— اختر القسم المستهدف —</option>' + siteTT.classes.filter(x=> x.id !== c.id).map(x=> `<option value="${x.id}">${escapeHtml(x.name)} — ${escapeHtml(x.level)}</option>`).join('');
+    renderCellEditor();
+  }
+  function renderCellEditor(){
+    const box = document.getElementById('ttCellEditor'), c = curClass();
+    if(!ttSelCell || !c){ box.style.display = 'none'; return; }
+    const slot = siteTT.slots.find(s=> s.id === ttSelCell.slot);
+    if(!slot){ box.style.display = 'none'; return; }
+    const key = ttSelCell.day + '|' + ttSelCell.slot;
+    const arr = (c.cells && c.cells[key]) || [];
+    box.style.display = '';
+    box.innerHTML = `<h5>${ttSelCell.day} — ${escapeHtml(slot.t)}</h5>
+      ${arr.map((x, i)=> `<div class="sess-row"><b>${escapeHtml(x.subj)}</b><span>${escapeHtml(x.teacher || '')}</span><span>${escapeHtml(x.room || '')}</span><span class="pill-p">${escapeHtml(x.group || 'كل القسم')}</span><button class="admin-mini-btn danger" data-rm-sess="${i}" type="button">✕</button></div>`).join('') || '<p style="font-size:.82rem;color:#7c8b91;margin-bottom:10px;">لا توجد حصص في هذه الخانة.</p>'}
+      <div class="admin-grid-4" style="margin-top:10px;">
+        <div class="admin-field"><label>المادة</label><input type="text" id="csSubj" list="subjList" placeholder="رياضيات"><datalist id="subjList">${SUBJECT_SUGGEST.map(s=> `<option value="${s}">`).join('')}</datalist></div>
+        <div class="admin-field"><label>الأستاذ(ة)</label><input type="text" id="csTeacher" placeholder="أ. فلان"></div>
+        <div class="admin-field"><label>القاعة</label><input type="text" id="csRoom" placeholder="قاعة 3"></div>
+        <div class="admin-field"><label>الفوج</label><select id="csGroup"><option value="">كل القسم</option>${(c.groups || []).map(g=> `<option>${escapeHtml(g)}</option>`).join('')}</select></div>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;"><button class="btn gold" id="csAdd" type="button">+ إضافة حصة إلى الخانة</button>
+      <button class="btn" id="csRepeat" type="button">تكرار نفس الحصص في كل أيام هذا التوقيت</button></div>`;
+    box.querySelectorAll('[data-rm-sess]').forEach(b=> b.onclick = async ()=>{
+      arr.splice(+b.dataset.rmSess, 1);
+      if(!arr.length) delete c.cells[key]; else c.cells[key] = arr;
+      await saveTT(); renderTTGrid(); renderTTClasses();
+    });
+    document.getElementById('csAdd').onclick = async ()=>{
+      const subj = document.getElementById('csSubj').value.trim();
+      if(!subj){ alert('اكتب اسم المادة.'); return; }
+      c.cells = c.cells || {};
+      const list = c.cells[key] || [];
+      list.push({ subj, teacher: document.getElementById('csTeacher').value.trim(), room: document.getElementById('csRoom').value.trim(), group: document.getElementById('csGroup').value });
+      c.cells[key] = list;
+      await saveTT('تمت إضافة الحصة.'); renderTTGrid(); renderTTClasses();
+    };
+    document.getElementById('csRepeat').onclick = async ()=>{
+      if(!arr.length){ alert('أضف حصة أولاً.'); return; }
+      if(!confirm('نسخ حصص هذه الخانة إلى نفس التوقيت في بقية الأيام (يستبدل ما فيها)؟')) return;
+      siteTT.days.forEach(d=>{ c.cells[d + '|' + ttSelCell.slot] = JSON.parse(JSON.stringify(arr)); });
+      await saveTT('تم النسخ.'); renderTTGrid(); renderTTClasses();
+    };
+  }
+  document.getElementById('ttCopyBtn').addEventListener('click', async ()=>{
+    const c = curClass(), to = siteTT.classes.find(x=> x.id === document.getElementById('ttCopyTo').value);
+    if(!c || !to){ alert('اختر القسم المستهدف.'); return; }
+    if(!confirm('سيُستبدل جدول «' + to.name + '» بجدول «' + c.name + '». المتابعة؟')) return;
+    to.cells = JSON.parse(JSON.stringify(c.cells || {}));
+    to.groups = to.groups && to.groups.length ? to.groups : (c.groups || []);
+    await saveTT('تم نسخ الجدول.'); renderTTClasses();
+  });
+  document.getElementById('ttClearBtn').addEventListener('click', async ()=>{
+    const c = curClass(); if(!c || !confirm('مسح كل حصص «' + c.name + '»؟')) return;
+    c.cells = {}; ttSelCell = null;
+    await saveTT('تم المسح.'); renderTTGrid(); renderTTClasses();
+  });
+
+  // ---------- الوسائط ----------
+  function parseSocial(url){
+    url = String(url || '').trim(); let u;
+    try{ u = new URL(url); }catch(e){ return null; }
+    if(u.protocol !== 'https:' && u.protocol !== 'http:') return null;
+    const h = u.hostname.replace(/^(www|m|web)\./, '');
+    const okId = id => /^[\w-]{5,30}$/.test(id || '');
+    if(h === 'youtu.be' || h.endsWith('youtube.com') || h.endsWith('youtube-nocookie.com')){
+      let id = h === 'youtu.be' ? u.pathname.slice(1).split('/')[0] : (u.searchParams.get('v') || '');
+      if(!id){ const m = u.pathname.match(/\/(shorts|embed|live|v)\/([\w-]+)/); if(m) id = m[2]; }
+      return okId(id) ? { platform:'youtube', thumb:'https://i.ytimg.com/vi/' + id + '/hqdefault.jpg' } : null;
+    }
+    if(h.endsWith('instagram.com')){ const m = u.pathname.match(/\/(p|reel|reels|tv)\/([\w-]+)/); return m && okId(m[2]) ? { platform:'instagram' } : null; }
+    if(h.endsWith('facebook.com') || h === 'fb.watch' || h.endsWith('fb.com')) return { platform:'facebook' };
+    return null;
+  }
+  const PLAT_AR = { youtube:'يوتيوب', instagram:'انستغرام', facebook:'فيسبوك' };
+  document.getElementById('mediaUrl').addEventListener('input', ()=>{
+    const v = document.getElementById('mediaUrl').value.trim(), box = document.getElementById('mediaDetect');
+    if(!v){ box.innerHTML = ''; return; }
+    const p = parseSocial(v);
+    box.innerHTML = p ? `<span class="pill-p">${PLAT_AR[p.platform]}</span>${p.thumb ? `<img src="${escapeHtml(p.thumb)}" alt="">` : ''}<span style="color:#2d8a4e;">رابط صالح ✓</span>` : '<span style="color:#a8402f;">رابط غير مدعوم — استعمل رابط فيديو/منشور من يوتيوب أو انستغرام أو فيسبوك.</span>';
+  });
+  function resetMediaForm(){
+    ['mediaEditId','mediaUrl','mediaTitle','mediaDate','mediaDesc'].forEach(i=> document.getElementById(i).value = '');
+    document.getElementById('mediaDetect').innerHTML = '';
+    document.getElementById('mediaFormTitle').textContent = 'إضافة فيديو / منشور';
+    document.getElementById('mediaCancelBtn').style.display = 'none';
+  }
+  document.getElementById('mediaCancelBtn').addEventListener('click', resetMediaForm);
+  document.getElementById('mediaSaveBtn').addEventListener('click', async ()=>{
+    const url = document.getElementById('mediaUrl').value.trim();
+    const p = parseSocial(url);
+    if(!p){ alert('الرابط غير مدعوم. استعمل رابطاً من يوتيوب أو انستغرام أو فيسبوك.'); return; }
+    const item = { id: document.getElementById('mediaEditId').value || genId(), url, platform: p.platform,
+      title: document.getElementById('mediaTitle').value.trim(), date: document.getElementById('mediaDate').value.trim(), desc: document.getElementById('mediaDesc').value.trim() };
+    const prevM = siteMedia.find(m=> m.id === item.id);
+    item.ts = (prevM && prevM.ts) || Date.now();
+    if(!item.title && p.platform === 'youtube') item.title = await fetchYtTitleA(url);
+    if(!item.date) item.date = fmtIsoAr(new Date(item.ts - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 10));
+    const idx = siteMedia.findIndex(m=> m.id === item.id);
+    if(idx >= 0) siteMedia[idx] = item; else siteMedia.unshift(item);
+    const ok = await saveJSON('site-social', siteMedia);
+    if(!ok){ siteMedia = await loadJSON('site-social', []); renderAdminMedia(); return; }
+    toast('تم حفظ المنشور.'); resetMediaForm(); renderAdminMedia();
+  });
+  function renderAdminMedia(){
+    const wrap = document.getElementById('mediaAdminList');
+    if(!siteMedia.length){ wrap.innerHTML = '<p class="empty-note">لا توجد منشورات بعد</p>'; return; }
+    wrap.innerHTML = siteMedia.map((m, i)=> `<div class="admin-list-item">
+      <div class="admin-list-info"><div class="t">${escapeHtml(m.title || PLAT_AR[m.platform] || 'منشور')} <span class="pill-p">${PLAT_AR[m.platform] || ''}</span></div><div class="s" dir="ltr" style="text-align:right;">${escapeHtml(m.url)}</div></div>
+      <div class="admin-list-actions">
+        <button class="admin-mini-btn" data-m-up="${i}" type="button" title="أعلى">▲</button><button class="admin-mini-btn" data-m-down="${i}" type="button" title="أسفل">▼</button>
+        <button class="admin-mini-btn edit" data-m-edit="${m.id}" type="button" title="تعديل">✎</button><button class="admin-mini-btn danger" data-m-del="${m.id}" type="button" title="حذف">✕</button>
+      </div></div>`).join('');
+    const move = async (i, d)=>{ const j = i + d; if(j < 0 || j >= siteMedia.length) return; [siteMedia[i], siteMedia[j]] = [siteMedia[j], siteMedia[i]]; await saveJSON('site-social', siteMedia); renderAdminMedia(); };
+    wrap.querySelectorAll('[data-m-up]').forEach(b=> b.onclick = ()=> move(+b.dataset.mUp, -1));
+    wrap.querySelectorAll('[data-m-down]').forEach(b=> b.onclick = ()=> move(+b.dataset.mDown, 1));
+    wrap.querySelectorAll('[data-m-edit]').forEach(b=> b.onclick = ()=>{
+      const m = siteMedia.find(x=> x.id === b.dataset.mEdit); if(!m) return;
+      document.getElementById('mediaEditId').value = m.id; document.getElementById('mediaUrl').value = m.url;
+      document.getElementById('mediaTitle').value = m.title || ''; document.getElementById('mediaDate').value = m.date || ''; document.getElementById('mediaDesc').value = m.desc || '';
+      document.getElementById('mediaUrl').dispatchEvent(new Event('input'));
+      document.getElementById('mediaFormTitle').textContent = 'تعديل المنشور';
+      document.getElementById('mediaCancelBtn').style.display = 'inline-flex'; window.scrollTo({ top:0, behavior:'smooth' });
+    });
+    wrap.querySelectorAll('[data-m-del]').forEach(b=> b.onclick = async ()=>{
+      if(!confirm('حذف هذا المنشور؟')) return;
+      siteMedia = siteMedia.filter(x=> x.id !== b.dataset.mDel);
+      await saveJSON('site-social', siteMedia); renderAdminMedia();
+    });
+  }
+
+  // ---------- معلومات المتوسطة ----------
+  function fillInfoForm(){
+    const i = siteInfo || {};
+    document.getElementById('infoAbout').value = i.about || ''; document.getElementById('infoPhone').value = i.phone || '';
+    document.getElementById('infoEmail').value = i.email || ''; document.getElementById('infoAddress').value = i.address || '';
+    document.getElementById('infoHours').value = i.hours || ''; document.getElementById('infoMap').value = i.mapQuery || '';
+    document.getElementById('infoBannerOn').checked = !!i.bannerOn; document.getElementById('infoBannerText').value = i.bannerText || ''; document.getElementById('infoBannerLink').value = i.bannerLink || '';
+    document.getElementById('infoFb').value = i.facebookUrl || ''; document.getElementById('infoIg').value = i.instagramUrl || ''; document.getElementById('infoYt').value = i.youtubeUrl || ''; document.getElementById('infoWeb').value = i.websiteUrl || '';
+    document.getElementById('infoAnnounce').checked = i.announceMedia !== false; document.getElementById('infoAnnounceDays').value = (i.announceDays !== undefined && i.announceDays !== '' && i.announceDays !== null) ? i.announceDays : 3; document.getElementById('infoQaPremod').checked = !!i.qaPremod;
+    document.getElementById('infoChannel').value = i.channelUrl || ''; document.getElementById('infoChannelLabel').value = i.channelLabel || ''; document.getElementById('infoBadWords').value = i.badWords || '';
+  }
+  document.getElementById('infoSaveBtn').addEventListener('click', async ()=>{
+    siteInfo = Object.assign({}, siteInfo, { about: document.getElementById('infoAbout').value.trim(), phone: document.getElementById('infoPhone').value.trim(),
+      email: document.getElementById('infoEmail').value.trim(), address: document.getElementById('infoAddress').value.trim(),
+      hours: document.getElementById('infoHours').value.trim(), mapQuery: document.getElementById('infoMap').value.trim(),
+      bannerOn: document.getElementById('infoBannerOn').checked, bannerText: document.getElementById('infoBannerText').value.trim(), bannerLink: document.getElementById('infoBannerLink').value.trim(),
+      channelUrl: document.getElementById('infoChannel').value.trim(), channelLabel: document.getElementById('infoChannelLabel').value.trim(), badWords: document.getElementById('infoBadWords').value.trim(),
+      facebookUrl: document.getElementById('infoFb').value.trim(), instagramUrl: document.getElementById('infoIg').value.trim(), youtubeUrl: document.getElementById('infoYt').value.trim(), websiteUrl: document.getElementById('infoWeb').value.trim(),
+      announceMedia: document.getElementById('infoAnnounce').checked, announceDays: Math.max(1, Math.min(30, +document.getElementById('infoAnnounceDays').value || 3)), qaPremod: document.getElementById('infoQaPremod').checked });
+    if(await saveJSON('site-info', siteInfo)) toast('تم حفظ معلومات المتوسطة.');
+  });
+  async function initV3Admin(){
+    siteTT = await loadJSON('site-timetable', {});
+    siteMedia = await loadJSON('site-social', []);
+    siteInfo = await loadJSON('site-info', {});
+    renderTTStruct(); renderTTClasses(); renderTTGrid(); renderAdminMedia(); fillInfoForm();
+  }
+
+
+  // =====================================================================
+  //  الإصدار 4: أخبار منفصلة + وثائق + قائمة المطعم + إشراف + مشرفون
+  // =====================================================================
+  let currentIsOwner = false;
+  async function checkAdmin(user){
+    if(!user || !user.email) return false;
+    if(isAdminUser(user)){ currentIsOwner = true; return true; }
+    try{ await db.collection('config').doc('admins').get(); return true; }   // القراءة لا تنجح إلا لمشرف (حسب القواعد)
+    catch(e){ return false; }
+  }
+
+  // ----- الأخبار: نص كامل وصور في مستند مستقل + صورة مصغرة -----
+  let editingFull = null;
+  function makeThumb(dataUrl, w, q){
+    return new Promise(res=>{
+      if(!dataUrl){ res(null); return; }
+      const img = new Image();
+      img.onload = ()=>{
+        const s = Math.min(1, w / img.width), cw = Math.round(img.width * s), ch = Math.round(img.height * s);
+        const c = document.createElement('canvas'); c.width = cw; c.height = ch;
+        const x = c.getContext('2d'); x.fillStyle = '#fff'; x.fillRect(0, 0, cw, ch); x.drawImage(img, 0, 0, cw, ch);
+        let o = ''; try{ o = c.toDataURL('image/webp', q); }catch(e){} res(o.startsWith('data:image/webp') ? o : c.toDataURL('image/jpeg', q));
+      };
+      img.onerror = ()=> res(null);
+      img.src = dataUrl;
+    });
+  }
+  async function migrateNews(){
+    const legacy = siteNews.filter(n=> !n.split);
+    if(!legacy.length) return;
+    if(!confirm('سيتم نقل نص وصور ' + legacy.length + ' خبر إلى النظام الجديد (أسرع وأخف). لن يضيع شيء. المتابعة؟')) return;
+    const out = []; let done = 0;
+    for(const n of siteNews){
+      if(n.split){ out.push(n); continue; }
+      const thumb = n.thumb || await makeThumb(n.image, 480, 0.6);
+      try{ await db.collection('newsFull').doc(n.id).set({ content: n.content || '', image: n.image || null, gallery: n.gallery || [] }); }
+      catch(e){ console.error(e); alert('تعذر ترحيل الخبر: ' + n.title + '\nتأكد من نشر قواعد Firestore الجديدة.'); out.push(n); continue; }
+      out.push({ id:n.id, date:n.date, title:n.title, excerpt:n.excerpt, cat:n.cat, ic:n.ic || 'newspaper', thumb: thumb || null, pinned: !!n.pinned, split:true });
+      done++;
+    }
+    siteNews = out;
+    if(!(await saveJSON('site-news', siteNews))){ siteNews = await loadJSON('site-news', DEFAULT_NEWS); }
+    else toast('تم ترحيل ' + done + ' خبر إلى النظام الجديد.');
+    renderAdminNewsList();
+  }
+  function updateLegacyNotice(){
+    const box = document.getElementById('newsLegacyNotice'); if(!box) return;
+    const legacy = siteNews.filter(n=> !n.split && (n.image || n.content || (n.gallery && n.gallery.length))).length;
+    const kb = Math.round(new Blob([JSON.stringify(siteNews)]).size / 1024);
+    if(!legacy){ box.style.display = kb > 600 ? '' : 'none'; box.innerHTML = kb > 600 ? `قائمة الأخبار كبيرة (${kb} ك.ب). فكّر في حذف الأخبار القديمة.` : ''; return; }
+    box.style.display = '';
+    box.innerHTML = `<b>تحسين الأداء:</b> يوجد ${legacy} خبر بالنظام القديم (صور ونصوص داخل مستند واحد حجمه الآن ${kb} ك.ب من أصل 1024). نقلها يجعل الموقع أخف وأسرع ويلغي حدّ عدد الأخبار.
+      <div style="margin-top:8px;"><button class="btn gold" id="migrateNewsBtn" type="button">ترحيل الأخبار القديمة الآن</button></div>`;
+    document.getElementById('migrateNewsBtn').onclick = migrateNews;
+  }
+
+  // ----- الوثائق + قائمة المطعم -----
+  let siteDocs = [], siteMenu = {};
+  function resetDocForm(){
+    ['docEditId','docTitle','docCat','docUrl','docDesc'].forEach(i=> document.getElementById(i).value = '');
+    document.getElementById('docFormTitle').textContent = 'إضافة وثيقة أو استمارة';
+    document.getElementById('docCancelBtn').style.display = 'none';
+  }
+  document.getElementById('docCancelBtn').addEventListener('click', resetDocForm);
+  document.getElementById('docSaveBtn').addEventListener('click', async ()=>{
+    const title = document.getElementById('docTitle').value.trim();
+    const url = document.getElementById('docUrl').value.trim();
+    if(!title || !/^https?:\/\/[^\s"'<>`]+$/i.test(url)){ alert('اكتب العنوان ورابطاً صحيحاً يبدأ بـ https://'); return; }
+    const item = { id: document.getElementById('docEditId').value || genId(), title, url, cat: document.getElementById('docCat').value.trim() || 'عام', desc: document.getElementById('docDesc').value.trim() };
+    const i = siteDocs.findIndex(d=> d.id === item.id);
+    if(i >= 0) siteDocs[i] = item; else siteDocs.unshift(item);
+    if(!(await saveJSON('site-docs', siteDocs))){ siteDocs = await loadJSON('site-docs', []); renderAdminDocs(); return; }
+    toast('تم حفظ الوثيقة.'); resetDocForm(); renderAdminDocs();
+  });
+  function renderAdminDocs(){
+    const wrap = document.getElementById('docsAdminList');
+    if(!siteDocs.length){ wrap.innerHTML = '<p class="empty-note">لا توجد وثائق بعد</p>'; return; }
+    wrap.innerHTML = siteDocs.map(d=> `<div class="admin-list-item"><div class="admin-list-info"><div class="t">${escapeHtml(d.title)} <span class="pill-p">${escapeHtml(d.cat || '')}</span></div><div class="s" dir="ltr" style="text-align:right;">${escapeHtml(d.url)}</div></div>
+      <div class="admin-list-actions"><button class="admin-mini-btn edit" data-d-edit="${d.id}" type="button">✎</button><button class="admin-mini-btn danger" data-d-del="${d.id}" type="button">✕</button></div></div>`).join('');
+    wrap.querySelectorAll('[data-d-edit]').forEach(b=> b.onclick = ()=>{
+      const d = siteDocs.find(x=> x.id === b.dataset.dEdit); if(!d) return;
+      document.getElementById('docEditId').value = d.id; document.getElementById('docTitle').value = d.title; document.getElementById('docCat').value = d.cat || '';
+      document.getElementById('docUrl').value = d.url; document.getElementById('docDesc').value = d.desc || '';
+      document.getElementById('docFormTitle').textContent = 'تعديل الوثيقة'; document.getElementById('docCancelBtn').style.display = 'inline-flex'; window.scrollTo({ top:0, behavior:'smooth' });
+    });
+    wrap.querySelectorAll('[data-d-del]').forEach(b=> b.onclick = async ()=>{
+      if(!confirm('حذف هذه الوثيقة؟')) return;
+      siteDocs = siteDocs.filter(x=> x.id !== b.dataset.dDel); await saveJSON('site-docs', siteDocs); renderAdminDocs();
+    });
+  }
+  function renderMenuEditor(){
+    const days = ['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس'];
+    const cur = (siteMenu && siteMenu.rows) || [];
+    document.getElementById('menuWeekInput').value = (siteMenu && siteMenu.week) || '';
+    document.getElementById('menuRowsEditor').innerHTML = days.map(d=> {
+      const r = cur.find(x=> x.day === d) || {};
+      return `<div class="admin-grid-2" style="grid-template-columns:110px 1fr;margin-bottom:6px;"><input type="text" value="${d}" readonly style="background:#f3efe2;"><input type="text" class="menu-meal" data-day="${d}" value="${escapeHtml(r.meal || '')}" placeholder="وجبة ${d}"></div>`;
+    }).join('');
+  }
+  document.getElementById('menuSaveBtn').addEventListener('click', async ()=>{
+    const rows = [...document.querySelectorAll('.menu-meal')].map(i=> ({ day: i.dataset.day, meal: i.value.trim() })).filter(r=> r.meal);
+    siteMenu = { week: document.getElementById('menuWeekInput').value.trim(), rows };
+    if(await saveJSON('site-menu', siteMenu)) toast(rows.length ? 'تم حفظ قائمة المطعم.' : 'تم إخفاء قائمة المطعم.');
+  });
+
+  // ----- الإشراف: البلاغات والحظر -----
+  const REP_TYPES = { question:'سؤال', reply:'رد', comment:'تعليق', chat:'رسالة دردشة' };
+  const fmtTs = ts => { try{ return ts && ts.toDate ? ts.toDate().toLocaleString('ar-DZ', { dateStyle:'medium', timeStyle:'short' }) : ''; }catch(e){ return ''; } };
+  async function loadModeration(){
+    const box = document.getElementById('reportsList');
+    try{
+      const snap = await db.collection('reports').orderBy('createdAt', 'desc').limit(100).get();
+      const items = snap.docs.map(d=> Object.assign({ id: d.id }, d.data()));
+      document.getElementById('repCount').textContent = items.length || '';
+      const badge = document.getElementById('repBadge'); if(badge) badge.textContent = items.length ? '(' + items.length + ')' : '';
+      if(!items.length){ box.innerHTML = '<p class="empty-note">لا توجد بلاغات 🎉</p>'; }
+      else box.innerHTML = items.map(r=> `<div class="admin-list-item" style="align-items:flex-start;">
+        <div class="admin-list-info"><div class="t"><span class="pill-p">${REP_TYPES[r.type] || escapeHtml(r.type || '')}</span> ${escapeHtml(r.text || '')}</div>
+          <div class="s">الكاتب: ${escapeHtml(r.author || '—')} · أبلغ: ${escapeHtml(r.reporterName || '—')} · ${fmtTs(r.createdAt)}</div></div>
+        <div class="admin-list-actions" style="flex-wrap:wrap;">
+          <button class="btn" data-r-del="${r.id}" type="button" style="padding:6px 12px;font-size:.76rem;background:#a8402f;">حذف المحتوى</button>
+          <button class="btn" data-r-ban="${r.id}" type="button" style="padding:6px 12px;font-size:.76rem;background:#7a3b1f;">حظر الكاتب</button>
+          <button class="btn" data-r-ok="${r.id}" type="button" style="padding:6px 12px;font-size:.76rem;background:#5d7a86;">تجاهل</button>
+        </div></div>`).join('');
+      const byId = id => items.find(x=> x.id === id);
+      box.querySelectorAll('[data-r-ok]').forEach(b=> b.onclick = async ()=>{ await db.collection('reports').doc(b.dataset.rOk).delete(); toast('تم تجاهل البلاغ.'); loadModeration(); });
+      box.querySelectorAll('[data-r-del]').forEach(b=> b.onclick = async ()=>{
+        const r = byId(b.dataset.rDel); if(!r || !confirm('حذف المحتوى المُبلَّغ عنه نهائياً؟')) return;
+        try{ await db.doc(r.targetPath).delete(); }catch(e){ console.error(e); alert('تعذر حذف المحتوى (ربما حُذف مسبقاً).'); }
+        await db.collection('reports').doc(r.id).delete(); toast('تم حذف المحتوى.'); loadModeration();
+      });
+      box.querySelectorAll('[data-r-ban]').forEach(b=> b.onclick = async ()=>{
+        const r = byId(b.dataset.rBan); if(!r) return;
+        if(!r.authorUid){ alert('لا يتوفر معرّف الكاتب في هذا البلاغ.'); return; }
+        if(!confirm('حظر «' + (r.author || r.authorUid) + '» من النشر؟')) return;
+        await banUser(r.authorUid, r.author || '', (r.text || '').slice(0, 100)); toast('تم حظر الحساب.'); loadBanned();
+      });
+    }catch(e){ console.error(e); box.innerHTML = '<p class="empty-note">تعذر تحميل البلاغات — انشر قواعد Firestore الجديدة.</p>'; }
+    loadBanned();
+  }
+  async function banUser(uid, name, reason){
+    await db.collection('bannedUsers').doc(uid).set({ name: name || '', reason: reason || '', at: firebase.firestore.FieldValue.serverTimestamp() });
+  }
+  async function loadBanned(){
+    const box = document.getElementById('bannedList');
+    try{
+      const snap = await db.collection('bannedUsers').get();
+      if(snap.empty){ box.innerHTML = '<p class="empty-note">لا توجد حسابات محظورة</p>'; return; }
+      box.innerHTML = snap.docs.map(d=> { const v = d.data(); return `<div class="admin-list-item"><div class="admin-list-info"><div class="t">${escapeHtml(v.name || 'مستخدم')}</div><div class="s" dir="ltr" style="text-align:right;">${escapeHtml(d.id)} ${v.reason ? '· ' + escapeHtml(v.reason) : ''}</div></div>
+        <div class="admin-list-actions"><button class="btn" data-unban="${d.id}" type="button" style="padding:6px 14px;font-size:.78rem;">رفع الحظر</button></div></div>`; }).join('');
+      box.querySelectorAll('[data-unban]').forEach(b=> b.onclick = async ()=>{ await db.collection('bannedUsers').doc(b.dataset.unban).delete(); toast('تم رفع الحظر.'); loadBanned(); });
+    }catch(e){ console.error(e); box.innerHTML = ''; }
+  }
+  document.getElementById('banAddBtn').addEventListener('click', async ()=>{
+    const uid = document.getElementById('banUid').value.trim();
+    if(!uid){ alert('اكتب معرّف المستخدم (UID).'); return; }
+    await banUser(uid, '', document.getElementById('banReason').value.trim());
+    document.getElementById('banUid').value = ''; document.getElementById('banReason').value = ''; toast('تم الحظر.'); loadBanned();
+  });
+  document.querySelectorAll('#adminTabs .admin-tab-btn').forEach(b=> b.addEventListener('click', ()=>{ if(b.dataset.tab === 'moderation') loadModeration(); }));
+
+  // ----- المشرفون الإضافيون (للمالك) -----
+  document.getElementById('extraAdminsSave').addEventListener('click', async ()=>{
+    const emails = [...new Set(document.getElementById('extraAdmins').value.split(/[\s,،;]+/).map(e=> e.trim().toLowerCase()).filter(e=> /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e)))];
+    try{ await db.collection('config').doc('admins').set({ emails }); toast('تم حفظ المشرفين (' + emails.length + ').'); }
+    catch(e){ console.error(e); alert('تعذر الحفظ — هذه الميزة للمالك فقط، وتتطلب نشر قواعد Firestore الجديدة.'); }
+  });
+  async function initV4Admin(){
+    siteDocs = await loadJSON('site-docs', []); siteMenu = await loadJSON('site-menu', {});
+    renderAdminDocs(); renderMenuEditor(); updateLegacyNotice();
+    if(currentIsOwner){
+      document.getElementById('adminsCard').style.display = '';
+      try{ const d = await db.collection('config').doc('admins').get(); document.getElementById('extraAdmins').value = d.exists ? (d.data().emails || []).join('\n') : ''; }catch(e){}
+    }
+    try{ const s = await db.collection('reports').limit(100).get(); const b = document.getElementById('repBadge'); if(b) b.textContent = s.size ? '(' + s.size + ')' : ''; }catch(e){}
+  }
+
+
+  // =====================================================================
+  //  الإصدار 5: لوحة المعلومات، المستخدمون بالصور، الاستطلاعات، الاقتراحات، الاستعادة
+  // =====================================================================
+  const jumpTab = (name)=>{ const b = document.querySelector('.admin-tab-btn[data-tab="' + name + '"]'); if(b) b.click(); };
+  document.querySelectorAll('[data-jump]').forEach(b=> b.addEventListener('click', ()=> jumpTab(b.dataset.jump)));
+  const kbOf = (v)=> Math.round(new Blob([JSON.stringify(v || null)]).size / 1024);
+
+  // ----- لوحة المعلومات -----
+  async function renderDashboard(){
+    const today = new Date().toISOString().slice(0, 10);
+    const upcoming = (siteEvents || []).filter(e=> !e.iso || e.iso >= today).length;
+    const classes = ((siteTT && siteTT.classes) || []).length;
+    const sessions = ((siteTT && siteTT.classes) || []).reduce((n, c)=> n + Object.values(c.cells || {}).reduce((m, a)=> m + (a ? a.length : 0), 0), 0);
+    const exams = Object.values(siteLevels || {}).reduce((n, a)=> n + (a ? a.length : 0), 0);
+    const card = (label, val, color, go, sub)=> `<div class="dash-card" style="--c:${color}" data-go="${go}"><b id="dc-${go}-${label.length}">${val}</b><span>${label}</span>${sub ? `<small>${sub}</small>` : ''}</div>`;
+    const box = document.getElementById('dashCards');
+    box.innerHTML = [
+      card('أخبار', (siteNews || []).length, '#2f6ea8', 'news', (siteNews || []).filter(n=> n.pinned).length + ' مثبّت'),
+      card('مناسبات قادمة', upcoming, '#2e9b5b', 'news'),
+      card('أقسام الحصص', classes, '#7452a8', 'timetable', sessions + ' حصة'),
+      card('فروض واختبارات', exams, '#c99a2e', 'exams'),
+      card('وسائط', (siteMedia || []).length, '#d1558a', 'media'),
+      card('وثائق', (siteDocs || []).length, '#3d9f8f', 'docs'),
+      '<div class="dash-card" style="--c:#c0392b" data-go="moderation"><b id="dcRep">…</b><span>بلاغات</span></div>',
+      '<div class="dash-card" style="--c:#b2691f" data-go="suggestions"><b id="dcSug">…</b><span>اقتراحات وشكاوى</span></div>',
+      '<div class="dash-card" style="--c:#7a3b1f" data-go="qpending"><b id="dcQp">…</b><span>أسئلة بانتظار المراجعة</span></div>',
+      '<div class="dash-card" style="--c:#4f6bd6" data-go="polls"><b id="dcPoll">…</b><span>استطلاعات نشطة</span></div>',
+      '<div class="dash-card" style="--c:#0e3b4c" data-go="users"><b id="dcUsers">…</b><span>مستخدمون مسجلون</span><small>اضغط للتفاصيل</small></div>'
+    ].join('');
+    box.querySelectorAll('[data-go]').forEach(c=> c.onclick = ()=> jumpTab(c.dataset.go));
+    const put = (id, v)=>{ const e = document.getElementById(id); if(e) e.textContent = v; };
+    try{ put('dcRep', (await db.collection('reports').limit(100).get()).size); }catch(e){ put('dcRep', '—'); }
+    try{ const s = await db.collection('suggestions').limit(100).get(); put('dcSug', s.size); updateSugBadge(s.size); }catch(e){ put('dcSug', '—'); }
+    try{ const s = await db.collection('polls').where('active', '==', true).get(); put('dcPoll', s.size); }catch(e){ put('dcPoll', '—'); }
+    try{ put('dcQp', (await db.collection('questionsPending').limit(100).get()).size); }catch(e){ put('dcQp', '—'); }
+    try{ put('dcUsers', (await db.collection('users').get()).size); }catch(e){ put('dcUsers', '—'); }
+    // حجم البيانات
+    const parts = [['قائمة الأخبار', 'site-news', siteNews, 1024], ['المناسبات', 'site-events', siteEvents, 1024], ['جدول الحصص', 'site-timetable', siteTT, 1024], ['الوسائط', 'site-social', siteMedia, 1024], ['الوثائق', 'site-docs', siteDocs, 1024]];
+    document.getElementById('dashHealth').innerHTML = parts.map(([label, , v, max])=>{
+      const kb = kbOf(v), pct = Math.min(100, Math.round(kb / max * 100));
+      return `<div class="health-row"><b>${label}</b> — ${kb} ك.ب من ${max}<div class="meter ${pct > 60 ? 'warn' : ''}"><i style="width:${Math.max(pct, 1)}%"></i></div></div>`;
+    }).join('') + '<p style="font-size:.76rem;color:#7c8b91;">حدّ Firestore لكل مستند 1024 ك.ب. الأخبار الجديدة (نصها وصورها) تُحفظ في مستندات منفصلة فلا تؤثر على هذا العدّاد.</p>';
+    document.getElementById('qBannerText').value = (siteInfo && siteInfo.bannerText) || '';
+    document.getElementById('qBannerOn').checked = !!(siteInfo && siteInfo.bannerOn);
+  }
+  document.getElementById('qBannerSave').addEventListener('click', async ()=>{
+    siteInfo = Object.assign({}, siteInfo, { bannerText: document.getElementById('qBannerText').value.trim(), bannerOn: document.getElementById('qBannerOn').checked });
+    if(await saveJSON('site-info', siteInfo)){ toast(siteInfo.bannerOn ? 'تم نشر الإعلان العاجل.' : 'تم حفظ الإعلان (معطّل).'); fillInfoForm(); }
+  });
+
+  // ----- المستخدمون: صور، بحث، تصدير، حظر -----
+  let adminUsers = [], bannedSet = new Set(), uFilter = { q:'', role:'', photo:false, sort:'new' };
+  function showPhoto(src, name, email){
+    let m = document.getElementById('adminPhotoModal');
+    if(!m){
+      m = document.createElement('div'); m.id = 'adminPhotoModal';
+      m.innerHTML = '<div class="box"><img id="apImg" alt=""><div class="cap" id="apCap"></div><div style="display:flex;gap:10px;justify-content:center;"><a class="btn gold" id="apDl" download="profile.jpg">تحميل الصورة</a><button class="btn" id="apClose" type="button">إغلاق</button></div></div>';
+      document.body.appendChild(m);
+      m.addEventListener('click', e=>{ if(e.target === m || e.target.id === 'apClose') m.classList.remove('open'); });
+    }
+    document.getElementById('apImg').src = src; document.getElementById('apDl').href = src;
+    document.getElementById('apCap').innerHTML = '<b>' + escapeHtml(name) + '</b><br><span style="color:#7c8b91">' + escapeHtml(email || '') + '</span>';
+    m.classList.add('open');
+  }
+  async function renderAdminUsersAndStats(){
+    const listWrap = document.getElementById('usersAdminList');
+    if(!db){ listWrap.innerHTML = '<p class="empty-note">تعذر الاتصال بقاعدة البيانات</p>'; return; }
+    listWrap.innerHTML = 'جاري التحميل...';
+    try{
+      const snap = await db.collection('users').get();
+      adminUsers = []; snap.forEach(d=> adminUsers.push(Object.assign({ _id: d.id }, d.data())));
+      try{ const bs = await db.collection('bannedUsers').get(); bannedSet = new Set(bs.docs.map(d=> d.id)); }catch(e){ bannedSet = new Set(); }
+      if(!document.getElementById('usersControls')){
+        listWrap.insertAdjacentHTML('beforebegin', `<div class="u-ctrl" id="usersControls">
+          <input type="text" id="uSearch" placeholder="بحث بالاسم أو البريد أو اسم التلميذ...">
+          <select id="uRole"><option value="">كل الصفات</option><option>تلميذ</option><option>ولي</option><option>إدارة</option></select>
+          <select id="uSort"><option value="new">الأحدث</option><option value="name">الاسم</option></select>
+          <label style="display:flex;gap:6px;align-items:center;cursor:pointer;font-size:.84rem;"><input type="checkbox" id="uPhoto" style="width:auto;"> بصور فقط</label>
+          <button class="btn" id="uExport" type="button">تصدير CSV</button></div>`);
+        document.getElementById('uSearch').addEventListener('input', e=>{ uFilter.q = e.target.value; drawUsers(); });
+        document.getElementById('uRole').addEventListener('change', e=>{ uFilter.role = e.target.value; drawUsers(); });
+        document.getElementById('uSort').addEventListener('change', e=>{ uFilter.sort = e.target.value; drawUsers(); });
+        document.getElementById('uPhoto').addEventListener('change', e=>{ uFilter.photo = e.target.checked; drawUsers(); });
+        document.getElementById('uExport').addEventListener('click', exportUsersCsv);
+      }
+      const week = Date.now() - 7 * 86400000;
+      const ms = u=>{ try{ return u.createdAt && u.createdAt.toMillis ? u.createdAt.toMillis() : 0; }catch(e){ return 0; } };
+      const sc = (label, value)=> `<div style="background:#f6f8f9;border-radius:12px;padding:14px 20px;min-width:120px;text-align:center;"><div style="font-size:1.6rem;font-weight:700;color:var(--deep);">${value}</div><div style="font-size:.8rem;color:#7c8b91;">${label}</div></div>`;
+      document.getElementById('userStatsSummary').innerHTML =
+        sc('إجمالي المسجلين', adminUsers.length) + sc('تلاميذ', adminUsers.filter(u=> u.role === 'تلميذ').length) + sc('أولياء', adminUsers.filter(u=> u.role === 'ولي').length) +
+        sc('بصور شخصية', adminUsers.filter(u=> u.photoURL).length) + sc('جدد هذا الأسبوع', adminUsers.filter(u=> ms(u) > week).length) + sc('محظورون', bannedSet.size);
+      drawUsers();
+    }catch(e){
+      console.error(e);
+      listWrap.innerHTML = '<p class="empty-note">حدث خطأ أثناء تحميل قائمة المستخدمين. تأكد من نشر قواعد Firestore.</p>';
+    }
+  }
+  function userName(u){ return ((u.firstName || '') + ' ' + (u.lastName || '')).trim() || 'بدون اسم'; }
+  function drawUsers(){
+    const listWrap = document.getElementById('usersAdminList');
+    const ms = u=>{ try{ return u.createdAt && u.createdAt.toMillis ? u.createdAt.toMillis() : 0; }catch(e){ return 0; } };
+    const q = (uFilter.q || '').trim().toLowerCase();
+    let list = adminUsers.filter(u=>
+      (!uFilter.role || u.role === uFilter.role) && (!uFilter.photo || u.photoURL) &&
+      (!q || (userName(u) + ' ' + (u.email || '') + ' ' + (u.studentName || '')).toLowerCase().includes(q)));
+    list.sort((a, b)=> uFilter.sort === 'name' ? userName(a).localeCompare(userName(b), 'ar') : ms(b) - ms(a));
+    if(!list.length){ listWrap.innerHTML = '<p class="empty-note">لا نتائج</p>'; return; }
+    listWrap.innerHTML = list.map(u=>{
+      const name = userName(u);
+      const roleLabel = u.role === 'ولي' ? 'ولي تلميذ' : (u.role === 'إدارة' ? 'حساب الإدارة' : 'تلميذ');
+      const extra = u.role === 'ولي' ? `${u.studentName ? 'الابن: ' + u.studentName : ''}${u.parentPhone ? ' · الهاتف: ' + u.parentPhone : ''}` : (u.studentName || '');
+      let dateStr = ''; try{ if(u.createdAt && u.createdAt.toDate) dateStr = u.createdAt.toDate().toLocaleDateString('ar-DZ'); }catch(e){}
+      const banned = bannedSet.has(u._id);
+      const ava = u.photoURL ? `<img src="${safeImg(u.photoURL)}" alt="" data-ph="${escapeHtml(u._id)}">` : escapeHtml(name.charAt(0) || 'م');
+      return `<div class="admin-list-item" style="align-items:flex-start;"><div class="u-ava">${ava}</div>
+        <div class="admin-list-info"><div class="t">${escapeHtml(name)} <span style="font-size:.75rem;color:#7c8b91;">(${roleLabel})</span>${banned ? '<span class="u-badge-ban">محظور</span>' : ''}</div>
+        <div class="s">${escapeHtml(u.email || '')}${extra ? ' · ' + escapeHtml(extra) : ''}${dateStr ? ' · انضم في ' + dateStr : ''}</div></div>
+        ${u.role !== 'إدارة' ? `<div class="admin-list-actions"><button class="admin-mini-btn ${banned ? '' : 'danger'}" data-ban="${escapeHtml(u._id)}" type="button" style="width:auto;padding:0 12px;">${banned ? 'رفع الحظر' : 'حظر'}</button></div>` : ''}</div>`;
+    }).join('');
+    listWrap.querySelectorAll('[data-ph]').forEach(img=> img.onclick = ()=>{ const u = adminUsers.find(x=> x._id === img.dataset.ph); if(u) showPhoto(u.photoURL, userName(u), u.email); });
+    listWrap.querySelectorAll('[data-ban]').forEach(b=> b.onclick = async ()=>{
+      const u = adminUsers.find(x=> x._id === b.dataset.ban); if(!u) return;
+      if(bannedSet.has(u._id)){ await db.collection('bannedUsers').doc(u._id).delete(); bannedSet.delete(u._id); toast('تم رفع الحظر.'); }
+      else { if(!confirm('حظر «' + userName(u) + '» من النشر؟')) return; await banUser(u._id, userName(u), 'من قائمة المستخدمين'); bannedSet.add(u._id); toast('تم الحظر.'); }
+      drawUsers();
+    });
+  }
+  function exportUsersCsv(){
+    const q = v => '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"';
+    const rows = [['الاسم', 'البريد', 'الصفة', 'الجنس', 'اسم التلميذ', 'هاتف الولي', 'تاريخ الانضمام', 'UID']];
+    adminUsers.forEach(u=>{ let d = ''; try{ if(u.createdAt && u.createdAt.toDate) d = u.createdAt.toDate().toISOString().slice(0, 10); }catch(e){} rows.push([userName(u), u.email, u.role, u.gender, u.studentName, u.parentPhone, d, u._id]); });
+    const blob = new Blob(['\ufeff' + rows.map(r=> r.map(q).join(',')).join('\r\n')], { type:'text/csv;charset=utf-8' });
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'users-' + new Date().toISOString().slice(0, 10) + '.csv'; a.click(); setTimeout(()=> URL.revokeObjectURL(a.href), 500);
+  }
+
+  // ----- الاستطلاعات -----
+  async function loadPollsAdmin(){
+    const box = document.getElementById('pollsAdminList');
+    try{
+      const snap = await db.collection('polls').get();
+      const items = snap.docs.map(d=> Object.assign({ id: d.id }, d.data()));
+      const ms = p=>{ try{ return p.createdAt && p.createdAt.toMillis ? p.createdAt.toMillis() : 0; }catch(e){ return 0; } };
+      items.sort((a, b)=> ms(b) - ms(a));
+      if(!items.length){ box.innerHTML = '<p class="empty-note">لا توجد استطلاعات بعد</p>'; return; }
+      const html = [];
+      for(const p of items){
+        let votes = [];
+        try{ votes = (await db.collection('polls').doc(p.id).collection('votes').get()).docs.map(d=> d.data().choice); }catch(e){}
+        const total = votes.length, opts = p.options || [];
+        html.push(`<div class="admin-list-item" style="align-items:flex-start;"><div class="admin-list-info"><div class="t">${escapeHtml(p.question)} <span class="pill-p" style="${p.active ? '' : 'background:#7c8b91'}">${p.active ? 'نشط' : 'مغلق'}</span></div>
+          <div class="poll-res">${opts.map((o, i)=>{ const c = votes.filter(v=> v === i).length, pc = total ? Math.round(c / total * 100) : 0; return `<div class="row"><span style="min-width:110px">${escapeHtml(o)}</span><i style="width:${pc}%"></i><span>${pc}% (${c})</span></div>`; }).join('')}<div style="color:#7c8b91;margin-top:4px;">${total} مشارك</div></div></div>
+          <div class="admin-list-actions"><button class="btn" data-ptoggle="${p.id}" data-active="${p.active ? 1 : 0}" type="button" style="padding:6px 12px;font-size:.76rem;">${p.active ? 'إغلاق' : 'إعادة فتح'}</button><button class="admin-mini-btn danger" data-pdel="${p.id}" type="button">✕</button></div></div>`);
+      }
+      box.innerHTML = html.join('');
+      box.querySelectorAll('[data-ptoggle]').forEach(b=> b.onclick = async ()=>{ await db.collection('polls').doc(b.dataset.ptoggle).update({ active: b.dataset.active !== '1' }); toast('تم التحديث.'); loadPollsAdmin(); });
+      box.querySelectorAll('[data-pdel]').forEach(b=> b.onclick = async ()=>{
+        if(!confirm('حذف هذا الاستطلاع ونتائجه نهائياً؟')) return;
+        try{ const vs = await db.collection('polls').doc(b.dataset.pdel).collection('votes').get(); await Promise.all(vs.docs.map(d=> d.ref.delete())); }catch(e){}
+        await db.collection('polls').doc(b.dataset.pdel).delete(); toast('تم الحذف.'); loadPollsAdmin();
+      });
+    }catch(e){ console.error(e); box.innerHTML = '<p class="empty-note">تعذر التحميل — انشر قواعد Firestore الجديدة.</p>'; }
+  }
+  document.getElementById('pollCreateBtn').addEventListener('click', async ()=>{
+    const question = document.getElementById('pollQuestion').value.trim();
+    const options = document.getElementById('pollOptions').value.split('\n').map(s=> s.trim()).filter(Boolean).slice(0, 6);
+    if(!question || options.length < 2){ alert('اكتب السؤال وخيارين على الأقل (كل خيار في سطر).'); return; }
+    try{
+      await db.collection('polls').add({ question, options, active: true, createdAt: firebase.firestore.FieldValue.serverTimestamp() });
+      document.getElementById('pollQuestion').value = ''; document.getElementById('pollOptions').value = '';
+      toast('تم نشر الاستطلاع.'); loadPollsAdmin();
+    }catch(e){ console.error(e); alert('تعذر النشر — انشر قواعد Firestore الجديدة (polls).'); }
+  });
+
+  // ----- الاقتراحات والشكاوى -----
+  function updateSugBadge(n){ const b = document.getElementById('sugBadge'); if(b) b.textContent = n ? '(' + n + ')' : ''; }
+  let sugItems = [];
+  async function loadSuggestions(){
+    const box = document.getElementById('sugList');
+    try{
+      const snap = await db.collection('suggestions').orderBy('createdAt', 'desc').limit(200).get();
+      sugItems = snap.docs.map(d=> Object.assign({ id: d.id }, d.data()));
+      document.getElementById('sugCount').textContent = sugItems.length || ''; updateSugBadge(sugItems.length);
+      drawSuggestions();
+    }catch(e){ console.error(e); box.innerHTML = '<p class="empty-note">تعذر التحميل — انشر قواعد Firestore الجديدة.</p>'; }
+  }
+  function drawSuggestions(){
+    const box = document.getElementById('sugList');
+    const f = (document.querySelector('input[name="sugf"]:checked') || {}).value || '';
+    const list = sugItems.filter(s=> !f || s.kind === f);
+    if(!list.length){ box.innerHTML = '<p class="empty-note">لا توجد رسائل 🎉</p>'; return; }
+    box.innerHTML = list.map(s=> `<div class="admin-list-item" style="align-items:flex-start;"><div class="admin-list-info"><div class="t"><span class="pill-p">${escapeHtml(s.kind || '')}</span> ${s.anonymous ? '<span style="color:#7c8b91;font-size:.8rem;">مجهول الهوية</span>' : escapeHtml(s.name || 'بدون اسم')}</div>
+      <div style="margin:6px 0;line-height:1.9;white-space:pre-wrap;">${escapeHtml(s.text || '')}</div><div class="s">${fmtTs(s.createdAt)}</div></div>
+      <div class="admin-list-actions"><button class="btn gold" data-sdone="${s.id}" type="button" style="padding:6px 12px;font-size:.76rem;">تمت المعالجة</button></div></div>`).join('');
+    box.querySelectorAll('[data-sdone]').forEach(b=> b.onclick = async ()=>{ if(!confirm('حذف هذه الرسالة نهائياً بعد معالجتها؟')) return; await db.collection('suggestions').doc(b.dataset.sdone).delete(); toast('تمت المعالجة.'); loadSuggestions(); });
+  }
+  document.querySelectorAll('input[name="sugf"]').forEach(r=> r.addEventListener('change', drawSuggestions));
+
+  document.querySelectorAll('#adminTabs .admin-tab-btn').forEach(b=> b.addEventListener('click', ()=>{
+    if(b.dataset.tab === 'dashboard') renderDashboard();
+    if(b.dataset.tab === 'polls') loadPollsAdmin();
+    if(b.dataset.tab === 'suggestions') loadSuggestions();
+  }));
+
+  // ----- استعادة نسخة احتياطية -----
+  document.getElementById('restoreFile').addEventListener('change', async (e)=>{
+    const f = e.target.files[0]; if(!f) return;
+    let data; try{ data = JSON.parse(await f.text()); }catch(err){ alert('الملف غير صالح.'); return; }
+    const map = { news:'site-news', events:'site-events', levels:'site-levels', timetable:'site-timetable', social:'site-social', docs:'site-docs', menu:'site-menu', info:'site-info', theme:'site-theme' };
+    const keys = Object.keys(map).filter(k=> data[k] !== undefined && data[k] !== null);
+    if(!keys.length){ alert('لا توجد بيانات قابلة للاستعادة في هذا الملف.'); return; }
+    if(!confirm('سيتم استبدال: ' + keys.join('، ') + '\nهل أنت متأكد؟')) return;
+    let ok = 0;
+    for(const k of keys){ if(await saveJSON(map[k], data[k])) ok++; }
+    if(data.newsFull && typeof data.newsFull === 'object'){
+      for(const id of Object.keys(data.newsFull)){ try{ await db.collection('newsFull').doc(id).set(data.newsFull[id]); }catch(err){ console.error(err); } }
+    }
+    toast('تمت استعادة ' + ok + ' من ' + keys.length + ' مجموعات. سيُعاد تحميل الصفحة.');
+    setTimeout(()=> location.reload(), 1200);
+  });
+  async function initV5Admin(){ renderDashboard(); }
+
+
+  // =====================================================================
+  //  الإصدار 6: توحيد التواريخ، عناوين الفيديو الأصلية، التغذية التلقائية، مراجعة الأسئلة
+  // =====================================================================
+  const AR_MONTHS_A = ['جانفي','فيفري','مارس','أفريل','ماي','جوان','جويلية','أوت','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+  const fmtIsoAr = iso => { const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || ''); return m ? (+m[3]) + ' ' + AR_MONTHS_A[+m[2] - 1] + ' ' + m[1] : ''; };
+  const todayIsoA = ()=> new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 10);
+
+  // ----- عنوان الفيديو الأصلي (يوتيوب) -----
+  let ytTitleTimer = null;
+  async function fetchYtTitleA(url){
+    try{
+      const r = await fetch('https://www.youtube.com/oembed?format=json&url=' + encodeURIComponent(url));
+      if(!r.ok) return '';
+      return (await r.json()).title || '';
+    }catch(e){ return ''; }
+  }
+  document.getElementById('mediaUrl').addEventListener('input', ()=>{
+    clearTimeout(ytTitleTimer);
+    ytTitleTimer = setTimeout(async ()=>{
+      const url = document.getElementById('mediaUrl').value.trim(), p = parseSocial(url);
+      const box = document.getElementById('mediaDetect');
+      if(!p) return;
+      if(p.platform === 'youtube'){
+        const tEl = document.getElementById('mediaTitle');
+        if(!tEl.value.trim()){
+          box.insertAdjacentHTML('beforeend', '<span id="ytFetching" style="color:#7c8b91;">… جاري جلب العنوان الأصلي</span>');
+          const t = await fetchYtTitleA(url);
+          const f = document.getElementById('ytFetching'); if(f) f.remove();
+          if(t && !tEl.value.trim()){ tEl.value = t; box.insertAdjacentHTML('beforeend', '<span style="color:#2d8a4e;">✓ تم جلب العنوان الأصلي من يوتيوب</span>'); }
+        }
+      } else {
+        box.insertAdjacentHTML('beforeend', '<span style="color:#9a6b0f;font-size:.78rem;">لا يمكن جلب العنوان تلقائياً من ' + PLAT_AR[p.platform] + ': اكتبه بنفسك (أو انسخ أول سطر من المنشور).</span>');
+      }
+    }, 600);
+  });
+
+  // ----- التغذية التلقائية: إخفاء/إظهار -----
+  let feedItems = [];
+  async function loadFeedAdmin(){
+    const box = document.getElementById('feedAdminList'); if(!box) return;
+    try{
+      const r = await fetch('media-feed.json?v=' + Date.now(), { cache:'no-cache' });
+      if(!r.ok) throw new Error('missing');
+      feedItems = (await r.json()).items || [];
+    }catch(e){ feedItems = []; }
+    document.getElementById('feedCount').textContent = feedItems.length || '';
+    if(!feedItems.length){ box.innerHTML = '<p class="empty-note">لا توجد منشورات تلقائية بعد.</p>'; return; }
+    const hidden = new Set((siteInfo && siteInfo.hiddenFeed) || []);
+    box.innerHTML = feedItems.slice(0, 40).map(f=> `<div class="admin-list-item"><div class="admin-list-info"><div class="t">${escapeHtml(f.title || '(بدون عنوان)')} <span class="pill-p">${PLAT_AR[f.platform] || ''}</span>${hidden.has(f.id) ? '<span class="u-badge-ban" style="background:#7c8b91;">مخفي</span>' : ''}</div><div class="s" dir="ltr" style="text-align:right;">${escapeHtml(f.url)}${f.ts ? ' · ' + new Date(f.ts).toLocaleDateString('ar-DZ') : ''}</div></div>
+      <div class="admin-list-actions"><button class="btn" data-fhide="${escapeHtml(f.id)}" type="button" style="padding:6px 14px;font-size:.78rem;">${hidden.has(f.id) ? 'إظهار' : 'إخفاء'}</button></div></div>`).join('');
+    box.querySelectorAll('[data-fhide]').forEach(b=> b.onclick = async ()=>{
+      const set = new Set((siteInfo && siteInfo.hiddenFeed) || []);
+      if(set.has(b.dataset.fhide)) set.delete(b.dataset.fhide); else set.add(b.dataset.fhide);
+      siteInfo = Object.assign({}, siteInfo, { hiddenFeed: [...set] });
+      if(await saveJSON('site-info', siteInfo)){ toast('تم التحديث.'); loadFeedAdmin(); }
+    });
+  }
+
+  // ----- مراجعة الأسئلة قبل النشر -----
+  async function loadPending(){
+    const box = document.getElementById('qpList');
+    try{
+      const snap = await db.collection('questionsPending').orderBy('createdAt', 'desc').limit(100).get();
+      const items = snap.docs.map(d=> Object.assign({ id: d.id }, d.data()));
+      document.getElementById('qpCount').textContent = items.length || '';
+      const b = document.getElementById('qpBadge'); if(b) b.textContent = items.length ? '(' + items.length + ')' : '';
+      if(!items.length){ box.innerHTML = '<p class="empty-note">لا توجد أسئلة بانتظار المراجعة 🎉</p>'; return; }
+      box.innerHTML = items.map(q=> `<div class="admin-list-item" style="align-items:flex-start;"><div class="admin-list-info"><div class="t"><span class="pill-p">${escapeHtml(q.subj || '')}</span> ${escapeHtml(q.level || '')} <span style="color:#7c8b91;font-size:.8rem;">${escapeHtml(q.author || '')}</span></div>
+        <div style="margin:6px 0;line-height:1.9;white-space:pre-wrap;">${escapeHtml(q.body || '')}</div>${q.attachment ? `<img src="${safeImg(q.attachment)}" alt="" style="max-height:120px;border-radius:10px;">` : ''}<div class="s">${fmtTs(q.createdAt)}</div></div>
+        <div class="admin-list-actions"><button class="btn gold" data-qp-ok="${q.id}" type="button" style="padding:6px 14px;font-size:.78rem;">موافقة ونشر</button><button class="btn" data-qp-no="${q.id}" type="button" style="padding:6px 14px;font-size:.78rem;background:#a8402f;">رفض</button></div></div>`).join('');
+      box.querySelectorAll('[data-qp-ok]').forEach(btn=> btn.onclick = async ()=>{
+        const q = items.find(x=> x.id === btn.dataset.qpOk); if(!q) return;
+        const data = Object.assign({}, q); delete data.id;
+        data.createdAt = firebase.firestore.FieldValue.serverTimestamp(); data.likes = []; data.answerLikes = [];
+        try{ await db.collection('questions').add(data); await db.collection('questionsPending').doc(q.id).delete(); toast('تم نشر السؤال.'); loadPending(); }
+        catch(e){ console.error(e); alert('تعذر النشر — تأكد من نشر قواعد Firestore الجديدة.'); }
+      });
+      box.querySelectorAll('[data-qp-no]').forEach(btn=> btn.onclick = async ()=>{
+        if(!confirm('رفض هذا السؤال وحذفه؟')) return;
+        await db.collection('questionsPending').doc(btn.dataset.qpNo).delete(); toast('تم الرفض.'); loadPending();
+      });
+    }catch(e){ console.error(e); box.innerHTML = '<p class="empty-note">تعذر التحميل — انشر قواعد Firestore الجديدة.</p>'; }
+  }
+  document.querySelectorAll('#adminTabs .admin-tab-btn').forEach(b=> b.addEventListener('click', ()=>{
+    if(b.dataset.tab === 'qpending') loadPending();
+    if(b.dataset.tab === 'media') loadFeedAdmin();
+  }));
+  async function initV6Admin(){
+    loadFeedAdmin();
+    try{ const s = await db.collection('questionsPending').limit(100).get(); const b = document.getElementById('qpBadge'); if(b) b.textContent = s.size ? '(' + s.size + ')' : ''; }catch(e){}
+  }
+
+  async function initAdminData(){
+    siteNews = await loadJSON('site-news', DEFAULT_NEWS);
+    siteEvents = await loadJSON('site-events', DEFAULT_EVENTS);
+    siteLevels = await loadJSON('site-levels', DEFAULT_LEVELS);
+    siteQuestions = await loadQuestionsAdmin();
+    await initV3Admin();
+    await initV4Admin();
+    await initV5Admin();
+    await initV6Admin();
+  }
+
+  // ================= تسجيل دخول المدير =================
+  const adminLoginWrap = document.getElementById('adminLoginWrap');
+  const adminShell = document.getElementById('adminShell');
+  const adminErrorBox = document.getElementById('adminError');
+
+  function showAdminError(msg){
+    adminErrorBox.textContent = msg;
+    adminErrorBox.style.display = 'block';
+  }
+
+  let adminShellStarted = false;
+  async function showAdminShell(){
+    if(adminShellStarted) return;
+    adminShellStarted = true;
+    adminLoginWrap.style.display = 'none';
+    adminShell.classList.add('open');
+    await initAdminData();
+    renderAdminNewsList();
+    renderAdminEventsList();
+    renderAdminLevelTabs();
+    renderAdminQAList();
+    renderAdminUsersAndStats();
+    renderAdminParentMessages();
+    loadThemeSettings();
+  }
+
+  if(auth){
+    auth.onAuthStateChanged(async (user)=>{
+      if(!user) return;
+      if(await checkAdmin(user)){
+        showAdminShell();
+      } else {
+        showAdminError('هذا الحساب (' + user.email + ') غير مخوّل بالدخول إلى لوحة التحكم.');
+      }
+    });
+  }
+
+  document.getElementById('adminGoogleBtn').addEventListener('click', async ()=>{
+    if(!auth){ showAdminError('تعذر الاتصال بخدمة تسجيل الدخول.'); return; }
+    try{
+      const result = await auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+      if(!(await checkAdmin(result.user))){
+        showAdminError('هذا الحساب (' + result.user.email + ') غير مخوّل بالدخول إلى لوحة التحكم.');
+        await auth.signOut();
+        return;
+      }
+      showAdminShell();
+    }catch(e){
+      console.error(e);
+      showAdminError(friendlyAuthError(e.code));
+    }
+  });
+
+  document.getElementById('adminLoginBtn').addEventListener('click', async ()=>{
+    const email = document.getElementById('adminEmailInput').value.trim();
+    const pass = document.getElementById('adminPassInput').value;
+    if(!email || !pass){ showAdminError('أدخل البريد الإلكتروني وكلمة المرور.'); return; }
+    if(!auth){ showAdminError('تعذر الاتصال بخدمة تسجيل الدخول.'); return; }
+    try{
+      const cred = await auth.signInWithEmailAndPassword(email, pass);
+      if(!(await checkAdmin(cred.user))){
+        showAdminError('هذا الحساب غير مخوّل بالدخول إلى لوحة التحكم.');
+        await auth.signOut();
+        return;
+      }
+      showAdminShell();
+    }catch(e){
+      console.error(e);
+      showAdminError(friendlyAuthError(e.code));
+    }
+  });
+  document.getElementById('adminPassInput').addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter') document.getElementById('adminLoginBtn').click();
+  });
+  document.getElementById('adminLogoutBtn').addEventListener('click', async ()=>{
+    if(auth) await auth.signOut();
+    location.reload();
+  });
+
+  // ---- تبديل التبويبات ----
+  document.querySelectorAll('#adminTabs .admin-tab-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('#adminTabs .admin-tab-btn').forEach(b=>b.classList.remove('active'));
+      document.querySelectorAll('.admin-panel-section').forEach(s=>s.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tab' + btn.dataset.tab.charAt(0).toUpperCase() + btn.dataset.tab.slice(1)).classList.add('active');
+      if(btn.dataset.tab === 'users') renderAdminUsersAndStats();
+      if(btn.dataset.tab === 'parentmsgs') renderAdminParentMessages();
+    });
+  });
+
+  // ---- ضغط الصور قبل الرفع ----
+  function compressImage(file, maxW, quality){
+    maxW = maxW || 900; quality = quality || 0.72;
+    return new Promise((resolve, reject)=>{
+      const reader = new FileReader();
+      reader.onload = (e)=>{
+        const img = new Image();
+        img.onload = ()=>{
+          const scale = Math.min(1, maxW / img.width);
+          const w = Math.round(img.width * scale), h = Math.round(img.height * scale);
+          const canvas = document.createElement('canvas');
+          canvas.width = w; canvas.height = h;
+          const ctx = canvas.getContext('2d'); ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, w, h); ctx.drawImage(img, 0, 0, w, h);
+          let o = ''; try{ o = canvas.toDataURL('image/webp', quality); }catch(e){} resolve(o.startsWith('data:image/webp') ? o : canvas.toDataURL('image/jpeg', quality));
+        };
+        img.onerror = reject;
+        img.src = e.target.result;
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  // ================= محرر النصوص المتقدم (Quill) =================
+  const newsQuill = new Quill('#newsContentEditor', {
+    theme: 'snow',
+    placeholder: 'اكتب هنا التفاصيل الكاملة للخبر...',
+    modules: {
+      toolbar: [
+        [{ header: [2, 3, false] }],
+        ['bold', 'italic', 'underline'],
+        [{ color: [] }, { background: [] }],
+        [{ align: [] }],
+        [{ list: 'ordered' }, { list: 'bullet' }],
+        ['link'],
+        ['clean']
+      ]
+    }
+  });
+
+  // ================= إدارة الأخبار =================
+  let pendingNewsImage = null;
+  let pendingGallery = [];
+  document.getElementById('newsImgBox').addEventListener('click', ()=> document.getElementById('newsImgInput').click());
+  document.getElementById('newsImgInput').addEventListener('change', async (e)=>{
+    const file = e.target.files[0];
+    if(!file) return;
+    pendingNewsImage = await compressImage(file);
+    const prev = document.getElementById('newsImgPreview');
+    prev.src = pendingNewsImage; prev.style.display = 'block';
+  });
+
+  function renderGalleryPreview(){
+    const box = document.getElementById('newsGalleryPreview');
+    box.innerHTML = pendingGallery.map((src, i)=> `
+      <div style="position:relative;">
+        <img src="${safeImg(src)}" style="width:70px; height:70px; object-fit:cover; border-radius:8px;">
+        <button type="button" data-remove-gallery="${i}" style="position:absolute; top:-6px; left:-6px; width:20px; height:20px; border-radius:50%; background:var(--red); color:#fff; font-size:.7rem; line-height:1;">×</button>
+      </div>`).join('');
+    box.querySelectorAll('[data-remove-gallery]').forEach(b=> b.addEventListener('click', ()=>{
+      pendingGallery.splice(Number(b.dataset.removeGallery), 1);
+      renderGalleryPreview();
+    }));
+  }
+  document.getElementById('newsGalleryBox').addEventListener('click', ()=> document.getElementById('newsGalleryInput').click());
+  document.getElementById('newsGalleryInput').addEventListener('change', async (e)=>{
+    const file = e.target.files[0];
+    if(!file) return;
+    const compressed = await compressImage(file);
+    pendingGallery.push(compressed);
+    renderGalleryPreview();
+    e.target.value = '';
+  });
+
+  function resetNewsForm(){
+    editingFull = null; document.getElementById('newsPinned').checked = false;
+    document.getElementById('newsEditId').value = '';
+    document.getElementById('newsTitle').value = '';
+    document.getElementById('newsDate').value = ''; document.getElementById('newsDateOld').dataset.old = ''; document.getElementById('newsDateOld').style.display = 'none';
+    document.getElementById('newsCat').value = '';
+    document.getElementById('newsExcerpt').value = '';
+    newsQuill.setContents([]);
+    document.getElementById('newsImgPreview').style.display = 'none';
+    document.getElementById('newsFormTitle').textContent = 'إضافة خبر جديد';
+    document.getElementById('newsCancelEdit').style.display = 'none';
+    pendingNewsImage = null;
+    pendingGallery = [];
+    renderGalleryPreview();
+  }
+  document.getElementById('newsCancelEdit').addEventListener('click', resetNewsForm);
+
+  document.getElementById('newsSaveBtn').addEventListener('click', async ()=>{
+    const title = document.getElementById('newsTitle').value.trim();
+    const iso = document.getElementById('newsDate').value || '';
+    const date = iso ? fmtIsoAr(iso) : (document.getElementById('newsDateOld').dataset.old || '');
+    const cat = document.getElementById('newsCat').value.trim() || 'إعلان';
+    const excerpt = document.getElementById('newsExcerpt').value.trim();
+    const content = newsQuill.getText().trim() ? newsQuill.root.innerHTML : '';
+    if(!title || !date || !excerpt){ alert('يرجى تعبئة العنوان والتاريخ والنص المختصر على الأقل'); return; }
+    const editId = document.getElementById('newsEditId').value;
+    const old = editId ? siteNews.find(n=> n.id === editId) : null;
+    const id = editId || genId();
+    const prevImage = editingFull ? editingFull.image : (old && !old.split ? old.image : null);
+    const image = pendingNewsImage || prevImage || null;
+    const full = { content: content || '', image, gallery: pendingGallery.slice() };
+    if(JSON.stringify(full).length > 900000){ alert('حجم صور الخبر كبير جداً (الحد 1 ميغابايت). قلّل عدد الصور أو حجمها.'); return; }
+    const thumb = pendingNewsImage ? await makeThumb(pendingNewsImage, 480, 0.6) : ((old && old.thumb) || await makeThumb(image, 480, 0.6));
+    const light = { id, date, iso: iso || null, title, excerpt, cat, ic: (old && old.ic) || 'newspaper', thumb: thumb || null, pinned: document.getElementById('newsPinned').checked, split: true };
+    try{ await db.collection('newsFull').doc(id).set(full); }
+    catch(e){ console.error(e); alert('تعذر حفظ نص الخبر — تأكد من نشر قواعد Firestore الجديدة (newsFull).'); return; }
+    const idx = siteNews.findIndex(n=> n.id === id);
+    if(idx >= 0) siteNews[idx] = light; else siteNews.unshift(light);
+    const okNews = await saveJSON('site-news', siteNews);
+    if(!okNews){ siteNews = await loadJSON('site-news', DEFAULT_NEWS); renderAdminNewsList(); return; }
+    renderAdminNewsList();
+    resetNewsForm();
+    toast('تم حفظ الخبر.');
+  });
+
+  function renderAdminNewsList(){
+    updateLegacyNotice();
+    const wrap = document.getElementById('newsAdminList');
+    if(!siteNews.length){ wrap.innerHTML = '<p class="empty-note">لا توجد أخبار بعد</p>'; return; }
+    wrap.innerHTML = siteNews.map(n=> `
+      <div class="admin-list-item">
+        <div class="admin-list-thumb">${(n.thumb || n.image) ? `<img src="${safeImg(n.thumb || n.image)}">` : icon(n.ic || 'newspaper', 18)}</div>
+        <div class="admin-list-info">
+          <div class="t">${escapeHtml(n.title)}</div>
+          <div class="s">${escapeHtml(n.date)} · ${escapeHtml(n.cat)}${n.pinned ? ' · 📌 مثبّت' : ''}${n.iso && n.iso > todayIsoA() ? ' · ⏳ مجدول للنشر' : ''}${n.split ? '' : ' · نظام قديم'}${n.gallery && n.gallery.length ? ' · ' + n.gallery.length + ' صور إضافية' : ''}</div>
+        </div>
+        <div class="admin-list-actions">
+          <button class="admin-mini-btn edit" data-edit-news="${n.id}" title="تعديل"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4l11-11-4-4L4 16v4z"/></svg></button>
+          <button class="admin-mini-btn danger" data-del-news="${n.id}" title="حذف"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7h14M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2m-8 0 1 13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1l1-13"/></svg></button>
+        </div>
+      </div>`).join('');
+
+    wrap.querySelectorAll('[data-edit-news]').forEach(b=> b.addEventListener('click', async ()=>{
+      const item = siteNews.find(n=> n.id === b.dataset.editNews);
+      if(!item) return;
+      let src = item; editingFull = null;
+      if(item.split){
+        try{ const d = await db.collection('newsFull').doc(item.id).get(); editingFull = d.exists ? d.data() : {}; }
+        catch(e){ console.error(e); alert('تعذر تحميل نص الخبر.'); return; }
+        src = Object.assign({}, item, editingFull);
+      }
+      document.getElementById('newsPinned').checked = !!item.pinned;
+      document.getElementById('newsEditId').value = item.id;
+      document.getElementById('newsTitle').value = item.title;
+      document.getElementById('newsDate').value = item.iso || '';
+      { const od = document.getElementById('newsDateOld'); od.dataset.old = item.iso ? '' : (item.date || ''); od.style.display = item.iso ? 'none' : 'block'; od.textContent = item.iso ? '' : 'التاريخ المسجّل سابقاً: ' + (item.date || '') + ' — اختر تاريخاً جديداً لتوحيد الصيغة'; }
+      document.getElementById('newsCat').value = item.cat;
+      document.getElementById('newsExcerpt').value = item.excerpt;
+      newsQuill.setContents([]); newsQuill.clipboard.dangerouslyPasteHTML(0, src.content || '');
+      document.getElementById('newsFormTitle').textContent = 'تعديل الخبر';
+      document.getElementById('newsCancelEdit').style.display = 'inline-flex';
+      const prev = document.getElementById('newsImgPreview');
+      if(src.image){ prev.src = src.image; prev.style.display = 'block'; } else { prev.style.display = 'none'; }
+      pendingNewsImage = null;
+      pendingGallery = (src.gallery || []).slice();
+      renderGalleryPreview();
+      window.scrollTo({top:0, behavior:'smooth'});
+    }));
+    wrap.querySelectorAll('[data-del-news]').forEach(b=> b.addEventListener('click', async ()=>{
+      if(!confirm('هل تريد حذف هذا الخبر؟')) return;
+      siteNews = siteNews.filter(n=> n.id !== b.dataset.delNews);
+      db.collection('newsFull').doc(b.dataset.delNews).delete().catch(()=>{});
+      await saveJSON('site-news', siteNews);
+      renderAdminNewsList();
+    }));
+  }
+
+  // ================= إدارة المناسبات =================
+  function resetEventForm(){
+    document.getElementById('eventEditId').value = '';
+    document.getElementById('eventTitle').value = '';
+    document.getElementById('eventDate').value = '';
+    document.getElementById('eventDesc').value = '';
+    document.getElementById('eventIso').value = '';
+    document.getElementById('eventFormTitle').textContent = 'إضافة مناسبة جديدة';
+    document.getElementById('eventCancelEdit').style.display = 'none';
+  }
+  document.getElementById('eventCancelEdit').addEventListener('click', resetEventForm);
+
+  document.getElementById('eventSaveBtn').addEventListener('click', async ()=>{
+    const title = document.getElementById('eventTitle').value.trim();
+    const iso = document.getElementById('eventIso').value || null;
+    let date = document.getElementById('eventDate').value.trim();
+    if(!date && iso){ date = new Date(iso + 'T12:00:00').toLocaleDateString('ar-DZ', { day:'2-digit', month:'long', year:'numeric' }); }
+    const desc = document.getElementById('eventDesc').value.trim();
+    if(!title || !date){ alert('يرجى تعبئة العنوان والتاريخ على الأقل'); return; }
+    const editId = document.getElementById('eventEditId').value;
+
+    if(editId){
+      const item = siteEvents.find(ev=> ev.id === editId);
+      if(item){ item.title = title; item.date = date; item.desc = desc; item.iso = iso; }
+    } else {
+      siteEvents.push({id:genId(), date, title, desc, iso, ic:'calendarStar'});
+    }
+    const okEv = await saveJSON('site-events', siteEvents);
+    if(!okEv){ siteEvents = await loadJSON('site-events', DEFAULT_EVENTS); renderAdminEventsList(); return; }
+    renderAdminEventsList();
+    resetEventForm();
+    toast('تم حفظ المناسبة.');
+  });
+
+  function renderAdminEventsList(){
+    const wrap = document.getElementById('eventsAdminList');
+    if(!siteEvents.length){ wrap.innerHTML = '<p class="empty-note">لا توجد مناسبات بعد</p>'; return; }
+    wrap.innerHTML = siteEvents.map(ev=> `
+      <div class="admin-list-item">
+        <div class="admin-list-thumb">${icon(ev.ic || 'calendarStar', 18)}</div>
+        <div class="admin-list-info">
+          <div class="t">${escapeHtml(ev.title)}</div>
+          <div class="s">${escapeHtml(ev.date)}</div>
+        </div>
+        <div class="admin-list-actions">
+          <button class="admin-mini-btn edit" data-edit-event="${ev.id}" title="تعديل"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4l11-11-4-4L4 16v4z"/></svg></button>
+          <button class="admin-mini-btn danger" data-del-event="${ev.id}" title="حذف"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7h14M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2m-8 0 1 13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1l1-13"/></svg></button>
+        </div>
+      </div>`).join('');
+
+    wrap.querySelectorAll('[data-edit-event]').forEach(b=> b.addEventListener('click', ()=>{
+      const item = siteEvents.find(ev=> ev.id === b.dataset.editEvent);
+      if(!item) return;
+      document.getElementById('eventEditId').value = item.id;
+      document.getElementById('eventTitle').value = item.title;
+      document.getElementById('eventDate').value = item.date;
+      document.getElementById('eventDesc').value = item.desc;
+      document.getElementById('eventIso').value = item.iso || '';
+      document.getElementById('eventFormTitle').textContent = 'تعديل المناسبة';
+      document.getElementById('eventCancelEdit').style.display = 'inline-flex';
+      window.scrollTo({top:0, behavior:'smooth'});
+    }));
+    wrap.querySelectorAll('[data-del-event]').forEach(b=> b.addEventListener('click', async ()=>{
+      if(!confirm('هل تريد حذف هذه المناسبة؟')) return;
+      siteEvents = siteEvents.filter(ev=> ev.id !== b.dataset.delEvent);
+      await saveJSON('site-events', siteEvents);
+      renderAdminEventsList();
+    }));
+  }
+
+  // ================= الفروض والاختبارات =================
+  let adminExamLevel = "";
+  function renderAdminLevelTabs(){
+    const wrap = document.getElementById('adminLevelTabs');
+    const levelNames = Object.keys(siteLevels);
+    adminExamLevel = adminExamLevel || levelNames[0];
+    wrap.innerHTML = levelNames.map(lvl=>
+      `<button class="admin-tab-btn level-tab-btn ${lvl===adminExamLevel?'active':''}" data-lvl="${escapeHtml(lvl)}">${escapeHtml(lvl)}</button>`).join('');
+    wrap.querySelectorAll('[data-lvl]').forEach(b=> b.addEventListener('click', ()=>{
+      adminExamLevel = b.dataset.lvl;
+      renderAdminLevelTabs();
+      renderAdminExamList();
+    }));
+    renderAdminExamList();
+  }
+
+  document.getElementById('examSaveBtn').addEventListener('click', async ()=>{
+    const subj = document.getElementById('examSubj').value.trim();
+    const type = document.getElementById('examType').value;
+    const date = document.getElementById('examDate').value.trim();
+    const time = document.getElementById('examTime').value.trim();
+    if(!subj || !date || !time){ alert('يرجى تعبئة كل الحقول'); return; }
+    if(!siteLevels[adminExamLevel]) siteLevels[adminExamLevel] = [];
+    siteLevels[adminExamLevel].push({subj, type, date, time});
+    const okEx = await saveJSON('site-levels', siteLevels);
+    if(!okEx){ siteLevels = await loadJSON('site-levels', DEFAULT_LEVELS); renderAdminExamList(); return; }
+    renderAdminExamList();
+    toast('تمت الإضافة إلى الجدول.');
+    document.getElementById('examSubj').value = '';
+    document.getElementById('examDate').value = '';
+    document.getElementById('examTime').value = '';
+  });
+
+  function renderAdminExamList(){
+    const wrap = document.getElementById('examAdminList');
+    const rows = siteLevels[adminExamLevel] || [];
+    if(!rows.length){ wrap.innerHTML = '<p class="empty-note">لا توجد فروض مسجلة لهذا المستوى</p>'; return; }
+    wrap.innerHTML = rows.map((r, idx)=> `
+      <div class="admin-list-item">
+        <div class="admin-list-thumb">${icon(r.type==='test' ? 'clipboard':'book', 18)}</div>
+        <div class="admin-list-info">
+          <div class="t">${escapeHtml(r.subj)} — ${r.type==='test' ? 'اختبار':'واجب منزلي'}</div>
+          <div class="s">${escapeHtml(r.date)} · ${escapeHtml(r.time)}</div>
+        </div>
+        <div class="admin-list-actions">
+          <button class="admin-mini-btn danger" data-del-exam="${idx}" title="حذف"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7h14M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2m-8 0 1 13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1l1-13"/></svg></button>
+        </div>
+      </div>`).join('');
+    wrap.querySelectorAll('[data-del-exam]').forEach(b=> b.addEventListener('click', async ()=>{
+      if(!confirm('هل تريد حذف هذا الفرض/الاختبار؟')) return;
+      siteLevels[adminExamLevel].splice(Number(b.dataset.delExam), 1);
+      await saveJSON('site-levels', siteLevels);
+      renderAdminExamList();
+    }));
+  }
+
+  // ================= إدارة الأسئلة =================
+  async function loadQuestionsAdmin(){
+    if(!db) return [];
+    try{
+      const snap = await db.collection('questions').orderBy('createdAt', 'desc').limit(300).get();
+      return snap.docs.map(d=>{
+        const x = d.data(); let t = '';
+        try{ if(x.createdAt && x.createdAt.toDate) t = x.createdAt.toDate().toLocaleDateString('ar-DZ'); }catch(e){}
+        return Object.assign({}, x, { id: d.id, time: t, likes: x.likes || [], answerLikes: x.answerLikes || [] });
+      });
+    }catch(e){ console.error('load questions failed', e); return []; }
+  }
+  async function deleteQuestionAdmin(qId){
+    const ref = db.collection('questions').doc(qId);
+    const reps = await ref.collection('replies').get();
+    const batch = db.batch();
+    reps.forEach(d=> batch.delete(d.ref));
+    batch.delete(ref);
+    await batch.commit();
+  }
+  // نقل الأسئلة من النظام القديم (siteData/site-questions) إلى المجموعة الجديدة questions
+  async function migrateLegacyQuestions(){
+    const legacy = await loadJSON('site-questions', []);
+    if(!Array.isArray(legacy) || !legacy.length){ alert('لا توجد أسئلة قديمة لنقلها.'); return; }
+    if(!confirm('سيتم نقل ' + legacy.length + ' سؤالاً مع ردودها إلى النظام الجديد. متابعة؟')) return;
+    const TS = firebase.firestore.Timestamp;
+    const base = Date.now();
+    let done = 0;
+    try{
+      for(let i = 0; i < legacy.length; i++){
+        const q = legacy[i] || {};
+        const cleanId = String(q.id || '').replace(/[^A-Za-z0-9_-]/g, '');
+        const ref = cleanId ? db.collection('questions').doc('legacy_' + cleanId) : db.collection('questions').doc();
+        const data = {
+          subj: String(q.subj || ''), body: String(q.body || '').slice(0, 1000), author: String(q.author || 'مستخدم'),
+          authorUid: String(q.authorUid || ''), authorPhoto: safeImg(q.authorPhoto) ? q.authorPhoto : null, isOwner: !!q.isOwner,
+          likes: Array.isArray(q.likes) ? q.likes : [], answerLikes: (q.answer && Array.isArray(q.answer.likes)) ? q.answer.likes : [],
+          attachment: safeImg(q.attachment) ? q.attachment : null, createdAt: TS.fromMillis(base - i * 60000)
+        };
+        if(q.answer && q.answer.text) data.answer = { text: String(q.answer.text), author: String(q.answer.author || 'الإدارة'), time: String(q.answer.time || '') };
+        await ref.set(data);
+        const reps = Array.isArray(q.replies) ? q.replies : [];
+        for(let j = 0; j < reps.length; j++){
+          const r = reps[j] || {};
+          await ref.collection('replies').doc('r' + j).set({
+            uid: String(r.uid || ''), author: String(r.author || 'مستخدم'), authorPhoto: safeImg(r.authorPhoto) ? r.authorPhoto : null,
+            isOwner: !!r.isOwner, text: String(r.text || '').slice(0, 500), likes: Array.isArray(r.likes) ? r.likes : [],
+            createdAt: TS.fromMillis(base - i * 60000 + (j + 1) * 1000)
+          });
+        }
+        done++;
+      }
+      alert('تم نقل ' + done + ' سؤالاً بنجاح. (النسخة القديمة بقيت محفوظة في siteData/site-questions ويمكنك حذفها من Firebase Console لاحقاً).');
+    }catch(e){ console.error(e); alert('توقف النقل بعد ' + done + ' سؤالاً بسبب خطأ. تأكد من نشر قواعد Firestore الجديدة ثم أعد المحاولة (النقل آمن للتكرار).'); }
+    renderAdminQAList(true);
+  }
+
+  async function renderAdminQAList(reload){
+    const wrap = document.getElementById('qaAdminList');
+    if(reload) siteQuestions = await loadQuestionsAdmin();
+    wrap.innerHTML = '';
+    const tools = document.createElement('div');
+    tools.style.cssText = 'display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px;';
+    tools.innerHTML = '<button class="btn" type="button" data-qa-reload>تحديث القائمة</button><button class="btn" type="button" data-qa-migrate>نقل الأسئلة القديمة إلى النظام الجديد</button>';
+    tools.querySelector('[data-qa-reload]').addEventListener('click', ()=> renderAdminQAList(true));
+    tools.querySelector('[data-qa-migrate]').addEventListener('click', migrateLegacyQuestions);
+    wrap.appendChild(tools);
+    if(!siteQuestions.length){ wrap.insertAdjacentHTML('beforeend', '<p class="empty-note">لا توجد أسئلة بعد</p>'); return; }
+    siteQuestions.forEach(q=>{
+      const box = document.createElement('div');
+      box.className = 'admin-card';
+      box.style.marginBottom = '14px';
+      box.innerHTML = `
+        <div style="display:flex; gap:12px; align-items:flex-start;">
+          <div class="admin-list-thumb">${icon('message', 16)}</div>
+          <div style="flex:1; min-width:0;">
+            <div style="font-weight:700; margin-bottom:4px; overflow-wrap:anywhere; word-break:break-word;">${escapeHtml(q.body)}</div>
+            <div style="font-size:.78rem; color:#8a959a;">${escapeHtml(q.subj)} · ${escapeHtml(q.author)} · ${escapeHtml(q.time)} · ${(q.likes||[]).length} إعجاب</div>
+            ${q.attachment && safeImg(q.attachment) ? `<img src="${safeImg(q.attachment)}" style="max-width:160px; border-radius:8px; margin-top:8px;">` : ''}
+          </div>
+          <button class="admin-mini-btn danger" data-del-q="${escapeHtml(q.id)}" title="حذف"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7h14M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2m-8 0 1 13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1l1-13"/></svg></button>
+        </div>
+        <div style="margin-top:10px; padding-top:10px; border-top:1px solid #f0e8d5;">
+          <textarea class="answerInput" maxlength="3000" placeholder="اكتب إجابة الإدارة/الأستاذ هنا..." style="width:100%; min-height:60px; border:1px solid #e4d9bd; border-radius:10px; padding:10px; font-family:'IBM Plex Sans Arabic',sans-serif; font-size:.88rem;">${q.answer ? escapeHtml(q.answer.text) : ''}</textarea>
+          <div style="display:flex; gap:8px; margin-top:8px; align-items:center;">
+            <button class="btn gold answerSaveBtn">${q.answer ? 'تحديث الإجابة' : 'حفظ الإجابة'}</button>
+            ${q.answer ? `<span style="font-size:.78rem; color:#8a959a;">${(q.answerLikes||[]).length} إعجاب على الإجابة</span>` : ''}
+          </div>
+        </div>`;
+      box.querySelector('.answerSaveBtn').addEventListener('click', async ()=>{
+        const text = box.querySelector('.answerInput').value.trim();
+        if(!text) return;
+        try{
+          // تحديث حقل الإجابة فقط — لا تتم إعادة كتابة باقي الأسئلة (لا فقدان للبيانات)
+          await db.collection('questions').doc(q.id).update({ answer: { text, author: 'الإدارة', time: new Date().toLocaleDateString('ar-DZ') } });
+        }catch(e){ console.error(e); alert('تعذر حفظ الإجابة.'); }
+        renderAdminQAList(true);
+      });
+      box.querySelector('[data-del-q]').addEventListener('click', async ()=>{
+        if(!confirm('هل تريد حذف هذا السؤال مع كل ردوده؟')) return;
+        try{ await deleteQuestionAdmin(q.id); }catch(e){ console.error(e); alert('تعذر حذف السؤال.'); }
+        renderAdminQAList(true);
+      });
+      wrap.appendChild(box);
+    });
+  }
+
+  // ================= المستخدمون والإحصائيات =================
+
+  // ================= دردشة الأولياء العامة (مراقبة وحذف) =================
+  async function renderAdminParentMessages(){
+    const wrap = document.getElementById('parentThreadsAdminList');
+    if(!db){ wrap.innerHTML = '<p class="empty-note">تعذر الاتصال بقاعدة البيانات</p>'; return; }
+    wrap.innerHTML = 'جاري التحميل...';
+    try{
+      const snap = await db.collection('parentsGeneralChat').orderBy('time', 'desc').limit(100).get();
+      if(snap.empty){
+        wrap.innerHTML = '<p class="empty-note">لا توجد رسائل في الدردشة العامة بعد</p>';
+        return;
+      }
+      wrap.innerHTML = snap.docs.map(doc=>{
+        const m = doc.data();
+        let dateStr = '';
+        try{ if(m.time && m.time.toDate) dateStr = m.time.toDate().toLocaleString('ar-DZ'); }catch(e){}
+        return `<div class="admin-list-item" style="align-items:flex-start;">
+          <div class="admin-list-thumb">${icon('message', 16)}</div>
+          <div class="admin-list-info">
+            <div class="t">${escapeHtml(m.author||'ولي')}</div>
+            <div class="s">${m.text ? escapeHtml(m.text) : '(صورة)'} ${dateStr ? '· ' + dateStr : ''}</div>
+            ${m.image ? `<img src="${safeImg(m.image)}" style="max-width:140px; border-radius:8px; margin-top:6px;">` : ''}
+          </div>
+          <div class="admin-list-actions">
+            <button class="admin-mini-btn danger" data-del-msg="${doc.id}" title="حذف"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7h14M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2m-8 0 1 13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1l1-13"/></svg></button>
+          </div>
+        </div>`;
+      }).join('');
+      wrap.querySelectorAll('[data-del-msg]').forEach(btn=> btn.addEventListener('click', async ()=>{
+        if(!confirm('هل تريد حذف هذه الرسالة نهائياً؟')) return;
+        try{
+          await db.collection('parentsGeneralChat').doc(btn.dataset.delMsg).delete();
+          renderAdminParentMessages();
+        }catch(e){
+          console.error(e);
+          alert('تعذر حذف الرسالة.');
+        }
+      }));
+    }catch(e){
+      console.error(e);
+      wrap.innerHTML = '<p class="empty-note">حدث خطأ أثناء تحميل الرسائل. تأكد من تفعيل قواعد الحماية المحدّثة.</p>';
+    }
+  }
+
+  // ================= إعدادات ومظهر الموقع =================
+  const DEFAULT_THEME = { deep: '#0e3b4c', gold: '#c99a2e', royal: '#2f6ea8' };
+
+  async function loadThemeSettings(){
+    const theme = await loadJSON('site-theme', DEFAULT_THEME);
+    document.getElementById('themeDeep').value = theme.deep || DEFAULT_THEME.deep;
+    document.getElementById('themeGold').value = theme.gold || DEFAULT_THEME.gold;
+    document.getElementById('themeRoyal').value = theme.royal || DEFAULT_THEME.royal;
+  }
+
+  document.getElementById('themeSaveBtn').addEventListener('click', async ()=>{
+    const theme = {
+      deep: document.getElementById('themeDeep').value,
+      gold: document.getElementById('themeGold').value,
+      royal: document.getElementById('themeRoyal').value
+    };
+    const ok = await saveJSON('site-theme', theme);
+    if(ok) alert('تم حفظ الألوان. حدّث الموقع الرئيسي لترى التغيير.');
+  });
+
+  document.getElementById('themeResetBtn').addEventListener('click', async ()=>{
+    document.getElementById('themeDeep').value = DEFAULT_THEME.deep;
+    document.getElementById('themeGold').value = DEFAULT_THEME.gold;
+    document.getElementById('themeRoyal').value = DEFAULT_THEME.royal;
+    const ok = await saveJSON('site-theme', DEFAULT_THEME);
+    if(ok) alert('تم استرجاع الألوان الافتراضية.');
+  });
+
+  document.getElementById('exportBackupBtn').addEventListener('click', async ()=>{
+    const grab = async (fn)=>{ try{ return await fn(); }catch(e){ console.error('backup part failed', e); return null; } };
+    const docs = snap=> snap.docs.map(d=> Object.assign({ _id: d.id, _path: d.ref.path }, d.data()));
+    const questions = await grab(async()=> docs(await db.collection('questions').get()));
+    const replies = await grab(async()=> docs(await db.collectionGroup('replies').get()));
+    const comments = await grab(async()=> docs(await db.collectionGroup('comments').get()));
+    const users = await grab(async()=> docs(await db.collection('users').get()));
+    const chat = await grab(async()=> docs(await db.collection('parentsGeneralChat').get()));
+    const theme = await grab(()=> loadJSON('site-theme', null));
+    const newsFull = {};
+    for(const n of (siteNews || [])){ if(n.split){ try{ const d = await db.collection('newsFull').doc(n.id).get(); if(d.exists) newsFull[n.id] = d.data(); }catch(e){} } }
+    const backup = {
+      exportedAt: new Date().toISOString(),
+      news: siteNews, events: siteEvents, levels: siteLevels, timetable: siteTT, social: siteMedia, docs: siteDocs, menu: siteMenu, info: siteInfo, newsFull, theme,
+      questions, questionReplies: replies, newsComments: comments, users, parentsChat: chat
+    };
+    const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'نسخة-احتياطية-' + new Date().toISOString().slice(0,10) + '.json';
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+</script>
+</body>
+</html>

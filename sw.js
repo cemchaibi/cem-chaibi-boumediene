@@ -1,5 +1,5 @@
 /* Service Worker: يجعل الموقع تطبيقاً قابلاً للتثبيت، يعمل بلا إنترنت، ويعرض الإشعارات */
-const CACHE = 'cem-shell-v6';
+const CACHE = 'cem-shell-v7';
 const SHELL = ['./', 'index.html', 'logo.png', 'favicon.png', 'manifest.webmanifest'];
 
 self.addEventListener('install', (e)=>{
