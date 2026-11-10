@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
 Disallow: /admin.html
-Sitemap: https://cemchaibi.github.io/cem-chaibi-boumediene/sitemap.xml
+Disallow: /admin
+
+Sitemap: https://chaibi-boumediene.pages.dev/sitemap.xml
+Sitemap: https://chaibi-boumediene.pages.dev/sitemap-news.xml

@@ -2,27 +2,35 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
+<script src="site-origin.js"></script>
+<script>(function(){var o=window.SITE_ORIGIN;if(!o||!window.SITE_REDIRECT||!/github\.io$/.test(location.hostname))return;var h=(location.hash||'').replace('#',''),pages=['news','timetable','media','qa','parents','about','privacy'],p='/',m=h.match(/^article-([\w-]+)$/),f=(location.pathname.split('/').pop()||'').replace(/\.html$/,'');if(m)p='/n/'+m[1];else if(pages.indexOf(h)>-1)p='/'+h;else if(!h&&pages.indexOf(f)>-1)p='/'+f;else if(h)p='/#'+h;location.replace(o+p);})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>سياسة الخصوصية | متوسطة شعيبي بومدين</title>
-<link rel="icon" type="image/png" href="favicon.png">
+<link rel="icon" href="/favicon.ico" sizes="48x48 32x32 16x16">
+<link rel="icon" type="image/png" sizes="48x48" href="favicon-48.png">
+<link rel="icon" type="image/png" sizes="96x96" href="favicon-96.png">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
 <meta name="description" content="كيف نحمي بياناتك في موقع متوسطة شعيبي بومدين وما نحفظه من تفضيلات.">
 <meta name="keywords" content="متوسطة شعيبي بومدين, موقع متوسطة شعيبي بومدين, شعيبي بومدين وهران, Cem chaibi, Cem chaibi oran, Cem chaibi boumediene, متوسطة بومدين, أخبار المتوسطة, فضاء الأولياء, وهران الجزائر">
-<link rel="canonical" href="https://cemchaibi.github.io/cem-chaibi-boumediene/privacy.html">
+<link rel="canonical" href="https://chaibi-boumediene.pages.dev/privacy">
 <meta property="og:title" content="سياسة الخصوصية | متوسطة شعيبي بومدين">
 <meta property="og:description" content="كيف نحمي بياناتك في موقع متوسطة شعيبي بومدين وما نحفظه من تفضيلات.">
 <meta property="og:type" content="website">
-<meta name="twitter:image" content="https://cemchaibi.github.io/cem-chaibi-boumediene/og-image.png">
+<meta name="twitter:image" content="https://chaibi-boumediene.pages.dev/og-privacy.png">
 <meta property="og:image:alt" content="شعار متوسطة شعيبي بومدين">
 <meta property="og:locale" content="ar_DZ">
 <meta property="og:site_name" content="متوسطة شعيبي بومدين">
 <!-- للتحقق من ملكية الموقع في Google Search Console: ضع هنا وسم google-site-verification الذي تمنحه لك المنصة -->
-<meta property="og:url" content="https://cemchaibi.github.io/cem-chaibi-boumediene/privacy.html">
-<meta property="og:image" content="https://cemchaibi.github.io/cem-chaibi-boumediene/og-image.png">
+<meta property="og:url" content="https://chaibi-boumediene.pages.dev/privacy">
+<meta property="og:image" content="https://chaibi-boumediene.pages.dev/og-privacy.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="apple-touch-icon" href="logo.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <meta name="theme-color" content="#0e3b4c">
+<meta name="application-name" content="متوسطة شعيبي بومدين">
+<meta name="apple-mobile-web-app-title" content="شعيبي بومدين">
+<meta name="robots" content="index, follow, max-image-preview:large">
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -31,12 +39,47 @@
 <meta name="twitter:description" content="كيف نحمي بياناتك في موقع متوسطة شعيبي بومدين وما نحفظه من تفضيلات.">
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "School",
-  "name": "متوسطة شعيبي بومدين",
-  "alternateName": "Cem Chaibi Boumediene",
-  "url": "https://cemchaibi.github.io/cem-chaibi-boumediene/",
-  "address": { "@type": "PostalAddress", "addressLocality": "وهران", "addressRegion": "Oran", "addressCountry": "DZ" }
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "WebSite",
+   "@id": "https://chaibi-boumediene.pages.dev/#website",
+   "url": "https://chaibi-boumediene.pages.dev/",
+   "name": "متوسطة شعيبي بومدين",
+   "alternateName": [
+    "Cem Chaibi Boumediene",
+    "CEM Chaibi Boumediene Oran",
+    "متوسطة شعيبي بومدين وهران"
+   ],
+   "inLanguage": "ar",
+   "publisher": {
+    "@id": "https://chaibi-boumediene.pages.dev/#school"
+   }
+  },
+  {
+   "@type": "School",
+   "@id": "https://chaibi-boumediene.pages.dev/#school",
+   "name": "متوسطة شعيبي بومدين",
+   "alternateName": "Cem Chaibi Boumediene",
+   "url": "https://chaibi-boumediene.pages.dev/",
+   "logo": {
+    "@type": "ImageObject",
+    "url": "https://chaibi-boumediene.pages.dev/favicon-512.png",
+    "width": 512,
+    "height": 512
+   },
+   "image": "https://chaibi-boumediene.pages.dev/og-image.png",
+   "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "وهران",
+    "addressRegion": "Oran",
+    "addressCountry": "DZ"
+   },
+   "sameAs": [
+    "https://www.youtube.com/@chaibi-boumediane.officail"
+   ]
+  }
+ ]
 }
 </script>
 <script>(function(){try{var c=navigator.connection||{},m=navigator.deviceMemory,h=navigator.hardwareConcurrency;if(c.saveData||/(^|-)2g$/.test(c.effectiveType||'')||(m&&m<=2)||(h&&h<=2)||(window.matchMedia&&matchMedia('(prefers-reduced-data: reduce)').matches))document.documentElement.classList.add('lite');}catch(e){}try{var th=localStorage.getItem('theme');if(th==='dark'||th==='sepia')document.documentElement.setAttribute('data-theme',th);}catch(e){}})();</script>
@@ -4604,7 +4647,7 @@
     const bc = document.getElementById('breadcrumbTitle');
     if(bc) bc.textContent = n.title;
     const gallery = (n.gallery || []).map(src=> `<img src="${safeImg(src)}" alt="${escapeHtml(n.title)}" loading="lazy" style="width:100%; border-radius:14px; margin-bottom:12px;">`).join('');
-    const shareUrl = location.origin + location.pathname + '#article-' + n.id;
+    const shareUrl = PRETTY ? location.origin + '/n/' + n.id : location.origin + location.pathname + '#article-' + n.id;
     const readMin = Math.max(1, Math.round(stripHtml(fullTextHtml).split(/\s+/).filter(Boolean).length / 170));
 
     wrap.innerHTML = `
@@ -4835,6 +4878,28 @@
   }
 
   // ================= عرض قسم واحد فقط في كل مرة (كصفحات منفصلة) =================
+  const PRETTY = !!window.SITE_FORCE_PRETTY || (/^https?:$/.test(location.protocol) && !/github\.io$/.test(location.hostname) && !/^(localhost|127\.0\.0\.1)$/.test(location.hostname));
+  const PAGE_PATHS = { home:'/', news:'/news', timetable:'/timetable', media:'/media', qa:'/qa', parents:'/parents', about:'/about', privacy:'/privacy' };
+  function routeFromLocation(){
+    const h = (location.hash || '').replace('#', '');
+    if(h) return h;
+    const m = location.pathname.match(/\/n\/([\w-]+)\/?$/);
+    if(m) return 'article-' + m[1];
+    const seg = location.pathname.replace(/\/+$/, '').split('/').pop().replace(/\.html$/, '');
+    if(PAGE_PATHS[seg] && seg !== 'home') return seg;
+    if(document.body.dataset.article) return 'article-' + document.body.dataset.article;
+    return document.body.dataset.page || 'home';
+  }
+  function prettyFor(target, raw){
+    if(target === 'article') return '/n/' + String(raw).replace('article-', '');
+    if(target === 'parents-chat') return '/parents#parents-chat';
+    return PAGE_PATHS[target] || '/';
+  }
+  function normalizeUrl(target, raw){
+    if(!PRETTY) return;
+    const want = prettyFor(target, raw);
+    if(location.pathname + location.hash !== want){ try{ history.replaceState(null, '', want); }catch(e){} }
+  }
   const PAGE_META = {
     home:{ t:'متوسطة شعيبي بومدين — الفضاء الرقمي', d:'الموقع الرسمي لمتوسطة شعيبي بومدين بوهران: أخبار المؤسسة ومناسباتها، جداول الحصص والفروض، فضاء الأسئلة، ودردشة الأولياء.' },
     news:{ t:'الأخبار والمناسبات | متوسطة شعيبي بومدين', d:'آخر أخبار متوسطة شعيبي بومدين والإعلانات الإدارية، مع تقويم المناسبات والاحتفالات القادمة.' },
@@ -4855,7 +4920,7 @@
   const MAIN_SECTIONS = ['home','news','timetable','media','qa','parents','parents-chat','about','privacy'];
   const SECTION_TITLES = { home:'الرئيسية', news:'الأخبار والمناسبات', timetable:'جدول الحصص والفروض', media:'الوسائط', qa:'فضاء الأسئلة', parents:'فضاء الأولياء', 'parents-chat':'دردشة الأولياء', about:'عن المتوسطة', privacy:'سياسة الخصوصية', article:'خبر' };
   function showMainSection(){
-    let rawHash = (location.hash || '').replace('#', '') || document.body.dataset.page || 'home';
+    let rawHash = routeFromLocation();
     if(rawHash === 'events'){ feedFilter = 'events'; syncFeedUI(); rawHash = 'news'; history.replaceState(null, '', '#news'); }
     if(rawHash === 'exams'){ setTTPane('exams'); rawHash = 'timetable'; history.replaceState(null, '', '#timetable'); }
     const isArticle = rawHash.startsWith('article-');
@@ -4887,6 +4952,7 @@
     if(target !== 'parents-chat' && typeof parentsChatUnsub === 'function'){ parentsChatUnsub(); parentsChatUnsub = null; }
     if(target === 'article') markSeen(['news:' + rawHash.replace('article-', '')]); else notifVisit(target);
     setPageMeta(target);
+    normalizeUrl(target, rawHash);
     window.scrollTo(0, 0);
   }
   window.addEventListener('hashchange', showMainSection);
