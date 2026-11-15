@@ -1683,6 +1683,24 @@
   .tt-empty{ opacity:1; color:var(--muted); }
 </style>
 
+<style>
+  .ch-title{margin:6px 0 12px;font-size:1.1rem;text-align:center}
+  .ch-card h4 small{font-weight:600;color:var(--muted);margin-inline-start:8px}
+  .ch-grid{display:grid;grid-template-columns:minmax(160px,200px) 1fr;gap:16px;align-items:start;margin-top:10px}
+  @media(max-width:520px){.ch-grid{grid-template-columns:1fr}}
+  .ch-qr{text-align:center}.ch-qr img{width:100%;max-width:200px;border-radius:12px;background:#fff;border:1px solid var(--line)}
+  .ch-acts{display:flex;gap:8px;justify-content:center;margin-top:8px;flex-wrap:wrap}.ch-acts .btn{padding:7px 14px;font-size:.78rem}
+  .ch-row{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:8px 0;border-bottom:1px dashed var(--line);font-size:.88rem}
+  .ch-pill{display:inline-block;padding:2px 10px;border-radius:999px;font-size:.75rem;font-weight:700;margin:2px}
+  .ch-pill.ok{background:#e3f4e8;color:#1f7a3a}.ch-pill.late{background:#fff3cd;color:#8a6100}.ch-pill.none{background:#eef1f2;color:#5b6b72}
+  .ch-det{margin-top:8px;font-size:.84rem}.ch-abs{padding:3px 0;color:var(--muted)}
+  .ch-ntc{padding:10px 12px;border-radius:12px;background:var(--paper-2);margin-top:8px;font-size:.88rem;line-height:1.8}
+  .ch-ntc.alert{background:#f9e1dd}.ch-ntc .h{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:2px}.ch-ntc .h span{color:var(--muted);font-size:.78rem}
+  .ch-ntc em{background:#c0392b;color:#fff;border-radius:999px;font-style:normal;font-size:.68rem;padding:0 8px}
+  .ch-form{display:grid;gap:8px}.ch-form input,.ch-form select{padding:11px 14px;border:1px solid var(--line);border-radius:12px;background:var(--paper);color:var(--ink);width:100%}
+  #childrenSpace .parent-card{margin-bottom:14px}
+  .child-dot{background:#c0392b;color:#fff;border-radius:999px;min-width:18px;height:18px;padding:0 5px;font-size:.68rem;font-weight:800;display:inline-flex;align-items:center;justify-content:center;margin-inline-start:4px}
+</style>
 </head>
 <body data-page="news">
 <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true"><defs><symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9v10.5a1.5 1.5 0 0 0 1.5 1.5H10v-6h4v6h3.5a1.5 1.5 0 0 0 1.5-1.5V9"/></symbol><symbol id="i-newspaper" viewBox="0 0 24 24"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H17v16H6a2 2 0 0 1-2-2z"/><path d="M17 8h2.5A1.5 1.5 0 0 1 21 9.5V18a2 2 0 0 1-2 2h-2"/><path d="M8 8.5h5M8 12h5M8 15.5h3"/></symbol><symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="16.5" rx="3"/><path d="M8 2.5v4M16 2.5v4M3 10h18"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 17.5h.01M12 17.5h.01"/></symbol><symbol id="i-clipboard" viewBox="0 0 24 24"><rect x="5" y="3.5" width="14" height="17.5" rx="2.5"/><path d="M9 3.5h6V6H9z"/><path d="m9 13.5 2 2 4-4.5"/></symbol><symbol id="i-message" viewBox="0 0 24 24"><path d="M20.5 11.5a8 8 0 0 1-11.8 7L3.5 20l1.5-4.6A8 8 0 1 1 20.5 11.5z"/><path d="M9 11.5h.01M12 11.5h.01M15 11.5h.01"/></symbol><symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.7a3.5 3.5 0 0 1 0 6.6M18.5 14.2a6.5 6.5 0 0 1 3 5.8"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></symbol><symbol id="i-send" viewBox="0 0 24 24"><path d="M21.5 2.5 10.5 13.5"/><path d="m21.5 2.5-7 19-4-8.5-8.5-4z"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="m8 12.5 3 3 5-6"/></symbol><symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.3 3.9 1.9 18a2 2 0 0 0 1.7 3h16.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9.5v4M12 17h.01"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 2.8 4.5 5.6v5.7c0 4.6 3 8.2 7.5 9.9 4.5-1.7 7.5-5.3 7.5-9.9V5.6z"/><path d="m8.8 12 2.4 2.4 4-4.4"/></symbol><symbol id="i-login" viewBox="0 0 24 24"><path d="M14 3h4a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3h-4"/><path d="M9 7.5 4 12l5 4.5M4 12h12"/></symbol><symbol id="i-sparkles" viewBox="0 0 24 24"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4M5 17v4M3 19h4"/></symbol><symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5.2c2.2-1 5.2-1 8 1 2.8-2 5.8-2 8-1v13.6c-2.2-1-5.2-1-8 1-2.8-2-5.8-2-8-1z"/><path d="M12 6.2v13.6"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="m10 8.3 5.6 3.7-5.6 3.7z"/></symbol><symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M12 6.5V12l3.5 2"/></symbol><symbol id="i-printer" viewBox="0 0 24 24"><path d="M7 9V3.5h10V9"/><rect x="3" y="9" width="18" height="8" rx="2.5"/><path d="M7 14h10v6.5H7z"/></symbol><symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5.5M12 7.8h.01"/></symbol><symbol id="i-youtube" viewBox="0 0 24 24"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="m10 9.2 5 2.8-5 2.8z"/></symbol><symbol id="i-instagram" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.3 6.7h.01"/></symbol><symbol id="i-facebook" viewBox="0 0 24 24"><path d="M14 8.5V7a1.5 1.5 0 0 1 1.5-1.5H17V2.5h-2.5A4 4 0 0 0 10.5 6.5v2H8v3h2.5V21h3.5v-9.5h2.7l.5-3z"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol><symbol id="i-smile" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M8 14.2a5 5 0 0 0 8 0M9 9.5h.01M15 9.5h.01"/></symbol><symbol id="i-reply" viewBox="0 0 24 24"><path d="M9 14 4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 6 6v3"/></symbol><symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6"/><path d="M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12"/><path d="M9 7V4.5A1.5 1.5 0 0 1 10.5 3h3A1.5 1.5 0 0 1 15 4.5V7"/></symbol><symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.8"/><path d="m21 16-5-5-9 9"/></symbol><symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></symbol><symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11.5a7 7 0 0 0-14 0C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol><symbol id="i-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol><symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V4M5 5h12l-2 4 2 4H5"/></symbol><symbol id="i-file" viewBox="0 0 24 24"><path d="M6 3h8l5 5v13H6z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></symbol><symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></symbol><symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 17V11a6 6 0 0 1 12 0v6l1.5 2h-15z"/><path d="M10 21a2 2 0 0 0 4 0"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-grid" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></symbol><symbol id="i-bars" viewBox="0 0 24 24"><path d="M5 20V10M12 20V4M19 20v-7"/></symbol><symbol id="i-chev-l" viewBox="0 0 24 24"><path d="m15 6-6 6 6 6"/></symbol><symbol id="i-chev-r" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol><symbol id="b-google" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></symbol><symbol id="b-facebook" viewBox="0 0 24 24"><path fill="#1877F2" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></symbol><symbol id="b-facebook-w" viewBox="0 0 24 24"><path fill="#fff" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></symbol><symbol id="b-instagram" viewBox="0 0 24 24"><defs><linearGradient id="igGrad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#FEDA75"/><stop offset="30%" stop-color="#FA7E1E"/><stop offset="55%" stop-color="#D62976"/><stop offset="80%" stop-color="#962FBF"/><stop offset="100%" stop-color="#4F5BD5"/></linearGradient></defs><rect x="1" y="1" width="22" height="22" rx="6.2" fill="url(#igGrad)"/><rect x="5.2" y="5.2" width="13.6" height="13.6" rx="4.2" fill="none" stroke="#fff" stroke-width="1.8"/><circle cx="12" cy="12" r="3.3" fill="none" stroke="#fff" stroke-width="1.8"/><circle cx="16.3" cy="7.7" r="1.1" fill="#fff"/></symbol><symbol id="b-youtube" viewBox="0 0 24 24"><rect x="1" y="4.4" width="22" height="15.2" rx="4.4" fill="#FF0000"/><path fill="#fff" d="M9.8 8.9v6.2L15.3 12z"/></symbol></defs></svg>
@@ -2159,6 +2177,7 @@
     <h3 id="accountName" style="margin-bottom:4px;"></h3>
     <div id="accountType" style="font-size:.82rem; color:var(--link); font-family:'Cairo',sans-serif; margin-bottom:6px;"></div>
     <div id="accountEmail" style="font-size:.8rem; color:var(--muted); margin-bottom:22px;"></div>
+    <a class="btn gold" id="accountChildrenLink" href="#parents" style="display:none; width:100%; margin-bottom:10px;">👪 فضاء ابني (بطاقة QR والغياب)</a>
     <button class="btn" id="accountLogoutBtn" style="width:100%; margin-bottom:10px; background:var(--paper-2); color:var(--ink);">تسجيل الخروج</button>
     <button class="btn" id="accountDeleteBtn" style="width:100%; background:var(--red);">حذف الحساب نهائياً</button>
   </div>
@@ -2247,7 +2266,10 @@
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-messaging-compat.js"></script>
 <script>
+  // مفتاح Web Push (VAPID) من Firebase ← Project settings ← Cloud Messaging ← Web Push certificates. اتركه فارغاً لتعطيل إشعارات الهاتف.
+  window.FCM_VAPID_KEY = "";
   const firebaseConfig = {
     apiKey: "AIzaSyDZ4hr_MISEoJs67DrPLYxqO0LfsSYPtXY",
     authDomain: "chaibi-1c3aa.firebaseapp.com",
@@ -4014,6 +4036,7 @@
       ? 'حساب إدارة المتوسطة الرسمي'
       : (profile.role === 'ولي' ? 'ولي تلميذ' : (profile.role === 'تلميذ' ? 'تلميذ(ة)' : ''));
     document.getElementById('accountEmail').textContent = user.email || '';
+    const cl = document.getElementById('accountChildrenLink'); if(cl){ cl.style.display = (!isOwner && profile.role === 'ولي') ? 'flex' : 'none'; cl.onclick = ()=> accountOverlay.classList.remove('open'); }
     accountOverlay.classList.add('open');
   }
   document.getElementById('closeAccountBtn').addEventListener('click', ()=> accountOverlay.classList.remove('open'));
@@ -4185,6 +4208,10 @@
           الدردشة العامة للأولياء
         </a>
       </div>`;
+    if(!owner && typeof window.renderChildrenSpace === 'function'){
+      const w = document.createElement('div'); w.id = 'childrenSpace'; w.style.cssText = 'max-width:600px; margin:18px auto 0;';
+      gate.appendChild(w); window.renderChildrenSpace(user, profile, w);
+    }
   }
 
   // ================= صفحة الدردشة العامة للأولياء — واجهة تطبيق حديث =================
@@ -5087,6 +5114,167 @@
   window.addEventListener('load', ()=>{ _top(); setTimeout(_top, 250); });
   showMainSection();
 
+</script>
+<script>
+/* ================= فضاء ولدي: بطاقة QR + الحضور والغياب + الإشعارات + طلب الربط ================= */
+(function(){
+  if(typeof db === 'undefined' || !db || typeof auth === 'undefined' || !auth) return;
+  const esc = (s)=> escapeHtml(String(s == null ? '' : s));
+  const pad = (n)=> String(n).padStart(2,'0');
+  const today = ()=>{ const d = new Date(); return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()); };
+  const sid = (s)=> String(s).replace(/[\/\s]+/g,'_');
+  const SL = { morning:'الصباحية', evening:'المسائية', all:'' };
+  const FCM_VAPID_KEY = (typeof window.FCM_VAPID_KEY === 'string') ? window.FCM_VAPID_KEY : '';
+
+  async function loadLinks(uid){
+    const s = await db.collection('parentLinks').where('uid','==',uid).get();
+    return s.docs.map(d=>d.data());
+  }
+  async function loadNotices(links){
+    const out = [];
+    await Promise.all(links.map(async l=>{
+      try{
+        const s = await db.collection('parentNotices').where('studentId','==',String(l.studentId)).limit(60).get();
+        s.docs.forEach(d=> out.push(Object.assign({ _name:l.studentName }, d.data())));
+      }catch(e){ console.error(e); }
+    }));
+    const t = (n)=> n.createdAt && n.createdAt.toMillis ? n.createdAt.toMillis() : 0;
+    return out.sort((a,b)=> t(b) - t(a) || String(b.date).localeCompare(String(a.date)));
+  }
+  const ms = (n)=> n.createdAt && n.createdAt.toMillis ? n.createdAt.toMillis() : 0;
+
+  // ---- شارة عدد الإشعارات الجديدة بجانب اسم الحساب ----
+  async function updateBadge(user, profile){
+    try{
+      if(!profile || profile.role !== 'ولي') return;
+      const links = await loadLinks(user.uid); if(!links.length) return;
+      const seen = +profile.noticesSeenAt || 0;
+      const n = (await loadNotices(links)).filter(x=> ms(x) > seen).length;
+      const chip = document.querySelector('#openAuthBtn .user-chip, .user-chip');
+      if(!chip) return;
+      const old = chip.querySelector('.child-dot'); if(old) old.remove();
+      if(n){ const b = document.createElement('span'); b.className = 'child-dot'; b.textContent = n > 9 ? '9+' : n; b.title = 'إشعارات جديدة عن ابنك'; chip.appendChild(b); }
+    }catch(e){}
+  }
+  auth.onAuthStateChanged((user)=>{
+    if(!user) return;
+    let tries = 0;
+    const t = setInterval(()=>{
+      tries++;
+      if(typeof currentUserProfile !== 'undefined' && currentUserProfile){ clearInterval(t); setTimeout(()=> updateBadge(user, currentUserProfile), 800); }
+      else if(tries > 20) clearInterval(t);
+    }, 500);
+  });
+
+  // ---- تفعيل إشعارات الهاتف ----
+  async function pushSupported(){
+    try{ return !!(FCM_VAPID_KEY && 'Notification' in window && 'serviceWorker' in navigator && firebase.messaging && firebase.messaging.isSupported && await firebase.messaging.isSupported()); }catch(e){ return false; }
+  }
+  async function registerPush(user, ask){
+    const reg = await navigator.serviceWorker.ready;
+    if(Notification.permission !== 'granted'){
+      if(!ask) return false;
+      const p = await Notification.requestPermission();
+      if(p !== 'granted'){ showToast('لم يُسمح بالإشعارات. يمكنك تفعيلها من إعدادات المتصفح.', true); return false; }
+    }
+    const token = await firebase.messaging().getToken({ vapidKey: FCM_VAPID_KEY, serviceWorkerRegistration: reg });
+    if(!token) return false;
+    await db.collection('pushTokens').doc(token).set({ uid:user.uid, token, ua:(navigator.userAgent||'').slice(0,120), createdAt: firebase.firestore.FieldValue.serverTimestamp() });
+    return true;
+  }
+
+  function qrImg(svg){
+    svg = String(svg || '');
+    if(!/^\s*<svg[\s>]/i.test(svg)) return '';
+    return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);   // داخل <img> فلا تُنفَّذ أي شيفرات
+  }
+  function noticeHtml(n, seen){
+    const isNew = ms(n) > seen;
+    const icon = n.kind === 'alert' ? '🚨' : '📌';
+    const when = n.kind === 'alert' ? '' : ' — الفترة ' + (SL[n.session]||'');
+    return `<div class="ch-ntc ${n.kind==='alert'?'alert':''}"><div class="h">${icon} <b>${esc(n._name || n.name)}</b> <span>${esc(n.date||'')}${esc(when)}</span>${isNew?'<em>جديد</em>':''}</div><div>${esc(n.message||'')}</div></div>`;
+  }
+
+  window.renderChildrenSpace = async function(user, profile, mount){
+    mount.innerHTML = '<div class="parent-card"><p class="empty-note">جاري تحميل فضاء ابنك...</p></div>';
+    try{
+      const [links, rq] = await Promise.all([ loadLinks(user.uid), db.collection('linkRequests').where('uid','==',user.uid).get() ]);
+      const reqs = rq.docs.map(d=>d.data()).filter(r=> r.status === 'pending');
+      const linkedIds = new Set(links.map(l=> String(l.studentId)));
+      const seen = +(profile && profile.noticesSeenAt) || 0;
+      const notices = links.length ? await loadNotices(links) : [];
+      const t = today();
+
+      const cards = await Promise.all(links.map(async (l)=>{
+        let qr = '', status = '';
+        try{ const d = await db.collection('qrCards').doc(sid(l.studentId)).get(); if(d.exists) qr = qrImg(d.data().svg); }catch(e){}
+        try{
+          const s = await db.collection('attendance').where('studentId','==',String(l.studentId)).where('date','==',t).get();
+          const recs = s.docs.map(d=>d.data()).filter(r=>!r.deleted).sort((a,b)=> String(a.time).localeCompare(String(b.time)));
+          status = recs.length ? recs.map(r=> `<span class="ch-pill ${r.status==='late'?'late':'ok'}">${r.status==='late'?'متأخر':'حاضر'} — الفترة ${SL[r.session]||''} ${esc(String(r.time||'').slice(0,5))}</span>`).join(' ')
+                               : '<span class="ch-pill none">لم يُسجَّل دخوله اليوم بعد</span>';
+        }catch(e){ status = ''; }
+        const abs = notices.filter(n=> String(n.studentId) === String(l.studentId) && n.kind !== 'alert');
+        return `<div class="parent-card ch-card">
+          <h4>${esc(l.studentName)} <small>${esc(l.className||'')}</small></h4>
+          <div class="ch-grid">
+            <div class="ch-qr">${qr ? `<img src="${qr}" alt="رمز QR للتلميذ ${esc(l.studentName)}"><div class="ch-acts"><a class="btn" href="${qr}" download="QR-${esc(l.studentId)}.svg">تنزيل البطاقة</a><button class="btn" data-print="${esc(l.studentId)}" type="button">طباعة</button></div>` : '<p class="empty-note">لم تصل بطاقة QR بعد. ستظهر هنا بمجرد رفعها من الإدارة.</p>'}</div>
+            <div><div class="ch-row"><span>اليوم</span><div>${status || '—'}</div></div>
+              <div class="ch-row"><span>الغيابات المسجّلة</span><b>${abs.length}</b></div>
+              ${abs.length ? `<details class="ch-det"><summary>عرض تواريخ الغياب</summary>${abs.slice(0,30).map(n=>`<div class="ch-abs">${esc(n.date)} — ${esc(SL[n.session]||'')}</div>`).join('')}</details>` : ''}
+            </div>
+          </div></div>`;
+      }));
+
+      const pend = reqs.length ? `<div class="parent-card"><h4>طلبات بانتظار اعتماد الإدارة</h4>${reqs.map(r=>`<div class="ch-row"><span>${esc(r.studentName||r.studentId)} (رقم ${esc(r.studentId)})</span><span class="ch-pill none">قيد المراجعة</span></div>`).join('')}</div>` : '';
+      const ntc = links.length ? `<div class="parent-card"><h4>🔔 الإشعارات</h4>${notices.length ? notices.slice(0,30).map(n=> noticeHtml(n, seen)).join('') : '<p class="empty-note">لا توجد إشعارات.</p>'}</div>` : '';
+      const pushBox = (links.length && await pushSupported()) ? `<div class="parent-card" id="chPushBox"><h4>إشعارات الهاتف</h4><p style="color:var(--muted);font-size:.88rem;margin:6px 0 12px">فعّل التنبيهات لتصلك رسالة على هذا الجهاز فور تسجيل غياب ابنك.</p><button class="btn gold" id="chPushBtn" type="button" style="width:100%">تفعيل إشعارات هذا الجهاز</button></div>` : '';
+      const form = `<div class="parent-card"><h4>${links.length ? 'ربط ابن/ابنة آخر' : 'اربط حسابك بابنك'}</h4>
+        <p style="color:var(--muted);font-size:.88rem;margin:6px 0 12px">أدخل رقم التلميذ (المكتوب على بطاقته) واسمه الكامل. بعد اعتماد الإدارة لطلبك يظهر لك رمز QR الخاص به وغياباته.</p>
+        <div class="ch-form"><input id="chId" inputmode="numeric" placeholder="رقم التلميذ" maxlength="30"><input id="chName" placeholder="الاسم واللقب كما في المتوسطة" maxlength="120" value="${links.length ? '' : esc(profile.studentName||'')}"><input id="chClass" placeholder="القسم (اختياري) مثال: 3م2" maxlength="40">
+        <select id="chRel"><option value="">صلة القرابة (اختياري)</option><option>أب</option><option>أم</option><option>وصي</option></select></div>
+        <button class="btn gold" id="chSend" type="button" style="width:100%;margin-top:10px">إرسال طلب الربط</button></div>`;
+
+      mount.innerHTML = `<h4 class="ch-title">👪 فضاء ابنك</h4>${pend}${cards.join('')}${ntc}${pushBox}${form}`;
+
+      mount.querySelectorAll('[data-print]').forEach(b=> b.addEventListener('click', ()=>{
+        const img = b.closest('.ch-qr').querySelector('img'); if(!img) return;
+        const w = window.open('', '_blank'); if(!w) return;
+        w.document.write('<html dir="rtl"><body style="text-align:center;font-family:Arial"><img src="'+img.src+'" style="width:340px"><script>onload=function(){setTimeout(function(){print()},300)}<\/script></body></html>'); w.document.close();
+      }));
+      const pb = document.getElementById('chPushBtn');
+      if(pb){
+        pb.addEventListener('click', async ()=>{
+          try{ pb.disabled = true; if(await registerPush(user, true)){ showToast('تم تفعيل إشعارات هذا الجهاز'); pb.textContent = '✓ الإشعارات مفعّلة على هذا الجهاز'; } else pb.disabled = false; }
+          catch(e){ console.error(e); pb.disabled = false; showToast('تعذّر تفعيل الإشعارات على هذا المتصفح.', true); }
+        });
+        if(Notification.permission === 'granted'){ registerPush(user, false).then(ok=>{ if(ok){ pb.textContent = '✓ الإشعارات مفعّلة على هذا الجهاز'; pb.disabled = true; } }).catch(()=>{}); }
+      }
+      const send = document.getElementById('chSend');
+      send.addEventListener('click', async ()=>{
+        const id = document.getElementById('chId').value.trim().replace(/[\u0660-\u0669]/g, d=> String(d.charCodeAt(0)-0x660));
+        const name = document.getElementById('chName').value.trim();
+        if(!/^[0-9A-Za-z\u0600-\u06FF._-]{1,30}$/.test(id)){ showToast('رقم التلميذ غير صحيح.', true); return; }
+        if(name.length < 3){ showToast('اكتب الاسم الكامل للتلميذ.', true); return; }
+        if(linkedIds.has(id)){ showToast('هذا التلميذ مرتبط بحسابك مسبقاً.', true); return; }
+        send.disabled = true;
+        try{
+          await db.collection('linkRequests').doc(user.uid+'_'+id).set({ uid:user.uid, parentName: ((profile.firstName||'')+' '+(profile.lastName||'')).trim() || (user.displayName||''), email:user.email||'', studentId:id, studentName:name, className:document.getElementById('chClass').value.trim(), relation:document.getElementById('chRel').value, status:'pending', createdAt: firebase.firestore.FieldValue.serverTimestamp() });
+          showToast('تم إرسال الطلب. ستعتمده الإدارة قريباً.');
+          window.renderChildrenSpace(user, profile, mount);
+        }catch(e){ console.error(e); send.disabled = false; showToast(e.code === 'permission-denied' ? 'لديك طلب سابق لهذا التلميذ بانتظار الإدارة.' : 'تعذّر إرسال الطلب، حاول لاحقاً.', true); }
+      });
+
+      // علّم الإشعارات كمقروءة
+      if(links.length && notices.length){
+        db.collection('users').doc(user.uid).set({ noticesSeenAt: Date.now() }, { merge:true }).then(()=>{ if(profile) profile.noticesSeenAt = Date.now(); const d = document.querySelector('.child-dot'); if(d) d.remove(); }).catch(()=>{});
+      }
+    }catch(e){
+      console.error(e);
+      mount.innerHTML = '<div class="parent-card"><p class="empty-note">تعذّر تحميل فضاء ابنك حالياً. حاول لاحقاً.</p></div>';
+    }
+  };
+})();
 </script>
 
 </body>

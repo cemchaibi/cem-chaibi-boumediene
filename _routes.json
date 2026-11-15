@@ -1,1 +1,1 @@
-{ "version": 1, "include": ["/n/*", "/sitemap-news.xml"], "exclude": [] }
+{"version": 1, "include": ["/api/*", "/n/*", "/sitemap-news.xml"], "exclude": []}

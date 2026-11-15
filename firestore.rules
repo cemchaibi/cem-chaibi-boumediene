@@ -23,6 +23,19 @@ service cloud.firestore {
              request.auth.token.email.lower() in get(/databases/$(database)/documents/config/admins).data.get('emails', []);
     }
     function isAdmin() { return isOwner() || isExtraAdmin(); }
+    // حسابات البوابة (برنامج الحضور): قائمة البريد في config/gate يديرها المالك من لوحة الإدارة
+    function isGate() {
+      return signedIn() &&
+             request.auth.token.email != null &&
+             exists(/databases/$(database)/documents/config/gate) &&
+             request.auth.token.email.lower() in get(/databases/$(database)/documents/config/gate).data.get('emails', []);
+    }
+    function isStaff() { return isAdmin() || isGate(); }
+    // ولي مرتبط بتلميذ (الربط يعتمده المشرف فقط: parentLinks/{uid}_{studentId})
+    function linkedTo(sid) {
+      return signedIn() && sid is string &&
+             exists(/databases/$(database)/documents/parentLinks/$(request.auth.uid + '_' + sid));
+    }
     // حساب محظور من النشر (يضعه المشرف في bannedUsers)
     function notBanned() {
       return !exists(/databases/$(database)/documents/bannedUsers/$(request.auth.uid));
@@ -233,6 +246,70 @@ service cloud.firestore {
             request.resource.data.diff(resource.data).affectedKeys().hasOnly(['text']) &&
             textOk('text', 2000));
       allow delete: if isAdmin() || (signedIn() && request.auth.uid == resource.data.uid);
+    }
+
+
+    // ===================== الحضور والغياب (ربط برنامج الحضور بالموقع) =====================
+    // قائمة التلاميذ (فيها هواتف الأولياء): للإدارة والبوابة فقط
+    match /students/{id} {
+      allow read, write: if isStaff();
+    }
+    // تسجيلات الدخول: تكتبها البوابة، ويقرأها المشرف، وولي التلميذ المرتبط يقرأ تسجيلات ابنه فقط
+    match /attendance/{id} {
+      allow read: if isStaff() || linkedTo(resource.data.studentId);
+      allow write: if isStaff();
+    }
+    // إشعارات الأولياء (غياب / غياب متكرر)
+    match /parentNotices/{id} {
+      allow read: if isStaff() || linkedTo(resource.data.studentId);
+      allow write: if isStaff();
+    }
+    // تنبيهات الغياب المتكرر (المعرّف = رقم التلميذ)
+    match /absenceAlerts/{id} {
+      allow read: if isStaff() || linkedTo(id);
+      allow write: if isStaff();
+    }
+    // بطاقة QR لكل تلميذ (المعرّف = رقم التلميذ): يراها ولي التلميذ المرتبط فقط
+    match /qrCards/{id} {
+      allow read: if isStaff() || linkedTo(id);
+      allow write: if isStaff();
+    }
+    // ربط ولي بتلميذ: يعتمده المشرف وحده، والولي يقرأ روابطه فقط
+    match /parentLinks/{id} {
+      allow read: if isStaff() || (signedIn() && resource.data.uid == request.auth.uid);
+      allow create, update: if isAdmin();
+      allow delete: if isAdmin() || (signedIn() && resource.data.uid == request.auth.uid);
+    }
+    // طلبات الربط: الولي يرسل طلباً باسم حسابه فقط، والمشرف يعالجها
+    match /linkRequests/{id} {
+      allow create: if signedIn() && notBanned() &&
+        request.resource.data.keys().hasOnly(['uid', 'parentName', 'email', 'studentId', 'studentName', 'className', 'relation', 'status', 'createdAt']) &&
+        request.resource.data.uid == request.auth.uid &&
+        id == request.auth.uid + '_' + request.resource.data.studentId &&
+        request.resource.data.status == 'pending' &&
+        request.resource.data.studentId is string && request.resource.data.studentId.size() > 0 && request.resource.data.studentId.size() <= 30 &&
+        request.resource.data.get('studentName', '') is string && request.resource.data.get('studentName', '').size() <= 120 &&
+        request.resource.data.get('className', '') is string && request.resource.data.get('className', '').size() <= 40 &&
+        request.resource.data.createdAt == request.time;
+      allow read: if isStaff() || (signedIn() && resource.data.uid == request.auth.uid);
+      allow update: if isAdmin();
+      allow delete: if isAdmin() || (signedIn() && resource.data.uid == request.auth.uid);
+    }
+    // أجهزة الأولياء لإشعارات الهاتف (يقرؤها خادم الإرسال بحساب الخدمة، فلا يقرؤها أحد غير صاحبها)
+    match /pushTokens/{id} {
+      allow create, update: if signedIn() &&
+        request.resource.data.keys().hasOnly(['uid', 'token', 'ua', 'createdAt']) &&
+        request.resource.data.uid == request.auth.uid &&
+        request.resource.data.token is string && request.resource.data.token.size() < 400;
+      allow read, delete: if signedIn() && resource.data.uid == request.auth.uid;
+    }
+    // إعدادات الغياب التي تضبطها الإدارة ويطبّقها برنامج الحضور
+    match /attSettings/{id} {
+      allow read: if isStaff();
+      allow write: if isAdmin();
+    }
+    match /_ping/{id} {
+      allow write: if isStaff();
     }
 
     // أي مسار آخر: ممنوع

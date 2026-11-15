@@ -1,5 +1,5 @@
 /* Service Worker: يجعل الموقع تطبيقاً قابلاً للتثبيت، يعمل بلا إنترنت، ويعرض الإشعارات */
-const CACHE = 'cem-shell-v8';
+const CACHE = 'cem-shell-v9';
 const SHELL = ['/', 'index.html', 'site-origin.js', 'favicon-192.png', 'favicon-48.png', 'manifest.webmanifest'];
 
 self.addEventListener('install', (e)=>{
@@ -34,5 +34,16 @@ self.addEventListener('notificationclick', (e)=>{
   e.waitUntil(self.clients.matchAll({ type:'window', includeUncontrolled:true }).then(list=>{
     for(const c of list){ if('focus' in c){ c.focus(); c.postMessage({ type:'nav', hash }); return; } }
     return self.clients.openWindow('/' + hash);
+  }));
+});
+
+// إشعارات الهاتف (FCM Web Push): غياب التلميذ وغيابه المتكرر
+self.addEventListener('push', (e)=>{
+  let p = {};
+  try{ p = e.data ? e.data.json() : {}; }catch(_){ p = { notification:{ title:'متوسطة شعيبي بومدين', body: e.data ? e.data.text() : '' } }; }
+  const n = p.notification || {}, d = p.data || {};
+  e.waitUntil(self.registration.showNotification(n.title || d.title || 'متوسطة شعيبي بومدين', {
+    body: n.body || d.body || '', icon: '/favicon-192.png', badge: '/favicon-48.png', dir: 'rtl', lang: 'ar',
+    tag: d.studentId ? 'abs-' + d.studentId : undefined, data: { hash: '#parents' }
   }));
 });

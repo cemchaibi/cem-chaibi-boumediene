@@ -203,6 +203,31 @@
   #adminPhotoModal .cap{ margin:10px 0; font-size:.9rem; line-height:1.8; }
 </style>
 <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
+<style>
+  .att-sub{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+  .att-sub button{background:#fff;border:1px solid #e4d9bd;padding:9px 16px;border-radius:999px;font-weight:700;font-size:.86rem;color:var(--deep)}
+  .att-sub button.on{background:var(--deep);color:#fff;border-color:var(--deep)}
+  .att-pane{display:none}.att-pane.on{display:block}
+  .att-row{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end;margin-bottom:10px}
+  .att-row label,.att-grid label{display:flex;flex-direction:column;gap:4px;font-size:.82rem;font-weight:700;color:var(--deep)}
+  .att-row input,.att-row select,.att-grid input,#tabAttendance textarea{padding:9px 12px;border:1px solid #e4d9bd;border-radius:10px;background:#fff}
+  .att-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px;margin-bottom:14px}
+  .att-grid .att-chk{flex-direction:row;align-items:center;gap:8px;grid-column:1/-1}
+  .att-grid .att-chk input{width:auto}
+  .att-note{font-size:.78rem;color:#7c8b91;margin:6px 0 10px}
+  .att-scroll{overflow-x:auto}
+  table.att-t{width:100%;border-collapse:collapse;min-width:560px;font-size:.84rem}
+  table.att-t th,table.att-t td{padding:8px 10px;border-bottom:1px solid #efe6d0;text-align:right}
+  table.att-t th{background:#f6efdd;color:var(--deep);position:sticky;top:0}
+  .att-badge{color:#c0392b;font-weight:800}
+  .att-tag{display:inline-block;padding:1px 9px;border-radius:999px;font-size:.72rem;font-weight:700}
+  .att-tag.ok{background:#e3f4e8;color:#1f7a3a}.att-tag.wait{background:#fff3cd;color:#8a6100}.att-tag.no{background:#f9e1dd;color:#a8402f}
+  .att-lr{display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid #efe6d0}
+  .att-lr small{display:block;color:#7c8b91}
+  .att-lr .acts{display:flex;gap:8px}
+  .att-lr .acts button{padding:7px 16px;border-radius:10px;font-weight:700;font-size:.82rem}
+  .att-ok{background:#1f7a3a;color:#fff}.att-rej{background:#f9e1dd;color:#a8402f}
+</style>
 </head>
 <body>
 
@@ -230,6 +255,7 @@
     <div class="admin-body">
       <div class="admin-tabs" id="adminTabs">
         <button class="admin-tab-btn active" data-tab="dashboard">📊 نظرة عامة</button>
+        <button class="admin-tab-btn" data-tab="attendance">🏫 الحضور والغياب <span id="lrBadge" style="color:#c0392b;font-weight:800;"></span></button>
         <button class="admin-tab-btn" data-tab="news">الأخبار والمناسبات</button>
         <button class="admin-tab-btn" data-tab="timetable">جدول الحصص</button>
         <button class="admin-tab-btn" data-tab="exams">الفروض والاختبارات</button>
@@ -281,6 +307,95 @@
             <li>إضافة مشرف احتياطي من «إعدادات ومظهر الموقع».</li>
             <li>تحميل نسخة احتياطية كل أسبوع.</li>
           </ul>
+        </div>
+      </div>
+
+      <!-- ATTENDANCE TAB -->
+      <div class="admin-panel-section" id="tabAttendance">
+        <div class="att-sub" id="attSub">
+          <button class="on" data-at="today" type="button">📅 اليوم</button>
+          <button data-at="reports" type="button">📊 التقارير</button>
+          <button data-at="links" type="button">👪 ربط الأولياء <span id="lrBadge2" class="att-badge"></span></button>
+          <button data-at="notices" type="button">🔔 سجل الإشعارات</button>
+          <button data-at="settings" type="button">⚙️ إعدادات الغياب</button>
+        </div>
+
+        <div class="att-pane on" id="atToday">
+          <div class="admin-card">
+            <div class="att-row">
+              <label>التاريخ <input type="date" id="atDate"></label>
+              <label>الفترة <select id="atSess"><option value="morning">الصباحية</option><option value="evening">المسائية</option></select></label>
+              <button class="btn gold" id="atLoad" type="button">عرض</button>
+            </div>
+            <p class="att-note">يقرأ هذا العرض سجلات اليوم المرفوعة من برنامج الحضور (نحو ألف قراءة لكل عرض)، ولا يتحدّث تلقائياً: اضغط «عرض» للتحديث. الغيابات المبرَّرة تُسجَّل في البرنامج فقط ولا تظهر هنا.</p>
+          </div>
+          <div class="dash-grid" id="atCards"></div>
+          <div class="admin-card" id="atAlerts" style="display:none"></div>
+          <div class="admin-card"><h4>الأقسام</h4><div class="att-scroll" id="atClasses"><p class="empty-note">اضغط «عرض».</p></div></div>
+          <div class="admin-card"><h4>الغائبون</h4>
+            <div class="att-row"><button class="btn" id="atNotify" type="button" disabled>إنشاء وإرسال إشعارات الغياب الآن</button><button class="btn" id="atAbsCsv" type="button" disabled>تنزيل قائمة الغائبين (Excel)</button></div>
+            <p class="att-note">يتم هذا تلقائياً من برنامج الحضور بعد وقت القطع. استعمل الزر فقط إن لم يكن البرنامج يعمل.</p>
+            <div id="atAbsent"></div>
+          </div>
+        </div>
+
+        <div class="att-pane" id="atReports">
+          <div class="admin-card">
+            <div class="att-row">
+              <label>من <input type="date" id="rpFrom"></label>
+              <label>إلى <input type="date" id="rpTo"></label>
+              <label>القسم <select id="rpClass"><option value="">كل الأقسام</option></select></label>
+              <label>ترتيب <select id="rpSort"><option value="abs">الأكثر غياباً</option><option value="late">الأكثر تأخراً</option><option value="name">الاسم</option></select></label>
+              <button class="btn gold" id="rpRun" type="button">إنشاء التقرير</button>
+            </div>
+            <p class="att-note">أقصى مدة 62 يوماً. التقرير الشهري الكامل قد يستهلك عشرات الآلاف من القراءات من الحصة المجانية اليومية (50 ألف)، فلا تكثر من تشغيله.</p>
+          </div>
+          <div class="dash-grid" id="rpCards"></div>
+          <div class="admin-card"><div class="att-row"><button class="btn" id="rpCsv" type="button" disabled>تنزيل Excel</button><button class="btn" id="rpPrint" type="button" disabled>طباعة</button></div><div class="att-scroll" id="rpOut"></div></div>
+        </div>
+
+        <div class="att-pane" id="atLinks">
+          <div class="admin-card">
+            <h4>طلبات الربط بانتظار الاعتماد</h4>
+            <p class="att-note">يطلب الولي ربط حسابه بابنه (رقم التلميذ + الاسم). تحقّق من الاسم ثم اعتمد؛ عندها فقط يرى الولي بطاقة QR وغيابات ابنه.</p>
+            <div class="att-row"><button class="btn gold" id="lrReload" type="button">تحديث</button><button class="btn" id="lrAllOk" type="button">اعتماد كل الطلبات المطابقة</button></div>
+            <div id="lrList"><p class="empty-note">جاري التحميل...</p></div>
+          </div>
+          <div class="admin-card">
+            <h4>الروابط المعتمدة</h4>
+            <div class="att-row"><input type="search" id="lkSearch" placeholder="بحث باسم الولي أو التلميذ أو رقمه" style="flex:1;min-width:200px"><button class="btn" id="lkLoad" type="button">عرض</button></div>
+            <div class="att-scroll" id="lkList"></div>
+          </div>
+        </div>
+
+        <div class="att-pane" id="atNotices">
+          <div class="admin-card"><div class="att-row"><button class="btn gold" id="ntLoad" type="button">آخر 100 إشعار</button></div><div class="att-scroll" id="ntList"><p class="empty-note">اضغط الزر.</p></div></div>
+        </div>
+
+        <div class="att-pane" id="atSettings">
+          <div class="admin-card">
+            <h4>إشعارات الغياب (يطبّقها برنامج الحضور تلقائياً)</h4>
+            <div class="att-grid">
+              <label class="att-chk"><input type="checkbox" id="stAuto"> إرسال إشعار غياب تلقائي لولي كل غائب</label>
+              <label>بعد الساعة (الفترة الصباحية) <input type="time" id="stMorning"></label>
+              <label>بعد الساعة (الفترة المسائية) <input type="time" id="stEvening"></label>
+              <label class="att-chk"><input type="checkbox" id="stAlertOn"> إشعار «الغياب المتكرر» عند تجاوز الحد</label>
+              <label>أيام الغياب المتتالية <input type="number" id="stStreak" min="1" max="30"></label>
+              <label>مجموع الغيابات <input type="number" id="stTotal" min="0" max="100"></label>
+              <label>خلال آخر (يوم) <input type="number" id="stWindow" min="0" max="365"></label>
+              <label class="att-chk"><input type="checkbox" id="stPush"> إرسال إشعارات إلى هواتف الأولياء</label>
+            </div>
+            <div class="admin-field"><label>نص إشعار الغياب</label><textarea id="stAbsText" rows="3"></textarea></div>
+            <div class="admin-field"><label>نص إشعار الغياب المتكرر</label><textarea id="stAlrText" rows="3"></textarea></div>
+            <p class="att-note">المتغيّرات: {name} اسم التلميذ — {class} القسم — {date} التاريخ — {session} الفترة — {school} اسم المتوسطة.</p>
+            <button class="btn gold" id="stSave" type="button">حفظ الإعدادات</button>
+          </div>
+          <div class="admin-card" id="gateCard">
+            <h4>حسابات بوابة الدخول (برنامج الحضور)</h4>
+            <p class="att-note">اكتب بريد حساب البوابة الذي أنشأته في Firebase Authentication (بريد/كلمة مرور) — بريد واحد في كل سطر. يصبح له وحده حق رفع الحضور وقراءة قائمة التلاميذ. يحفظها المالك فقط.</p>
+            <div class="admin-field"><textarea id="gateEmails" rows="3" dir="ltr" placeholder="gate@example.com"></textarea></div>
+            <button class="btn gold" id="gateSave" type="button">حفظ حسابات البوابة</button>
+          </div>
         </div>
       </div>
 
@@ -2114,6 +2229,285 @@
     a.click();
     URL.revokeObjectURL(url);
   });
+</script>
+<script>
+/* ================= تبويب الحضور والغياب (ربط برنامج الحضور بالموقع) ================= */
+(function(){
+  if(typeof db === 'undefined' || !db) return;
+  const $ = (id)=> document.getElementById(id);
+  const esc = (s)=> escapeHtml(String(s == null ? '' : s));
+  const norm = (s)=> String(s||'').toLowerCase().replace(/[\u064B-\u0652\u0640]/g,'').replace(/[أإآٱ]/g,'ا').replace(/ى/g,'ي').replace(/ة/g,'ه').replace(/\s+/g,' ').trim();
+  const pad = (n)=> String(n).padStart(2,'0');
+  const dkey = (d)=> d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+  const SL = { morning:'الصباحية', evening:'المسائية' };
+  const sid = (s)=> String(s).replace(/[\/\s]+/g,'_');
+  const HELD_PCT = 20;
+  let students = null, lastDay = null, lastReport = null;
+
+  async function loadStudents(force){
+    if(students && !force) return students;
+    const snap = await db.collection('students').get();
+    students = snap.docs.map(d=> d.data());
+    return students;
+  }
+  function download(name, text){
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob(['\ufeff'+text], { type:'text/csv;charset=utf-8' }));
+    a.download = name; document.body.appendChild(a); a.click(); a.remove();
+  }
+  const csvCell = (v)=> '"'+String(v==null?'':v).replace(/"/g,'""')+'"';
+  const csv = (rows)=> rows.map(r=> r.map(csvCell).join(',')).join('\r\n');
+  function card(n, label, color){ return `<div class="dash-card" style="cursor:default"><div style="font-size:1.7rem;font-weight:800;color:${color||'var(--deep)'}">${n}</div><div style="font-size:.8rem">${label}</div></div>`; }
+  function table(head, rows){ return `<table class="att-t"><thead><tr>${head.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${rows.join('')}</tbody></table>`; }
+  const td = (v)=> `<td>${v}</td>`;
+
+  // ---- التبويبات الفرعية ----
+  document.querySelectorAll('#attSub button').forEach(b=> b.addEventListener('click', ()=>{
+    document.querySelectorAll('#attSub button').forEach(x=>x.classList.toggle('on', x===b));
+    document.querySelectorAll('.att-pane').forEach(p=> p.classList.remove('on'));
+    const id = {today:'atToday',reports:'atReports',links:'atLinks',notices:'atNotices',settings:'atSettings'}[b.dataset.at];
+    $(id).classList.add('on');
+    if(b.dataset.at === 'links') loadRequests();
+    if(b.dataset.at === 'settings') loadSettings();
+  }));
+  document.querySelectorAll('#adminTabs .admin-tab-btn').forEach(b=> b.addEventListener('click', ()=>{ if(b.dataset.tab === 'attendance') refreshBadge(); }));
+
+  // ================= اليوم =================
+  $('atDate').value = dkey(new Date());
+  $('atSess').value = new Date().getHours() < 12 ? 'morning' : 'evening';
+  $('atLoad').addEventListener('click', loadDay);
+  async function loadDay(){
+    const date = $('atDate').value, sess = $('atSess').value;
+    if(!date) return;
+    $('atClasses').innerHTML = '<p class="empty-note">جاري التحميل...</p>';
+    try{
+      const list = await loadStudents();
+      const snap = await db.collection('attendance').where('date','==',date).get();
+      const recs = snap.docs.map(d=>d.data()).filter(r=> !r.deleted && r.session === sess);
+      const by = new Map(); recs.forEach(r=> by.set(String(r.studentId), r));
+      const cls = {};
+      list.forEach(s=>{
+        const c = cls[s.class] || (cls[s.class] = { total:0, present:0, late:0, abs:[] });
+        c.total++;
+        const r = by.get(String(s.id));
+        if(!r) c.abs.push(s); else if(r.status === 'late') c.late++; else c.present++;
+      });
+      const names = Object.keys(cls).sort((a,b)=> a.localeCompare(b,'ar',{numeric:true}));
+      const P = names.reduce((a,k)=>a+cls[k].present,0), L = names.reduce((a,k)=>a+cls[k].late,0), A = names.reduce((a,k)=>a+cls[k].abs.length,0);
+      const held = recs.length >= Math.max(1, Math.ceil(list.length*HELD_PCT/100));
+      $('atCards').innerHTML = card(list.length,'تلميذ مسجّل') + card(P,'حاضر','#1f7a3a') + card(L,'متأخر','#b9770e') + card(A,'غائب','#a8402f') + card(list.length ? Math.round((P+L)*100/list.length)+'%' : '—','نسبة الحضور');
+      $('atClasses').innerHTML = list.length ? table(['القسم','العدد','حاضر','متأخر','غائب','النسبة'], names.map(k=>{ const c=cls[k]; return '<tr>'+td(esc(k))+td(c.total)+td(c.present)+td(c.late)+td(c.abs.length)+td(Math.round((c.present+c.late)*100/c.total)+'%')+'</tr>'; })) : '<p class="empty-note">لا توجد قائمة تلاميذ مرفوعة. من برنامج الحضور: الإعدادات ← الربط ← «رفع قائمة التلاميذ».</p>';
+      const absRows = []; names.forEach(k=> cls[k].abs.forEach(s=> absRows.push({ s })));
+      $('atAbsent').innerHTML = !held ? '<p class="empty-note">لم تُسجَّل هذه الفترة بعد (أو هي عطلة) — لا تُحتسب الغيابات.</p>' : absRows.length ? table(['القسم','الرقم','الاسم','هاتف الولي'], absRows.map(x=> '<tr>'+td(esc(x.s.class))+td(esc(x.s.id))+td(esc(x.s.name))+td(esc(x.s.phone||'—'))+'</tr>')) : '<p class="empty-note">لا يوجد غائبون 🎉</p>';
+      lastDay = { date, sess, held, absent: held ? absRows.map(x=>x.s) : [] };
+      $('atNotify').disabled = !lastDay.absent.length; $('atAbsCsv').disabled = !lastDay.absent.length;
+      loadAlerts();
+    }catch(e){ console.error(e); $('atClasses').innerHTML = '<p class="empty-note">تعذّر التحميل: '+esc(e.code||e.message)+' — تأكد من نشر قواعد Firestore الجديدة.</p>'; }
+  }
+  async function loadAlerts(){
+    try{
+      const snap = await db.collection('absenceAlerts').where('active','==',true).get();
+      const box = $('atAlerts');
+      if(snap.empty){ box.style.display='none'; return; }
+      const rows = snap.docs.map(d=>d.data()).sort((a,b)=> (b.streak||0)-(a.streak||0));
+      box.style.display='block';
+      box.innerHTML = '<h4>🚨 غياب متكرر ('+rows.length+')</h4><div class="att-scroll">'+table(['الرقم','الاسم','القسم','أيام متتالية','المجموع','آخر حضور'], rows.map(a=>'<tr>'+td(esc(a.studentId))+td(esc(a.name))+td(esc(a.class))+td(a.streak||0)+td(a.total||0)+td(esc(a.lastPresent||'—'))+'</tr>'))+'</div>';
+    }catch(e){}
+  }
+  $('atAbsCsv').addEventListener('click', ()=>{
+    if(!lastDay) return;
+    download('absences_'+lastDay.date+'_'+lastDay.sess+'.csv', csv([['القسم','رقم التلميذ','الاسم واللقب','هاتف الولي']].concat(lastDay.absent.map(s=>[s.class,s.id,s.name,s.phone||'']))));
+  });
+  async function callPush(keys){
+    try{
+      const tk = await auth.currentUser.getIdToken();
+      for(let i=0;i<keys.length;i+=10){
+        const r = await fetch('/api/push', { method:'POST', headers:{ 'Content-Type':'application/json', Authorization:'Bearer '+tk }, body: JSON.stringify({ keys: keys.slice(i,i+10) }) });
+        if(!r.ok) return false;
+      }
+      return true;
+    }catch(e){ return false; }
+  }
+  $('atNotify').addEventListener('click', async ()=>{
+    if(!lastDay || !lastDay.absent.length) return;
+    if(!confirm('سيُرسل إشعار غياب لأولياء '+lastDay.absent.length+' تلميذ. المتابعة؟')) return;
+    $('atNotify').disabled = true;
+    try{
+      const exist = await db.collection('parentNotices').where('date','==',lastDay.date).get();
+      const have = new Set(exist.docs.map(d=>d.id));
+      const st = (await db.collection('attSettings').doc('main').get()).data() || {};
+      const tpl = st.absenceText || 'نُعلمكم بغياب التلميذ(ة) {name} ({class}) عن الفترة {session} بتاريخ {date}. نرجو تبرير الغياب لدى إدارة المتوسطة.';
+      const keys = []; let batch = db.batch(), n = 0;
+      for(const s of lastDay.absent){
+        const key = lastDay.date+'|'+lastDay.sess+'|'+s.id, id = sid(key);
+        if(have.has(id)) continue;
+        batch.set(db.collection('parentNotices').doc(id), { studentId:String(s.id), name:s.name, class:s.class, phone:s.phone||'', kind:'absence', date:lastDay.date, session:lastDay.sess, status:'pending',
+          message: tpl.replace(/\{name\}/g,s.name).replace(/\{class\}/g,s.class).replace(/\{date\}/g,lastDay.date).replace(/\{session\}/g,SL[lastDay.sess]).replace(/\{school\}/g,'متوسطة شعيبي بومدين'),
+          createdAt: firebase.firestore.FieldValue.serverTimestamp() });
+        keys.push(key); n++;
+        if(n % 400 === 0){ await batch.commit(); batch = db.batch(); }
+      }
+      await batch.commit();
+      const pushed = keys.length ? await callPush(keys) : true;
+      toast(keys.length ? 'تم إنشاء '+keys.length+' إشعار'+(pushed?' وإرسالها':' (تعذّر إرسال إشعارات الهاتف، يراها الأولياء داخل الموقع)') : 'كل الإشعارات موجودة مسبقاً');
+    }catch(e){ console.error(e); toast('تعذّر الإرسال: '+(e.code||e.message)); }
+    $('atNotify').disabled = false;
+  });
+
+  // ================= التقارير =================
+  const t0 = new Date(); $('rpTo').value = dkey(t0); const f0 = new Date(t0); f0.setDate(1); $('rpFrom').value = dkey(f0);
+  $('rpRun').addEventListener('click', async ()=>{
+    const from = $('rpFrom').value, to = $('rpTo').value;
+    if(!from || !to || from > to){ toast('تحقق من التواريخ'); return; }
+    if((new Date(to) - new Date(from))/864e5 > 62){ toast('أقصى مدة 62 يوماً'); return; }
+    $('rpOut').innerHTML = '<p class="empty-note">جاري التحميل...</p>'; $('rpRun').disabled = true;
+    try{
+      const list = await loadStudents();
+      const snap = await db.collection('attendance').where('date','>=',from).where('date','<=',to).get();
+      const recs = snap.docs.map(d=>d.data()).filter(r=>!r.deleted);
+      // الفترات المنعقدة: التي سُجّل فيها عدد معتبر من التلاميذ
+      const cnt = {}, seen = {};
+      recs.forEach(r=>{ const k=r.date+'|'+r.session; (seen[k] = seen[k] || new Set()); seen[k].add(String(r.studentId)); });
+      const thr = Math.max(1, Math.ceil(list.length*HELD_PCT/100));
+      const held = Object.keys(seen).filter(k=> seen[k].size >= thr);
+      const per = {};
+      list.forEach(s=> per[String(s.id)] = { s, p:0, l:0, a:0 });
+      recs.forEach(r=>{ const k=r.date+'|'+r.session; if(!held.includes(k)) return; const x = per[String(r.studentId)]; if(!x) return; if(r.status==='late') x.l++; else x.p++; });
+      Object.values(per).forEach(x=> x.a = Math.max(0, held.length - x.p - x.l));
+      let rows = Object.values(per);
+      const cl = $('rpClass').value; if(cl) rows = rows.filter(x=> x.s.class === cl);
+      const so = $('rpSort').value;
+      rows.sort((a,b)=> so==='name' ? String(a.s.name).localeCompare(b.s.name,'ar') : so==='late' ? b.l-a.l : b.a-a.a);
+      const tot = rows.reduce((a,x)=>({p:a.p+x.p,l:a.l+x.l,a:a.a+x.a}),{p:0,l:0,a:0}), all = tot.p+tot.l+tot.a;
+      $('rpCards').innerHTML = card(held.length,'فترة دراسية منعقدة') + card(rows.length,'تلميذ') + card(tot.a,'مجموع الغيابات (فترات)','#a8402f') + card(tot.l,'مجموع التأخرات','#b9770e') + card(all ? Math.round((tot.p+tot.l)*100/all)+'%' : '—','نسبة الحضور');
+      $('rpOut').innerHTML = table(['#','القسم','الرقم','الاسم','حاضر','متأخر','غائب (فترات)','نسبة الحضور'], rows.map((x,i)=>{ const t=x.p+x.l+x.a; return '<tr>'+td(i+1)+td(esc(x.s.class))+td(esc(x.s.id))+td(esc(x.s.name))+td(x.p)+td(x.l)+td(x.a)+td(t?Math.round((x.p+x.l)*100/t)+'%':'—')+'</tr>'; }));
+      lastReport = { from, to, rows, held: held.length };
+      $('rpCsv').disabled = $('rpPrint').disabled = !rows.length;
+    }catch(e){ console.error(e); $('rpOut').innerHTML = '<p class="empty-note">تعذّر التحميل: '+esc(e.code||e.message)+'</p>'; }
+    $('rpRun').disabled = false;
+  });
+  async function fillClasses(){
+    try{
+      const list = await loadStudents(), cs = [...new Set(list.map(s=>s.class))].sort((a,b)=>a.localeCompare(b,'ar',{numeric:true}));
+      $('rpClass').innerHTML = '<option value="">كل الأقسام</option>' + cs.map(c=>`<option>${esc(c)}</option>`).join('');
+    }catch(e){}
+  }
+  $('rpCsv').addEventListener('click', ()=>{ if(!lastReport) return; download('report_'+lastReport.from+'_'+lastReport.to+'.csv', csv([['القسم','رقم التلميذ','الاسم','حاضر','متأخر','غائب (فترات)']].concat(lastReport.rows.map(x=>[x.s.class,x.s.id,x.s.name,x.p,x.l,x.a])))); });
+  $('rpPrint').addEventListener('click', ()=>{
+    if(!lastReport) return;
+    const w = window.open('', '_blank'); if(!w) return;
+    w.document.write('<html dir="rtl" lang="ar"><head><meta charset="utf-8"><title>تقرير الحضور</title><style>body{font-family:Arial,sans-serif;padding:18px}table{border-collapse:collapse;width:100%;font-size:12px}th,td{border:1px solid #999;padding:4px 6px;text-align:right}th{background:#eee}</style></head><body><h3>متوسطة شعيبي بومدين — تقرير الحضور والغياب من '+esc(lastReport.from)+' إلى '+esc(lastReport.to)+'</h3>'+$('rpOut').innerHTML+'</body></html>');
+    w.document.close(); w.focus(); setTimeout(()=> w.print(), 300);
+  });
+
+  // ================= ربط الأولياء =================
+  async function refreshBadge(){
+    try{
+      const snap = await db.collection('linkRequests').where('status','==','pending').get();
+      const t = snap.size ? '('+snap.size+')' : '';
+      $('lrBadge2').textContent = t; const b = $('lrBadge'); if(b) b.textContent = t;
+    }catch(e){}
+  }
+  let pending = [];
+  function matches(r, st){
+    if(!st) return false;
+    const a = norm(r.studentName).split(' ').filter(Boolean), b = norm(st.name);
+    return a.length > 0 && a.every(w=> b.includes(w));
+  }
+  async function loadRequests(){
+    $('lrList').innerHTML = '<p class="empty-note">جاري التحميل...</p>';
+    try{
+      const list = await loadStudents(true), byId = new Map(list.map(s=>[String(s.id), s]));
+      const snap = await db.collection('linkRequests').where('status','==','pending').get();
+      pending = snap.docs.map(d=> Object.assign({ _id:d.id }, d.data())).sort((a,b)=> ((a.createdAt&&a.createdAt.seconds)||0)-((b.createdAt&&b.createdAt.seconds)||0));
+      pending.forEach(r=>{ r._st = byId.get(String(r.studentId)) || null; r._ok = matches(r, r._st); });
+      const t = pending.length ? '('+pending.length+')' : ''; $('lrBadge2').textContent = t; if($('lrBadge')) $('lrBadge').textContent = t;
+      $('lrList').innerHTML = pending.length ? pending.map((r,i)=>`<div class="att-lr"><div><b>${esc(r.parentName)}</b> <small>${esc(r.email)}${r.relation?' — '+esc(r.relation):''}</small>
+        <div>يطلب ربط: <b>${esc(r.studentName||'—')}</b> (رقم ${esc(r.studentId)}${r.className?' — '+esc(r.className):''})</div>
+        <div>${r._st ? `في القائمة: <b>${esc(r._st.name)}</b> — ${esc(r._st.class)} <span class="att-tag ${r._ok?'ok':'wait'}">${r._ok?'الاسم مطابق':'راجع الاسم'}</span>` : '<span class="att-tag no">الرقم غير موجود في قائمة التلاميذ</span>'}</div></div>
+        <div class="acts"><button class="att-ok" data-ok="${i}" type="button">اعتماد</button><button class="att-rej" data-no="${i}" type="button">رفض</button></div></div>`).join('') : '<p class="empty-note">لا توجد طلبات.</p>';
+    }catch(e){ console.error(e); $('lrList').innerHTML = '<p class="empty-note">تعذّر التحميل: '+esc(e.code||e.message)+'</p>'; }
+  }
+  async function approve(r){
+    const st = r._st;
+    await db.collection('parentLinks').doc(r.uid+'_'+r.studentId).set({ uid:r.uid, studentId:String(r.studentId), studentName: st ? st.name : r.studentName, className: st ? st.class : (r.className||''), parentName:r.parentName, email:r.email, status:'approved', approvedAt: firebase.firestore.FieldValue.serverTimestamp(), approvedBy: auth.currentUser.email });
+    await db.collection('linkRequests').doc(r._id).update({ status:'approved' });
+  }
+  $('lrList').addEventListener('click', async (e)=>{
+    const ok = e.target.closest('[data-ok]'), no = e.target.closest('[data-no]');
+    try{
+      if(ok){ const r = pending[+ok.dataset.ok]; if(!r._st && !confirm('رقم التلميذ غير موجود في القائمة. اعتماد الربط رغم ذلك؟')) return; await approve(r); toast('تم الاعتماد'); loadRequests(); }
+      if(no){ const r = pending[+no.dataset.no]; if(!confirm('رفض هذا الطلب؟')) return; await db.collection('linkRequests').doc(r._id).delete(); toast('تم الرفض'); loadRequests(); }
+    }catch(err){ console.error(err); toast('تعذّر التنفيذ: '+(err.code||err.message)); }
+  });
+  $('lrReload').addEventListener('click', loadRequests);
+  $('lrAllOk').addEventListener('click', async ()=>{
+    const okList = pending.filter(r=>r._ok);
+    if(!okList.length){ toast('لا توجد طلبات مطابقة'); return; }
+    if(!confirm('اعتماد '+okList.length+' طلباً مطابقاً (الرقم والاسم)؟')) return;
+    try{ for(const r of okList) await approve(r); toast('تم اعتماد '+okList.length+' طلباً'); loadRequests(); }catch(err){ toast('تعذّر التنفيذ: '+(err.code||err.message)); }
+  });
+  $('lkLoad').addEventListener('click', async ()=>{
+    $('lkList').innerHTML = '<p class="empty-note">جاري التحميل...</p>';
+    try{
+      const q = norm($('lkSearch').value);
+      const snap = await db.collection('parentLinks').limit(1000).get();
+      let rows = snap.docs.map(d=> Object.assign({ _id:d.id }, d.data()));
+      if(q) rows = rows.filter(x=> norm([x.parentName,x.studentName,x.studentId,x.email].join(' ')).includes(q));
+      $('lkList').innerHTML = rows.length ? table(['الولي','البريد','التلميذ','الرقم','القسم',''], rows.slice(0,200).map((x,i)=>'<tr>'+td(esc(x.parentName))+td(esc(x.email||''))+td(esc(x.studentName))+td(esc(x.studentId))+td(esc(x.className||''))+`<td><button class="att-rej" data-del="${esc(x._id)}" type="button" style="padding:4px 12px;border-radius:8px">إلغاء الربط</button></td></tr>`)) : '<p class="empty-note">لا توجد نتائج.</p>';
+    }catch(e){ $('lkList').innerHTML = '<p class="empty-note">تعذّر التحميل: '+esc(e.code||e.message)+'</p>'; }
+  });
+  $('lkList').addEventListener('click', async (e)=>{
+    const b = e.target.closest('[data-del]'); if(!b) return;
+    if(!confirm('إلغاء ربط هذا الولي بالتلميذ؟ لن يرى بطاقته ولا غياباته بعد الآن.')) return;
+    try{ await db.collection('parentLinks').doc(b.dataset.del).delete(); b.closest('tr').remove(); toast('تم إلغاء الربط'); }catch(err){ toast('تعذّر: '+(err.code||err.message)); }
+  });
+
+  // ================= سجل الإشعارات =================
+  $('ntLoad').addEventListener('click', async ()=>{
+    $('ntList').innerHTML = '<p class="empty-note">جاري التحميل...</p>';
+    try{
+      const snap = await db.collection('parentNotices').orderBy('createdAt','desc').limit(100).get();
+      const rows = snap.docs.map(d=>d.data());
+      $('ntList').innerHTML = rows.length ? table(['التاريخ','النوع','التلميذ','القسم','الفترة','الهاتف','الإرسال'], rows.map(n=>{
+        const t = n.createdAt && n.createdAt.toDate ? n.createdAt.toDate().toLocaleString('ar-DZ') : '';
+        return '<tr>'+td(esc(n.date||t))+td(n.kind==='alert'?'غياب متكرر':'غياب')+td(esc(n.name))+td(esc(n.class))+td(esc(SL[n.session]||'—'))+td(esc(n.phone||'—'))+td(n.pushedAt?'<span class="att-tag ok">أُرسل للهاتف</span>':'<span class="att-tag wait">داخل الموقع</span>')+'</tr>';
+      })) : '<p class="empty-note">لا توجد إشعارات.</p>';
+    }catch(e){ $('ntList').innerHTML = '<p class="empty-note">تعذّر التحميل: '+esc(e.code||e.message)+'</p>'; }
+  });
+
+  // ================= الإعدادات =================
+  const DEF = { autoAbsence:true, notifyMorning:'09:30', notifyEvening:'14:30', autoAlert:true, streakDays:3, totalAbsences:10, windowDays:30, push:true,
+    absenceText:'نُعلمكم بغياب التلميذ(ة) {name} ({class}) عن الفترة {session} بتاريخ {date}. نرجو تبرير الغياب لدى إدارة المتوسطة.',
+    alertText:'تنبيه: تكرّر غياب التلميذ(ة) {name} ({class}). نرجو التقرّب من إدارة المتوسطة في أقرب وقت.' };
+  async function loadSettings(){
+    try{
+      const d = Object.assign({}, DEF, (await db.collection('attSettings').doc('main').get()).data() || {});
+      $('stAuto').checked = d.autoAbsence !== false; $('stMorning').value = d.notifyMorning; $('stEvening').value = d.notifyEvening;
+      $('stAlertOn').checked = d.autoAlert !== false; $('stStreak').value = d.streakDays; $('stTotal').value = d.totalAbsences; $('stWindow').value = d.windowDays;
+      $('stPush').checked = d.push !== false; $('stAbsText').value = d.absenceText; $('stAlrText').value = d.alertText;
+    }catch(e){ toast('تعذّر تحميل الإعدادات: '+(e.code||e.message)); }
+    try{ const g = await db.collection('config').doc('gate').get(); $('gateEmails').value = ((g.data()||{}).emails||[]).join('\n'); }catch(e){}
+    $('gateSave').disabled = !(auth.currentUser && isAdminUser(auth.currentUser));
+  }
+  $('stSave').addEventListener('click', async ()=>{
+    const n = (id, lo, hi)=> Math.min(hi, Math.max(lo, parseInt($(id).value,10) || lo));
+    try{
+      await db.collection('attSettings').doc('main').set({ autoAbsence:$('stAuto').checked, notifyMorning:$('stMorning').value||'09:30', notifyEvening:$('stEvening').value||'14:30', autoAlert:$('stAlertOn').checked,
+        streakDays:n('stStreak',1,30), totalAbsences:n('stTotal',0,100), windowDays:n('stWindow',0,365), push:$('stPush').checked,
+        absenceText:$('stAbsText').value.trim()||DEF.absenceText, alertText:$('stAlrText').value.trim()||DEF.alertText, updatedAt: firebase.firestore.FieldValue.serverTimestamp() });
+      toast('تم حفظ الإعدادات — يطبّقها برنامج الحضور خلال دقيقة من اتصاله بالإنترنت');
+    }catch(e){ toast('تعذّر الحفظ: '+(e.code||e.message)); }
+  });
+  $('gateSave').addEventListener('click', async ()=>{
+    const emails = $('gateEmails').value.split(/\s+/).map(s=>s.trim().toLowerCase()).filter(s=> /^\S+@\S+\.\S+$/.test(s));
+    try{ await db.collection('config').doc('gate').set({ emails }); toast('تم حفظ '+emails.length+' حساب'); }catch(e){ toast('تعذّر الحفظ (للمالك فقط): '+(e.code||e.message)); }
+  });
+
+  // تحميل أولي عند أول فتح للتبويب
+  let first = true;
+  document.querySelectorAll('#adminTabs .admin-tab-btn').forEach(b=> b.addEventListener('click', ()=>{ if(b.dataset.tab==='attendance' && first){ first=false; fillClasses(); } }));
+})();
 </script>
 </body>
 </html>
