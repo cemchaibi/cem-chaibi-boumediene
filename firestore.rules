@@ -280,16 +280,17 @@ service cloud.firestore {
       allow create, update: if isAdmin();
       allow delete: if isAdmin() || (signedIn() && resource.data.uid == request.auth.uid);
     }
-    // طلبات الربط: الولي يرسل طلباً باسم حسابه فقط، والمشرف يعالجها
+    // طلبات الربط (ولي أو تلميذ يطلب بطاقته بالاسم واللقب والقسم): حتى 6 طلبات لكل حساب، والمشرف يعالجها
     match /linkRequests/{id} {
       allow create: if signedIn() && notBanned() &&
-        request.resource.data.keys().hasOnly(['uid', 'parentName', 'email', 'studentId', 'studentName', 'className', 'relation', 'status', 'createdAt']) &&
+        request.resource.data.keys().hasOnly(['uid', 'parentName', 'email', 'role', 'studentName', 'className', 'relation', 'status', 'createdAt']) &&
         request.resource.data.uid == request.auth.uid &&
-        id == request.auth.uid + '_' + request.resource.data.studentId &&
+        id.matches(request.auth.uid + '_[1-6]') &&
         request.resource.data.status == 'pending' &&
-        request.resource.data.studentId is string && request.resource.data.studentId.size() > 0 && request.resource.data.studentId.size() <= 30 &&
-        request.resource.data.get('studentName', '') is string && request.resource.data.get('studentName', '').size() <= 120 &&
-        request.resource.data.get('className', '') is string && request.resource.data.get('className', '').size() <= 40 &&
+        request.resource.data.get('role', '') in ['ولي', 'تلميذ'] &&
+        request.resource.data.studentName is string && request.resource.data.studentName.size() >= 3 && request.resource.data.studentName.size() <= 120 &&
+        request.resource.data.className is string && request.resource.data.className.size() >= 1 && request.resource.data.className.size() <= 40 &&
+        request.resource.data.get('relation', '') is string && request.resource.data.get('relation', '').size() <= 20 &&
         request.resource.data.createdAt == request.time;
       allow read: if isStaff() || (signedIn() && resource.data.uid == request.auth.uid);
       allow update: if isAdmin();

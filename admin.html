@@ -315,7 +315,7 @@
         <div class="att-sub" id="attSub">
           <button class="on" data-at="today" type="button">📅 اليوم</button>
           <button data-at="reports" type="button">📊 التقارير</button>
-          <button data-at="links" type="button">👪 ربط الأولياء <span id="lrBadge2" class="att-badge"></span></button>
+          <button data-at="links" type="button">👪 ربط الحسابات <span id="lrBadge2" class="att-badge"></span></button>
           <button data-at="notices" type="button">🔔 سجل الإشعارات</button>
           <button data-at="settings" type="button">⚙️ إعدادات الغياب</button>
         </div>
@@ -356,14 +356,20 @@
 
         <div class="att-pane" id="atLinks">
           <div class="admin-card">
-            <h4>طلبات الربط بانتظار الاعتماد</h4>
-            <p class="att-note">يطلب الولي ربط حسابه بابنه (رقم التلميذ + الاسم). تحقّق من الاسم ثم اعتمد؛ عندها فقط يرى الولي بطاقة QR وغيابات ابنه.</p>
-            <div class="att-row"><button class="btn gold" id="lrReload" type="button">تحديث</button><button class="btn" id="lrAllOk" type="button">اعتماد كل الطلبات المطابقة</button></div>
+            <h4>طلبات البطاقات (أولياء وتلاميذ)</h4>
+            <p class="att-note">يكتب الولي أو التلميذ الاسم واللقب والقسم. يقترح لك النظام التلميذ المطابق: اضغط على اسمه للاعتماد بنقرة واحدة. الطلبات المطابقة تماماً (الاسم والقسم) يمكن اعتمادها كلها بزر واحد.</p>
+            <div class="att-row"><button class="btn gold" id="lrAllOk" type="button">✓ اعتماد كل الطلبات المطابقة تماماً</button><button class="btn" id="lrReload" type="button">تحديث</button></div>
             <div id="lrList"><p class="empty-note">جاري التحميل...</p></div>
           </div>
           <div class="admin-card">
+            <h4>ربط يدوي سريع</h4>
+            <p class="att-note">اكتب بريد حساب الولي/التلميذ واسم التلميذ، ثم اختر التلميذ من النتائج.</p>
+            <div class="att-row"><label>بريد الحساب<input type="email" id="mlEmail" dir="ltr" placeholder="name@example.com"></label><label>اسم التلميذ<input id="mlName" placeholder="جزء من الاسم أو اللقب"></label><button class="btn" id="mlFind" type="button">بحث</button></div>
+            <div id="mlRes"></div>
+          </div>
+          <div class="admin-card">
             <h4>الروابط المعتمدة</h4>
-            <div class="att-row"><input type="search" id="lkSearch" placeholder="بحث باسم الولي أو التلميذ أو رقمه" style="flex:1;min-width:200px"><button class="btn" id="lkLoad" type="button">عرض</button></div>
+            <div class="att-row"><input type="search" id="lkSearch" placeholder="بحث باسم الحساب أو التلميذ" style="flex:1;min-width:200px"><button class="btn" id="lkLoad" type="button">عرض</button></div>
             <div class="att-scroll" id="lkList"></div>
           </div>
         </div>
@@ -2400,7 +2406,7 @@
     w.document.close(); w.focus(); setTimeout(()=> w.print(), 300);
   });
 
-  // ================= ربط الأولياء =================
+  // ================= ربط الحسابات (أولياء وتلاميذ) بالاسم والقسم =================
   async function refreshBadge(){
     try{
       const snap = await db.collection('linkRequests').where('status','==','pending').get();
@@ -2408,44 +2414,99 @@
       $('lrBadge2').textContent = t; const b = $('lrBadge'); if(b) b.textContent = t;
     }catch(e){}
   }
-  let pending = [];
-  function matches(r, st){
-    if(!st) return false;
-    const a = norm(r.studentName).split(' ').filter(Boolean), b = norm(st.name);
-    return a.length > 0 && a.every(w=> b.includes(w));
+  const digits = (s)=> String(s||'').replace(/[\u0660-\u0669]/g, d=> String(d.charCodeAt(0)-0x660)).replace(/\D/g,'');
+  const ckey = (s)=> norm(s).replace(/\s+/g,'');
+  function classMatch(a, b){
+    if(!a || !b) return null;
+    if(ckey(a) === ckey(b)) return true;
+    const x = digits(a), y = digits(b);
+    return !!x && x === y;
   }
+  function candidates(r, list){
+    const toks = norm(r.studentName).split(' ').filter(Boolean), out = [];
+    if(!toks.length) return out;
+    list.forEach(st=>{
+      const nm = norm(st.name).split(' ').filter(Boolean); let hit = 0;
+      toks.forEach(t=>{ if(nm.includes(t)) hit++; else if(t.length > 2 && nm.some(w=> w.length > 2 && (w.startsWith(t) || t.startsWith(w)))) hit += 0.6; });
+      const ratio = hit / toks.length; if(ratio < 0.6) return;
+      const cm = classMatch(r.className, st.class);
+      out.push({ st, full: ratio >= 1, cm, score: ratio*10 + (cm?5:0) - (cm===false?3:0) - Math.abs(nm.length - toks.length)*0.1 });
+    });
+    return out.sort((a,b)=> b.score - a.score).slice(0,4);
+  }
+  let pending = [];
+  async function approve(r, st){
+    const id = String(st.id);
+    if(/\//.test(id)) throw new Error('رقم التلميذ يحتوي رمزاً غير مسموح');
+    await db.collection('parentLinks').doc(r.uid+'_'+id).set({ uid:r.uid, studentId:id, studentName:st.name, className:st.class, parentName:r.parentName||'', email:r.email||'', role:r.role||'', status:'approved', approvedAt: firebase.firestore.FieldValue.serverTimestamp(), approvedBy: auth.currentUser.email });
+    if(r._id) await db.collection('linkRequests').doc(r._id).update({ status:'approved' });
+  }
+  const pickBtn = (rid, st, tag)=> `<button class="att-ok" data-pick="${esc(rid)}|${esc(st.id)}" type="button" style="margin:3px 0">✓ ${esc(st.name)} — ${esc(st.class)}${tag||''}</button>`;
   async function loadRequests(){
     $('lrList').innerHTML = '<p class="empty-note">جاري التحميل...</p>';
     try{
-      const list = await loadStudents(true), byId = new Map(list.map(s=>[String(s.id), s]));
+      const list = await loadStudents(true);
       const snap = await db.collection('linkRequests').where('status','==','pending').get();
       pending = snap.docs.map(d=> Object.assign({ _id:d.id }, d.data())).sort((a,b)=> ((a.createdAt&&a.createdAt.seconds)||0)-((b.createdAt&&b.createdAt.seconds)||0));
-      pending.forEach(r=>{ r._st = byId.get(String(r.studentId)) || null; r._ok = matches(r, r._st); });
+      pending.forEach(r=>{
+        r._c = candidates(r, list);
+        const top = r._c[0];
+        r._strong = !!(top && top.full && top.cm === true && !r._c.slice(1).some(o=> o.full && o.cm === true));
+      });
       const t = pending.length ? '('+pending.length+')' : ''; $('lrBadge2').textContent = t; if($('lrBadge')) $('lrBadge').textContent = t;
-      $('lrList').innerHTML = pending.length ? pending.map((r,i)=>`<div class="att-lr"><div><b>${esc(r.parentName)}</b> <small>${esc(r.email)}${r.relation?' — '+esc(r.relation):''}</small>
-        <div>يطلب ربط: <b>${esc(r.studentName||'—')}</b> (رقم ${esc(r.studentId)}${r.className?' — '+esc(r.className):''})</div>
-        <div>${r._st ? `في القائمة: <b>${esc(r._st.name)}</b> — ${esc(r._st.class)} <span class="att-tag ${r._ok?'ok':'wait'}">${r._ok?'الاسم مطابق':'راجع الاسم'}</span>` : '<span class="att-tag no">الرقم غير موجود في قائمة التلاميذ</span>'}</div></div>
-        <div class="acts"><button class="att-ok" data-ok="${i}" type="button">اعتماد</button><button class="att-rej" data-no="${i}" type="button">رفض</button></div></div>`).join('') : '<p class="empty-note">لا توجد طلبات.</p>';
+      if(!list.length){ $('lrList').innerHTML = '<p class="empty-note">لا توجد قائمة تلاميذ مرفوعة. من برنامج الحضور: الإعدادات ← الربط ← «رفع قائمة التلاميذ».</p>'; return; }
+      $('lrList').innerHTML = pending.length ? pending.map(r=>`<div class="att-lr" data-rid="${esc(r._id)}"><div style="flex:1;min-width:240px">
+        <b>${esc(r.studentName)}</b> — ${esc(r.className)} <span class="att-tag ${r.role==='تلميذ'?'ok':'wait'}">${esc(r.role||'ولي')}</span>
+        <small>الحساب: ${esc(r.parentName||'')} — ${esc(r.email||'')}${r.relation?' — '+esc(r.relation):''}</small>
+        <div>${r._c.length ? r._c.map((c,i)=> pickBtn(r._id, c.st, c.cm===true && c.full && i===0 ? ' <span class="att-tag ok">مطابق</span>' : (c.cm===false?' <span class="att-tag wait">قسم مختلف</span>':''))).join('<br>') : '<span class="att-tag no">لا يوجد تلميذ مطابق في القائمة</span>'}</div>
+        <div style="margin-top:6px"><input data-q="${esc(r._id)}" placeholder="بحث عن تلميذ آخر بالاسم" style="padding:7px 10px;border:1px solid #e4d9bd;border-radius:8px;width:100%;max-width:280px"><div data-qres="${esc(r._id)}"></div></div></div>
+        <div class="acts"><button class="att-rej" data-no="${esc(r._id)}" type="button">رفض</button></div></div>`).join('') : '<p class="empty-note">لا توجد طلبات. 🎉</p>';
     }catch(e){ console.error(e); $('lrList').innerHTML = '<p class="empty-note">تعذّر التحميل: '+esc(e.code||e.message)+'</p>'; }
   }
-  async function approve(r){
-    const st = r._st;
-    await db.collection('parentLinks').doc(r.uid+'_'+r.studentId).set({ uid:r.uid, studentId:String(r.studentId), studentName: st ? st.name : r.studentName, className: st ? st.class : (r.className||''), parentName:r.parentName, email:r.email, status:'approved', approvedAt: firebase.firestore.FieldValue.serverTimestamp(), approvedBy: auth.currentUser.email });
-    await db.collection('linkRequests').doc(r._id).update({ status:'approved' });
-  }
   $('lrList').addEventListener('click', async (e)=>{
-    const ok = e.target.closest('[data-ok]'), no = e.target.closest('[data-no]');
+    const pick = e.target.closest('[data-pick]'), no = e.target.closest('[data-no]');
     try{
-      if(ok){ const r = pending[+ok.dataset.ok]; if(!r._st && !confirm('رقم التلميذ غير موجود في القائمة. اعتماد الربط رغم ذلك؟')) return; await approve(r); toast('تم الاعتماد'); loadRequests(); }
-      if(no){ const r = pending[+no.dataset.no]; if(!confirm('رفض هذا الطلب؟')) return; await db.collection('linkRequests').doc(r._id).delete(); toast('تم الرفض'); loadRequests(); }
+      if(pick){
+        const [rid, stid] = pick.dataset.pick.split('|'), r = pending.find(x=> x._id === rid), st = (students||[]).find(x=> String(x.id) === stid);
+        if(!r || !st) return;
+        await approve(r, st); toast('تم الاعتماد: '+st.name); loadRequests();
+      }
+      if(no){ const r = pending.find(x=> x._id === no.dataset.no); if(!r || !confirm('رفض هذا الطلب؟')) return; await db.collection('linkRequests').doc(r._id).delete(); toast('تم الرفض'); loadRequests(); }
     }catch(err){ console.error(err); toast('تعذّر التنفيذ: '+(err.code||err.message)); }
+  });
+  $('lrList').addEventListener('input', (e)=>{
+    const q = e.target.closest('[data-q]'); if(!q) return;
+    const rid = q.dataset.q, out = document.querySelector('[data-qres="'+rid+'"]'), v = norm(q.value);
+    if(v.length < 2){ out.innerHTML = ''; return; }
+    const res = (students||[]).filter(s=> norm(s.name).includes(v)).slice(0,6);
+    out.innerHTML = res.map(s=> pickBtn(rid, s)).join('<br>') || '<small>لا نتائج</small>';
   });
   $('lrReload').addEventListener('click', loadRequests);
   $('lrAllOk').addEventListener('click', async ()=>{
-    const okList = pending.filter(r=>r._ok);
-    if(!okList.length){ toast('لا توجد طلبات مطابقة'); return; }
-    if(!confirm('اعتماد '+okList.length+' طلباً مطابقاً (الرقم والاسم)؟')) return;
-    try{ for(const r of okList) await approve(r); toast('تم اعتماد '+okList.length+' طلباً'); loadRequests(); }catch(err){ toast('تعذّر التنفيذ: '+(err.code||err.message)); }
+    const okList = pending.filter(r=> r._strong);
+    if(!okList.length){ toast('لا توجد طلبات مطابقة تماماً'); return; }
+    if(!confirm('اعتماد '+okList.length+' طلباً مطابقاً (الاسم والقسم)؟')) return;
+    try{ for(const r of okList) await approve(r, r._c[0].st); toast('تم اعتماد '+okList.length+' طلباً'); loadRequests(); }catch(err){ toast('تعذّر التنفيذ: '+(err.code||err.message)); }
+  });
+  // ربط يدوي سريع
+  $('mlFind').addEventListener('click', async ()=>{
+    const email = $('mlEmail').value.trim().toLowerCase(), v = norm($('mlName').value), out = $('mlRes');
+    if(!email || v.length < 2){ toast('اكتب البريد وجزءاً من اسم التلميذ'); return; }
+    out.innerHTML = '<p class="empty-note">جاري البحث...</p>';
+    try{
+      const list = await loadStudents();
+      const us = await db.collection('users').where('email','==',email).get();
+      if(us.empty){ out.innerHTML = '<p class="empty-note">لا يوجد حساب بهذا البريد.</p>'; return; }
+      const u = Object.assign({ uid: us.docs[0].id }, us.docs[0].data());
+      const res = list.filter(s=> norm(s.name).includes(v)).slice(0,8);
+      window.__mlUser = u;
+      out.innerHTML = '<p>الحساب: <b>'+esc(((u.firstName||'')+' '+(u.lastName||'')).trim() || email)+'</b> ('+esc(u.role||'')+')</p>' + (res.map(s=>`<button class="att-ok" data-ml="${esc(s.id)}" type="button" style="margin:3px 0">ربط بـ ${esc(s.name)} — ${esc(s.class)}</button>`).join('<br>') || '<p class="empty-note">لا يوجد تلميذ بهذا الاسم.</p>');
+    }catch(err){ console.error(err); out.innerHTML = '<p class="empty-note">تعذّر البحث: '+esc(err.code||err.message)+'</p>'; }
+  });
+  $('mlRes').addEventListener('click', async (e)=>{
+    const b = e.target.closest('[data-ml]'); if(!b || !window.__mlUser) return;
+    const st = (students||[]).find(x=> String(x.id) === b.dataset.ml), u = window.__mlUser; if(!st) return;
+    try{ await approve({ uid:u.uid, parentName:((u.firstName||'')+' '+(u.lastName||'')).trim(), email:u.email||'', role:u.role||'' }, st); toast('تم الربط'); $('mlRes').innerHTML = ''; }catch(err){ toast('تعذّر الربط: '+(err.code||err.message)); }
   });
   $('lkLoad').addEventListener('click', async ()=>{
     $('lkList').innerHTML = '<p class="empty-note">جاري التحميل...</p>';
@@ -2454,7 +2515,7 @@
       const snap = await db.collection('parentLinks').limit(1000).get();
       let rows = snap.docs.map(d=> Object.assign({ _id:d.id }, d.data()));
       if(q) rows = rows.filter(x=> norm([x.parentName,x.studentName,x.studentId,x.email].join(' ')).includes(q));
-      $('lkList').innerHTML = rows.length ? table(['الولي','البريد','التلميذ','الرقم','القسم',''], rows.slice(0,200).map((x,i)=>'<tr>'+td(esc(x.parentName))+td(esc(x.email||''))+td(esc(x.studentName))+td(esc(x.studentId))+td(esc(x.className||''))+`<td><button class="att-rej" data-del="${esc(x._id)}" type="button" style="padding:4px 12px;border-radius:8px">إلغاء الربط</button></td></tr>`)) : '<p class="empty-note">لا توجد نتائج.</p>';
+      $('lkList').innerHTML = rows.length ? table(['الحساب','البريد','التلميذ','الرقم','القسم',''], rows.slice(0,200).map((x,i)=>'<tr>'+td(esc(x.parentName))+td(esc(x.email||''))+td(esc(x.studentName))+td(esc(x.studentId))+td(esc(x.className||''))+`<td><button class="att-rej" data-del="${esc(x._id)}" type="button" style="padding:4px 12px;border-radius:8px">إلغاء الربط</button></td></tr>`)) : '<p class="empty-note">لا توجد نتائج.</p>';
     }catch(e){ $('lkList').innerHTML = '<p class="empty-note">تعذّر التحميل: '+esc(e.code||e.message)+'</p>'; }
   });
   $('lkList').addEventListener('click', async (e)=>{
