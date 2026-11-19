@@ -228,6 +228,146 @@
   .att-lr .acts button{padding:7px 16px;border-radius:10px;font-weight:700;font-size:.82rem}
   .att-ok{background:#1f7a3a;color:#fff}.att-rej{background:#f9e1dd;color:#a8402f}
 </style>
+<style id="adPro">
+/* =============== لوحة التحكم — التصميم الجديد (v2) =============== */
+:root{
+  --bg:#f3f5f9; --sf:#ffffff; --sf2:#f7f9fc; --bd:#e5e9f0; --tx:#18232c; --mu:#6b7a86;
+  --pri:#2f6ea8; --pri2:#245a8d; --ok:#1f9d57; --warn:#d98e04; --bad:#d64545;
+  --shadow:0 1px 2px rgba(16,24,40,.04),0 8px 24px rgba(16,24,40,.06);
+}
+html[data-theme=dark]{
+  --bg:#0d141c; --sf:#151f2a; --sf2:#1a2633; --bd:#263341; --tx:#e7eef5; --mu:#8fa1b1;
+  --pri:#5aa2e0; --pri2:#7bb6ea; --shadow:0 1px 2px rgba(0,0,0,.35),0 8px 24px rgba(0,0,0,.35);
+  --ink:#e7eef5; --deep:#cfe3f1; --deep-2:#0d141c; --paper:#0d141c; --paper-2:#1a2633; --line:#263341; --royal:#4a90d6; --red:#ff7a6b;
+  color-scheme:dark;
+}
+html{scrollbar-width:thin}
+body{background:var(--bg)!important;color:var(--tx)!important}
+.admin-shell.open{display:flex!important;min-height:100vh;align-items:stretch}
+
+/* ---- الشريط الجانبي ---- */
+.ad-side{width:268px;flex:0 0 268px;background:var(--sf);border-inline-start:1px solid var(--bd);position:sticky;top:0;height:100vh;display:flex;flex-direction:column;z-index:40}
+.ad-brand{display:flex;gap:12px;align-items:center;padding:18px 18px 14px;border-bottom:1px solid var(--bd)}
+.ad-brand .lg{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,#1f5589,#4f8fc7);display:grid;place-items:center;color:#fff;font-size:1.3rem;flex:none}
+.ad-brand b{display:block;font-family:Almarai,sans-serif;font-size:.98rem;color:var(--tx);line-height:1.3}
+.ad-brand small{color:var(--mu);font-size:.72rem}
+.admin-tabs{display:block!important;flex:1;overflow-y:auto;padding:6px 12px 12px;margin:0!important}
+.ad-grp{font-size:.68rem;color:var(--mu);font-weight:800;padding:16px 10px 6px;letter-spacing:.03em}
+.admin-tab-btn{display:flex!important;align-items:center;gap:11px;width:100%;background:transparent!important;border:0!important;color:var(--tx)!important;padding:9px 12px!important;border-radius:10px!important;font-size:.87rem!important;text-align:right;margin:1px 0;font-weight:600;position:relative}
+.admin-tab-btn:hover{background:var(--sf2)!important}
+.admin-tab-btn.active{background:rgba(47,110,168,.12)!important;color:var(--pri)!important;font-weight:800}
+html[data-theme=dark] .admin-tab-btn.active{background:rgba(90,162,224,.16)!important}
+.admin-tab-btn.active::before{content:'';position:absolute;inset-block:8px;inset-inline-start:-12px;width:3px;border-radius:3px;background:var(--pri)}
+.admin-tab-btn svg{width:18px;height:18px;flex:none;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.admin-tab-btn span[id$=Badge]{margin-inline-start:auto;background:var(--bad);color:#fff!important;border-radius:999px;font-size:.68rem!important;padding:0 7px;min-width:20px;text-align:center;font-weight:800}
+.admin-tab-btn span[id$=Badge]:empty{display:none}
+.ad-side-foot{padding:12px 16px;border-top:1px solid var(--bd);display:flex;gap:10px;justify-content:space-between;align-items:center;font-size:.8rem}
+.ad-side-foot a,.ad-side-foot .exit-link{color:var(--pri)!important;font-weight:700;cursor:pointer}
+.ad-side-foot .exit-link{color:var(--bad)!important}
+
+/* ---- الشريط العلوي ---- */
+.ad-main{flex:1;min-width:0}
+.admin-topbar{background:var(--sf)!important;color:var(--tx)!important;border-bottom:1px solid var(--bd)!important;padding:11px 26px!important;gap:14px;justify-content:flex-start!important;top:0;z-index:30}
+.admin-topbar h2{font-size:1.1rem;color:var(--tx);margin-inline-end:auto}
+.ad-ib{background:var(--sf2)!important;border:1px solid var(--bd)!important;color:var(--tx)!important;border-radius:10px;height:38px;min-width:38px;padding:0 12px;display:inline-flex;align-items:center;gap:8px;font-size:.82rem;font-weight:700;position:relative}
+.ad-ib:hover{border-color:var(--pri)!important}
+.ad-ib svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.ad-ib kbd{font-family:inherit;font-size:.68rem;background:var(--bd);border-radius:5px;padding:1px 6px;color:var(--mu)}
+.ad-dot{position:absolute;top:-5px;inset-inline-start:-5px;background:var(--bad);color:#fff;border-radius:999px;font-size:.66rem;min-width:18px;height:18px;display:grid;place-items:center;padding:0 4px;font-weight:800}
+.ad-dot:empty{display:none}
+#adMenuBtn{display:none}
+.ad-user{font-size:.78rem;color:var(--mu);max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.admin-body{max-width:1320px!important;padding:24px 26px 80px!important}
+
+/* ---- عناصر عامة ---- */
+.admin-card{background:var(--sf)!important;border:1px solid var(--bd)!important;border-radius:16px!important;box-shadow:var(--shadow)!important;padding:20px!important;margin-bottom:18px!important;color:var(--tx)}
+.admin-card h4{color:var(--tx)!important;font-size:.98rem!important;margin-bottom:14px!important;display:flex;align-items:center;gap:8px}
+.admin-card h4::before{content:'';width:4px;height:16px;border-radius:3px;background:var(--pri);flex:none}
+.admin-field label{color:var(--tx)!important}
+.admin-field input,.admin-field textarea,.admin-field select,.att-row input,.att-row select,.att-grid input,#tabAttendance textarea,.u-ctrl input,.u-ctrl select,input[type=search]{background:var(--sf)!important;border:1px solid var(--bd)!important;color:var(--tx)!important;border-radius:10px!important}
+.admin-field input:focus,.admin-field textarea:focus,.admin-field select:focus,.att-row input:focus,.att-row select:focus,.u-ctrl input:focus{border-color:var(--pri)!important;box-shadow:0 0 0 3px rgba(47,110,168,.18)!important;outline:none}
+.btn{background:var(--pri)!important;color:#fff!important;border-radius:10px!important;padding:9px 18px!important;box-shadow:none!important;font-size:.84rem!important}
+.btn:hover{transform:none!important;filter:brightness(1.1);background:var(--pri)!important}
+.btn.gold{background:#d9a62e!important;color:#2a2108!important}
+.admin-list-item{background:var(--sf2)!important;border:1px solid var(--bd)!important;border-radius:12px!important}
+.admin-list-info .t{color:var(--tx)!important}
+.admin-mini-btn{background:var(--sf)!important;border:1px solid var(--bd)!important;color:var(--tx)!important}
+.admin-list-thumb{background:var(--sf2)!important}
+.empty-note{color:var(--mu)!important}
+.admin-card table,table.att-t{width:100%;border-collapse:collapse}
+.admin-card th,table.att-t th{background:var(--sf2)!important;color:var(--tx)!important;font-size:.78rem}
+.admin-card td,table.att-t td{border-bottom:1px solid var(--bd)!important;color:var(--tx)}
+html[data-theme=dark] [style*="background:#fff"],html[data-theme=dark] [style*="background:#f6f8f9"],html[data-theme=dark] [style*="background:#fffdf7"],html[data-theme=dark] [style*="background: #fff"]{background:var(--sf2)!important;color:var(--tx)!important}
+html[data-theme=dark] .admin-login-card{background:var(--sf)}
+.att-sub button{background:var(--sf)!important;border:1px solid var(--bd)!important;color:var(--tx)!important}
+.att-sub button.on{background:var(--pri)!important;border-color:var(--pri)!important;color:#fff!important}
+.att-note,.att-hint{color:var(--mu)!important}
+.att-lr{border-color:var(--bd)!important}
+.dash-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px}
+.dash-card{background:var(--sf)!important;border:1px solid var(--bd)!important;border-radius:14px!important;box-shadow:var(--shadow)}
+.dash-card::before{height:3px!important}
+.dash-card span{color:var(--mu)!important}
+
+/* ---- لوحة النظرة العامة ---- */
+.ad-hero{background:linear-gradient(120deg,#17507a,#2f6ea8 58%,#4f8fc7);color:#fff;border-radius:18px;padding:22px 26px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center;margin-bottom:18px;box-shadow:var(--shadow)}
+.ad-hero h3{font-size:1.25rem;margin-bottom:2px;color:#fff}.ad-hero p{opacity:.88;font-size:.84rem;margin:0}
+.ad-qa{display:flex;gap:8px;flex-wrap:wrap}
+.ad-qa button{background:rgba(255,255,255,.16)!important;color:#fff!important;border:1px solid rgba(255,255,255,.34)!important;border-radius:10px;padding:8px 14px;font-size:.8rem;font-weight:700;display:inline-flex;gap:6px;align-items:center}
+.ad-qa button:hover{background:rgba(255,255,255,.28)!important}
+.ad-sec{font-size:.78rem;color:var(--mu);font-weight:800;margin:6px 2px 10px;letter-spacing:.03em}
+.ad-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));gap:14px;margin-bottom:18px}
+.ad-kpi{background:var(--sf);border:1px solid var(--bd);border-radius:16px;padding:14px;box-shadow:var(--shadow);display:flex;gap:14px;align-items:center;cursor:pointer;transition:.18s;color:var(--tx)}
+.ad-kpi:hover{transform:translateY(-2px);border-color:var(--c)}
+.ad-kpi .ic{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;background:color-mix(in srgb,var(--c) 14%,transparent);color:var(--c);flex:none}
+.ad-kpi .ic svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.ad-kpi b{font-size:1.6rem;line-height:1.15;display:block;font-family:Almarai,sans-serif}
+.ad-kpi span{font-size:.8rem;color:var(--mu);display:block}.ad-kpi small{display:block;font-size:.7rem;color:var(--mu)}
+.sk{display:inline-block;min-width:44px;height:1em;border-radius:6px;background:linear-gradient(90deg,var(--bd),var(--sf2),var(--bd));background-size:200% 100%;animation:sk 1.1s infinite linear;color:transparent}
+@keyframes sk{to{background-position:-200% 0}}
+.ad-row{display:grid;gap:16px;margin-bottom:0}
+.ad-row.c2{grid-template-columns:minmax(0,2fr) minmax(0,1fr)}.ad-row.c2e{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.ad-row.c3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.ad-chart{width:100%;height:190px;display:block}
+.ad-chart .g{stroke:var(--bd);stroke-width:1}.ad-chart text{fill:var(--mu);font-size:11px;font-family:Cairo,sans-serif}
+.ad-chart rect.b{fill:var(--c,var(--pri));opacity:.9}.ad-chart rect.b:hover{opacity:1}
+.ad-donut{display:flex;gap:18px;align-items:center;flex-wrap:wrap;justify-content:center}
+.ad-donut svg{width:150px;height:150px;flex:none}.ad-donut .t{fill:var(--tx);font-family:Almarai,sans-serif;font-size:7px;font-weight:800}.ad-donut .t2{fill:var(--mu);font-size:3.2px}
+.ad-leg{font-size:.82rem;display:grid;gap:7px;min-width:130px}.ad-leg i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-inline-end:8px}.ad-leg b{margin-inline-start:6px}
+.ad-list{display:grid;gap:8px}
+.ad-it{display:flex;align-items:center;gap:12px;padding:10px 12px;border:1px solid var(--bd);border-radius:12px;background:var(--sf2);font-size:.86rem;color:var(--tx)}
+.ad-it .n{margin-inline-start:auto;font-weight:800;border-radius:999px;padding:1px 10px;background:var(--bd);color:var(--tx);min-width:30px;text-align:center}
+.ad-it .n.hot{background:var(--bad);color:#fff}
+.ad-it a,.ad-it button{color:var(--pri)!important;font-weight:700;font-size:.78rem;background:none!important;border:0!important;cursor:pointer}
+.ad-it small{color:var(--mu);display:block;font-size:.72rem}
+.ad-st{display:flex;align-items:center;gap:10px;font-size:.85rem;padding:9px 0;border-bottom:1px dashed var(--bd);color:var(--tx)}
+.ad-st:last-child{border:0}.ad-st i{width:10px;height:10px;border-radius:50%;flex:none;background:var(--mu)}
+.ad-st i.ok{background:var(--ok)}.ad-st i.warn{background:var(--warn)}.ad-st i.bad{background:var(--bad)}.ad-st small{color:var(--mu);margin-inline-start:auto;font-size:.74rem;text-align:left}
+.ad-pbar{height:8px;border-radius:6px;background:var(--bd);overflow:hidden;margin-top:6px}.ad-pbar i{display:block;height:100%;background:var(--ok)}
+.health-row{margin-bottom:10px;font-size:.84rem;color:var(--tx)}.meter{height:8px;background:var(--bd)!important;border-radius:6px}
+.ad-fn{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+/* ---- البحث السريع والتنبيهات ---- */
+.ad-cmd{position:fixed;inset:0;background:rgba(8,14,20,.55);z-index:9000;display:none;align-items:flex-start;justify-content:center;padding-top:12vh;backdrop-filter:blur(3px)}
+.ad-cmd.open{display:flex}
+.ad-cmd .bx{width:min(620px,92vw);background:var(--sf);border:1px solid var(--bd);border-radius:16px;box-shadow:0 30px 80px rgba(0,0,0,.4);overflow:hidden}
+.ad-cmd input{width:100%;border:0!important;border-bottom:1px solid var(--bd)!important;border-radius:0!important;padding:16px 18px;font-size:1rem;outline:none;background:var(--sf)!important;color:var(--tx)!important}
+.ad-cmd ul{list-style:none;max-height:52vh;overflow:auto;padding:8px}
+.ad-cmd li{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;cursor:pointer;font-size:.88rem;color:var(--tx)}
+.ad-cmd li.sel,.ad-cmd li:hover{background:rgba(47,110,168,.13)}
+.ad-cmd li small{color:var(--mu);margin-inline-start:auto;font-size:.72rem}
+.ad-cmd .gh{font-size:.68rem;color:var(--mu);font-weight:800;padding:8px 12px 2px}
+.ad-pop{position:absolute;top:46px;inset-inline-start:0;width:290px;background:var(--sf);border:1px solid var(--bd);border-radius:14px;box-shadow:0 20px 50px rgba(0,0,0,.25);padding:10px;display:none;z-index:50;text-align:right}
+.ad-pop.open{display:block}.ad-pop h5{font-size:.8rem;color:var(--mu);margin:2px 4px 8px}
+.ad-scrim{display:none}
+@media(max-width:1000px){.ad-row.c2,.ad-row.c2e,.ad-row.c3{grid-template-columns:1fr}}
+@media(max-width:900px){
+  .ad-side{position:fixed;inset-block:0;inset-inline-start:0;transform:translateX(100%);transition:.25s;box-shadow:0 0 40px rgba(0,0,0,.3)}
+  .ad-side.open{transform:none}
+  .ad-scrim.open{display:block;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:35}
+  #adMenuBtn{display:inline-flex}
+  .admin-topbar{padding:10px 14px!important}.admin-body{padding:16px 14px 80px!important}
+  .ad-ib kbd,.ad-ib .lbl,.ad-user{display:none}
+}
+@media print{.ad-side,.admin-topbar,.ad-qa,.ad-scrim,.ad-cmd,.ad-fn{display:none!important}.admin-shell.open{display:block!important}.admin-card,.ad-kpi{box-shadow:none!important;break-inside:avoid}body{background:#fff!important}}
+</style>
 </head>
 <body>
 
@@ -248,66 +388,93 @@
   </div>
 
   <div class="admin-shell" id="adminShell">
-    <div class="admin-topbar">
-      <div class="t-left">لوحة تحكم متوسطة شعيبي بومدين</div>
-      <span class="exit-link" id="adminLogoutBtn">تسجيل الخروج</span>
-    </div>
-    <div class="admin-body">
-      <div class="admin-tabs" id="adminTabs">
-        <button class="admin-tab-btn active" data-tab="dashboard">📊 نظرة عامة</button>
-        <button class="admin-tab-btn" data-tab="attendance">🏫 الحضور والغياب <span id="lrBadge" style="color:#c0392b;font-weight:800;"></span></button>
-        <button class="admin-tab-btn" data-tab="news">الأخبار والمناسبات</button>
+    <div class="ad-scrim" id="adScrim"></div>
+    <aside class="ad-side" id="adSide">
+      <div class="ad-brand"><div class="lg">🏫</div><div><b>لوحة التحكم</b><small>متوسطة شعيبي بومدين</small></div></div>
+      <nav class="admin-tabs" id="adminTabs">
+        <div class="ad-grp">الرئيسية</div>
+        <button class="admin-tab-btn active" data-tab="dashboard">نظرة عامة</button>
+        <div class="ad-grp">المدرسة</div>
+        <button class="admin-tab-btn" data-tab="attendance">الحضور والغياب <span id="lrBadge"></span></button>
         <button class="admin-tab-btn" data-tab="timetable">جدول الحصص</button>
         <button class="admin-tab-btn" data-tab="exams">الفروض والاختبارات</button>
-        <button class="admin-tab-btn" data-tab="media">الوسائط (يوتيوب/انستغرام/فيسبوك)</button>
-        <button class="admin-tab-btn" data-tab="docs">الوثائق وقائمة المطعم</button>
-        <button class="admin-tab-btn" data-tab="moderation">الإشراف والبلاغات <span id="repBadge" style="color:#c0392b;font-weight:800;"></span></button>
+        <div class="ad-grp">محتوى الموقع</div>
+        <button class="admin-tab-btn" data-tab="news">الأخبار والمناسبات</button>
+        <button class="admin-tab-btn" data-tab="media">الوسائط</button>
+        <button class="admin-tab-btn" data-tab="docs">الوثائق والمطعم</button>
         <button class="admin-tab-btn" data-tab="polls">الاستطلاعات</button>
-        <button class="admin-tab-btn" data-tab="suggestions">الاقتراحات والشكاوى <span id="sugBadge" style="color:#c0392b;font-weight:800;"></span></button>
-        <button class="admin-tab-btn" data-tab="qpending">مراجعة الأسئلة <span id="qpBadge" style="color:#c0392b;font-weight:800;"></span></button>
+        <div class="ad-grp">المجتمع</div>
+        <button class="admin-tab-btn" data-tab="moderation">الإشراف والبلاغات <span id="repBadge"></span></button>
+        <button class="admin-tab-btn" data-tab="suggestions">الاقتراحات والشكاوى <span id="sugBadge"></span></button>
+        <button class="admin-tab-btn" data-tab="qpending">مراجعة الأسئلة <span id="qpBadge"></span></button>
         <button class="admin-tab-btn" data-tab="qa">فضاء الأسئلة</button>
-        <button class="admin-tab-btn" data-tab="users">المستخدمون والإحصائيات</button>
-        <button class="admin-tab-btn" data-tab="parentmsgs">دردشة الأولياء العامة</button>
-        <button class="admin-tab-btn" data-tab="settings">إعدادات ومظهر الموقع</button>
-      </div>
-
+        <button class="admin-tab-btn" data-tab="parentmsgs">دردشة الأولياء</button>
+        <div class="ad-grp">النظام</div>
+        <button class="admin-tab-btn" data-tab="users">المستخدمون</button>
+        <button class="admin-tab-btn" data-tab="settings">الإعدادات والمظهر</button>
+      </nav>
+      <div class="ad-side-foot"><a href="/" target="_blank" rel="noopener">↗ عرض الموقع</a><span class="exit-link" id="adminLogoutBtn">تسجيل الخروج</span></div>
+    </aside>
+    <div class="ad-main">
+    <div class="admin-topbar">
+      <button class="ad-ib" id="adMenuBtn" type="button" aria-label="القائمة"></button>
+      <h2 id="adTitle">نظرة عامة</h2>
+      <span class="ad-user" id="adUser"></span>
+      <button class="ad-ib" id="adSearchBtn" type="button"><span class="ic"></span><span class="lbl">بحث سريع</span><kbd>Ctrl K</kbd></button>
+      <div style="position:relative"><button class="ad-ib" id="adBell" type="button" aria-label="التنبيهات"><span class="ic"></span><span class="ad-dot" id="adBellN"></span></button><div class="ad-pop" id="adPop"></div></div>
+      <button class="ad-ib" id="adTheme" type="button" aria-label="الوضع الليلي"></button>
+    </div>
+    <div class="admin-body">
       <!-- DASHBOARD TAB -->
       <div class="admin-panel-section active" id="tabDashboard">
-        <div class="dash-grid" id="dashCards"></div>
-        <div class="admin-card">
-          <h4>إجراءات سريعة</h4>
-          <div class="dash-actions">
-            <button class="btn gold" data-jump="news" type="button">+ نشر خبر</button>
-            <button class="btn" data-jump="timetable" type="button">تعديل جدول الحصص</button>
-            <button class="btn" data-jump="polls" type="button">استطلاع جديد</button>
-            <button class="btn" data-jump="media" type="button">إضافة فيديو</button>
-            <button class="btn" data-jump="docs" type="button">رفع وثيقة</button>
-            <button class="btn" data-jump="moderation" type="button">البلاغات</button>
+        <div id="dashCards" hidden></div>
+        <div class="ad-hero">
+          <div><h3 id="adHello">مرحباً بك</h3><p id="adDate"></p></div>
+          <div class="ad-qa">
+            <button data-jump="news" type="button">+ نشر خبر</button>
+            <button data-jump="attendance" type="button">الحضور والغياب</button>
+            <button data-jump="polls" type="button">استطلاع جديد</button>
+            <button data-jump="media" type="button">إضافة فيديو</button>
+            <button data-jump="docs" type="button">رفع وثيقة</button>
+            <button data-jump="timetable" type="button">جدول الحصص</button>
+            <button id="adRefresh" type="button">⟳ تحديث</button>
+            <button id="adPrint" type="button">🖨️ طباعة التقرير</button>
           </div>
         </div>
-        <div class="admin-card">
-          <h4>إعلان عاجل (نشر سريع)</h4>
-          <p style="font-size:.8rem;color:#7c8b91;margin-bottom:10px;">يظهر كلافتة ذهبية أعلى الموقع ويصل كإشعار للزوار. اتركه معطّلاً عند عدم الحاجة.</p>
-          <div class="admin-field"><input type="text" id="qBannerText" placeholder="مثال: غداً لا دراسة بسبب الأحوال الجوية"></div>
-          <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
-            <label style="display:flex;gap:8px;align-items:center;cursor:pointer;"><input type="checkbox" id="qBannerOn" style="width:auto;"> تفعيل اللافتة</label>
-            <button class="btn gold" id="qBannerSave" type="button">نشر</button>
+
+        <div class="ad-sec">يحتاج انتباهك</div>
+        <div class="admin-card" style="padding:14px!important"><div class="ad-list" id="adAttn"><p class="empty-note">جاري التحميل...</p></div></div>
+
+        <div class="ad-sec">المجتمع والإدارة</div>
+        <div class="ad-kpis" id="adKpi2"></div>
+        <div class="ad-sec">محتوى الموقع</div>
+        <div class="ad-kpis" id="adKpi1"></div>
+
+        <div class="ad-row c2">
+          <div class="admin-card"><h4>تسجيلات الحسابات الجديدة — آخر 30 يوماً</h4><div id="adChReg"><p class="empty-note">جاري التحميل...</p></div></div>
+          <div class="admin-card"><h4>توزيع الحسابات</h4><div id="adChRoles" class="ad-donut"><p class="empty-note">جاري التحميل...</p></div></div>
+        </div>
+        <div class="ad-row c2">
+          <div class="admin-card"><h4>الغيابات المُبلَّغة للأولياء — آخر 14 يوماً</h4><div id="adChAbs"><p class="empty-note">جاري التحميل...</p></div></div>
+          <div class="admin-card"><h4>حضور اليوم</h4><div id="adAtt"><p class="empty-note" style="padding:6px 0">يقرأ سجلات اليوم من Firestore (نحو ألف قراءة).</p><div class="ad-fn"><button class="btn" id="adAttLoad" type="button">عرض حضور اليوم</button></div></div></div>
+        </div>
+        <div class="ad-row c3">
+          <div class="admin-card"><h4>آخر المسجلين</h4><div class="ad-list" id="adRecU"></div></div>
+          <div class="admin-card"><h4>آخر الأخبار</h4><div class="ad-list" id="adRecN"></div></div>
+          <div class="admin-card"><h4>آخر إشعارات الغياب</h4><div class="ad-list" id="adRecA"></div></div>
+        </div>
+        <div class="ad-row c2e">
+          <div class="admin-card"><h4>حالة النظام</h4><div id="adStatus"><p class="empty-note">جاري الفحص...</p></div></div>
+          <div class="admin-card"><h4>إعلان عاجل (نشر سريع)</h4>
+            <p style="font-size:.8rem;color:var(--mu);margin-bottom:10px;">يظهر كلافتة ذهبية أعلى الموقع ويصل كإشعار للزوار. اتركه معطّلاً عند عدم الحاجة.</p>
+            <div class="admin-field"><input type="text" id="qBannerText" placeholder="مثال: غداً لا دراسة بسبب الأحوال الجوية"></div>
+            <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+              <label style="display:flex;gap:8px;align-items:center;cursor:pointer;"><input type="checkbox" id="qBannerOn" style="width:auto;"> تفعيل اللافتة</label>
+              <button class="btn gold" id="qBannerSave" type="button">نشر</button>
+            </div>
           </div>
         </div>
-        <div class="admin-card">
-          <h4>صحة الموقع وحجم البيانات</h4>
-          <div id="dashHealth"></div>
-        </div>
-        <div class="admin-card">
-          <h4>قائمة تحقق</h4>
-          <ul class="dash-check">
-            <li>نشر قواعد Firestore الأخيرة (Rules → Publish).</li>
-            <li>ترحيل الأخبار القديمة إلى النظام الجديد إن ظهر لك تنبيه في تبويب الأخبار.</li>
-            <li>تفعيل <b>App Check</b> وتقييد مفتاح API بنطاق الموقع من Google Cloud.</li>
-            <li>إضافة مشرف احتياطي من «إعدادات ومظهر الموقع».</li>
-            <li>تحميل نسخة احتياطية كل أسبوع.</li>
-          </ul>
-        </div>
+        <div class="admin-card"><h4>صحة الموقع وحجم البيانات</h4><div id="dashHealth"></div></div>
       </div>
 
       <!-- ATTENDANCE TAB -->
@@ -723,6 +890,7 @@
         </div>
 
       </div>
+    </div>
     </div>
   </div>
 
@@ -2568,6 +2736,276 @@
   // تحميل أولي عند أول فتح للتبويب
   let first = true;
   document.querySelectorAll('#adminTabs .admin-tab-btn').forEach(b=> b.addEventListener('click', ()=>{ if(b.dataset.tab==='attendance' && first){ first=false; fillClasses(); } }));
+})();
+</script>
+<script>
+/* ================= لوحة التحكم v2: الواجهة، النظرة العامة، البحث السريع، التنبيهات، الوضع الليلي ================= */
+(function(){
+  const $ = (id)=> document.getElementById(id);
+  const esc = (s)=> escapeHtml(String(s == null ? '' : s));
+  const root = document.documentElement;
+  const jump = (t)=>{ const b = document.querySelector('.admin-tab-btn[data-tab="'+t+'"]'); if(b) b.click(); };
+  const ICON = {
+    dashboard:'<rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/>',
+    attendance:'<rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/>',
+    news:'<path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8M15 18h-5M10 6h8v4h-8z"/>',
+    timetable:'<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>',
+    exams:'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/>',
+    media:'<circle cx="12" cy="12" r="10"/><path d="m10 8 6 4-6 4z"/>',
+    docs:'<path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.7-.9l-.8-1.2A2 2 0 0 0 7.9 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2z"/>',
+    polls:'<path d="M3 3v18h18"/><path d="M7 16V9M12 16V5M17 16v-4"/>',
+    moderation:'<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
+    suggestions:'<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>',
+    qpending:'<circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3M12 17h.01"/>',
+    qa:'<path d="M14 9a2 2 0 0 1-2 2H6l-4 4V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2z"/><path d="M18 9h2a2 2 0 0 1 2 2v11l-4-4h-6a2 2 0 0 1-2-2v-1"/>',
+    parentmsgs:'<path d="M7.9 20A9 9 0 1 0 4 16.1L2 22z"/>',
+    users:'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/>',
+    settings:'<path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/>',
+    search:'<circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/>', bell:'<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>',
+    sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
+    moon:'<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/>', menu:'<path d="M4 6h16M4 12h16M4 18h16"/>',
+    user:'<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>', alert:'<path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/>',
+    link:'<path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/>',
+    calendar:'<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>'
+  };
+  const svg = (k)=> '<svg viewBox="0 0 24 24" aria-hidden="true">'+(ICON[k]||'')+'</svg>';
+  const TITLES = {};
+
+  // ---- أيقونات التنقل وعناوين الصفحات ----
+  document.querySelectorAll('#adminTabs .admin-tab-btn').forEach(b=>{
+    const t = b.dataset.tab, label = [...b.childNodes].filter(n=> n.nodeType === 3).map(n=> n.textContent).join('').trim();
+    TITLES[t] = label;
+    [...b.childNodes].forEach(n=>{ if(n.nodeType === 3) n.remove(); });
+    b.insertAdjacentHTML('afterbegin', svg(t) + '<span class="lb">' + esc(label) + '</span>');
+    b.addEventListener('click', ()=>{
+      $('adTitle').textContent = TITLES[t] || '';
+      $('adSide').classList.remove('open'); $('adScrim').classList.remove('open');
+      window.scrollTo({ top:0, behavior:'smooth' });
+    });
+  });
+  $('adMenuBtn').innerHTML = svg('menu'); $('adBell').querySelector('.ic').innerHTML = svg('bell'); $('adSearchBtn').querySelector('.ic').innerHTML = svg('search');
+  $('adMenuBtn').addEventListener('click', ()=>{ $('adSide').classList.add('open'); $('adScrim').classList.add('open'); });
+  $('adScrim').addEventListener('click', ()=>{ $('adSide').classList.remove('open'); $('adScrim').classList.remove('open'); });
+  document.querySelectorAll('[data-jump]').forEach(b=> b.addEventListener('click', ()=> jump(b.dataset.jump)));
+
+  // ---- الوضع الليلي ----
+  function setTheme(t){
+    root.setAttribute('data-theme', t);
+    try{ localStorage.setItem('adTheme', t); }catch(e){}
+    $('adTheme').innerHTML = svg(t === 'dark' ? 'sun' : 'moon');
+  }
+  let saved = 'light'; try{ saved = localStorage.getItem('adTheme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); }catch(e){}
+  setTheme(saved);
+  $('adTheme').addEventListener('click', ()=> setTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'));
+
+  // ---- اسم المستخدم والتحية ----
+  try{ auth.onAuthStateChanged(u=>{ if(u){ $('adUser').textContent = u.email || ''; const h = new Date().getHours(); $('adHello').textContent = (h < 12 ? 'صباح الخير' : h < 18 ? 'طاب يومك' : 'مساء الخير') + ' 👋'; } }); }catch(e){}
+  try{ $('adDate').textContent = new Date().toLocaleDateString('ar-DZ', { weekday:'long', year:'numeric', month:'long', day:'numeric' }); }catch(e){}
+
+  // ================= مخططات SVG خفيفة =================
+  function bars(vals, labels, color, unit){
+    const W = 640, H = 190, pl = 26, pb = 22, pt = 10, n = vals.length, max = Math.max(1, ...vals), bw = (W - pl) / n;
+    let g = '';
+    [0, .5, 1].forEach(f=>{ const y = pt + (H - pb - pt) * (1 - f); g += '<line class="g" x1="'+pl+'" x2="'+W+'" y1="'+y+'" y2="'+y+'"/><text x="'+(pl-6)+'" y="'+(y+4)+'" text-anchor="end">'+Math.round(max*f)+'</text>'; });
+    const b = vals.map((v, i)=>{ const h = (H - pb - pt) * v / max, x = pl + i*bw + bw*.18; return '<rect class="b" x="'+x.toFixed(1)+'" y="'+(H-pb-h).toFixed(1)+'" width="'+(bw*.64).toFixed(1)+'" height="'+Math.max(h, v ? 2 : 0).toFixed(1)+'" rx="3"><title>'+esc(labels[i])+': '+v+(unit||'')+'</title></rect>'; }).join('');
+    const step = Math.ceil(n / 7), lb = labels.map((l, i)=> i % step === 0 ? '<text x="'+(pl + i*bw + bw/2).toFixed(1)+'" y="'+(H-5)+'" text-anchor="middle">'+esc(l.slice(5))+'</text>' : '').join('');
+    return '<svg class="ad-chart" viewBox="0 0 '+W+' '+H+'" style="--c:'+color+'" preserveAspectRatio="none">'+g+b+lb+'</svg>';
+  }
+  function donut(parts, centerTop, centerSub){
+    const tot = parts.reduce((a, p)=> a + p.v, 0) || 1; let off = 25, segs = '';
+    parts.forEach(p=>{ const d = p.v / tot * 100; if(d > 0){ segs += '<circle cx="21" cy="21" r="15.9155" fill="none" stroke="'+p.c+'" stroke-width="5.2" stroke-dasharray="'+d.toFixed(2)+' '+(100-d).toFixed(2)+'" stroke-dashoffset="'+off.toFixed(2)+'"/>'; off -= d; } });
+    return '<svg viewBox="0 0 42 42"><circle cx="21" cy="21" r="15.9155" fill="none" stroke="var(--bd)" stroke-width="5.2"/>'+segs+'<text class="t" x="21" y="22.5" text-anchor="middle">'+esc(centerTop)+'</text><text class="t2" x="21" y="27" text-anchor="middle">'+esc(centerSub||'')+'</text></svg>' +
+      '<div class="ad-leg">'+parts.map(p=>'<div><i style="background:'+p.c+'"></i>'+esc(p.l)+'<b>'+p.v+'</b></div>').join('')+'</div>';
+  }
+  const kpi = (k, color, val, label, sub, go, id)=> '<div class="ad-kpi" style="--c:'+color+'" data-go="'+go+'"><div class="ic">'+svg(k)+'</div><div><b '+(id?'id="'+id+'"':'')+'>'+val+'</b><span>'+label+'</span>'+(sub?'<small>'+sub+'</small>':'')+'</div></div>';
+  const SK = '<i class="sk">00</i>';
+  const ms = (x)=>{ try{ return x && x.createdAt && x.createdAt.toMillis ? x.createdAt.toMillis() : 0; }catch(e){ return 0; } };
+  const ymd = (d)=> d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+  const ago = (t)=>{ if(!t) return ''; const m = Math.round((Date.now() - t) / 60000); return m < 1 ? 'الآن' : m < 60 ? 'منذ '+m+' د' : m < 1440 ? 'منذ '+Math.round(m/60)+' س' : 'منذ '+Math.round(m/1440)+' يوم'; };
+  const size = (v)=>{ try{ return typeof kbOf === 'function' ? kbOf(v) : Math.round(JSON.stringify(v || '').length / 1024); }catch(e){ return 0; } };
+
+  // ================= التنبيهات المعلّقة =================
+  const pend = { reports:null, sug:null, qp:null, links:null };
+  async function cnt(fn){ try{ return await fn(); }catch(e){ return null; } }
+  async function refreshPending(){
+    if(typeof db === 'undefined' || !db) return;
+    pend.reports = await cnt(async ()=> (await db.collection('reports').limit(100).get()).size);
+    pend.sug = await cnt(async ()=> (await db.collection('suggestions').limit(100).get()).size);
+    pend.qp = await cnt(async ()=> (await db.collection('questionsPending').limit(100).get()).size);
+    pend.links = await cnt(async ()=> (await db.collection('linkRequests').where('status','==','pending').get()).size);
+    const set = (id, n)=>{ const e = $(id); if(e) e.textContent = n ? n : ''; };
+    set('repBadge', pend.reports); set('sugBadge', pend.sug); set('qpBadge', pend.qp); set('lrBadge', pend.links);
+    const total = [pend.reports, pend.sug, pend.qp, pend.links].reduce((a, n)=> a + (n || 0), 0);
+    $('adBellN').textContent = total ? (total > 99 ? '99+' : total) : '';
+    $('adPop').innerHTML = '<h5>يحتاج انتباهك</h5>' + attnHtml(true);
+    bindGo($('adPop'));
+    return pend;
+  }
+  function attnHtml(compact){
+    const rows = [['moderation','alert','بلاغات بانتظار الإشراف', pend.reports], ['suggestions','suggestions','اقتراحات وشكاوى', pend.sug], ['qpending','qpending','أسئلة بانتظار المراجعة', pend.qp], ['attendance','link','طلبات بطاقات QR بانتظار الاعتماد', pend.links]];
+    const act = rows.filter(r=> r[3]);
+    if(!act.length) return '<div class="ad-it">✅ <span>لا يوجد شيء معلّق. كل شيء على ما يرام.</span></div>';
+    return act.map(r=> '<div class="ad-it" data-go="'+r[0]+'" style="cursor:pointer">'+svg(r[1]).replace('<svg','<svg style="width:18px;height:18px;stroke:var(--pri);fill:none;stroke-width:1.9"')+'<span>'+r[2]+'</span><span class="n hot">'+r[3]+'</span>'+(compact?'':'<a>فتح</a>')+'</div>').join('');
+  }
+  function bindGo(scope){ scope.querySelectorAll('[data-go]').forEach(e=> e.onclick = ()=>{ $('adPop').classList.remove('open'); jump(e.dataset.go); }); }
+  $('adBell').addEventListener('click', (e)=>{ e.stopPropagation(); $('adPop').classList.toggle('open'); });
+  document.addEventListener('click', (e)=>{ if(!e.target.closest('#adPop')) $('adPop').classList.remove('open'); });
+  setInterval(refreshPending, 120000);
+
+  // ================= النظرة العامة =================
+  let dashBusy = false;
+  window.renderDashboard = async function(){
+    if(dashBusy || typeof db === 'undefined' || !db) return; dashBusy = true;
+    try{
+      const today = ymd(new Date());
+      const news = (typeof siteNews !== 'undefined' && siteNews) || [], ev = (typeof siteEvents !== 'undefined' && siteEvents) || [];
+      const tt = (typeof siteTT !== 'undefined' && siteTT) || {}, lv = (typeof siteLevels !== 'undefined' && siteLevels) || {};
+      const docs = (typeof siteDocs !== 'undefined' && siteDocs) || [], media = (typeof siteMedia !== 'undefined' && siteMedia) || [];
+      const upcoming = ev.filter(e=> !e.iso || e.iso >= today).length;
+      const sessions = (tt.classes || []).reduce((n, c)=> n + Object.values(c.cells || {}).reduce((m, a)=> m + (a ? a.length : 0), 0), 0);
+      const exams = Object.values(lv).reduce((n, a)=> n + (a ? a.length : 0), 0);
+      $('adKpi1').innerHTML =
+        kpi('news', '#2f6ea8', news.length, 'أخبار', news.filter(n=> n.pinned).length + ' مثبّت', 'news') +
+        kpi('calendar', '#2e9b5b', upcoming, 'مناسبات قادمة', '', 'news') +
+        kpi('timetable', '#7452a8', (tt.classes || []).length, 'أقسام في جدول الحصص', sessions + ' حصة', 'timetable') +
+        kpi('exams', '#c99a2e', exams, 'فروض واختبارات', '', 'exams') +
+        kpi('media', '#d1558a', media.length, 'وسائط', '', 'media') +
+        kpi('docs', '#3d9f8f', docs.length, 'وثائق', '', 'docs');
+      $('adKpi2').innerHTML =
+        kpi('users', '#0e6b8a', SK, 'حسابات مسجلة', '', 'users', 'k-users') +
+        kpi('user', '#1f9d57', SK, 'تلاميذ', '', 'users', 'k-kids') +
+        kpi('user', '#7a5cd6', SK, 'أولياء', '', 'users', 'k-par') +
+        kpi('polls', '#4f6bd6', SK, 'استطلاعات نشطة', '', 'polls', 'k-polls') +
+        kpi('link', '#d98e04', SK, 'طلبات بطاقات QR', 'بانتظار الاعتماد', 'attendance', 'k-links') +
+        kpi('alert', '#d64545', SK, 'بلاغات', '', 'moderation', 'k-rep');
+      document.querySelectorAll('#tabDashboard .ad-kpi').forEach(k=> k.onclick = ()=> jump(k.dataset.go));
+      const put = (id, v)=>{ const e = $(id); if(e) e.textContent = v; };
+
+      // المحتوى المعلّق أولاً (سريع)
+      refreshPending().then(()=>{ $('adAttn').innerHTML = attnHtml(false); bindGo($('adAttn')); put('k-links', pend.links == null ? '—' : pend.links); put('k-rep', pend.reports == null ? '—' : pend.reports); });
+      cnt(async ()=> (await db.collection('polls').where('active','==',true).get()).size).then(n=> put('k-polls', n == null ? '—' : n));
+
+      // المستخدمون
+      const users = await cnt(async ()=> (await db.collection('users').get()).docs.map(d=> Object.assign({ _id:d.id }, d.data())));
+      if(users){
+        put('k-users', users.length); put('k-kids', users.filter(u=> u.role === 'تلميذ').length); put('k-par', users.filter(u=> u.role === 'ولي').length);
+        const days = [], counts = {}; for(let i = 29; i >= 0; i--){ const d = new Date(); d.setDate(d.getDate() - i); days.push(ymd(d)); counts[ymd(d)] = 0; }
+        users.forEach(u=>{ const t = ms(u); if(t){ const k = ymd(new Date(t)); if(k in counts) counts[k]++; } });
+        const vals = days.map(k=> counts[k]), tot = vals.reduce((a, b)=> a + b, 0);
+        $('adChReg').innerHTML = bars(vals, days, 'var(--pri)', ' تسجيل') + '<p style="font-size:.78rem;color:var(--mu);margin-top:6px">'+tot+' حساب جديد خلال 30 يوماً</p>';
+        const R = [['تلاميذ','تلميذ','#1f9d57'],['أولياء','ولي','#7a5cd6'],['إدارة','إدارة','#d98e04']];
+        const parts = R.map(r=> ({ l:r[0], v:users.filter(u=> u.role === r[1]).length, c:r[2] }));
+        const other = users.length - parts.reduce((a, p)=> a + p.v, 0); if(other > 0) parts.push({ l:'أخرى', v:other, c:'#8fa1b1' });
+        $('adChRoles').innerHTML = donut(parts, String(users.length), 'حساب');
+        const rec = users.slice().sort((a, b)=> ms(b) - ms(a)).slice(0, 5);
+        $('adRecU').innerHTML = rec.map(u=> '<div class="ad-it"><span>'+esc(((u.firstName||'')+' '+(u.lastName||'')).trim() || 'بدون اسم')+'<small>'+esc(u.role || '')+'</small></span><small style="margin-inline-start:auto">'+ago(ms(u))+'</small></div>').join('') || '<p class="empty-note">لا يوجد.</p>';
+        window.__adUsers = users;
+      } else { $('adChReg').innerHTML = $('adChRoles').innerHTML = '<p class="empty-note">تعذّر تحميل المستخدمين (تحقق من قواعد Firestore).</p>'; ['k-users','k-kids','k-par'].forEach(i=> put(i, '—')); }
+
+      // آخر الأخبار
+      const nl = news.slice().sort((a, b)=> String(b.date || '').localeCompare(String(a.date || ''))).slice(0, 5);
+      $('adRecN').innerHTML = nl.map(n=> '<div class="ad-it" data-go="news" style="cursor:pointer"><span>'+esc(n.title || '')+'<small>'+esc(n.date || '')+(n.pinned?' • مثبّت':'')+'</small></span></div>').join('') || '<p class="empty-note">لا توجد أخبار.</p>';
+      bindGo($('adRecN'));
+
+      // الغيابات المُبلَّغة
+      const notes = await cnt(async ()=> (await db.collection('parentNotices').orderBy('createdAt','desc').limit(300).get()).docs.map(d=> d.data()));
+      if(notes){
+        const days = [], c = {}; for(let i = 13; i >= 0; i--){ const d = new Date(); d.setDate(d.getDate() - i); days.push(ymd(d)); c[ymd(d)] = 0; }
+        notes.forEach(n=>{ if(n.kind !== 'alert' && n.date in c) c[n.date]++; });
+        const vals = days.map(k=> c[k]), tot = vals.reduce((a, b)=> a + b, 0);
+        $('adChAbs').innerHTML = bars(vals, days, 'var(--bad)', ' غياب') + '<p style="font-size:.78rem;color:var(--mu);margin-top:6px">'+tot+' إشعار غياب خلال 14 يوماً'+(notes.length >= 300 ? ' (آخر 300 إشعار)' : '')+'</p>';
+        $('adRecA').innerHTML = notes.slice(0, 5).map(n=> '<div class="ad-it"><span>'+esc(n.name || '')+'<small>'+(n.kind === 'alert' ? 'غياب متكرر' : 'غياب')+' • '+esc(n.class || '')+' • '+esc(n.date || '')+'</small></span><small style="margin-inline-start:auto">'+(n.pushedAt ? '📲' : '')+'</small></div>').join('') || '<p class="empty-note">لا توجد إشعارات بعد.</p>';
+      } else { $('adChAbs').innerHTML = $('adRecA').innerHTML = '<p class="empty-note">لا توجد بيانات (لم يُنشر الربط بعد أو القواعد غير منشورة).</p>'; }
+
+      // حجم البيانات
+      const parts = [['قائمة الأخبار', news], ['المناسبات', ev], ['جدول الحصص', tt], ['الوسائط', media], ['الوثائق', docs]];
+      $('dashHealth').innerHTML = parts.map(([label, v])=>{ const kb = size(v), pct = Math.min(100, Math.round(kb / 1024 * 100)); return '<div class="health-row"><b>'+label+'</b> — '+kb+' ك.ب من 1024<div class="meter '+(pct > 60 ? 'warn' : '')+'"><i style="width:'+Math.max(pct, 1)+'%"></i></div></div>'; }).join('') + '<p style="font-size:.76rem;color:var(--mu);">حدّ Firestore لكل مستند 1024 ك.ب. الأخبار الجديدة تُحفظ في مستندات منفصلة فلا تؤثر على هذا الحد.</p>';
+      try{ $('qBannerText').value = (siteInfo && siteInfo.bannerText) || ''; $('qBannerOn').checked = !!(siteInfo && siteInfo.bannerOn); }catch(e){}
+      checkStatus();
+    } finally { dashBusy = false; }
+  };
+
+  // ---- حضور اليوم (عند الطلب) ----
+  $('adAttLoad').addEventListener('click', async ()=>{
+    const box = $('adAtt'); box.innerHTML = '<p class="empty-note">جاري التحميل...</p>';
+    try{
+      const date = ymd(new Date()), sess = new Date().getHours() < 12 ? 'morning' : 'evening';
+      const st = (await db.collection('students').get()).docs.map(d=> d.data());
+      if(!st.length){ box.innerHTML = '<p class="empty-note">لم تُرفع قائمة التلاميذ من برنامج الحضور بعد.</p>'; return; }
+      const rec = (await db.collection('attendance').where('date','==',date).get()).docs.map(d=> d.data()).filter(r=> !r.deleted && r.session === sess);
+      const m = new Map(rec.map(r=> [String(r.studentId), r])); let p = 0, l = 0;
+      st.forEach(s=>{ const r = m.get(String(s.id)); if(r){ if(r.status === 'late') l++; else p++; } });
+      const a = st.length - p - l, held = rec.length >= Math.max(1, Math.ceil(st.length * .2));
+      box.innerHTML = '<div class="ad-donut">'+donut([{l:'حاضر', v:p, c:'#1f9d57'},{l:'متأخر', v:l, c:'#d98e04'},{l:'غائب', v:held ? a : 0, c:'#d64545'}], Math.round((p + l) * 100 / st.length) + '%', 'نسبة الحضور')+'</div><p style="font-size:.78rem;color:var(--mu);text-align:center;margin-top:8px">الفترة '+(sess === 'morning' ? 'الصباحية' : 'المسائية')+(held ? '' : ' — لم تُسجَّل بعد (لا تُحتسب الغيابات)')+'</p><div class="ad-fn" style="justify-content:center"><button class="btn" type="button" id="adAttGo">التفاصيل والتقارير</button></div>';
+      $('adAttGo').onclick = ()=> jump('attendance');
+    }catch(e){ box.innerHTML = '<p class="empty-note">تعذّر التحميل: '+esc(e.code || e.message)+'</p>'; }
+  });
+
+  // ---- حالة النظام ----
+  async function checkStatus(){
+    const rows = [], add = (c, t, s)=> rows.push('<div class="ad-st"><i class="'+c+'"></i><span>'+t+'</span><small>'+s+'</small></div>');
+    add('ok', 'قاعدة البيانات (Firestore)', 'متصلة');
+    try{ const r = await fetch('/api/push', { method:'POST', headers:{ 'Content-Type':'application/json' }, body:'{}' }); add(r.status === 401 ? 'ok' : r.status === 503 ? 'warn' : 'bad', 'إشعارات الهاتف (الخادم)', r.status === 401 ? 'جاهزة' : r.status === 503 ? 'ينقص السر FCM_SERVICE_ACCOUNT' : 'الدالة غير منشورة'); }catch(e){ add('warn', 'إشعارات الهاتف (الخادم)', 'تعذّر الفحص'); }
+    try{ const t = await (await fetch('/index.html', { cache:'no-store' })).text(); const ok = /FCM_VAPID_KEY\s*=\s*"B[\w-]{60,}"/.test(t); add(ok ? 'ok' : 'warn', 'مفتاح VAPID في الموقع', ok ? 'مضاف' : 'غير مضاف'); }catch(e){}
+    const g = await cnt(async ()=> ((await db.collection('config').doc('gate').get()).data() || {}).emails || []);
+    add(g && g.length ? 'ok' : 'warn', 'حسابات بوابة الدخول', g ? g.length + ' حساب' : 'غير متاح');
+    const as = await cnt(async ()=> (await db.collection('attSettings').doc('main').get()).exists);
+    add(as ? 'ok' : 'warn', 'إعدادات الغياب', as ? 'محفوظة' : 'لم تُحفظ بعد');
+    const st = await cnt(async ()=> !(await db.collection('students').limit(1).get()).empty);
+    add(st ? 'ok' : 'warn', 'قائمة التلاميذ من برنامج الحضور', st ? 'مرفوعة' : 'لم تُرفع بعد');
+    $('adStatus').innerHTML = rows.join('');
+  }
+
+  // ================= البحث السريع (Ctrl+K) =================
+  const cmd = document.createElement('div'); cmd.className = 'ad-cmd';
+  cmd.innerHTML = '<div class="bx"><input id="adCmdIn" placeholder="ابحث عن قسم، مستخدم، أو خبر..." autocomplete="off"><ul id="adCmdList"></ul></div>';
+  document.body.appendChild(cmd);
+  let sel = 0, items = [];
+  async function ensureUsers(){ if(window.__adUsers) return; try{ window.__adUsers = (await db.collection('users').get()).docs.map(d=> Object.assign({ _id:d.id }, d.data())); }catch(e){ window.__adUsers = []; } }
+  const norm = (s)=> String(s || '').toLowerCase().replace(/[\u064B-\u0652\u0640]/g,'').replace(/[أإآ]/g,'ا').replace(/ى/g,'ي').replace(/ة/g,'ه');
+  function drawCmd(){
+    const q = norm($('adCmdIn').value.trim()); items = [];
+    const sec = Object.keys(TITLES).filter(t=> !q || norm(TITLES[t]).includes(q)).map(t=> ({ g:'الأقسام', t:TITLES[t], s:'', f:()=> jump(t) }));
+    items = sec.slice(0, 8);
+    if(q.length >= 2){
+      (window.__adUsers || []).filter(u=> norm([u.firstName, u.lastName, u.email, u.studentName].join(' ')).includes(q)).slice(0, 6).forEach(u=> items.push({ g:'المستخدمون', t:((u.firstName||'')+' '+(u.lastName||'')).trim() || u.email, s:(u.role || '') + (u.email ? ' • ' + u.email : ''), f:()=>{ jump('users'); setTimeout(()=>{ const e = $('uSearch'); if(e){ e.value = u.email || u.firstName || ''; e.dispatchEvent(new Event('input')); } }, 800); } }));
+      ((typeof siteNews !== 'undefined' && siteNews) || []).filter(n=> norm(n.title).includes(q)).slice(0, 5).forEach(n=> items.push({ g:'الأخبار', t:n.title, s:n.date || '', f:()=> jump('news') }));
+    }
+    sel = 0; renderCmd();
+  }
+  function renderCmd(){
+    let last = '';
+    $('adCmdList').innerHTML = items.map((it, i)=>{ const h = it.g !== last ? '<div class="gh">'+it.g+'</div>' : ''; last = it.g; return h + '<li data-i="'+i+'" class="'+(i === sel ? 'sel' : '')+'">'+esc(it.t)+'<small>'+esc(it.s)+'</small></li>'; }).join('') || '<li style="cursor:default">لا نتائج</li>';
+    $('adCmdList').querySelectorAll('li[data-i]').forEach(li=> li.onclick = ()=> run(+li.dataset.i));
+  }
+  function run(i){ const it = items[i]; if(!it) return; closeCmd(); it.f(); }
+  function openCmd(){ cmd.classList.add('open'); $('adCmdIn').value = ''; drawCmd(); setTimeout(()=> $('adCmdIn').focus(), 30); ensureUsers(); }
+  function closeCmd(){ cmd.classList.remove('open'); }
+  $('adSearchBtn').addEventListener('click', openCmd);
+  cmd.addEventListener('click', (e)=>{ if(e.target === cmd) closeCmd(); });
+  $('adCmdIn').addEventListener('input', ()=>{ ensureUsers().then(drawCmd); drawCmd(); });
+  $('adCmdIn').addEventListener('keydown', (e)=>{
+    if(e.key === 'ArrowDown'){ sel = Math.min(items.length - 1, sel + 1); renderCmd(); e.preventDefault(); }
+    else if(e.key === 'ArrowUp'){ sel = Math.max(0, sel - 1); renderCmd(); e.preventDefault(); }
+    else if(e.key === 'Enter'){ run(sel); }
+  });
+  document.addEventListener('keydown', (e)=>{
+    if((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k'){ e.preventDefault(); openCmd(); }
+    else if(e.key === 'Escape') closeCmd();
+    else if(e.key === '/' && !/INPUT|TEXTAREA|SELECT/.test((document.activeElement || {}).tagName || '') && $('adminShell').classList.contains('open')){ e.preventDefault(); openCmd(); }
+  });
+
+
+  // أزرار التحديث والطباعة + تنظيف الأقواس من شارات التنقل
+  $('adRefresh').addEventListener('click', ()=>{ window.renderDashboard(); toast('جاري التحديث...'); });
+  $('adPrint').addEventListener('click', ()=> window.print());
+  document.querySelectorAll('#adminTabs [id$=Badge], #adSub [id^=lrBadge]').forEach(el=>{
+    const fix = ()=>{ const m = /^\((\d+)\)$/.exec(el.textContent.trim()); if(m) el.textContent = m[1]; };
+    new MutationObserver(fix).observe(el, { childList:true, characterData:true, subtree:true }); fix();
+  });
+  // أول تشغيل بعد دخول المشرف (الدالة القديمة initV5Admin تستدعي renderDashboard)
+  document.querySelectorAll('#adminTabs .admin-tab-btn').forEach(b=> b.addEventListener('click', ()=>{ if(b.dataset.tab === 'dashboard') window.renderDashboard(); }));
+  const iv = setInterval(()=>{ if($('adminShell').classList.contains('open')){ clearInterval(iv); window.renderDashboard(); } }, 500);
 })();
 </script>
 </body>
