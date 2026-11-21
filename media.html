@@ -5292,6 +5292,7 @@
   }
   function noticeHtml(n, seen){
     const when = n.kind === 'alert' ? '' : ' — الفترة ' + (SL[n.session]||'');
+    if(n.kind === 'announcement') return `<div class="ch-ntc"><div class="h">📣 <b>${esc(n.title || 'إعلان من المتوسطة')}</b> <span>${esc(n.date||'')}</span>${ms(n) > seen?'<em>جديد</em>':''}</div><div>${esc(n.message||'')}</div></div>`;
     return `<div class="ch-ntc ${n.kind==='alert'?'alert':''}"><div class="h">${n.kind==='alert'?'🚨':'📌'} <b>${esc(n._name || n.name)}</b> <span>${esc(n.date||'')}${esc(when)}</span>${ms(n) > seen?'<em>جديد</em>':''}</div><div>${esc(n.message||'')}</div></div>`;
   }
 
@@ -5305,7 +5306,7 @@
       const add = (html)=>{ const d = document.createElement('div'); d.className = 'parent-card'; d.innerHTML = html; mount.appendChild(d); return d; };
       if(st.reqs.length) add('<h4>طلبات بانتظار اعتماد الإدارة</h4>'+pendingHtml(st.reqs));
       for(const l of links){
-        const abs = notices.filter(n=> String(n.studentId) === String(l.studentId) && n.kind !== 'alert');
+        const abs = notices.filter(n=> String(n.studentId) === String(l.studentId) && n.kind === 'absence');
         const c = add(`<h4>${esc(l.studentName)} <small>${esc(l.className||'')}</small></h4><div class="ch-grid"><div class="ch-qr" data-qr></div><div><div class="ch-row"><span>اليوم</span><div data-today>…</div></div><div class="ch-row"><span>الغيابات المسجّلة</span><b>${abs.length}</b></div>${abs.length?`<details class="ch-det"><summary>عرض تواريخ الغياب</summary>${abs.slice(0,30).map(n=>`<div class="ch-abs">${esc(n.date)} — ${esc(SL[n.session]||'')}</div>`).join('')}</details>`:''}</div></div>`);
         renderCard(c.querySelector('[data-qr]'), l, { file:'QR-'+l.studentName });
         db.collection('attendance').where('studentId','==',String(l.studentId)).where('date','==',t).get().then(s=>{

@@ -93,7 +93,7 @@ export async function onRequestPost({ request, env }) {
       }
       if (sends + tokens.length > MAX_SENDS && sends > 0) { skipped.push(key); continue; }
       const kind = val(f.kind) || 'absence';
-      const title = kind === 'alert' ? 'تنبيه: غياب متكرر — ' + val(f.name) : 'إشعار غياب — ' + val(f.name);
+      const title = kind === 'announcement' ? (val(f.title) || 'إعلان من المتوسطة') : kind === 'alert' ? 'تنبيه: غياب متكرر — ' + val(f.name) : 'إشعار غياب — ' + val(f.name);
       for (const t of tokens) {
         sends++;
         const r = await fetch(`https://fcm.googleapis.com/v1/projects/${PROJECT}/messages:send`, {
